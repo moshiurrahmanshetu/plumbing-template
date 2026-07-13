@@ -269,7 +269,7 @@ window.lucide = {
       'trending-up': 'fa-solid fa-chart-line',
       'trophy': 'fa-solid fa-trophy',
       'truck': 'fa-solid fa-truck',
-      'twitter': 'fa-brands fa-x-twitter',
+      'twitter': 'fa-brands fa-twitter',
       'upload': 'fa-solid fa-upload',
       'upload-cloud': 'fa-solid fa-cloud-arrow-up',
       'user': 'fa-solid fa-user',
