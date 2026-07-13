@@ -267,7 +267,7 @@ function initMobileNav() {
       </div>
       <div class="d-flex align-items-center gap-3 mt-4">
         <a href="#" class="top-bar-link" aria-label="Facebook" style="font-size: 18px; color: var(--text-secondary);"><i class="fa-brands fa-facebook"></i></a>
-        <a href="#" class="top-bar-link" aria-label="Twitter" style="font-size: 18px; color: var(--text-secondary);"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" class="top-bar-link" aria-label="Twitter" style="font-size: 18px; color: var(--text-secondary);"><i class="fa-brands fa-twitter"></i></a>
         <a href="#" class="top-bar-link" aria-label="Instagram" style="font-size: 18px; color: var(--text-secondary);"><i class="fa-brands fa-instagram"></i></a>
         <a href="#" class="top-bar-link" aria-label="LinkedIn" style="font-size: 18px; color: var(--text-secondary);"><i class="fa-brands fa-linkedin-in"></i></a>
       </div>
@@ -423,7 +423,7 @@ window.lucide = {
       'trending-up': 'fa-solid fa-chart-line',
       'trophy': 'fa-solid fa-trophy',
       'truck': 'fa-solid fa-truck',
-      'twitter': 'fa-brands fa-x-twitter',
+      'twitter': 'fa-brands fa-twitter',
       'upload': 'fa-solid fa-upload',
       'upload-cloud': 'fa-solid fa-cloud-arrow-up',
       'user': 'fa-solid fa-user',
