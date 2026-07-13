@@ -1,0 +1,1195 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transparent Pricing Plans - PlumbMaster Premium Plumbing Template</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- AOS Animation CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    <!-- Custom Global Style -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    
+    <!-- Bespoke Styles for Pricing Page -->
+    <style>
+      .pricing-section-title {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .pricing-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 40px 30px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .pricing-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--color-orange);
+        box-shadow: var(--shadow-lg), var(--shadow-glow);
+      }
+
+      .pricing-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 4px;
+        background-color: var(--color-orange);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .pricing-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .pricing-card-highlighted {
+        border-color: rgba(255, 87, 34, 0.4);
+        box-shadow: 0 4px 20px rgba(255, 87, 34, 0.05);
+      }
+
+      .pricing-card-highlighted::before {
+        transform: scaleX(1);
+        background: linear-gradient(90deg, var(--color-orange), #ff7043);
+      }
+
+      .pricing-badge-popular {
+        position: absolute;
+        top: 20px;
+        right: -30px;
+        background-color: var(--color-orange);
+        color: #fff;
+        font-family: var(--font-heading);
+        font-size: 0.725rem;
+        font-weight: 700;
+        padding: 4px 30px;
+        transform: rotate(45deg);
+        box-shadow: var(--shadow-sm);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .price-value {
+        font-family: var(--font-heading);
+        font-size: 2.75rem;
+        font-weight: 700;
+        line-height: 1;
+        color: var(--text-primary);
+      }
+
+      .price-currency {
+        font-size: 1.5rem;
+        vertical-align: super;
+        color: var(--color-orange);
+        font-weight: 600;
+      }
+
+      .price-period {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        font-weight: 400;
+      }
+
+      .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 30px 0;
+        flex-grow: 1;
+      }
+
+      .feature-list li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--text-secondary);
+        margin-bottom: 12px;
+        font-size: 0.95rem;
+      }
+
+      .feature-list li i {
+        color: var(--color-orange);
+        flex-shrink: 0;
+      }
+
+      .feature-list li.disabled {
+        color: var(--text-muted);
+        text-decoration: line-through;
+      }
+
+      .feature-list li.disabled i {
+        color: var(--text-muted);
+      }
+
+      /* Introduction block */
+      .intro-stat-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 24px;
+        transition: all 0.3s ease;
+      }
+      .intro-stat-card:hover {
+        border-color: var(--color-orange);
+        transform: translateY(-4px);
+      }
+
+      /* Comparison Table */
+      .comparison-table-wrapper {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+      }
+
+      .comparison-table {
+        width: 100%;
+        margin-bottom: 0;
+        color: var(--text-primary);
+        border-collapse: collapse;
+      }
+
+      .comparison-table th {
+        background-color: var(--bg-topbar);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        padding: 20px;
+        border-bottom: 2px solid var(--border-color);
+      }
+
+      .comparison-table td {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border-color);
+        vertical-align: middle;
+      }
+
+      .comparison-table tr:hover td {
+        background-color: var(--bg-surface-hover);
+      }
+
+      .comparison-table tr.highlighted-row td {
+        background-color: rgba(255, 87, 34, 0.03);
+      }
+
+      /* FAQ Accordion Custom styling */
+      .custom-accordion .accordion-item {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md) !important;
+        margin-bottom: 16px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .custom-accordion .accordion-item:hover {
+        border-color: var(--color-orange);
+      }
+
+      .custom-accordion .accordion-button {
+        background-color: var(--bg-surface);
+        color: var(--text-primary);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 20px 24px;
+        box-shadow: none !important;
+      }
+
+      .custom-accordion .accordion-button:not(.collapsed) {
+        background-color: var(--bg-surface-hover);
+        color: var(--color-orange);
+      }
+
+      .custom-accordion .accordion-button::after {
+        filter: invert(1) sepia(1) saturate(5) hue-rotate(330deg);
+      }
+
+      .custom-accordion .accordion-body {
+        background-color: var(--bg-surface);
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        padding: 0 24px 24px 24px;
+      }
+
+      /* Emergency & Membership custom cards */
+      .emergency-card {
+        background: linear-gradient(135deg, #1e1310 0%, #131a2e 100%);
+        border: 1px solid rgba(255, 87, 34, 0.2);
+        border-radius: var(--border-radius-md);
+        padding: 30px;
+        transition: all 0.3s ease;
+        position: relative;
+        height: 100%;
+      }
+      .emergency-card:hover {
+        border-color: var(--color-orange);
+        box-shadow: var(--shadow-glow);
+        transform: translateY(-5px);
+      }
+      .emergency-badge-pulse {
+        background-color: var(--color-orange);
+        color: #fff;
+        padding: 4px 12px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-uppercase: uppercase;
+        display: inline-block;
+        animation: pulse-orange 2s infinite;
+      }
+      @keyframes pulse-orange {
+        0% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.4); }
+        70% { box-shadow: 0 0 0 10px rgba(255, 87, 34, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0); }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- GLOBAL SEARCH MODAL -->
+    <div class="search-modal-overlay" id="searchModal">
+      <button class="search-modal-close" aria-label="Close search">
+        <i data-lucide="x" style="width:32px;height:32px;"></i>
+      </button>
+      <div class="search-modal-box">
+        <div class="search-modal-input-wrapper">
+          <input type="text" class="search-modal-input" placeholder="Search services, articles, products..." />
+          <i data-lucide="search" class="search-modal-icon" style="width:24px;height:24px;"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- STICKY HEADER TOP-BAR -->
+    <div class="top-bar d-none d-lg-flex">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-4">
+          <span class="top-bar-link">
+            <i data-lucide="clock" style="width:14px;height:14px;"></i>
+            Working Hours: 24/7 Emergency Support
+          </span>
+          <a href="mailto:emergency@plumbmaster.com" class="top-bar-link">
+            <i data-lucide="mail" style="width:14px;height:14px;"></i>
+            emergency@plumbmaster.com
+          </a>
+        </div>
+        <div class="d-flex align-items-center gap-4">
+          <a href="tel:18005550199" class="top-bar-link fw-bold text-orange">
+            <i data-lucide="phone-call" style="width:14px;height:14px;"></i>
+            Emergency Hotline: 1-800-555-0199
+          </a>
+          <div class="d-flex align-items-center gap-2 border-start ps-3 border-secondary">
+            <a href="#" class="top-bar-link" aria-label="Facebook"><i data-lucide="facebook" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Twitter"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN HEADER NAVIGATION -->
+    <header class="main-header">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a href="index.html" class="logo-brand">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:22px;height:22px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="nav-menu">
+          <div class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </div>
+          <div class="nav-item">
+            <a href="about.html" class="nav-link ">About</a>
+          </div>
+          <div class="nav-item">
+            <a href="services.html" class="nav-link">
+              Services <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="services.html" class="dropdown-item-custom">All Services</a>
+              <a href="service-details.html" class="dropdown-item-custom">Service Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="projects.html" class="nav-link">
+              Projects <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="projects.html" class="dropdown-item-custom">Project Gallery</a>
+              <a href="project-details.html" class="dropdown-item-custom">Project Details</a>
+            </div>
+          </div>
+          <div class="nav-item mega-menu-wrapper">
+            <a href="shop.html" class="nav-link ">
+              Shop <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="mega-menu">
+              <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Shop Collection</h3>
+                  <a href="shop.html" class="dropdown-item-custom ">Main Plumbing Store</a>
+                  <a href="product-details.html" class="dropdown-item-custom ">Premium Fittings</a>
+                  <a href="cart.html" class="dropdown-item-custom ">Shopping Cart</a>
+                  <a href="checkout.html" class="dropdown-item-custom ">Secure Checkout</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Our Pages</h3>
+                  <a href="team.html" class="dropdown-item-custom ">Our Expert Plumbers</a>
+                  <a href="team-details.html" class="dropdown-item-custom ">Expert Profile</a>
+                  <a href="pricing.html" class="dropdown-item-custom text-orange">Transparent Rates</a>
+                  <a href="faq.html" class="dropdown-item-custom ">Frequently Asked Qs</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                  <h3 class="mega-title">Company Info</h3>
+                  <a href="about.html" class="dropdown-item-custom">Corporate Overview</a>
+                  <a href="contact.html" class="dropdown-item-custom ">Office Contacts</a>
+                  <a href="privacy-policy.html" class="dropdown-item-custom ">Privacy Policy</a>
+                  <a href="terms-conditions.html" class="dropdown-item-custom ">Terms of Service</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="emergency-banner-box h-100 d-flex flex-column justify-content-center p-3 text-center">
+                    <span class="badge-premium mb-2 mx-auto">Seasonal Offer</span>
+                    <h4 class="fs-6 text-white mb-2">Free Inspections</h4>
+                    <p class="text-secondary small mb-3">Claim a free system audit on your initial water lines setup.</p>
+                    <a href="appointment.html" class="btn-premium py-2 px-3 fs-7 align-self-center">Claim Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="blog.html" class="nav-link ">
+              Blog <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="blog.html" class="dropdown-item-custom ">Industry News</a>
+              <a href="blog-details.html" class="dropdown-item-custom ">Article Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="contact.html" class="nav-link ">Contact</a>
+          </div>
+        </nav>
+
+        <div class="d-flex align-items-center gap-3">
+          <button class="search-toggle-btn search-trigger" aria-label="Open Search">
+            <i data-lucide="search"></i>
+          </button>
+          <button class="theme-toggle-btn" aria-label="Toggle Theme">
+            <i data-lucide="sun"></i>
+          </button>
+          <a href="appointment.html" class="btn-premium d-none d-xl-flex">
+            Book Appointment
+            <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+          </a>
+          <button class="mobile-menu-trigger" aria-label="Toggle Navigation">
+            <i data-lucide="menu" style="width:20px;height:20px;"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div class="mobile-nav-overlay"></div>
+    <div class="mobile-nav-drawer">
+      <div class="mobile-nav-header">
+        <a href="index.html" class="logo-brand text-decoration-none">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:18px;height:18px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+        <button class="mobile-nav-close" aria-label="Close Mobile Menu">
+          <i data-lucide="x" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-links">
+        <div class="mobile-nav-item"><a href="index.html" class="mobile-nav-link">Home</a></div>
+        <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About Us</a></div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Services <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="services.html" class="mobile-nav-submenu-link">Our Services</a>
+            <a href="service-details.html" class="mobile-nav-submenu-link">Service Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Projects <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="projects.html" class="mobile-nav-submenu-link">Project Gallery</a>
+            <a href="project-details.html" class="mobile-nav-submenu-link">Project Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link ">Store Collection <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="shop.html" class="mobile-nav-submenu-link ">Main Shop</a>
+            <a href="product-details.html" class="mobile-nav-submenu-link ">Product Details</a>
+            <a href="cart.html" class="mobile-nav-submenu-link ">Cart</a>
+            <a href="checkout.html" class="mobile-nav-submenu-link ">Checkout</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">More Pages <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="team.html" class="mobile-nav-submenu-link ">Our Plumbers</a>
+            <a href="team-details.html" class="mobile-nav-submenu-link ">Profile Details</a>
+            <a href="pricing.html" class="mobile-nav-submenu-link text-orange">Pricing Plans</a>
+            <a href="faq.html" class="mobile-nav-submenu-link ">FAQ Pages</a>
+            <a href="404.html" class="mobile-nav-submenu-link ">404 Page</a>
+            <a href="coming-soon.html" class="mobile-nav-submenu-link ">Coming Soon</a>
+            <a href="privacy-policy.html" class="mobile-nav-submenu-link ">Privacy Policy</a>
+            <a href="terms-conditions.html" class="mobile-nav-submenu-link ">Terms & Conditions</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link ">Blog & News <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="blog.html" class="mobile-nav-submenu-link ">Blog Posts</a>
+            <a href="blog-details.html" class="mobile-nav-submenu-link ">Blog Article</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link ">Contact</a></div>
+      </div>
+      <div class="mt-4 pt-3 border-top border-secondary">
+        <a href="appointment.html" class="btn-premium w-full text-center">Book Online Now</a>
+      </div>
+    </div>
+
+    <!-- MAIN BREADCRUMB HERO BANNER -->
+    <section class="breadcrumbs-hero">
+      <div class="container text-center text-md-start d-md-flex align-items-center justify-content-between">
+        <div data-aos="fade-right">
+          <h1 class="display-5 text-white fw-bold mb-2">Transparent Rates</h1>
+          <p class="text-secondary mb-0">No hidden fees. Premium certified mechanical support at fixed standard rates.</p>
+        </div>
+        <div class="mt-3 mt-md-0" data-aos="fade-left">
+          <nav class="breadcrumb-nav justify-content-center justify-content-md-end">
+            <a href="index.html">Home</a>
+            <i data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+            <span class="text-orange">Pricing</span>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2: PRICING INTRODUCTION
+         ========================================== -->
+    <section class="section-padding bg-surface" style="border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6" data-aos="fade-right">
+            <span class="badge-premium mb-3">HONEST ESTIMATES</span>
+            <h2 class="display-6 font-heading fw-bold text-white mb-4">
+              Our Core Pricing Philosophy: <span class="text-orange">No Hidden Surprises</span>
+            </h2>
+            <p class="text-secondary mb-4">
+              At PlumbMaster, we believe that high-end craftsmanship should be paired with complete financial transparency. We have eliminated variable hourly rates that encourage slow work. Instead, we use state-of-the-art diagnostic testing to give you an exact, flat-rate quote before any wrench touches a pipe.
+            </p>
+            <div class="row g-4">
+              <div class="col-sm-6">
+                <div class="intro-stat-card">
+                  <div class="text-orange mb-2"><i data-lucide="shield-check" style="width:32px;height:32px;"></i></div>
+                  <h3 class="h5 text-white mb-2">Licensed & Bonded</h3>
+                  <p class="text-secondary small mb-0">Every dispatch is run by a certified master plumber for ultimate peace of mind.</p>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="intro-stat-card">
+                  <div class="text-orange mb-2"><i data-lucide="dollar-sign" style="width:32px;height:32px;"></i></div>
+                  <h3 class="h5 text-white mb-2">Transparent Flat Rates</h3>
+                  <p class="text-secondary small mb-0">Upfront printed sheets and digital breakdowns. What we quote is what you pay.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-left">
+            <div class="glass-panel p-4 p-md-5">
+              <h3 class="h4 text-white mb-4">Why Clients Trust PlumbMaster</h3>
+              <ul class="feature-list my-0">
+                <li class="mb-3"><i data-lucide="check-circle" style="width:20px;height:20px;"></i> <span class="text-secondary"><strong>0% Interest Financing</strong> available for high-end boiler overhauls.</span></li>
+                <li class="mb-3"><i data-lucide="check-circle" style="width:20px;height:20px;"></i> <span class="text-secondary"><strong>Lifetime warranty</strong> on structural copper lines copper setups.</span></li>
+                <li class="mb-3"><i data-lucide="check-circle" style="width:20px;height:20px;"></i> <span class="text-secondary"><strong>100% Diagnostic Refund</strong> — testing fee is waived if you book repairs.</span></li>
+                <li class="mb-3"><i data-lucide="check-circle" style="width:20px;height:20px;"></i> <span class="text-secondary"><strong>24/7 Live Support</strong> via real, local dispatchers (never robot lines).</span></li>
+                <li><i data-lucide="check-circle" style="width:20px;height:20px;"></i> <span class="text-secondary"><strong>Compliant with ASME and EPA</strong> environmental safety standards.</span></li>
+              </ul>
+              <div class="mt-4 pt-3 border-top border-secondary text-center text-md-start">
+                <a href="appointment.html" class="btn-premium">Schedule Diagnostics <i data-lucide="calendar" style="width:16px;height:16px;"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 3: RESIDENTIAL PLANS
+         ========================================== -->
+    <section class="section-padding" style="border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <span class="badge-premium mb-3">DOMESTIC CARE</span>
+          <h2 class="display-6 font-heading fw-bold text-white">Residential Maintenance Rates</h2>
+          <p class="text-secondary max-w-2xl mx-auto">Standard upfront pricing packages for home diagnostics, leak mitigations, and luxury fittings.</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+          <!-- Card 1 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="pricing-card">
+              <span class="text-orange font-mono small fw-bold mb-2">DIAGNOSTIC VISITS</span>
+              <h3 class="h4 text-white mb-3">Basic Plumbing Visit</h3>
+              <div class="mb-4">
+                <span class="price-currency">$</span><span class="price-value">89</span><span class="price-period">/flat rate</span>
+              </div>
+              <p class="text-secondary small mb-4">Our entry-level certified inspection dispatch. Ideal for diagnosing isolated issues.</p>
+              <ul class="feature-list">
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Full physical site inspection</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Diagnostic pressure test</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Written repair estimate</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>30-Min scheduled arrival</span></li>
+                <li class="disabled"><i data-lucide="x" style="width:16px;height:16px;"></i> <span>Acoustic leak sensor scan</span></li>
+                <li class="disabled"><i data-lucide="x" style="width:16px;height:16px;"></i> <span>Extended warranty on diagnostic</span></li>
+              </ul>
+              <a href="appointment.html?service=basic_visit" class="btn-premium w-100 text-center py-3">Book This Visit</a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="pricing-card pricing-card-highlighted">
+              <span class="pricing-badge-popular">Best Value</span>
+              <span class="text-orange font-mono small fw-bold mb-2">STANDARD MITIGATION</span>
+              <h3 class="h4 text-white mb-3">Standard Repair</h3>
+              <div class="mb-4">
+                <span class="price-currency">$</span><span class="price-value">189</span><span class="price-period">/starting rate</span>
+              </div>
+              <p class="text-secondary small mb-4">Covers standard pipe leak repairs, drain clearings, and core water line setups.</p>
+              <ul class="feature-list">
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>All features in Basic Visit</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Up to 2 hours of standard labor</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Sewer line CCTV camera scan</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>High-power mechanical rooter</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>1-Year craftsmanship warranty</span></li>
+                <li class="disabled"><i data-lucide="x" style="width:16px;height:16px;"></i> <span>Boiler manifold calibration</span></li>
+              </ul>
+              <a href="appointment.html?service=standard_repair" class="btn-premium w-100 text-center py-3">Book Standard Repair</a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="pricing-card">
+              <span class="text-orange font-mono small fw-bold mb-2">ELITE CARE</span>
+              <h3 class="h4 text-white mb-3">Premium Home Care</h3>
+              <div class="mb-4">
+                <span class="price-currency">$</span><span class="price-value">349</span><span class="price-period">/complete rate</span>
+              </div>
+              <p class="text-secondary small mb-4">Complete residential overhaul including thermal system tuning and ultrasonic analysis.</p>
+              <ul class="feature-list">
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>All features in Standard Repair</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Ultrasonic acoustic leak sweep</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Water heater mineral descaling</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Pressure regulator alignment</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>5-Year comprehensive warranty</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Priority same-day dispatch</span></li>
+              </ul>
+              <a href="appointment.html?service=premium_care" class="btn-premium w-100 text-center py-3">Book Premium Care</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 4: COMMERCIAL PLANS
+         ========================================== -->
+    <section class="section-padding bg-surface" style="border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <span class="badge-premium mb-3">CORPORATE INFRASTRUCTURE</span>
+          <h2 class="display-6 font-heading fw-bold text-white">Commercial Plumbing Plans</h2>
+          <p class="text-secondary max-w-2xl mx-auto">Heavy-duty commercial fluid engineering, backflow compliance, and high-flow boiler setups.</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+          <!-- Commercial Plan 1 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="pricing-card">
+              <span class="text-orange font-mono small fw-bold mb-2">RETAIL & OFFICES</span>
+              <h3 class="h4 text-white mb-3">Small Business</h3>
+              <div class="mb-4">
+                <span class="price-currency">$</span><span class="price-value">249</span><span class="price-period">/starting rate</span>
+              </div>
+              <p class="text-secondary small mb-4">Designed for single commercial units, storefronts, and local branch offices.</p>
+              <ul class="feature-list">
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Commercial backflow check</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Up to 3 multi-user restrooms audit</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Priority business dispatch</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>ASME compliant report</span></li>
+                <li class="disabled"><i data-lucide="x" style="width:16px;height:16px;"></i> <span>24/7 dedicated account manager</span></li>
+                <li class="disabled"><i data-lucide="x" style="width:16px;height:16px;"></i> <span>Biological waste line tracking</span></li>
+              </ul>
+              <a href="appointment.html?service=comm_small" class="btn-premium-secondary w-100 text-center py-3">Book Small Business</a>
+            </div>
+          </div>
+
+          <!-- Commercial Plan 2 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="pricing-card pricing-card-highlighted">
+              <span class="pricing-badge-popular">Industrial</span>
+              <span class="text-orange font-mono small fw-bold mb-2">ENTERPRISE HUBS</span>
+              <h3 class="h4 text-white mb-3">Business Plus</h3>
+              <div class="mb-4">
+                <span class="price-currency">$</span><span class="price-value">549</span><span class="price-period">/flat diagnostics</span>
+              </div>
+              <p class="text-secondary small mb-4">Engineered for hotels, large offices, apartment buildings, and production complexes.</p>
+              <ul class="feature-list">
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>All features in Small Business</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>High-temperature steam boiler overhaul</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>RPZ backflow assembly validation</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Heavy-gauge pipe weld scans</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Dedicated business service coordinator</span></li>
+                <li class="disabled"><i data-lucide="x" style="width:16px;height:16px;"></i> <span>Continuous telemetry node tracking</span></li>
+              </ul>
+              <a href="appointment.html?service=comm_plus" class="btn-premium w-100 text-center py-3">Book Business Plus</a>
+            </div>
+          </div>
+
+          <!-- Commercial Plan 3 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="pricing-card">
+              <span class="text-orange font-mono small fw-bold mb-2">CUSTOM ARRAYS</span>
+              <h3 class="h4 text-white mb-3">Enterprise</h3>
+              <div class="mb-4">
+                <span class="price-currency">$</span><span class="price-value">999</span><span class="price-period">/annual baseline</span>
+              </div>
+              <p class="text-secondary small mb-4">Complete infrastructure modeling, lab lines, and deep ground grids management.</p>
+              <ul class="feature-list">
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>All features in Business Plus</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>IoT digital flow telemetry setup</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Chemical waste neutralization systems</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>On-call structural engineer dispatch</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>EPA-mandated environmental checks</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Custom pipeline drafting audits</span></li>
+              </ul>
+              <a href="appointment.html?service=comm_enterprise" class="btn-premium-secondary w-100 text-center py-3">Request Custom Plan</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5: EMERGENCY PRICING
+         ========================================== -->
+    <section class="section-padding" style="border-bottom: 1px solid var(--border-color); background-image: radial-gradient(circle at top right, rgba(255, 87, 34, 0.05), transparent 60%);">
+      <div class="container">
+        <div class="row align-items-center mb-5" data-aos="fade-up">
+          <div class="col-lg-6 text-center text-lg-start">
+            <span class="badge-premium mb-3">CRITICAL MITIGATION</span>
+            <h2 class="display-6 font-heading fw-bold text-white mb-3">Emergency Callout Pricing</h2>
+            <p class="text-secondary mb-0">When pipes break at midnight, you need immediate, decisive action. Here is our transparent emergency dispatch schedule.</p>
+          </div>
+          <div class="col-lg-6 text-center text-lg-end mt-4 mt-lg-0">
+            <a href="tel:18005550199" class="btn-premium py-3 px-4 fs-5 fw-bold" style="animation: pulse-orange 2s infinite;">
+              <i data-lucide="phone-call" class="me-2" style="width:20px;height:20px;"></i> 1-800-555-0199
+            </a>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <!-- Emergency Card 1 -->
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="emergency-card text-center">
+              <span class="emergency-badge-pulse mb-3">ACTIVE 24/7</span>
+              <h3 class="h5 text-white mb-2">Standard Night-Call</h3>
+              <p class="text-secondary small mb-3">Standard night response (6:00 PM – 7:00 AM)</p>
+              <div class="h3 text-white font-heading mb-0">$149</div>
+              <p class="text-muted small mt-2 mb-0">Dispatch & Diagnostic Fee</p>
+            </div>
+          </div>
+
+          <!-- Emergency Card 2 -->
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="emergency-card text-center" style="border-color: var(--color-orange);">
+              <span class="emergency-badge-pulse mb-3" style="background-color: var(--color-yellow);">PRIORITY</span>
+              <h3 class="h5 text-white mb-2">Weekend Dispatch</h3>
+              <p class="text-secondary small mb-3">Saturdays and Sundays (All Hours)</p>
+              <div class="h3 text-white font-heading mb-0">$179</div>
+              <p class="text-muted small mt-2 mb-0">Dispatch & Diagnostic Fee</p>
+            </div>
+          </div>
+
+          <!-- Emergency Card 3 -->
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="emergency-card text-center">
+              <span class="emergency-badge-pulse mb-3">STATE HOLIDAYS</span>
+              <h3 class="h5 text-white mb-2">Holiday Service</h3>
+              <p class="text-secondary small mb-3">National & State Holidays (All Hours)</p>
+              <div class="h3 text-white font-heading mb-0">$249</div>
+              <p class="text-muted small mt-2 mb-0">Dispatch & Diagnostic Fee</p>
+            </div>
+          </div>
+
+          <!-- Emergency Card 4 -->
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="emergency-card text-center" style="background: linear-gradient(135deg, #2b120c 0%, #1c142c 100%);">
+              <span class="emergency-badge-pulse mb-3">FAST TRACK</span>
+              <h3 class="h5 text-white mb-2">Emergency Callout</h3>
+              <p class="text-secondary small mb-3">Critical flooding & toxic gas failures</p>
+              <div class="h3 text-white font-heading mb-0">$199</div>
+              <p class="text-muted small mt-2 mb-0">Guaranteed 30-Min Dispatch</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 6: MAINTENANCE MEMBERSHIP PLANS
+         ========================================== -->
+    <section class="section-padding bg-surface" style="border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <span class="badge-premium mb-3">PREVENTIVE CARE</span>
+          <h2 class="display-6 font-heading fw-bold text-white">Annual Maintenance Memberships</h2>
+          <p class="text-secondary max-w-2xl mx-auto">Protect your home, prevent costly main line ruptures, and lock in guaranteed priority response slots.</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+          <!-- Member 1 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="pricing-card">
+              <span class="text-secondary font-mono small fw-bold mb-2">ENTRY LEVEL</span>
+              <h3 class="h4 text-white mb-3">Silver Plan</h3>
+              <div class="mb-4">
+                <span class="price-currency">$</span><span class="price-value">12</span><span class="price-period">/monthly billing</span>
+              </div>
+              <p class="text-secondary small mb-4">Essential protection for single-family residences or low-use rental apartments.</p>
+              <ul class="feature-list">
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>1 Annual 100-Point Inspection</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>10% Discount on all repairs</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Guaranteed 24-Hr response slot</span></li>
+                <li class="disabled"><i data-lucide="x" style="width:16px;height:16px;"></i> <span>Free diagnostic dispatches</span></li>
+                <li class="disabled"><i data-lucide="x" style="width:16px;height:16px;"></i> <span>Zero emergency dispatch charges</span></li>
+              </ul>
+              <a href="appointment.html?plan=silver" class="btn-premium-secondary w-100 text-center py-3">Subscribe to Silver</a>
+            </div>
+          </div>
+
+          <!-- Member 2 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="pricing-card pricing-card-highlighted">
+              <span class="pricing-badge-popular">MOST POPULAR</span>
+              <span class="text-orange font-mono small fw-bold mb-2">FULL PROTECTION</span>
+              <h3 class="h4 text-white mb-3">Gold Plan</h3>
+              <div class="mb-4">
+                <span class="price-currency">$</span><span class="price-value">24</span><span class="price-period">/monthly billing</span>
+              </div>
+              <p class="text-secondary small mb-4">Ultimate coverage and high-frequency checks for active busy households.</p>
+              <ul class="feature-list">
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>2 Annual 100-Point Inspections</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>15% Discount on all repairs</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Guaranteed 4-Hr priority slot</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Free standard diagnostics dispatches</span></li>
+                <li class="disabled"><i data-lucide="x" style="width:16px;height:16px;"></i> <span>Zero emergency dispatch charges</span></li>
+              </ul>
+              <a href="appointment.html?plan=gold" class="btn-premium w-100 text-center py-3">Subscribe to Gold</a>
+            </div>
+          </div>
+
+          <!-- Member 3 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="pricing-card">
+              <span class="text-orange font-mono small fw-bold mb-2">ULTIMATE LUXURY</span>
+              <h3 class="h4 text-white mb-3">Platinum Plan</h3>
+              <div class="mb-4">
+                <span class="price-currency">$</span><span class="price-value">48</span><span class="price-period">/monthly billing</span>
+              </div>
+              <p class="text-secondary small mb-4">Complete hands-off worry-free care for high-end designer homes and complex arrays.</p>
+              <ul class="feature-list">
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Quarterly 100-Point Inspections</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>20% Discount on all repairs</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Guaranteed 2-Hr emergency slot</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Free diagnostic dispatches</span></li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> <span>Zero emergency dispatch charges</span></li>
+              </ul>
+              <a href="appointment.html?plan=platinum" class="btn-premium-secondary w-100 text-center py-3">Subscribe to Platinum</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 7: PRICING COMPARISON TABLE
+         ========================================== -->
+    <section class="section-padding" style="border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <span class="badge-premium mb-3">DETAILED BREAKDOWN</span>
+          <h2 class="display-6 font-heading fw-bold text-white">Compare Membership Plans</h2>
+          <p class="text-secondary max-w-2xl mx-auto">Analyze the detailed features and custom inclusions of each of our subscription tiers.</p>
+        </div>
+
+        <div class="comparison-table-wrapper" data-aos="fade-up">
+          <div class="table-responsive">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th style="width: 40%; text-align: left;">Inclusions & Benefits</th>
+                  <th style="width: 20%; text-align: center;">Silver Plan</th>
+                  <th style="width: 20%; text-align: center;" class="text-orange">Gold Plan (Recommended)</th>
+                  <th style="width: 20%; text-align: center;">Platinum Plan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Monthly Subscription Price</td>
+                  <td class="text-center fw-bold font-mono">$12/mo</td>
+                  <td class="text-center fw-bold font-mono text-orange">$24/mo</td>
+                  <td class="text-center fw-bold font-mono">$48/mo</td>
+                </tr>
+                <tr>
+                  <td>Annual 100-Point Systems Diagnostic Check</td>
+                  <td class="text-center">1 Inspection</td>
+                  <td class="text-center text-orange fw-bold">2 Inspections</td>
+                  <td class="text-center">Quarterly (4 total)</td>
+                </tr>
+                <tr class="highlighted-row">
+                  <td>Discount On All Specialized Parts & Labor Repairs</td>
+                  <td class="text-center font-mono">10% Off</td>
+                  <td class="text-center font-mono text-orange fw-bold">15% Off</td>
+                  <td class="text-center font-mono">20% Off</td>
+                </tr>
+                <tr>
+                  <td>Guaranteed Urgent Dispatch Arrival Window</td>
+                  <td class="text-center">24 Hours</td>
+                  <td class="text-center text-orange fw-bold">4 Hours</td>
+                  <td class="text-center">2 Hours (First Priority)</td>
+                </tr>
+                <tr>
+                  <td>Standard Day Diagnostic Trip Fee Waived</td>
+                  <td class="text-center text-muted"><i data-lucide="minus" style="width:16px;height:16px;"></i></td>
+                  <td class="text-center text-orange"><i data-lucide="check" style="width:18px;height:18px;"></i></td>
+                  <td class="text-center"><i data-lucide="check" style="width:18px;height:18px;"></i></td>
+                </tr>
+                <tr class="highlighted-row">
+                  <td>Off-Hours & Holiday Emergency Dispatch Fee Waived</td>
+                  <td class="text-center text-muted"><i data-lucide="minus" style="width:16px;height:16px;"></i></td>
+                  <td class="text-center text-muted"><i data-lucide="minus" style="width:16px;height:16px;"></i></td>
+                  <td class="text-center"><i data-lucide="check" style="width:18px;height:18px;"></i></td>
+                </tr>
+                <tr>
+                  <td>Ultrasonic Water Leak Mapping & Acoustic Scan</td>
+                  <td class="text-center text-muted"><i data-lucide="minus" style="width:16px;height:16px;"></i></td>
+                  <td class="text-center text-orange"><i data-lucide="check" style="width:18px;height:18px;"></i></td>
+                  <td class="text-center"><i data-lucide="check" style="width:18px;height:18px;"></i></td>
+                </tr>
+                <tr>
+                  <td>Water Heater Tank Descaling & Combustion Clean</td>
+                  <td class="text-center text-muted"><i data-lucide="minus" style="width:16px;height:16px;"></i></td>
+                  <td class="text-center text-muted"><i data-lucide="minus" style="width:16px;height:16px;"></i></td>
+                  <td class="text-center"><i data-lucide="check" style="width:18px;height:18px;"></i></td>
+                </tr>
+                <tr class="highlighted-row">
+                  <td>Sewer Main Line Camera CCTV Diagnostic Check</td>
+                  <td class="text-center text-muted"><i data-lucide="minus" style="width:16px;height:16px;"></i></td>
+                  <td class="text-center text-orange"><i data-lucide="check" style="width:18px;height:18px;"></i></td>
+                  <td class="text-center"><i data-lucide="check" style="width:18px;height:18px;"></i></td>
+                </tr>
+                <tr>
+                  <td>Dedicated Account Support & Priority Booking Portal</td>
+                  <td class="text-center text-muted"><i data-lucide="minus" style="width:16px;height:16px;"></i></td>
+                  <td class="text-center text-orange"><i data-lucide="check" style="width:18px;height:18px;"></i></td>
+                  <td class="text-center"><i data-lucide="check" style="width:18px;height:18px;"></i></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 8: FAQ
+         ========================================== -->
+    <section class="section-padding bg-surface" style="border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <span class="badge-premium mb-3">RESOLVING DOUBTS</span>
+          <h2 class="display-6 font-heading fw-bold text-white">Pricing & Rate FAQ</h2>
+          <p class="text-secondary max-w-2xl mx-auto">Find straightforward, honest answers to the most common billing and scheduling questions we receive.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-10 mx-auto" data-aos="fade-up">
+            <div class="accordion custom-accordion" id="pricingFAQ">
+              
+              <!-- Question 1 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faqH1">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqC1" aria-expanded="true" aria-controls="faqC1">
+                    Do you charge a flat rate or by the hour?
+                  </button>
+                </h3>
+                <div id="faqC1" class="accordion-collapse collapse show" aria-labelledby="faqH1" data-bs-parent="#pricingFAQ">
+                  <div class="accordion-body">
+                    We operate on an upfront, flat-rate pricing model. Before any work begins, we run physical diagnostics and provide an exact fixed quote. You'll never see surprise labor charges or creeping hourly costs.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 2 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faqH2">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqC2" aria-expanded="false" aria-controls="faqC2">
+                    Are there any hidden travel fees or fuel surcharges?
+                  </button>
+                </h3>
+                <div id="faqC2" class="accordion-collapse collapse" aria-labelledby="faqH2" data-bs-parent="#pricingFAQ">
+                  <div class="accordion-body">
+                    No. Our local dispatches include a standard inspection fee that is completely absorbed into any repair work we execute. We believe in absolute transparency and honest customer relations.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 3 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faqH3">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqC3" aria-expanded="false" aria-controls="faqC3">
+                    What does the Residential Basic Plumbing Visit include?
+                  </button>
+                </h3>
+                <div id="faqC3" class="accordion-collapse collapse" aria-labelledby="faqH3" data-bs-parent="#pricingFAQ">
+                  <div class="accordion-body">
+                    It covers a professional technician dispatching to your site, performing a full mechanical diagnostic of the issue, and providing a certified repair estimate.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 4 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faqH4">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqC4" aria-expanded="false" aria-controls="faqC4">
+                    How do emergency rates differ from standard hours?
+                  </button>
+                </h3>
+                <div id="faqC4" class="accordion-collapse collapse" aria-labelledby="faqH4" data-bs-parent="#pricingFAQ">
+                  <div class="accordion-body">
+                    Emergency dispatches outside our regular weekday schedule (after 6 PM, weekends, or holidays) require a dedicated priority surcharge as detailed in our Emergency Pricing schedule.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 5 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faqH5">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqC5" aria-expanded="false" aria-controls="faqC5">
+                    Is commercial pricing negotiable for multi-unit properties?
+                  </button>
+                </h3>
+                <div id="faqC5" class="accordion-collapse collapse" aria-labelledby="faqH5" data-bs-parent="#pricingFAQ">
+                  <div class="accordion-body">
+                    Yes, we offer customized corporate accounts and volume-based agreements for property managers and large hospitality/commercial operators.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 6 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faqH6">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqC6" aria-expanded="false" aria-controls="faqC6">
+                    How do I claim my 15% membership discount on repairs?
+                  </button>
+                </h3>
+                <div id="faqC6" class="accordion-collapse collapse" aria-labelledby="faqH6" data-bs-parent="#pricingFAQ">
+                  <div class="accordion-body">
+                    As an active Silver, Gold, or Platinum member, your profile is permanently flagged in our dispatch system. Any service order automatically applies your discount.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 7 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faqH7">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqC7" aria-expanded="false" aria-controls="faqC7">
+                    What is included in the Annual 100-Point Inspection?
+                  </button>
+                </h3>
+                <div id="faqC7" class="accordion-collapse collapse" aria-labelledby="faqH7" data-bs-parent="#pricingFAQ">
+                  <div class="accordion-body">
+                    Our master plumbers inspect all accessible water lines, test pressure regulators, flush water heaters to remove scale, run acoustic leak checks, and calibrate your backflow valves.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 8 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faqH8">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqC8" aria-expanded="false" aria-controls="faqC8">
+                    Can I upgrade or cancel my maintenance membership at any time?
+                  </button>
+                </h3>
+                <div id="faqC8" class="accordion-collapse collapse" aria-labelledby="faqH8" data-bs-parent="#pricingFAQ">
+                  <div class="accordion-body">
+                    Yes. Our annual memberships are billed monthly or annually with no lock-in periods. You can cancel or change your plan directly through our support desk.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 9 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faqH9">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqC9" aria-expanded="false" aria-controls="faqC9">
+                    Are parts and materials included in the plan prices?
+                  </button>
+                </h3>
+                <div id="faqC9" class="accordion-collapse collapse" aria-labelledby="faqH9" data-bs-parent="#pricingFAQ">
+                  <div class="accordion-body">
+                    Plan prices cover diagnostic assessments and core specialized equipment setups. Replacement parts (valves, copper tubes, boilers, fixtures) are estimated separately.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 10 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faqH10">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqC10" aria-expanded="false" aria-controls="faqC10">
+                    Do you offer warranties on your pricing and repairs?
+                  </button>
+                </h3>
+                <div id="faqC10" class="accordion-collapse collapse" aria-labelledby="faqH10" data-bs-parent="#pricingFAQ">
+                  <div class="accordion-body">
+                    Absolutely. Every residential and commercial repair is backed by our standard 1-Year Craftsmanship Warranty, and structural copper setups carry a Lifetime Warranty.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 9: CTA
+         ========================================== -->
+    <section class="section-padding text-center" style="background: linear-gradient(135deg, #0b0f19 0%, #171f38 100%); position: relative; border-bottom: 1px solid var(--border-color);">
+      <div class="container" data-aos="zoom-in">
+        <div class="max-w-2xl mx-auto">
+          <span class="badge-premium mb-3">IMMEDIATE COOPERATIVE INTERVENTION</span>
+          <h2 class="display-5 font-heading fw-bold text-white mb-4">Need Immediate Mechanical Help?</h2>
+          <p class="text-secondary mb-5">Our dispatch vehicles are loaded, certified, and waiting across the city. Get instant support or set up a scheduled audit in under two minutes.</p>
+          <div class="d-flex flex-wrap justify-content-center gap-4">
+            <a href="tel:18005550199" class="btn-premium fs-6 py-3 px-4">
+              <i data-lucide="phone-call" style="width:18px;height:18px;"></i> Emergency Hotline
+            </a>
+            <a href="appointment.html" class="btn-premium-secondary fs-6 py-3 px-4">
+              <i data-lucide="calendar" style="width:18px;height:18px;"></i> Book Online Appointment
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREMIUM FOOTER -->
+    <footer class="premium-footer section-padding pb-0">
+      <div class="container">
+        <div class="row g-5 pb-5">
+          <div class="col-lg-4 col-md-6">
+            <div class="mb-4">
+              <a href="index.html" class="logo-brand text-decoration-none">
+                <div class="logo-icon">
+                  <i data-lucide="wrench" style="width:20px;height:20px;"></i>
+                </div>
+                PLUMB<span>MASTER</span>
+              </a>
+            </div>
+            <p class="text-secondary mb-4">
+              Providing modern, elite plumbing engineering and emergency plumbing solutions across domestic and industrial sectors. Responsive, certified, and luxury-first.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" class="social-icon-circle" aria-label="Facebook"><i data-lucide="facebook" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Twitter"><i data-lucide="twitter" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Instagram"><i data-lucide="instagram" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:16px;height:16px;"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Core Services</h3>
+            <ul class="footer-link-list">
+              <li><a href="service-details.html">Drain Clearing</a></li>
+              <li><a href="service-details.html">Luxury Tub Fittings</a></li>
+              <li><a href="service-details.html">Pipeline Audits</a></li>
+              <li><a href="service-details.html">Water Heater Setup</a></li>
+              <li><a href="service-details.html">Emergency Response</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Quick Links</h3>
+            <ul class="footer-link-list">
+              <li><a href="about.html">About Corporate</a></li>
+              <li><a href="pricing.html">Transparent Rates</a></li>
+              <li><a href="team.html">Our Certified Staff</a></li>
+              <li><a href="faq.html">Common Questions</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <h3 class="footer-widget-title">Newsletter Signup</h3>
+            <p class="text-secondary mb-3">Subscribe to our monthly maintenance checklist and seasonal discount coupons.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+              <input type="email" class="newsletter-input" placeholder="Your Email Address" required />
+              <button type="submit" class="newsletter-submit" aria-label="Subscribe">
+                <i data-lucide="send" style="width:16px;height:16px;"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom text-center">
+          <div class="row align-items-center justify-content-between">
+            <div class="col-md-6 text-md-start mb-3 mb-md-0">
+              <p class="mb-0">&copy; 2026 PlumbMaster Template. Inspired by high-end luxury business engineering.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <div class="d-flex justify-content-center justify-content-md-end gap-4">
+                <a href="terms-conditions.html" class="text-secondary text-decoration-none">Terms of Service</a>
+                <a href="privacy-policy.html" class="text-secondary text-decoration-none">Privacy Policy</a>
+                <a href="contact.html" class="text-secondary text-decoration-none">Support desk</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lucide Vector Icons Library CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Animation Engine CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Theme JS Control -->
+    <script src="/assets/js/main.js"></script>
+
+  </body>
+</html>

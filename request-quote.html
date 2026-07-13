@@ -1,0 +1,1142 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Request a Premium Quote - PlumbMaster Premium Plumbing Template</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- AOS Animation CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    <!-- Custom Global Style -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    
+    <!-- Bespoke Styles for Quote Page -->
+    <style>
+      .form-section-title {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 1.25rem;
+        color: var(--text-primary);
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 12px;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* Custom input & Floating labels */
+      .custom-floating-form .form-floating > .form-control,
+      .custom-floating-form .form-floating > .form-select {
+        background-color: var(--bg-topbar);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        border-radius: var(--border-radius-sm);
+        transition: all 0.3s ease;
+      }
+
+      .custom-floating-form .form-floating > .form-control:focus,
+      .custom-floating-form .form-floating > .form-select:focus {
+        border-color: var(--color-orange);
+        box-shadow: var(--shadow-glow);
+        background-color: var(--bg-surface-hover);
+      }
+
+      .custom-floating-form .form-floating > label {
+        color: var(--text-secondary);
+      }
+
+      .custom-floating-form .form-floating > .form-control:focus ~ label,
+      .custom-floating-form .form-floating > .form-control:not(:placeholder-shown) ~ label,
+      .custom-floating-form .form-floating > .form-select:focus ~ label,
+      .custom-floating-form .form-floating > .form-select:not([value=""]) ~ label {
+        color: var(--color-orange);
+      }
+
+      /* Custom Drag & Drop File Upload UI */
+      .premium-file-dropzone {
+        border: 2px dashed var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 30px;
+        text-align: center;
+        cursor: pointer;
+        background-color: var(--bg-topbar);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      .premium-file-dropzone:hover, .premium-file-dropzone.dragover {
+        border-color: var(--color-orange);
+        background-color: var(--bg-surface-hover);
+        box-shadow: var(--shadow-glow);
+      }
+
+      /* Sticky Quote Summary Card */
+      .summary-sticky-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-lg);
+        padding: 30px;
+        box-shadow: var(--shadow-md);
+        position: sticky;
+        top: 120px;
+        z-index: 10;
+        transition: border-color 0.4s ease;
+      }
+      .summary-sticky-card:hover {
+        border-color: var(--color-orange);
+        box-shadow: var(--shadow-lg), var(--shadow-glow);
+      }
+
+      .summary-detail-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .summary-detail-item:last-child {
+        border-bottom: none;
+      }
+
+      /* Accordion custom styling to match PlumbMaster theme */
+      .custom-accordion .accordion-item {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        margin-bottom: 16px;
+        border-radius: var(--border-radius-md) !important;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      .custom-accordion .accordion-item:hover {
+        border-color: var(--border-color-hover);
+        box-shadow: var(--shadow-sm);
+      }
+      .custom-accordion .accordion-button {
+        background-color: var(--bg-surface);
+        color: var(--text-primary);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        padding: 20px 24px;
+        border: none;
+        box-shadow: none;
+        transition: all 0.3s ease;
+      }
+      .custom-accordion .accordion-button:not(.collapsed) {
+        background-color: var(--bg-surface-hover);
+        color: var(--color-orange);
+      }
+      .custom-accordion .accordion-button::after {
+        background-image: none;
+        content: '+';
+        font-family: var(--font-heading);
+        font-size: 22px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease;
+        transform: rotate(0);
+      }
+      .custom-accordion .accordion-button:not(.collapsed)::after {
+        content: '−';
+        transform: rotate(180deg);
+        color: var(--color-orange);
+      }
+      .custom-accordion .accordion-body {
+        background-color: var(--bg-surface);
+        color: var(--text-secondary);
+        padding: 24px;
+        border-top: 1px solid var(--border-color);
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .badge-premium {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-orange);
+        background-color: var(--color-orange-light);
+        padding: 6px 14px;
+        border-radius: 50px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: 1px solid rgba(255, 87, 34, 0.2);
+        margin-bottom: 12px;
+      }
+
+      /* Why Choose Us Minimal Layout */
+      .trust-grid-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 20px;
+        background-color: var(--bg-topbar);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        transition: all 0.3s ease;
+      }
+      .trust-grid-item:hover {
+        border-color: var(--color-orange);
+        transform: translateY(-4px);
+        background-color: var(--bg-surface-hover);
+      }
+
+      /* Floating decorations */
+      .floating-bg-element {
+        position: absolute;
+        opacity: 0.03;
+        pointer-events: none;
+        z-index: 0;
+        animation: floatEffect 12s infinite ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- GLOBAL SEARCH MODAL -->
+    <div class="search-modal-overlay" id="searchModal">
+      <button class="search-modal-close" aria-label="Close search">
+        <i data-lucide="x" style="width:32px;height:32px;"></i>
+      </button>
+      <div class="search-modal-box">
+        <div class="search-modal-input-wrapper">
+          <input type="text" class="search-modal-input" placeholder="Search services, articles, products..." />
+          <i data-lucide="search" class="search-modal-icon" style="width:24px;height:24px;"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- STICKY HEADER TOP-BAR -->
+    <div class="top-bar d-none d-lg-flex">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-4">
+          <span class="top-bar-link">
+            <i data-lucide="clock" style="width:14px;height:14px;"></i>
+            Working Hours: 24/7 Emergency Support
+          </span>
+          <a href="mailto:emergency@plumbmaster.com" class="top-bar-link">
+            <i data-lucide="mail" style="width:14px;height:14px;"></i>
+            emergency@plumbmaster.com
+          </a>
+        </div>
+        <div class="d-flex align-items-center gap-4">
+          <a href="tel:18005550199" class="top-bar-link fw-bold text-orange">
+            <i data-lucide="phone-call" style="width:14px;height:14px;"></i>
+            Emergency Hotline: 1-800-555-0199
+          </a>
+          <div class="d-flex align-items-center gap-2 border-start ps-3 border-secondary">
+            <a href="#" class="top-bar-link" aria-label="Facebook"><i data-lucide="facebook" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Twitter"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN HEADER NAVIGATION -->
+    <header class="main-header">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a href="index.html" class="logo-brand">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:22px;height:22px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="nav-menu">
+          <div class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </div>
+          <div class="nav-item">
+            <a href="about.html" class="nav-link">About</a>
+          </div>
+          <div class="nav-item">
+            <a href="services.html" class="nav-link">
+              Services <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="services.html" class="dropdown-item-custom">All Services</a>
+              <a href="service-details.html" class="dropdown-item-custom">Service Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="projects.html" class="nav-link">
+              Projects <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="projects.html" class="dropdown-item-custom">Project Gallery</a>
+              <a href="project-details.html" class="dropdown-item-custom">Project Details</a>
+            </div>
+          </div>
+          <div class="nav-item mega-menu-wrapper">
+            <a href="shop.html" class="nav-link">
+              Shop <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="mega-menu">
+              <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Shop Collection</h3>
+                  <a href="shop.html" class="dropdown-item-custom">Main Plumbing Store</a>
+                  <a href="product-details.html" class="dropdown-item-custom">Premium Fittings</a>
+                  <a href="cart.html" class="dropdown-item-custom">Shopping Cart</a>
+                  <a href="checkout.html" class="dropdown-item-custom">Secure Checkout</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Our Pages</h3>
+                  <a href="team.html" class="dropdown-item-custom">Our Expert Plumbers</a>
+                  <a href="team-details.html" class="dropdown-item-custom">Expert Profile</a>
+                  <a href="pricing.html" class="dropdown-item-custom">Transparent Rates</a>
+                  <a href="faq.html" class="dropdown-item-custom">Frequently Asked Qs</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                  <h3 class="mega-title">Company Info</h3>
+                  <a href="about.html" class="dropdown-item-custom">Corporate Overview</a>
+                  <a href="contact.html" class="dropdown-item-custom">Office Contacts</a>
+                  <a href="privacy-policy.html" class="dropdown-item-custom">Privacy Policy</a>
+                  <a href="terms-conditions.html" class="dropdown-item-custom">Terms of Service</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="emergency-banner-box h-100 d-flex flex-column justify-content-center p-3 text-center">
+                    <span class="badge-premium mb-2 mx-auto">Seasonal Offer</span>
+                    <h4 class="fs-6 text-white mb-2">Free Inspections</h4>
+                    <p class="text-secondary small mb-3">Claim a free system audit on your initial water lines setup.</p>
+                    <a href="appointment.html" class="btn-premium py-2 px-3 fs-7 align-self-center">Claim Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="blog.html" class="nav-link">
+              Blog <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="blog.html" class="dropdown-item-custom">Industry News</a>
+              <a href="blog-details.html" class="dropdown-item-custom">Article Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="contact.html" class="nav-link">Contact</a>
+          </div>
+        </nav>
+
+        <div class="d-flex align-items-center gap-3">
+          <button class="search-toggle-btn search-trigger" aria-label="Open Search">
+            <i data-lucide="search"></i>
+          </button>
+          <button class="theme-toggle-btn" aria-label="Toggle Theme">
+            <i data-lucide="sun"></i>
+          </button>
+          <a href="appointment.html" class="btn-premium d-none d-xl-flex">
+            Book Appointment
+            <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+          </a>
+          <button class="mobile-menu-trigger" aria-label="Toggle Navigation">
+            <i data-lucide="menu" style="width:20px;height:20px;"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div class="mobile-nav-overlay"></div>
+    <div class="mobile-nav-drawer">
+      <div class="mobile-nav-header">
+        <a href="index.html" class="logo-brand text-decoration-none">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:18px;height:18px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+        <button class="mobile-nav-close" aria-label="Close Mobile Menu">
+          <i data-lucide="x" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-drawer-links">
+        <div class="mobile-nav-item"><a href="index.html" class="mobile-nav-link">Home</a></div>
+        <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About Us</a></div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Services <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="services.html" class="mobile-nav-submenu-link">Our Services</a>
+            <a href="service-details.html" class="mobile-nav-submenu-link">Service Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Projects <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="projects.html" class="mobile-nav-submenu-link">Project Gallery</a>
+            <a href="project-details.html" class="mobile-nav-submenu-link">Project Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Store Collection <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="shop.html" class="mobile-nav-submenu-link">Main Shop</a>
+            <a href="product-details.html" class="mobile-nav-submenu-link">Product Details</a>
+            <a href="cart.html" class="mobile-nav-submenu-link">Cart</a>
+            <a href="checkout.html" class="mobile-nav-submenu-link">Checkout</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">More Pages <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="team.html" class="mobile-nav-submenu-link">Our Plumbers</a>
+            <a href="team-details.html" class="mobile-nav-submenu-link">Profile Details</a>
+            <a href="pricing.html" class="mobile-nav-submenu-link">Pricing Plans</a>
+            <a href="faq.html" class="mobile-nav-submenu-link">FAQ Pages</a>
+            <a href="404.html" class="mobile-nav-submenu-link">404 Page</a>
+            <a href="coming-soon.html" class="mobile-nav-submenu-link">Coming Soon</a>
+            <a href="privacy-policy.html" class="mobile-nav-submenu-link">Privacy Policy</a>
+            <a href="terms-conditions.html" class="mobile-nav-submenu-link">Terms & Conditions</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Blog & News <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="blog.html" class="mobile-nav-submenu-link">Blog Posts</a>
+            <a href="blog-details.html" class="mobile-nav-submenu-link">Blog Article</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></div>
+      </div>
+      <div class="mt-4 pt-3 border-top border-secondary">
+        <a href="appointment.html" class="btn-premium w-full text-center">Book Online Now</a>
+      </div>
+    </div>
+
+    <!-- 1. HERO BANNER -->
+    <section class="breadcrumbs-hero" style="background: linear-gradient(rgba(11, 15, 25, 0.85), rgba(11, 15, 25, 0.95)), url('https://images.unsplash.com/photo-1581094288338-2314dddb7eed?auto=format&fit=crop&w=1920&q=80') center/cover; padding: 120px 0;">
+      <!-- Floating illustrations -->
+      <svg class="floating-bg-element" style="top: 10%; right: 10%; width: 70px; height: 70px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      <svg class="floating-bg-element" style="bottom: 12%; left: 12%; width: 60px; height: 60px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M11 2a9 9 0 0 1 9 9v1a9 9 0 0 1-9 9l-1 .01A9 9 0 0 1 2 11V10a9 9 0 0 1 9-9z"/></svg>
+      
+      <div class="container text-center text-md-start d-md-flex align-items-center justify-content-between relative" style="z-index: 1;">
+        <div data-aos="fade-right">
+          <span class="badge-premium"><i data-lucide="file-text"></i> binding estimate module</span>
+          <h1 class="display-4 text-white fw-bold mb-3">Request A Binding Quote</h1>
+          <p class="text-secondary mb-0 max-w-600">Enter your project specifications, upload media attachments, and receive an engineered pricing plan in under 15 minutes.</p>
+        </div>
+        <div class="mt-4 mt-md-0" data-aos="fade-left">
+          <nav class="breadcrumb-nav justify-content-center justify-content-md-end">
+            <a href="index.html">Home</a>
+            <i data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+            <span class="text-orange">Request Quote</span>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN BODY SECTIONS -->
+    <main class="py-5">
+
+      <!-- 2. QUOTE INTRODUCTION & FORM SECTION -->
+      <section class="section-padding pt-0">
+        <div class="container">
+          <div class="row g-5">
+            
+            <!-- Left Side: Intro & Quote Form -->
+            <div class="col-lg-8" data-aos="fade-right">
+              
+              <!-- Intro Panel -->
+              <div class="glass-panel p-4 mb-5" style="border-left: 4px solid var(--color-orange);">
+                <h2 class="h3 text-white mb-3">Engineered Estimation System</h2>
+                <p class="text-secondary mb-0">Our digital calculation office uses certified plumbing parameters to generate precise estimates. Fill in the fields below. A local project leader will review your structural needs, photo attachments, and provide a binding proposal. No obligations, 100% transparent pricing.</p>
+              </div>
+
+              <!-- Form Panel -->
+              <div class="glass-panel p-4 p-md-5">
+                <form id="quoteRequestForm" class="custom-floating-form needs-validation" novalidate>
+                  
+                  <!-- Section 1: Customer Info -->
+                  <div class="form-section-title">
+                    <i data-lucide="users" class="text-orange" style="width:20px;height:20px;"></i>
+                    <span>1. Customer & Location Profile</span>
+                  </div>
+                  
+                  <div class="row g-3 mb-5">
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" id="customerName" placeholder="Full Name" required />
+                        <label for="customerName">Customer Name</label>
+                        <div class="invalid-feedback">Please enter your name.</div>
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input type="email" class="form-control" id="customerEmail" placeholder="name@example.com" required />
+                        <label for="customerEmail">Email Address</label>
+                        <div class="invalid-feedback">Please provide a valid email.</div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input type="tel" class="form-control" id="customerPhone" placeholder="+1 (555) 000-0000" required />
+                        <label for="customerPhone">Phone Number</label>
+                        <div class="invalid-feedback">Please enter your telephone number.</div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" id="company" placeholder="Company Name (Optional)" />
+                        <label for="company">Company / Organization (Optional)</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-8">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" id="streetAddress" placeholder="Street Address" required />
+                        <label for="streetAddress">Street Address</label>
+                        <div class="invalid-feedback">Please enter the service location address.</div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" id="cityName" placeholder="City" required />
+                        <label for="cityName">City</label>
+                        <div class="invalid-feedback">Required.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Section 2: Project Specifications -->
+                  <div class="form-section-title">
+                    <i data-lucide="wrench" class="text-orange" style="width:20px;height:20px;"></i>
+                    <span>2. Structural & Service Specifications</span>
+                  </div>
+
+                  <div class="row g-3 mb-5">
+                    <!-- Property Type Radios in grid -->
+                    <div class="col-12 mb-3">
+                      <label class="form-label text-white fw-semibold d-block mb-2">Property Type</label>
+                      <div class="d-flex flex-wrap gap-4">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="propertyType" id="propResidential" value="Residential" checked />
+                          <label class="form-check-label text-secondary" for="propResidential">Residential House / Condo</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="propertyType" id="propCommercial" value="Commercial" />
+                          <label class="form-check-label text-secondary" for="propCommercial">Commercial Storefront / Office</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="propertyType" id="propIndustrial" value="Industrial" />
+                          <label class="form-check-label text-secondary" for="propIndustrial">Industrial / Factory Site</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <select class="form-select" id="serviceCategory" required>
+                          <option value="" disabled selected>Select Category</option>
+                          <option value="Drain Cleaning & Cam">Drain Clearing & Camera Survey</option>
+                          <option value="Pipe Repair & Copper">Pipe Repair & Leak Solder</option>
+                          <option value="Boiler & Water Heater">Boiler & Water Heater Setup</option>
+                          <option value="Bathroom Luxury Fittings">Luxury Fitting & Renovations</option>
+                          <option value="Whole-House Pipeline Audit">Whole-House Pipe Audit</option>
+                          <option value="Emergency Pump & Backflow">Emergency Pump & Backflow</option>
+                        </select>
+                        <label for="serviceCategory">Service Category</label>
+                        <div class="invalid-feedback">Required.</div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" id="specificService" placeholder="e.g. Copper pipeline solder" required />
+                        <label for="specificService">Specific Issue / Repair Target</label>
+                        <div class="invalid-feedback">Please specify the problem.</div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-floating">
+                        <textarea class="form-control" id="projectDescription" placeholder="Project details" style="height: 120px" required></textarea>
+                        <label for="projectDescription">Project Description / System Failures</label>
+                        <div class="invalid-feedback">Please describe the work details.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Section 3: Booking & Logistics -->
+                  <div class="form-section-title">
+                    <i data-lucide="clock" class="text-orange" style="width:20px;height:20px;"></i>
+                    <span>3. Booking & Dispatch Logistics</span>
+                  </div>
+
+                  <div class="row g-3 mb-5">
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input type="date" class="form-control" id="preferredDate" required />
+                        <label for="preferredDate">Preferred Date</label>
+                        <div class="invalid-feedback">Choose a date.</div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <select class="form-select" id="preferredTime" required>
+                          <option value="" disabled selected>Select Window</option>
+                          <option value="Morning (8:00 AM - 12:00 PM)">Morning (8:00 AM - 12:00 PM)</option>
+                          <option value="Afternoon (12:00 PM - 4:00 PM)">Afternoon (12:00 PM - 4:00 PM)</option>
+                          <option value="Evening (4:00 PM - 8:00 PM)">Evening (4:00 PM - 8:00 PM)</option>
+                          <option value="Emergency (Same-Hour Crew Dispatch)">Emergency (24/7 Crew Dispatch)</option>
+                        </select>
+                        <label for="preferredTime">Preferred Time Window</label>
+                        <div class="invalid-feedback">Required.</div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <select class="form-select" id="estimatedBudget" required>
+                          <option value="" disabled selected>Select Budget Scope</option>
+                          <option value="Minor Repair (Under $500)">Minor Repair (Under $500)</option>
+                          <option value="Standard Solution ($500 - $1,500)">Standard Solution ($500 - $1,500)</option>
+                          <option value="Complex Mechanical Work ($1,500 - $5,000)">Complex Mechanical Work ($1,500 - $5,000)</option>
+                          <option value="Industrial System Engineering ($5,000+)">Industrial Integration ($5,000+)</option>
+                        </select>
+                        <label for="estimatedBudget">Estimated Budget Limit</label>
+                        <div class="invalid-feedback">Required.</div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <select class="form-select" id="urgencyLevel" required>
+                          <option value="" disabled selected>Select Urgency</option>
+                          <option value="Emergency (Same-Hour Crew)">Emergency (Same-Hour Dispatch)</option>
+                          <option value="Urgent (Same-Day Response)">Urgent (Same-Day Response)</option>
+                          <option value="Scheduled (Within This Week)">Scheduled (Within This Week)</option>
+                          <option value="Flexible (Planning Stage)">Flexible / Planning Stage</option>
+                        </select>
+                        <label for="urgencyLevel">Urgency Level</label>
+                        <div class="invalid-feedback">Required.</div>
+                      </div>
+                    </div>
+
+                    <!-- File Upload Container -->
+                    <div class="col-12 my-4">
+                      <label class="form-label text-white fw-semibold mb-2">Upload System Photos / Blueprints (UI Only)</label>
+                      <div class="premium-file-dropzone" id="fileDropzone">
+                        <input type="file" id="quoteFileInput" class="d-none" multiple />
+                        <div class="dropzone-content">
+                          <i data-lucide="upload" class="text-orange mb-3" style="width:40px;height:40px;margin: 0 auto; display: block;"></i>
+                          <h4 class="fs-6 text-white mb-1">Drag & Drop Plumbing Photos Here</h4>
+                          <p class="text-secondary small mb-0">or click to browse local folders (Support formats: JPG, PNG, PDF. Max size: 25MB)</p>
+                        </div>
+                        <div id="fileUploadFeedback" class="mt-3 text-teal d-none font-mono small">
+                          <i data-lucide="check-circle" style="width:14px;height:14px;display:inline-block;vertical-align:text-top;" class="me-1"></i>
+                          Plumbing_Spec_Photos.zip loaded successfully!
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                      <label class="form-label text-white fw-semibold d-block mb-2">Preferred Contact Method</label>
+                      <div class="d-flex flex-wrap gap-4">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="contactEmail" checked />
+                          <label class="form-check-label text-secondary" for="contactEmail">Email Correspondence</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="contactPhone" />
+                          <label class="form-check-label text-secondary" for="contactPhone">Phone Call Callback</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="contactSMS" />
+                          <label class="form-check-label text-secondary" for="contactSMS">SMS Text Alert</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-check text-start">
+                        <input class="form-check-input" type="checkbox" id="termsConsent" required />
+                        <label class="form-check-label text-secondary small" for="termsConsent">
+                          I agree to standard pricing evaluation terms and authorize PlumbMaster to dispatch local mechanical estimators if needed. Read our <a href="privacy-policy.html" class="text-orange text-decoration-underline">privacy rules</a>.
+                        </label>
+                        <div class="invalid-feedback">Required.</div>
+                      </div>
+                    </div>
+
+                    <div class="col-12 text-start mt-4">
+                      <button type="submit" class="btn-premium py-3 px-4 w-100">
+                        Request Binding Estimate
+                        <i data-lucide="file-text" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+
+                <!-- Success State Overlay -->
+                <div id="quoteSuccessAlert" class="mt-4 p-4 d-none glass-panel text-center animate-fade-in" style="border-color: var(--color-teal); background-color: rgba(0, 150, 136, 0.05);">
+                  <div class="text-teal mb-3">
+                    <i data-lucide="check-circle" style="width:48px;height:48px;stroke:var(--color-teal);"></i>
+                  </div>
+                  <h4 class="text-white">Estimate Request Received!</h4>
+                  <p class="text-secondary small mb-3">Your technical file has been loaded and queued. Our certified estimating team is running calculations.</p>
+                  <div class="p-3 bg-topbar border border-theme rounded mb-3">
+                    <div class="text-white font-mono small">Estimate Ticket ID: <span class="text-orange">#PM-2026-9941</span></div>
+                    <div class="text-secondary small mt-1">Response Guarantee: <strong class="text-white">Under 15 Minutes</strong></div>
+                  </div>
+                  <p class="text-muted small mb-0">A detailed plumbing breakdown PDF will be sent to your inbox. Keep your line active for coordinator callbacks.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side: Sticky Summary Card & Trust Grid -->
+            <div class="col-lg-4">
+              <div class="summary-sticky-card">
+                <span class="badge-premium mb-3 d-inline-block"><i data-lucide="activity"></i> live estimation</span>
+                <h3 class="h4 text-white mb-4">Pricing Estimation Summary</h3>
+                
+                <div class="summary-board text-secondary small mb-4">
+                  <div class="summary-detail-item">
+                    <span>Selected Service:</span>
+                    <strong class="text-white summary-service-val text-end" style="max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Select Category</strong>
+                  </div>
+                  <div class="summary-detail-item">
+                    <span>Estimated Budget:</span>
+                    <strong class="text-white summary-budget-val text-end">Select Budget</strong>
+                  </div>
+                  <div class="summary-detail-item">
+                    <span>Preferred Date:</span>
+                    <strong class="text-white summary-date-val text-end">Choose Date</strong>
+                  </div>
+                  <div class="summary-detail-item">
+                    <span>Response Time:</span>
+                    <strong class="text-orange summary-response-val text-end">Instant Response</strong>
+                  </div>
+                </div>
+
+                <div class="p-3 bg-topbar rounded border border-theme mb-4">
+                  <p class="text-secondary small mb-0"><i data-lucide="shield" class="text-orange me-1" style="width:14px;height:14px;display:inline-block;vertical-align:text-top;"></i> PlumbMaster binding estimates guarantee final repair invoices won't exceed quote targets by more than 5%.</p>
+                </div>
+
+                <a href="tel:18005550199" class="btn-premium w-100 py-3 text-center">
+                  <i data-lucide="phone-call" style="width:16px;height:16px;"></i>
+                  Direct Hotline: 1-800
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. WHY CHOOSE US -->
+      <section class="section-padding bg-surface border-top border-bottom border-theme">
+        <div class="container">
+          <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge-premium"><i data-lucide="award"></i> Certified Trust</span>
+            <h2 class="display-6 fw-bold text-white mb-3">Our Structural Guarantees</h2>
+            <p class="text-secondary mx-auto max-w-600">PlumbMaster integrates rigid corporate standards into every repair, remodel, and installation project we handle.</p>
+          </div>
+
+          <div class="row g-4 justify-content-center">
+            <!-- Licensed Team -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="trust-grid-item h-100">
+                <div class="premium-card-icon m-0 p-3" style="width:48px;height:48px;flex-shrink:0;">
+                  <i data-lucide="award" style="width:20px;height:20px;"></i>
+                </div>
+                <div>
+                  <h4 class="h5 text-white mb-2">Licensed Team</h4>
+                  <p class="text-secondary small mb-0">Every mechanical plumber on our crew holds full state contractor licenses, is fully bonded, and insured.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fast Response -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="trust-grid-item h-100">
+                <div class="premium-card-icon m-0 p-3" style="width:48px;height:48px;flex-shrink:0;">
+                  <i data-lucide="zap" style="width:20px;height:20px;"></i>
+                </div>
+                <div>
+                  <h4 class="h5 text-white mb-2">Fast Response</h4>
+                  <p class="text-secondary small mb-0">Local radio-dispatched trucks are parked strategically in your suburb to reach you in under 45 minutes.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Transparent Pricing -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="trust-grid-item h-100">
+                <div class="premium-card-icon m-0 p-3" style="width:48px;height:48px;flex-shrink:0;">
+                  <i data-lucide="dollar-sign" style="width:20px;height:20px;"></i>
+                </div>
+                <div>
+                  <h4 class="h5 text-white mb-2">Transparent Pricing</h4>
+                  <p class="text-secondary small mb-0">Upfront estimates, standard block rates, and zero surprise surcharges on final statements.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Warranty -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+              <div class="trust-grid-item h-100">
+                <div class="premium-card-icon m-0 p-3" style="width:48px;height:48px;flex-shrink:0;">
+                  <i data-lucide="shield" style="width:20px;height:20px;"></i>
+                </div>
+                <div>
+                  <h4 class="h5 text-white mb-2">Comprehensive Warranty</h4>
+                  <p class="text-secondary small mb-0">We back our precision repair lines with an unconditional 365-day parts & labor warranty.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Emergency Support -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+              <div class="trust-grid-item h-100">
+                <div class="premium-card-icon m-0 p-3" style="width:48px;height:48px;flex-shrink:0;">
+                  <i data-lucide="activity" style="width:20px;height:20px;"></i>
+                </div>
+                <div>
+                  <h4 class="h5 text-white mb-2">Emergency Support</h4>
+                  <p class="text-secondary small mb-0">Floods and backups don't wait for office hours. Dispatch systems operate 24/7/365.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. FAQ (Minimum 8 Questions Accordion UI) -->
+      <section class="section-padding">
+        <div class="container">
+          <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge-premium"><i data-lucide="help-circle"></i> calculation help</span>
+            <h2 class="display-6 fw-bold text-white mb-3">Estimation Knowledge Base</h2>
+            <p class="text-secondary mx-auto max-w-600">Get clear answers about how we estimate labor rates, bind quote values, charge diagnostics, or integrate commercial volume pricing.</p>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-8 mx-auto" data-aos="fade-up">
+              <div class="accordion custom-accordion" id="quoteFAQ">
+                <!-- FAQ 1 -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="faqOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#qCollapseOne" aria-expanded="true" aria-controls="qCollapseOne">
+                      Is there an upfront fee to receive a custom plumbing quote?
+                    </button>
+                  </h2>
+                  <div id="qCollapseOne" class="accordion-collapse collapse show" aria-labelledby="faqOne" data-bs-parent="#quoteFAQ">
+                    <div class="accordion-body">
+                      No, all initial digital estimates, calculations, and remote blueprint evaluations submitted via our request form are 100% free and carry zero obligation. If a complex structural plumbing project requires physical on-site camera inspections or manual flow diagnostics to compile a quote, a transparent, pre-agreed dispatch fee is quoted beforehand.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="faqTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#qCollapseTwo" aria-expanded="false" aria-controls="qCollapseTwo">
+                      Can I upload photos of my plumbing issue for a more accurate quote?
+                    </button>
+                  </h2>
+                  <div id="qCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqTwo" data-bs-parent="#quoteFAQ">
+                    <div class="accordion-body">
+                      Absolutely! We highly encourage uploading high-resolution photos of active leaks, structural layouts, boiler labels, or architectural blueprints. Photo attachments allow our engineering office to identify pipe gauges, fitting standards, and component brands instantly, generating a much more accurate binding estimate.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="faqThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#qCollapseThree" aria-expanded="false" aria-controls="qCollapseThree">
+                      How long is my custom binding quote valid for?
+                    </button>
+                  </h2>
+                  <div id="qCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqThree" data-bs-parent="#quoteFAQ">
+                    <div class="accordion-body">
+                      Every custom plumbing quote compiled by our estimating team is valid and binding for exactly 30 calendar days from the date of issue. This gives you ample room to evaluate finances, plan building schedules, or compare mechanical specifications without worrying about component price fluctuations.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="faqFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#qCollapseFour" aria-expanded="false" aria-controls="qCollapseFour">
+                      What is the difference between a rough estimate and a binding quote?
+                    </button>
+                  </h2>
+                  <div id="qCollapseFour" class="accordion-collapse collapse" aria-labelledby="faqFour" data-bs-parent="#quoteFAQ">
+                    <div class="accordion-body">
+                      A rough estimate is a structural prediction of price based on typical averages for a service category. A binding quote is a firm, formal agreement. Once you provide precise measurements, service addresses, and system photos, we lock in a binding quote. This guarantees that your final invoice will not exceed the quote target, subject only to pre-agreed scope variations.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="faqFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#qCollapseFive" aria-expanded="false" aria-controls="qCollapseFive">
+                      Do you offer commercial plumbing volume pricing?
+                    </button>
+                  </h2>
+                  <div id="qCollapseFive" class="accordion-collapse collapse" aria-labelledby="faqFive" data-bs-parent="#quoteFAQ">
+                    <div class="accordion-body">
+                      Yes. For high-occupancy buildings, corporate chains, real estate developers, property management groups, or multi-family properties, we offer specialized commercial accounts. This includes high-volume contract pricing schedules, dedicated diagnostic coordinators, and guaranteed SLA dispatch priority.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="faqSix">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#qCollapseSix" aria-expanded="false" aria-controls="qCollapseSix">
+                      What happens after I submit my quote request?
+                    </button>
+                  </h2>
+                  <div id="qCollapseSix" class="accordion-collapse collapse" aria-labelledby="faqSix" data-bs-parent="#quoteFAQ">
+                    <div class="accordion-body">
+                      Once submitted, our digital intake system logs your project parameters. A localized project estimator is assigned to review your files. If the specs are complete, you receive a detailed PDF breakdown via email in under 15 minutes. We will then schedule a callback to discuss scheduling, team mobilization, and equipment requirements.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- FAQ 7 -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="faqSeven">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#qCollapseSeven" aria-expanded="false" aria-controls="qCollapseSeven">
+                      Can I schedule a physical inspection instead of an online quote?
+                    </button>
+                  </h2>
+                  <div id="qCollapseSeven" class="accordion-collapse collapse" aria-labelledby="faqSeven" data-bs-parent="#quoteFAQ">
+                    <div class="accordion-body">
+                      Yes, of course. If you prefer to bypass digital uploads and have an expert mechanical plumber evaluate your building lines in person, simply head to our <a href="appointment.html" class="text-orange text-decoration-underline">Book Appointment</a> portal to schedule a technician visit directly at a time of your convenience.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- FAQ 8 -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="faqEight">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#qCollapseEight" aria-expanded="false" aria-controls="qCollapseEight">
+                      How are unexpected complications handled during repairs?
+                    </button>
+                  </h2>
+                  <div id="qCollapseEight" class="accordion-collapse collapse" aria-labelledby="faqEight" data-bs-parent="#quoteFAQ">
+                    <div class="accordion-body">
+                      If our technicians open a wall cavity or excavation and identify unexpected structural complications (e.g. adjacent corroded lead lines not visible in photos), we immediately stop work, document the complications, and explain the situations to you. We never execute or bill unauthorized additions without your express signature on a revised estimate.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- PREMIUM FOOTER -->
+    <footer class="premium-footer section-padding pb-0">
+      <div class="container">
+        <div class="row g-5 pb-5">
+          <div class="col-lg-4 col-md-6">
+            <div class="mb-4">
+              <a href="index.html" class="logo-brand text-decoration-none">
+                <div class="logo-icon">
+                  <i data-lucide="wrench" style="width:20px;height:20px;"></i>
+                </div>
+                PLUMB<span>MASTER</span>
+              </a>
+            </div>
+            <p class="text-secondary mb-4">
+              Providing modern, elite plumbing engineering and emergency plumbing solutions across domestic and industrial sectors. Responsive, certified, and luxury-first.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" class="social-icon-circle" aria-label="Facebook"><i data-lucide="facebook" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Twitter"><i data-lucide="twitter" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Instagram"><i data-lucide="instagram" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:16px;height:16px;"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Core Services</h3>
+            <ul class="footer-link-list">
+              <li><a href="service-details.html">Drain Clearing</a></li>
+              <li><a href="service-details.html">Luxury Tub Fittings</a></li>
+              <li><a href="service-details.html">Pipeline Audits</a></li>
+              <li><a href="service-details.html">Water Heater Setup</a></li>
+              <li><a href="service-details.html">Emergency Response</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Quick Links</h3>
+            <ul class="footer-link-list">
+              <li><a href="about.html">About Corporate</a></li>
+              <li><a href="pricing.html">Transparent Rates</a></li>
+              <li><a href="team.html">Our Certified Staff</a></li>
+              <li><a href="faq.html">Common Questions</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <h3 class="footer-widget-title">Newsletter Signup</h3>
+            <p class="text-secondary mb-3">Subscribe to our monthly maintenance checklist and seasonal discount coupons.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+              <input type="email" class="newsletter-input" placeholder="Your Email Address" required />
+              <button type="submit" class="newsletter-submit" aria-label="Subscribe">
+                <i data-lucide="send" style="width:16px;height:16px;"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom text-center">
+          <div class="row align-items-center justify-content-between">
+            <div class="col-md-6 text-md-start mb-3 mb-md-0">
+              <p class="mb-0">&copy; 2026 PlumbMaster Template. Inspired by high-end luxury business engineering.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <div class="d-flex justify-content-center justify-content-md-end gap-4">
+                <a href="terms-conditions.html" class="text-secondary text-decoration-none">Terms of Service</a>
+                <a href="privacy-policy.html" class="text-secondary text-decoration-none">Privacy Policy</a>
+                <a href="contact.html" class="text-secondary text-decoration-none">Support desk</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lucide Vector Icons Library CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Animation Engine CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Theme JS Control -->
+    <script src="/assets/js/main.js"></script>
+
+    <!-- Page Specific Interactive JS script for Live Estimation & Form Submission -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // UI elements
+        const form = document.getElementById('quoteRequestForm');
+        const successAlert = document.getElementById('quoteSuccessAlert');
+        
+        // Form field monitors for dynamic summary updates
+        const serviceCategorySelect = document.getElementById('serviceCategory');
+        const estimatedBudgetSelect = document.getElementById('estimatedBudget');
+        const preferredDateInput = document.getElementById('preferredDate');
+        const urgencyLevelSelect = document.getElementById('urgencyLevel');
+        
+        // Summary label elements
+        const summaryService = document.querySelector('.summary-service-val');
+        const summaryBudget = document.querySelector('.summary-budget-val');
+        const summaryDate = document.querySelector('.summary-date-val');
+        const summaryResponse = document.querySelector('.summary-response-val');
+
+        // Dynamic update listeners
+        if (serviceCategorySelect) {
+          serviceCategorySelect.addEventListener('change', (e) => {
+            summaryService.textContent = e.target.value || "Select Category";
+          });
+        }
+
+        if (estimatedBudgetSelect) {
+          estimatedBudgetSelect.addEventListener('change', (e) => {
+            summaryBudget.textContent = e.target.value || "Select Budget";
+          });
+        }
+
+        if (preferredDateInput) {
+          preferredDateInput.addEventListener('change', (e) => {
+            if (e.target.value) {
+              const d = new Date(e.target.value);
+              summaryDate.textContent = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            } else {
+              summaryDate.textContent = "Choose Date";
+            }
+          });
+        }
+
+        if (urgencyLevelSelect) {
+          urgencyLevelSelect.addEventListener('change', (e) => {
+            const val = e.target.value;
+            if (val.includes("Emergency") || val.includes("Urgent")) {
+              summaryResponse.textContent = "Under 15 Minutes";
+              summaryResponse.style.color = "var(--color-orange)";
+            } else {
+              summaryResponse.textContent = "Under 2 Hours";
+              summaryResponse.style.color = "var(--color-teal)";
+            }
+          });
+        }
+
+        // File dropzone mock click & dragover interaction
+        const fileDropzone = document.getElementById('fileDropzone');
+        const quoteFileInput = document.getElementById('quoteFileInput');
+        const fileUploadFeedback = document.getElementById('fileUploadFeedback');
+
+        if (fileDropzone && quoteFileInput) {
+          fileDropzone.addEventListener('click', () => {
+            quoteFileInput.click();
+          });
+
+          quoteFileInput.addEventListener('change', () => {
+            if (quoteFileInput.files.length > 0) {
+              fileUploadFeedback.textContent = `${quoteFileInput.files.length} file(s) loaded: "${quoteFileInput.files[0].name}"...`;
+              fileUploadFeedback.classList.remove('d-none');
+            }
+          });
+
+          fileDropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileDropzone.classList.add('dragover');
+          });
+
+          fileDropzone.addEventListener('dragleave', () => {
+            fileDropzone.classList.remove('dragover');
+          });
+
+          fileDropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileDropzone.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) {
+              quoteFileInput.files = e.dataTransfer.files;
+              fileUploadFeedback.textContent = `${e.dataTransfer.files.length} file(s) dropped: "${e.dataTransfer.files[0].name}"...`;
+              fileUploadFeedback.classList.remove('d-none');
+            }
+          });
+        }
+
+        // Form submission validation & UI success toggling
+        if (form) {
+          form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            if (form.checkValidity()) {
+              form.classList.add('d-none');
+              successAlert.classList.remove('d-none');
+              successAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+              form.classList.add('was-validated');
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

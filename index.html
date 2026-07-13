@@ -1,0 +1,1757 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PlumbMaster - Premium Plumbing Services HTML Template</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- AOS Animation CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Custom Global Style -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+
+    <!-- 1. GLOBAL SEARCH MODAL -->
+    <div class="search-modal-overlay" id="searchModal">
+      <button class="search-modal-close" aria-label="Close search">
+        <i data-lucide="x" style="width:32px;height:32px;"></i>
+      </button>
+      <div class="search-modal-box">
+        <div class="search-modal-input-wrapper">
+          <input type="text" class="search-modal-input" placeholder="Search services, articles, products..." />
+          <i data-lucide="search" class="search-modal-icon" style="width:24px;height:24px;"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. STICKY HEADER TOP-BAR -->
+    <div class="top-bar d-none d-lg-flex">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-4">
+          <span class="top-bar-link">
+            <i data-lucide="clock" style="width:14px;height:14px;"></i>
+            Working Hours: 24/7 Emergency Support
+          </span>
+          <a href="mailto:emergency@plumbmaster.com" class="top-bar-link">
+            <i data-lucide="mail" style="width:14px;height:14px;"></i>
+            emergency@plumbmaster.com
+          </a>
+        </div>
+        <div class="d-flex align-items-center gap-4">
+          <a href="tel:18005550199" class="top-bar-link fw-bold text-orange">
+            <i data-lucide="phone-call" style="width:14px;height:14px;"></i>
+            Emergency Hotline: 1-800-555-0199
+          </a>
+          <div class="d-flex align-items-center gap-2 border-start ps-3 border-secondary">
+            <a href="#" class="top-bar-link" aria-label="Facebook"><i data-lucide="facebook" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Twitter"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. MAIN HEADER NAVIGATION -->
+    <header class="main-header">
+      <div class="container d-flex justify-content-between align-items-center">
+        
+        <!-- Logo Branding -->
+        <a href="index.html" class="logo-brand">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:22px;height:22px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+
+        <!-- Desktop Navigation Menu (Mega Menu Ready) -->
+        <nav class="nav-menu">
+          <div class="nav-item">
+            <a href="index.html" class="nav-link text-orange">Home</a>
+          </div>
+          
+          <div class="nav-item">
+            <a href="about.html" class="nav-link">About</a>
+          </div>
+          
+          <div class="nav-item">
+            <a href="services.html" class="nav-link">
+              Services <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="services.html" class="dropdown-item-custom">All Services</a>
+              <a href="service-details.html" class="dropdown-item-custom">Service Details</a>
+            </div>
+          </div>
+          
+          <div class="nav-item">
+            <a href="projects.html" class="nav-link">
+              Projects <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="projects.html" class="dropdown-item-custom">Project Gallery</a>
+              <a href="project-details.html" class="dropdown-item-custom">Project Details</a>
+            </div>
+          </div>
+          
+          <!-- Mega Menu Integration -->
+          <div class="nav-item mega-menu-wrapper">
+            <a href="shop.html" class="nav-link">
+              Shop <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="mega-menu">
+              <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Shop Collection</h3>
+                  <a href="shop.html" class="dropdown-item-custom">Main Plumbing Store</a>
+                  <a href="product-details.html" class="dropdown-item-custom">Premium Fittings</a>
+                  <a href="cart.html" class="dropdown-item-custom">Shopping Cart</a>
+                  <a href="checkout.html" class="dropdown-item-custom">Secure Checkout</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Our Pages</h3>
+                  <a href="team.html" class="dropdown-item-custom">Our Expert Plumbers</a>
+                  <a href="team-details.html" class="dropdown-item-custom">Expert Profile</a>
+                  <a href="pricing.html" class="dropdown-item-custom">Transparent Rates</a>
+                  <a href="faq.html" class="dropdown-item-custom">Frequently Asked Qs</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                  <h3 class="mega-title">Company Info</h3>
+                  <a href="about.html" class="dropdown-item-custom">Corporate Overview</a>
+                  <a href="contact.html" class="dropdown-item-custom">Office Contacts</a>
+                  <a href="privacy-policy.html" class="dropdown-item-custom">Privacy Policy</a>
+                  <a href="terms-conditions.html" class="dropdown-item-custom">Terms of Service</a>
+                </div>
+                <!-- Premium Mega Menu Banner Column -->
+                <div class="col-lg-3 col-md-6">
+                  <div class="emergency-banner-box h-100 d-flex flex-column justify-content-center p-3 text-center">
+                    <span class="badge-premium mb-2 mx-auto">Seasonal Offer</span>
+                    <h4 class="fs-6 text-white mb-2">Free Inspections</h4>
+                    <p class="text-secondary small mb-3">Claim a free system audit on your initial water lines setup.</p>
+                    <a href="appointment.html" class="btn-premium py-2 px-3 fs-7 align-self-center">Claim Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="nav-item">
+            <a href="blog.html" class="nav-link">
+              Blog <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="blog.html" class="dropdown-item-custom">Industry News</a>
+              <a href="blog-details.html" class="dropdown-item-custom">Article Details</a>
+            </div>
+          </div>
+          
+          <div class="nav-item">
+            <a href="contact.html" class="nav-link">Contact</a>
+          </div>
+        </nav>
+
+        <!-- Right Header Action Utilities -->
+        <div class="d-flex align-items-center gap-3">
+          <button class="search-toggle-btn search-trigger" aria-label="Open Search">
+            <i data-lucide="search"></i>
+          </button>
+          
+          
+          <button class="theme-toggle-btn" aria-label="Toggle Theme" id="themeToggleBtn">
+            <i data-lucide="sun"></i>
+          </button>
+          
+          <a href="appointment.html" class="btn-premium d-none d-xl-flex">
+            Book Appointment
+            <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+          </a>
+          
+          <!-- Mobile Hamburger menu -->
+          <button class="mobile-menu-trigger" aria-label="Toggle Navigation">
+            <i data-lucide="menu" style="width:20px;height:20px;"></i>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- 4. MOBILE NAVIGATION OFFCANVAS DRAWER -->
+    <div class="mobile-nav-overlay"></div>
+    <div class="mobile-nav-drawer">
+      <div class="mobile-nav-header">
+        <a href="index.html" class="logo-brand text-decoration-none">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:18px;height:18px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+        <button class="mobile-nav-close" aria-label="Close Mobile Menu">
+          <i data-lucide="x" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-links">
+        <div class="mobile-nav-item">
+          <a href="index.html" class="mobile-nav-link text-orange">Home</a>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="about.html" class="mobile-nav-link">About Us</a>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">
+            Services
+            <i data-lucide="chevron-down" style="width:16px;height:16px;transition: transform 0.3s;"></i>
+          </a>
+          <div class="mobile-nav-submenu">
+            <a href="services.html" class="mobile-nav-submenu-link">Our Services</a>
+            <a href="service-details.html" class="mobile-nav-submenu-link">Service Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">
+            Projects
+            <i data-lucide="chevron-down" style="width:16px;height:16px;transition: transform 0.3s;"></i>
+          </a>
+          <div class="mobile-nav-submenu">
+            <a href="projects.html" class="mobile-nav-submenu-link">Project Gallery</a>
+            <a href="project-details.html" class="mobile-nav-submenu-link">Project Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">
+            Store Collection
+            <i data-lucide="chevron-down" style="width:16px;height:16px;transition: transform 0.3s;"></i>
+          </a>
+          <div class="mobile-nav-submenu">
+            <a href="shop.html" class="mobile-nav-submenu-link">Main Shop</a>
+            <a href="product-details.html" class="mobile-nav-submenu-link">Product Details</a>
+            <a href="cart.html" class="mobile-nav-submenu-link">Cart</a>
+            <a href="checkout.html" class="mobile-nav-submenu-link">Checkout</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">
+            More Pages
+            <i data-lucide="chevron-down" style="width:16px;height:16px;transition: transform 0.3s;"></i>
+          </a>
+          <div class="mobile-nav-submenu">
+            <a href="team.html" class="mobile-nav-submenu-link">Our Plumbers</a>
+            <a href="team-details.html" class="mobile-nav-submenu-link">Profile Details</a>
+            <a href="pricing.html" class="mobile-nav-submenu-link">Pricing Plans</a>
+            <a href="faq.html" class="mobile-nav-submenu-link">FAQ Pages</a>
+            <a href="404.html" class="mobile-nav-submenu-link">404 Page</a>
+            <a href="coming-soon.html" class="mobile-nav-submenu-link">Coming Soon</a>
+            <a href="privacy-policy.html" class="mobile-nav-submenu-link">Privacy Policy</a>
+            <a href="terms-conditions.html" class="mobile-nav-submenu-link">Terms & Conditions</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">
+            Blog & News
+            <i data-lucide="chevron-down" style="width:16px;height:16px;transition: transform 0.3s;"></i>
+          </a>
+          <div class="mobile-nav-submenu">
+            <a href="blog.html" class="mobile-nav-submenu-link">Blog Posts</a>
+            <a href="blog-details.html" class="mobile-nav-submenu-link">Blog Article</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="contact.html" class="mobile-nav-link">Contact</a>
+        </div>
+      </div>
+      <div class="mt-4 pt-3 border-top border-secondary">
+        <a href="appointment.html" class="btn-premium w-full text-center">Book Online Now</a>
+      </div>
+    </div>
+
+    <!-- 5. TEMPLATE CORE MAIN CONTENT STAGE -->
+    <main>
+      
+      <!-- Full-Width Premium Hero Slider -->
+      <div id="premiumHeroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000" data-bs-keyboard="true" data-bs-pause="false">
+        <!-- Indicators/Pagination Dots -->
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#premiumHeroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#premiumHeroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#premiumHeroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <!-- Carousel Slides -->
+        <div class="carousel-inner">
+          
+          <!-- Slide 1: Emergency Plumbing -->
+          <div class="carousel-item active">
+            <div class="slider-background-image" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="slider-dark-overlay"></div>
+            
+            <!-- Floating Decorative Plumbing Elements for Visual Polish -->
+            <div class="floating-elements-wrapper">
+              <div class="floating-bubble bubble-1"></div>
+              <div class="floating-bubble bubble-2"></div>
+              <div class="floating-pipe pipe-1">
+                <i data-lucide="wrench"></i>
+              </div>
+            </div>
+
+            <div class="slider-content-container d-flex align-items-center">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8 text-start">
+                    <span class="badge-premium mb-3 animate-slide-up-1">24/7 Emergency Dispatch</span>
+                    <h1 class="display-3 font-heading fw-bold mb-4 text-white animate-slide-up-2">
+                      Express Leak Detection <br />
+                      & <span class="text-orange">Rapid Pipe Repair</span>
+                    </h1>
+                    <p class="lead text-secondary-light mb-5 max-w-xl animate-slide-up-3">
+                      Certified mechanical master plumbers dispatched within 30 minutes. Real-time tracking and 100% fixed-rate guarantees for ultimate peace of mind.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 animate-slide-up-4">
+                      <a href="appointment.html" class="btn-premium">
+                        Request Emergency Dispatch
+                        <i data-lucide="phone-call" style="width:16px;height:16px;margin-left:8px;"></i>
+                      </a>
+                      <a href="pricing.html" class="btn-premium-secondary">
+                        Our Fixed Rates
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Residential Plumbing -->
+          <div class="carousel-item">
+            <div class="slider-background-image" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="slider-dark-overlay"></div>
+
+            <!-- Floating Decorative Plumbing Elements for Visual Polish -->
+            <div class="floating-elements-wrapper">
+              <div class="floating-bubble bubble-3"></div>
+              <div class="floating-bubble bubble-4"></div>
+              <div class="floating-pipe pipe-2">
+                <i data-lucide="droplet"></i>
+              </div>
+            </div>
+
+            <div class="slider-content-container d-flex align-items-center">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8 text-start">
+                    <span class="badge-premium mb-3 animate-slide-up-1">Residential Plumbing Systems</span>
+                    <h1 class="display-3 font-heading fw-bold mb-4 text-white animate-slide-up-2">
+                      Luxury Fittings & <br />
+                      <span class="text-orange">High-End Domestic Design</span>
+                    </h1>
+                    <p class="lead text-secondary-light mb-5 max-w-xl animate-slide-up-3">
+                      Renovating your home with premium water purification, custom bathroom architecture, smart water line sensors, and quiet drain layouts.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 animate-slide-up-4">
+                      <a href="appointment.html" class="btn-premium">
+                        Book Residential Consult
+                        <i data-lucide="calendar" style="width:16px;height:16px;margin-left:8px;"></i>
+                      </a>
+                      <a href="shop.html" class="btn-premium-secondary">
+                        Browse Collections
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Commercial Plumbing -->
+          <div class="carousel-item">
+            <div class="slider-background-image" style="background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7eed?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="slider-dark-overlay"></div>
+
+            <!-- Floating Decorative Plumbing Elements for Visual Polish -->
+            <div class="floating-elements-wrapper">
+              <div class="floating-bubble bubble-5"></div>
+              <div class="floating-bubble bubble-1"></div>
+              <div class="floating-pipe pipe-3">
+                <i data-lucide="settings"></i>
+              </div>
+            </div>
+
+            <div class="slider-content-container d-flex align-items-center">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8 text-start">
+                    <span class="badge-premium mb-3 animate-slide-up-1">Commercial & Industrial Services</span>
+                    <h1 class="display-3 font-heading fw-bold mb-4 text-white animate-slide-up-2">
+                      Heavy-Duty Mechanical <br />
+                      <span class="text-orange">Design & Sewer Surveys</span>
+                    </h1>
+                    <p class="lead text-secondary-light mb-5 max-w-xl animate-slide-up-3">
+                      Specialized sewer line hydro-jetting, full building audits, state-of-the-art backflow certifications, and large-scale mechanical contracting.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 animate-slide-up-4">
+                      <a href="contact.html" class="btn-premium">
+                        Request Project Quote
+                        <i data-lucide="arrow-right" style="width:16px;height:16px;margin-left:8px;"></i>
+                      </a>
+                      <a href="projects.html" class="btn-premium-secondary">
+                        Case Studies
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Carousel Arrow Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#premiumHeroCarousel" data-bs-slide="prev">
+          <span class="carousel-control-custom-prev-icon" aria-hidden="true">
+            <i data-lucide="chevron-left" style="width:24px;height:24px;"></i>
+          </span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#premiumHeroCarousel" data-bs-slide="next">
+          <span class="carousel-control-custom-next-icon" aria-hidden="true">
+            <i data-lucide="chevron-right" style="width:24px;height:24px;"></i>
+          </span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <!-- ==========================================
+           SECTION 1: EMERGENCY SERVICE BANNER
+           ========================================== -->
+      <section class="section-padding pt-0" style="background-color: var(--bg-body);">
+        <div class="container">
+          <div class="premium-emergency-banner" data-aos="fade-up" style="background-image: url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80');">
+            <div class="emergency-banner-overlay"></div>
+            <div class="emergency-banner-content">
+              <div class="row align-items-center g-4">
+                <div class="col-lg-1 col-md-2 text-center text-md-start">
+                  <div class="pulse-circle mx-auto">
+                    <i data-lucide="phone-call" style="width:32px;height:32px;"></i>
+                  </div>
+                </div>
+                <div class="col-lg-5 col-md-10 text-center text-md-start text-white">
+                  <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-md-start align-items-center mb-2">
+                    <span class="badge-247">OPEN 24 HOURS / 7 DAYS</span>
+                    <span class="text-orange fw-bold font-mono">● LIVE DISPATCH ACTIVATED</span>
+                  </div>
+                  <h3 class="h2 font-heading fw-bold text-white mb-1">Do You Have A Plumbing Emergency?</h3>
+                  <p class="text-secondary-light mb-0">Burst pipe, heavy drain clog, or water heater failure? We arrive in 30 mins.</p>
+                </div>
+                <div class="col-lg-4 col-md-8 text-center text-lg-start">
+                  <span class="text-secondary small d-block mb-1 text-uppercase font-mono">Toll-Free Dispatch Hot Line</span>
+                  <a href="tel:18005550199" class="h2 text-white font-heading fw-bold d-block text-decoration-none hover-orange">
+                    1-800-555-0199
+                  </a>
+                </div>
+                <div class="col-lg-2 col-md-4 text-center text-lg-end">
+                  <a href="tel:18005550199" class="btn-premium d-inline-block">
+                    Call Now
+                    <i data-lucide="phone" style="width:14px;height:14px;margin-left:6px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 2: ABOUT COMPANY
+           ========================================== -->
+      <section class="section-padding bg-surface" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+        <div class="container">
+          <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+              <div class="about-image-composition pe-lg-4">
+                <div class="experience-badge" id="expBadge">
+                  <span class="d-block h2 fw-bold mb-0">25+</span>
+                  <span class="small font-heading text-uppercase">Years of Elite<br>Craftsmanship</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1542013936693-8848e5742383?auto=format&fit=crop&w=800&q=80" alt="Luxury bathroom fixture installation" class="about-img-main img-fluid" id="aboutImgMain" />
+                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80" alt="Professional plumber fixing line" class="about-img-secondary img-fluid" />
+              </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+              <span class="badge-premium mb-3">WHO WE ARE</span>
+              <h2 class="display-5 font-heading fw-bold mb-4 text-white">
+                Engineering Flawless <br />
+                <span class="text-orange">Water Architecture</span>
+              </h2>
+              <p class="text-secondary mb-4">
+                Since 2001, PlumbMaster has delivered ThemeForest-quality, high-end mechanical contracting and residential plumbing systems. Our mission is to combine precise engineering with rapid dispatcher availability, keeping your home and facilities safe and dry.
+              </p>
+              
+              <!-- Tabs for Mission & Vision & Story -->
+              <ul class="nav nav-pills mb-4 gap-2" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="btn-premium active" id="pills-mission-tab" data-bs-toggle="pill" data-bs-target="#pills-mission" type="button" role="tab" aria-controls="pills-mission" aria-selected="true" style="padding: 8px 20px;">Our Mission</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="btn-premium-secondary" id="pills-vision-tab" data-bs-toggle="pill" data-bs-target="#pills-vision" type="button" role="tab" aria-controls="pills-vision" aria-selected="false" style="padding: 8px 20px;">Our Vision</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="btn-premium-secondary" id="pills-story-tab" data-bs-toggle="pill" data-bs-target="#pills-story" type="button" role="tab" aria-controls="pills-story" aria-selected="false" style="padding: 8px 20px;">Our Story</button>
+                </li>
+              </ul>
+              
+              <div class="tab-content mb-4" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-mission" role="tabpanel" aria-labelledby="pills-mission-tab">
+                  <p class="text-secondary mb-0">To supply unmatched plumbing excellence, absolute pricing transparency, and modern environment-safe water solutions that stand the test of time.</p>
+                </div>
+                <div class="tab-pane fade" id="pills-vision" role="tabpanel" aria-labelledby="pills-vision-tab">
+                  <p class="text-secondary mb-0">To lead the engineering industry with high-tech acoustic leak detection, zero-loss eco fittings, and intelligent smart-flow monitors for every modern household.</p>
+                </div>
+                <div class="tab-pane fade" id="pills-story" role="tabpanel" aria-labelledby="pills-story-tab">
+                  <p class="text-secondary mb-0">What started as a single dispatch truck in Seattle has evolved into a nationwide network of elite, state-certified master mechanical plumbers.</p>
+                </div>
+              </div>
+
+              <!-- Key Features Grid -->
+              <div class="row g-3 mb-5">
+                <div class="col-md-6">
+                  <div class="about-feature-item">
+                    <div class="about-feature-icon">
+                      <i data-lucide="shield-check" style="width:20px;height:20px;"></i>
+                    </div>
+                    <div>
+                      <h4 class="h5 text-white mb-1">Fully Certified & Insured</h4>
+                      <p class="small text-secondary mb-0">100% bonded operations protect your assets.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="about-feature-item">
+                    <div class="about-feature-icon">
+                      <i data-lucide="award" style="width:20px;height:20px;"></i>
+                    </div>
+                    <div>
+                      <h4 class="h5 text-white mb-1">Award-Winning Quality</h4>
+                      <p class="small text-secondary mb-0">Rated #1 Plumbing service company 6 years running.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex align-items-center gap-4">
+                <a href="about.html" class="btn-premium">
+                  More About Us
+                  <i data-lucide="arrow-right" style="width:16px;height:16px;margin-left:8px;"></i>
+                </a>
+                <a href="appointment.html" class="btn-premium-secondary">
+                  Schedule Audit
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 3: SERVICE CATEGORIES
+           ========================================== -->
+      <section class="section-padding" style="background-color: var(--bg-body);" id="serviceCategories">
+        <div class="container">
+          <div class="row text-center mb-5">
+            <div class="col-lg-6 mx-auto" data-aos="fade-up">
+              <span class="badge-premium mb-2">OUR REPUTABLE SERVICE CATEGORIES</span>
+              <h2 class="display-6 font-heading fw-bold text-white mb-3">Professional Solutions For Every Pipe</h2>
+              <p class="text-secondary">Explore our specialized sub-disciplines tailored to maintain continuous commercial and domestic flow.</p>
+            </div>
+          </div>
+          <div class="row g-4">
+            <!-- Card 1: Emergency Plumbing -->
+            <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="category-card">
+                <div class="category-card-icon">
+                  <i data-lucide="zap" style="width:28px;height:28px;"></i>
+                </div>
+                <h3 class="h4 text-white mb-3">Emergency Plumbing</h3>
+                <p class="text-secondary small mb-4">Urgent 30-minute dispatch for water pipe bursts, leak emergency, and severe property clogs.</p>
+                <a href="service-details.html" class="category-card-btn">
+                  Learn More <i data-lucide="chevron-right" style="width:16px;height:16px;"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Card 2: Leak Detection -->
+            <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="category-card">
+                <div class="category-card-icon">
+                  <i data-lucide="search" style="width:28px;height:28px;"></i>
+                </div>
+                <h3 class="h4 text-white mb-3">Leak Detection</h3>
+                <p class="text-secondary small mb-4">Non-invasive ultra-acoustic tracking and thermal diagnostics map pinholes perfectly.</p>
+                <a href="service-details.html" class="category-card-btn">
+                  Learn More <i data-lucide="chevron-right" style="width:16px;height:16px;"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Card 3: Pipe Installation -->
+            <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="category-card">
+                <div class="category-card-icon">
+                  <i data-lucide="wrench" style="width:28px;height:28px;"></i>
+                </div>
+                <h3 class="h4 text-white mb-3">Pipe Installation</h3>
+                <p class="text-secondary small mb-4">Elite copper, PEX, and heavy-duty PVC line replacements with multi-decade wear assurance.</p>
+                <a href="service-details.html" class="category-card-btn">
+                  Learn More <i data-lucide="chevron-right" style="width:16px;height:16px;"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Card 4: Drain Cleaning -->
+            <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+              <div class="category-card">
+                <div class="category-card-icon">
+                  <i data-lucide="droplet" style="width:28px;height:28px;"></i>
+                </div>
+                <h3 class="h4 text-white mb-3">Drain Cleaning</h3>
+                <p class="text-secondary small mb-4">High-velocity sewer hydro-jetting removes tree roots, silt, grease and mineral scaling.</p>
+                <a href="service-details.html" class="category-card-btn">
+                  Learn More <i data-lucide="chevron-right" style="width:16px;height:16px;"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Card 5: Bathroom Plumbing -->
+            <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="category-card">
+                <div class="category-card-icon">
+                  <i data-lucide="bath" style="width:28px;height:28px;"></i>
+                </div>
+                <h3 class="h4 text-white mb-3">Bathroom Plumbing</h3>
+                <p class="text-secondary small mb-4">Installation of high-end, designer tub fixtures, luxury custom showers, and toilet traps.</p>
+                <a href="service-details.html" class="category-card-btn">
+                  Learn More <i data-lucide="chevron-right" style="width:16px;height:16px;"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Card 6: Kitchen Plumbing -->
+            <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="category-card">
+                <div class="category-card-icon">
+                  <i data-lucide="utensils" style="width:28px;height:28px;"></i>
+                </div>
+                <h3 class="h4 text-white mb-3">Kitchen Plumbing</h3>
+                <p class="text-secondary small mb-4">Dishwasher waterline layouts, disposal units, and premium architectural water faucets.</p>
+                <a href="service-details.html" class="category-card-btn">
+                  Learn More <i data-lucide="chevron-right" style="width:16px;height:16px;"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Card 7: Water Heater -->
+            <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="category-card">
+                <div class="category-card-icon">
+                  <i data-lucide="flame" style="width:28px;height:28px;"></i>
+                </div>
+                <h3 class="h4 text-white mb-3">Water Heater</h3>
+                <p class="text-secondary small mb-4">Energy-star hybrid tankless water heaters and smart thermostats setups.</p>
+                <a href="service-details.html" class="category-card-btn">
+                  Learn More <i data-lucide="chevron-right" style="width:16px;height:16px;"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Card 8: Commercial Plumbing -->
+            <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+              <div class="category-card">
+                <div class="category-card-icon">
+                  <i data-lucide="building" style="width:28px;height:28px;"></i>
+                </div>
+                <h3 class="h4 text-white mb-3">Commercial Plumbing</h3>
+                <p class="text-secondary small mb-4">Multi-story mechanical pressure loops, grease separators, and scheduled safety audits.</p>
+                <a href="service-details.html" class="category-card-btn">
+                  Learn More <i data-lucide="chevron-right" style="width:16px;height:16px;"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 4: WHY CHOOSE US
+           ========================================== -->
+      <section class="section-padding bg-surface" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+        <div class="container">
+          <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+              <span class="badge-premium mb-3">OUR CORE COMPETENCE</span>
+              <h2 class="display-6 font-heading fw-bold text-white mb-4">Setting Nationwide Standards In Engineering</h2>
+              <p class="text-secondary mb-4">We do not believe in temporary fixes. Our mechanical teams look at your entire utility architecture to design durable solutions that increase pressure performance and secure your supply.</p>
+              
+              <div class="choose-list">
+                <!-- Checklist 1 -->
+                <div class="choose-list-item">
+                  <div class="choose-list-check">
+                    <i data-lucide="check" style="width:16px;height:16px;"></i>
+                  </div>
+                  <div>
+                    <h4 class="h5 text-white mb-1">Licensed Experts Only</h4>
+                    <p class="small text-secondary mb-0">Every member has undergone 5+ years of mechanical apprenticeships and background checks.</p>
+                  </div>
+                </div>
+                <!-- Checklist 2 -->
+                <div class="choose-list-item">
+                  <div class="choose-list-check">
+                    <i data-lucide="check" style="width:16px;height:16px;"></i>
+                  </div>
+                  <div>
+                    <h4 class="h5 text-white mb-1">Rapid response & Dispatch</h4>
+                    <p class="small text-secondary mb-0">We utilize GPS location dispatch routing to ensure the closest plumber is sent immediately.</p>
+                  </div>
+                </div>
+                <!-- Checklist 3 -->
+                <div class="choose-list-item">
+                  <div class="choose-list-check">
+                    <i data-lucide="check" style="width:16px;height:16px;"></i>
+                  </div>
+                  <div>
+                    <h4 class="h5 text-white mb-1">Affordable Pricing Guides</h4>
+                    <p class="small text-secondary mb-0">Fixed, clear upfront pricing structures. No hidden fees, dispatch costs, or overtime surprises.</p>
+                  </div>
+                </div>
+                <!-- Checklist 4 -->
+                <div class="choose-list-item">
+                  <div class="choose-list-check">
+                    <i data-lucide="check" style="width:16px;height:16px;"></i>
+                  </div>
+                  <div>
+                    <h4 class="h5 text-white mb-1">Guaranteed Work & Lifetime Warranty</h4>
+                    <p class="small text-secondary mb-0">Every repair is backed by our signature written warranty structure for ultimate longevity.</p>
+                  </div>
+                </div>
+                <!-- Checklist 5 -->
+                <div class="choose-list-item">
+                  <div class="choose-list-check">
+                    <i data-lucide="check" style="width:16px;height:16px;"></i>
+                  </div>
+                  <div>
+                    <h4 class="h5 text-white mb-1">Continuous 24/7 Support Desk</h4>
+                    <p class="small text-secondary mb-0">A real dispatcher answers every phone line, regardless of weather or hours.</p>
+                  </div>
+                </div>
+                <!-- Checklist 6 -->
+                <div class="choose-list-item">
+                  <div class="choose-list-check">
+                    <i data-lucide="check" style="width:16px;height:16px;"></i>
+                  </div>
+                  <div>
+                    <h4 class="h5 text-white mb-1">Advanced Modern Diagnostic Equipment</h4>
+                    <p class="small text-secondary mb-0">High-resolution optical pipe scopes, trace probes, and non-invasive acoustic sensors.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+              <div class="choose-us-img-box">
+                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80" alt="Plumbing tools and master plan layout" class="img-fluid" />
+                <div class="choose-us-overlay-badge d-none d-md-flex">
+                  <div class="badge-premium d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; border-radius: 50%; padding:0;">
+                    <i data-lucide="thumbs-up" style="width:20px;height:20px;"></i>
+                  </div>
+                  <div>
+                    <h4 class="h6 text-white mb-1">100% Satisfaction</h4>
+                    <p class="small text-secondary mb-0">Client Rating: 4.97 / 5.00 Stars</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 5: OUR PROCESS
+           ========================================== -->
+      <section class="section-padding" style="background-color: var(--bg-body);">
+        <div class="container">
+          <div class="row text-center mb-5">
+            <div class="col-lg-6 mx-auto" data-aos="fade-up">
+              <span class="badge-premium mb-2">OUR LOGICAL PATHWAY</span>
+              <h2 class="display-6 font-heading fw-bold text-white mb-3">Standard Operational Framework</h2>
+              <p class="text-secondary">Our structured 5-step process ensures a clean environment and certified results for every visit.</p>
+            </div>
+          </div>
+          <div class="process-timeline">
+            <!-- Step 01 -->
+            <div class="process-step-item" data-aos="fade-up" data-aos-delay="100">
+              <div class="process-step-num">
+                01
+                <div class="process-step-icon">
+                  <i data-lucide="eye" style="width:12px;height:12px;"></i>
+                </div>
+              </div>
+              <h4 class="h5 text-white mb-2">Inspection</h4>
+              <p class="small text-secondary px-3">We run digital camera scopes inside lines to diagnose anomalies with pin-point accuracy.</p>
+            </div>
+            <!-- Step 02 -->
+            <div class="process-step-item" data-aos="fade-up" data-aos-delay="200">
+              <div class="process-step-num">
+                02
+                <div class="process-step-icon">
+                  <i data-lucide="file-text" style="width:12px;height:12px;"></i>
+                </div>
+              </div>
+              <h4 class="h5 text-white mb-2">Planning</h4>
+              <p class="small text-secondary px-3">Upfront fixed estimates are drafted alongside materials lists for your authorization.</p>
+            </div>
+            <!-- Step 03 -->
+            <div class="process-step-item" data-aos="fade-up" data-aos-delay="300">
+              <div class="process-step-num">
+                03
+                <div class="process-step-icon">
+                  <i data-lucide="hammer" style="width:12px;height:12px;"></i>
+                </div>
+              </div>
+              <h4 class="h5 text-white mb-2">Repair</h4>
+              <p class="small text-secondary px-3">Certified mechanical plumbers perform the task utilizing professional tools and fittings.</p>
+            </div>
+            <!-- Step 04 -->
+            <div class="process-step-item" data-aos="fade-up" data-aos-delay="400">
+              <div class="process-step-num">
+                04
+                <div class="process-step-icon">
+                  <i data-lucide="shield-alert" style="width:12px;height:12px;"></i>
+                </div>
+              </div>
+              <h4 class="h5 text-white mb-2">Testing</h4>
+              <p class="small text-secondary px-3">Pressure loop tests and optical sweeps ensure there are zero secondary stress factors.</p>
+            </div>
+            <!-- Step 05 -->
+            <div class="process-step-item" data-aos="fade-up" data-aos-delay="500">
+              <div class="process-step-num">
+                05
+                <div class="process-step-icon">
+                  <i data-lucide="smile" style="width:12px;height:12px;"></i>
+                </div>
+              </div>
+              <h4 class="h5 text-white mb-2">Completion</h4>
+              <p class="small text-secondary px-3">A thorough cleanup is made, followed by invoice drafting and warranty activation.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 6: FEATURED SERVICES
+           ========================================== -->
+      <section class="section-padding bg-surface" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+        <div class="container">
+          <div class="row text-center mb-5">
+            <div class="col-lg-6 mx-auto" data-aos="fade-up">
+              <span class="badge-premium mb-2">SIGNATURE CAPABILITIES</span>
+              <h2 class="display-6 font-heading fw-bold text-white mb-3">Featured Engineering Disciplines</h2>
+              <p class="text-secondary">Delve into our complex commercial and domestic mechanical services.</p>
+            </div>
+          </div>
+          <div class="row g-5">
+            <!-- Large Service 1 -->
+            <div class="col-lg-6" data-aos="fade-right">
+              <div class="featured-service-large-card">
+                <div class="f-service-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80" alt="Energy tankless heater layout" />
+                  <span class="f-service-overlay-badge">Highly Requested</span>
+                </div>
+                <div class="p-4 p-md-5">
+                  <h3 class="h3 font-heading text-white mb-3">Tankless Water Heater Engineering</h3>
+                  <p class="text-secondary mb-4">We design and integrate smart instant water heat boilers. Cut utility overheads by up to 45% while enjoying a continuous supply of clean water.</p>
+                  <ul class="row g-2 mb-4 p-0">
+                    <li class="col-md-6 text-secondary small d-flex align-items-center gap-2">
+                      <i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> Instant Hot Water Supply
+                    </li>
+                    <li class="col-md-6 text-secondary small d-flex align-items-center gap-2">
+                      <i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> 45% Energy Optimization
+                    </li>
+                    <li class="col-md-6 text-secondary small d-flex align-items-center gap-2">
+                      <i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> Smart Digital Thermostat
+                    </li>
+                    <li class="col-md-6 text-secondary small d-flex align-items-center gap-2">
+                      <i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> 10-Year Part Warranties
+                    </li>
+                  </ul>
+                  <a href="service-details.html" class="btn-premium">
+                    View Details
+                    <i data-lucide="arrow-right" style="width:16px;height:16px;margin-left:8px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Large Service 2 -->
+            <div class="col-lg-6" data-aos="fade-left">
+              <div class="featured-service-large-card">
+                <div class="f-service-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1605647540924-852290f6b0d5?auto=format&fit=crop&w=800&q=80" alt="Technical diagnostic camera system" />
+                  <span class="f-service-overlay-badge">Acoustic Tech</span>
+                </div>
+                <div class="p-4 p-md-5">
+                  <h3 class="h3 font-heading text-white mb-3">Non-Invasive Diagnostic Leak Swipes</h3>
+                  <p class="text-secondary mb-4">Our high-fidelity acoustic frequencies locate micro-fissures behind premium plaster, stone tiles, and foundation slabs without breaking down walls.</p>
+                  <ul class="row g-2 mb-4 p-0">
+                    <li class="col-md-6 text-secondary small d-flex align-items-center gap-2">
+                      <i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> Zero Wall Destruction
+                    </li>
+                    <li class="col-md-6 text-secondary small d-flex align-items-center gap-2">
+                      <i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> Acoustic Trace Micro-Probes
+                    </li>
+                    <li class="col-md-6 text-secondary small d-flex align-items-center gap-2">
+                      <i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> Thermal Color Mapping
+                    </li>
+                    <li class="col-md-6 text-secondary small d-flex align-items-center gap-2">
+                      <i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> Digital Pipe Verification
+                    </li>
+                  </ul>
+                  <a href="service-details.html" class="btn-premium">
+                    View Details
+                    <i data-lucide="arrow-right" style="width:16px;height:16px;margin-left:8px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 7: 24/7 EMERGENCY CALLOUT
+           ========================================== -->
+      <section class="section-padding" style="background-color: var(--bg-body);">
+        <div class="container">
+          <div class="emergency-cta-panel" data-aos="zoom-in" style="background-image: url('https://images.unsplash.com/photo-1543674892-7d64d45df18b?auto=format&fit=crop&w=1200&q=80');">
+            <div class="emergency-cta-overlay"></div>
+            
+            <!-- Floating emergency decorations -->
+            <i data-lucide="wrench" class="cta-floating-icon cta-f1"></i>
+            <i data-lucide="droplet" class="cta-floating-icon cta-f2"></i>
+            
+            <div class="emergency-cta-content text-center py-5">
+              <div class="col-lg-8 mx-auto">
+                <span class="badge-premium bg-danger text-white mb-3">RAPID RESPONSE DEPLOYED</span>
+                <h2 class="display-4 font-heading fw-bold text-white mb-4">Certified Local Dispatchers <br />On Call 24 Hours</h2>
+                <p class="lead text-secondary-light mb-5 px-md-5">We protect residential and industrial infrastructure from catastrophic water damages. Immediate GPS tracked response, clear upfront rates, and zero travel surcharges.</p>
+                <div class="d-flex flex-wrap justify-content-center gap-4">
+                  <a href="tel:18005550199" class="btn-premium py-3 px-5 fs-5">
+                    <i data-lucide="phone" style="width:20px;height:20px;margin-right:10px;"></i>
+                    1-800-555-0199
+                  </a>
+                  <a href="appointment.html" class="btn-premium-secondary py-3 px-5 fs-5">
+                    Schedule Appointment
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 8: STATISTICS / COUNTER
+           ========================================== -->
+      <section class="section-padding bg-surface" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+        <div class="container">
+          <div class="row g-4 text-center">
+            <!-- Counter 1 -->
+            <div class="col-md-4 col-lg" data-aos="fade-up" data-aos-delay="100">
+              <div class="stat-counter-card">
+                <div class="stat-counter-icon">
+                  <i data-lucide="check-square" style="width:24px;height:24px;"></i>
+                </div>
+                <h3 class="display-5 font-heading fw-bold text-white mb-1 counter-number" id="projectsCounter">12500</h3>
+                <span class="text-orange fw-bold d-block mb-2">+ Completed Projects</span>
+                <p class="text-secondary small mb-0">Domestic & Commercial</p>
+              </div>
+            </div>
+            <!-- Counter 2 -->
+            <div class="col-md-4 col-lg" data-aos="fade-up" data-aos-delay="200">
+              <div class="stat-counter-card">
+                <div class="stat-counter-icon">
+                  <i data-lucide="users" style="width:24px;height:24px;"></i>
+                </div>
+                <h3 class="display-5 font-heading fw-bold text-white mb-1 counter-number" id="clientsCounter">9850</h3>
+                <span class="text-orange fw-bold d-block mb-2">+ Happy Customers</span>
+                <p class="text-secondary small mb-0">Satisfied Property Managers</p>
+              </div>
+            </div>
+            <!-- Counter 3 -->
+            <div class="col-md-4 col-lg" data-aos="fade-up" data-aos-delay="300">
+              <div class="stat-counter-card">
+                <div class="stat-counter-icon">
+                  <i data-lucide="award" style="width:24px;height:24px;"></i>
+                </div>
+                <h3 class="display-5 font-heading fw-bold text-white mb-1 counter-number" id="plumbersCounter">45</h3>
+                <span class="text-orange fw-bold d-block mb-2">Licensed Technicians</span>
+                <p class="text-secondary small mb-0">Certified Master Plumbers</p>
+              </div>
+            </div>
+            <!-- Counter 4 -->
+            <div class="col-md-4 col-lg" data-aos="fade-up" data-aos-delay="400">
+              <div class="stat-counter-card">
+                <div class="stat-counter-icon">
+                  <i data-lucide="calendar" style="width:24px;height:24px;"></i>
+                </div>
+                <h3 class="display-5 font-heading fw-bold text-white mb-1 counter-number" id="yearsCounter">25</h3>
+                <span class="text-orange fw-bold d-block mb-2">Years of Service</span>
+                <p class="text-secondary small mb-0">Industry Leading Tenure</p>
+              </div>
+            </div>
+            <!-- Counter 5 -->
+            <div class="col-md-4 col-lg" data-aos="fade-up" data-aos-delay="500">
+              <div class="stat-counter-card">
+                <div class="stat-counter-icon">
+                  <i data-lucide="trophy" style="width:24px;height:24px;"></i>
+                </div>
+                <h3 class="display-5 font-heading fw-bold text-white mb-1 counter-number" id="awardsCounter">12</h3>
+                <span class="text-orange fw-bold d-block mb-2">Industry Awards</span>
+                <p class="text-secondary small mb-0">Quality Engineering Citations</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 9: FEATURED PROJECTS
+           ========================================== -->
+      <section class="section-padding" style="background-color: var(--bg-body);" id="projectsSection">
+        <div class="container">
+          <div class="row align-items-end mb-5">
+            <div class="col-lg-6" data-aos="fade-right">
+              <span class="badge-premium mb-2">OUR SIGNATURE BLUEPRINTS</span>
+              <h2 class="display-6 font-heading fw-bold text-white">Outstanding Portfolios</h2>
+              <p class="text-secondary mb-0">Witness the surgical execution of our residential custom systems and industrial rebuild loops.</p>
+            </div>
+            <div class="col-lg-6 text-lg-end" data-aos="fade-left">
+              <a href="projects.html" class="btn-premium">
+                View Full Gallery
+                <i data-lucide="arrow-right" style="width:16px;height:16px;margin-left:8px;"></i>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Swiper Container for Projects -->
+          <div class="swiper projectsSwiper" data-aos="fade-up">
+            <div class="swiper-wrapper">
+              
+              <!-- Slide 1 -->
+              <div class="swiper-slide">
+                <div class="project-card-premium">
+                  <img src="https://images.unsplash.com/photo-1502005229762-fc1b2b812ca5?auto=format&fit=crop&w=600&q=80" alt="Luxury Master Shower Suite" />
+                  <div class="project-card-premium-overlay">
+                    <span class="text-orange font-mono small mb-1">RESIDENTIAL PLUMBING</span>
+                    <h4 class="h5 text-white mb-1">Luxury Master Shower Suite</h4>
+                    <span class="text-secondary small mb-3">📍 Beverly Hills, CA</span>
+                    <a href="project-details.html" class="btn-premium py-2 px-3 small d-inline-flex align-items-center gap-2" style="font-size:0.85rem; width: fit-content;">
+                      View Details <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Slide 2 -->
+              <div class="swiper-slide">
+                <div class="project-card-premium">
+                  <img src="https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&w=600&q=80" alt="Elite Geometric Kitchen Layout" />
+                  <div class="project-card-premium-overlay">
+                    <span class="text-orange font-mono small mb-1">KITCHEN FITTINGS</span>
+                    <h4 class="h5 text-white mb-1">Elite Geometric Kitchen Layout</h4>
+                    <span class="text-secondary small mb-3">📍 Manhattan, NY</span>
+                    <a href="project-details.html" class="btn-premium py-2 px-3 small d-inline-flex align-items-center gap-2" style="font-size:0.85rem; width: fit-content;">
+                      View Details <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3 -->
+              <div class="swiper-slide">
+                <div class="project-card-premium">
+                  <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="Polished Public Utility Lines" />
+                  <div class="project-card-premium-overlay">
+                    <span class="text-orange font-mono small mb-1">COMMERCIAL BUILD</span>
+                    <h4 class="h5 text-white mb-1">Polished Public Utility Lines</h4>
+                    <span class="text-secondary small mb-3">📍 Seattle, WA</span>
+                    <a href="project-details.html" class="btn-premium py-2 px-3 small d-inline-flex align-items-center gap-2" style="font-size:0.85rem; width: fit-content;">
+                      View Details <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 4 -->
+              <div class="swiper-slide">
+                <div class="project-card-premium">
+                  <img src="https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=600&q=80" alt="Industrial Pump Rebuild Loops" />
+                  <div class="project-card-premium-overlay">
+                    <span class="text-orange font-mono small mb-1">MECHANICAL PLANT</span>
+                    <h4 class="h5 text-white mb-1">Industrial Pump Rebuild Loops</h4>
+                    <span class="text-secondary small mb-3">📍 Houston, TX</span>
+                    <a href="project-details.html" class="btn-premium py-2 px-3 small d-inline-flex align-items-center gap-2" style="font-size:0.85rem; width: fit-content;">
+                      View Details <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            
+            <!-- Slider Navigation Buttons -->
+            <div class="d-flex justify-content-center gap-3 mt-4">
+              <div class="swiper-button-prev-custom text-white" style="cursor:pointer; width: 40px; height: 40px; border-radius:50%; border:1px solid var(--border-color); display:flex; align-items:center; justify-content:center; background-color: var(--bg-surface);">
+                <i data-lucide="arrow-left" style="width:18px;height:18px;"></i>
+              </div>
+              <div class="swiper-button-next-custom text-white" style="cursor:pointer; width: 40px; height: 40px; border-radius:50%; border:1px solid var(--border-color); display:flex; align-items:center; justify-content:center; background-color: var(--bg-surface);">
+                <i data-lucide="arrow-right" style="width:18px;height:18px;"></i>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 10: PRICING PLANS
+           ========================================== -->
+      <section class="section-padding bg-surface" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+        <div class="container">
+          <div class="row text-center mb-5">
+            <div class="col-lg-6 mx-auto" data-aos="fade-up">
+              <span class="badge-premium mb-2">TRANSPARENT PRICING</span>
+              <h2 class="display-6 font-heading fw-bold text-white mb-3">Certified Mechanical Pricing Plans</h2>
+              <p class="text-secondary"> upfront hourly and standard flat-rate billing tiers, backed by our Satisfaction Guarantee.</p>
+            </div>
+          </div>
+          <div class="row g-4 align-items-center">
+            
+            <!-- Card 1: Basic -->
+            <div class="col-lg-4" data-aos="fade-right" data-aos-delay="100">
+              <div class="pricing-plan-card">
+                <span class="text-secondary font-mono small text-uppercase mb-2">Standard Diagnostic</span>
+                <h3 class="h4 text-white mb-3">Basic Service</h3>
+                <div class="pricing-price mb-4">
+                  $79<span>/Session</span>
+                </div>
+                <p class="text-secondary small">Comprehensive electronic line inspection, fault audit report, and immediate fix estimate.</p>
+                <ul class="pricing-features">
+                  <li><i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> High-resolution video scoping</li>
+                  <li><i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> Acoustic leak trace</li>
+                  <li><i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> Full diagnostic summary</li>
+                  <li class="disabled"><i data-lucide="x" style="width:16px;height:16px;" class="text-danger"></i> Free dispatch fee deduction</li>
+                  <li class="disabled"><i data-lucide="x" style="width:16px;height:16px;" class="text-danger"></i> 10-Year Part Warranties</li>
+                </ul>
+                <a href="pricing.html" class="btn-premium-secondary text-center mt-auto py-3">
+                  Book Basic Plan
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 2: Standard (Highlighted) -->
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+              <div class="pricing-plan-card highlighted">
+                <span class="pricing-badge">RECOMMENDED</span>
+                <span class="text-orange font-mono small text-uppercase mb-2">Residential Care</span>
+                <h3 class="h4 text-white mb-3">Standard Plan</h3>
+                <div class="pricing-price mb-4">
+                  $189<span>/Session</span>
+                </div>
+                <p class="text-secondary small">Comprehensive line diagnostics plus drain clearing and standard gasket fits.</p>
+                <ul class="pricing-features">
+                  <li><i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> High-resolution video scoping</li>
+                  <li><i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> Acoustic leak trace</li>
+                  <li><i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> Up to 2 hours manual clearing</li>
+                  <li><i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> Free dispatch fee deduction</li>
+                  <li class="disabled"><i data-lucide="x" style="width:16px;height:16px;" class="text-danger"></i> 10-Year Part Warranties</li>
+                </ul>
+                <a href="appointment.html" class="btn-premium text-center mt-auto py-3">
+                  Book Standard Plan
+                  <i data-lucide="arrow-right" style="width:16px;height:16px;margin-left:8px;"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 3: Premium -->
+            <div class="col-lg-4" data-aos="fade-left" data-aos-delay="300">
+              <div class="pricing-plan-card">
+                <span class="text-secondary font-mono small text-uppercase mb-2">Industrial Class</span>
+                <h3 class="h4 text-white mb-3">Premium Master</h3>
+                <div class="pricing-price mb-4">
+                  $499<span>/Session</span>
+                </div>
+                <p class="text-secondary small">Large scale property pressure overhaul, hydro-jetting, and mechanical valve fittings.</p>
+                <ul class="pricing-features">
+                  <li><i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> High-resolution video scoping</li>
+                  <li><i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> High-velocity hydro-jetting</li>
+                  <li><i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> Complete valve rebuilds</li>
+                  <li><i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> Zero dispatch fees</li>
+                  <li><i data-lucide="check" style="width:16px;height:16px;" class="text-orange"></i> 10-Year Part Warranties</li>
+                </ul>
+                <a href="pricing.html" class="btn-premium-secondary text-center mt-auto py-3">
+                  Book Premium Plan
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 11: MEET OUR EXPERTS
+           ========================================== -->
+      <section class="section-padding" style="background-color: var(--bg-body);">
+        <div class="container">
+          <div class="row align-items-end mb-5">
+            <div class="col-lg-6" data-aos="fade-right">
+              <span class="badge-premium mb-2">CERTIFIED ADVISORS</span>
+              <h2 class="display-6 font-heading fw-bold text-white">Our Mechanical Leaders</h2>
+              <p class="text-secondary mb-0">Every advisor is state certified, background screened, and undergoes monthly high-tech equipment trainings.</p>
+            </div>
+            <div class="col-lg-6 text-lg-end" data-aos="fade-left">
+              <a href="team.html" class="btn-premium">
+                View All Plumbers
+                <i data-lucide="arrow-right" style="width:16px;height:16px;margin-left:8px;"></i>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Swiper Container for Team -->
+          <div class="swiper teamSwiper" data-aos="fade-up">
+            <div class="swiper-wrapper">
+              
+              <!-- Team member 1 -->
+              <div class="swiper-slide">
+                <div class="team-member-card">
+                  <div class="team-member-img">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="Marcus Vance" />
+                    <div class="team-social-overlay">
+                      <a href="#" class="social-icon-circle"><i data-lucide="facebook" style="width:14px;height:14px;"></i></a>
+                      <a href="#" class="social-icon-circle"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a>
+                      <a href="#" class="social-icon-circle"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+                    </div>
+                  </div>
+                  <div class="p-4 text-center">
+                    <h4 class="h5 text-white mb-1">Marcus Vance</h4>
+                    <span class="text-orange small font-mono text-uppercase">Lead Mechanical Engineer</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Team member 2 -->
+              <div class="swiper-slide">
+                <div class="team-member-card">
+                  <div class="team-member-img">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="Sarah Jenkins" />
+                    <div class="team-social-overlay">
+                      <a href="#" class="social-icon-circle"><i data-lucide="facebook" style="width:14px;height:14px;"></i></a>
+                      <a href="#" class="social-icon-circle"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a>
+                      <a href="#" class="social-icon-circle"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+                    </div>
+                  </div>
+                  <div class="p-4 text-center">
+                    <h4 class="h5 text-white mb-1">Sarah Jenkins</h4>
+                    <span class="text-orange small font-mono text-uppercase">Quality Control Director</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Team member 3 -->
+              <div class="swiper-slide">
+                <div class="team-member-card">
+                  <div class="team-member-img">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" alt="David Croft" />
+                    <div class="team-social-overlay">
+                      <a href="#" class="social-icon-circle"><i data-lucide="facebook" style="width:14px;height:14px;"></i></a>
+                      <a href="#" class="social-icon-circle"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a>
+                      <a href="#" class="social-icon-circle"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+                    </div>
+                  </div>
+                  <div class="p-4 text-center">
+                    <h4 class="h5 text-white mb-1">David Croft</h4>
+                    <span class="text-orange small font-mono text-uppercase">Senior Master Plumber</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 12: CUSTOMER TESTIMONIALS
+           ========================================== -->
+      <section class="section-padding bg-surface" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+        <div class="container">
+          <div class="row align-items-end mb-5">
+            <div class="col-lg-6" data-aos="fade-right">
+              <span class="badge-premium mb-2">CLIENT TESTIMONIALS</span>
+              <h2 class="display-6 font-heading fw-bold text-white">Trust Echoed By Thousands</h2>
+              <p class="text-secondary mb-0">Discover why major developers and local families trust PlumbMaster with their critical pipeline infrastructures.</p>
+            </div>
+            <div class="col-lg-6 text-lg-end" data-aos="fade-left">
+              <!-- Slider Navigation -->
+              <div class="d-inline-flex gap-3">
+                <div class="swiper-testimonial-prev-custom text-white" style="cursor:pointer; width: 44px; height: 44px; border-radius:50%; border:1px solid var(--border-color); display:flex; align-items:center; justify-content:center; background-color: var(--bg-body);">
+                  <i data-lucide="chevron-left" style="width:20px;height:20px;"></i>
+                </div>
+                <div class="swiper-testimonial-next-custom text-white" style="cursor:pointer; width: 44px; height: 44px; border-radius:50%; border:1px solid var(--border-color); display:flex; align-items:center; justify-content:center; background-color: var(--bg-body);">
+                  <i data-lucide="chevron-right" style="width:20px;height:20px;"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial Swiper -->
+          <div class="swiper testimonialsSwiper" data-aos="fade-up">
+            <div class="swiper-wrapper">
+              
+              <!-- Review 1 -->
+              <div class="swiper-slide">
+                <div class="testimonial-card-premium">
+                  <div class="star-rating mb-3">
+                    <i data-lucide="star" style="width:16px;height:16px;fill:currentColor;"></i>
+                    <i data-lucide="star" style="width:16px;height:16px;fill:currentColor;"></i>
+                    <i data-lucide="star" style="width:16px;height:16px;fill:currentColor;"></i>
+                    <i data-lucide="star" style="width:16px;height:16px;fill:currentColor;"></i>
+                    <i data-lucide="star" style="width:16px;height:16px;fill:currentColor;"></i>
+                  </div>
+                  <p class="text-secondary-light mb-4 fs-5 italic">"Our main waterline burst at 2:00 AM on Sunday. The dispatcher was calm, guided me to close the main valve, and had a mechanical crew at our door in 25 minutes. Absolutely stellar, stress-free response!"</p>
+                  <div class="d-flex align-items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Robert Chen" class="testimonial-user-photo" />
+                    <div>
+                      <h4 class="h5 text-white mb-0">Robert Chen</h4>
+                      <span class="text-secondary small">📍 Property Director, Beverly Hills</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Review 2 -->
+              <div class="swiper-slide">
+                <div class="testimonial-card-premium">
+                  <div class="star-rating mb-3">
+                    <i data-lucide="star" style="width:16px;height:16px;fill:currentColor;"></i>
+                    <i data-lucide="star" style="width:16px;height:16px;fill:currentColor;"></i>
+                    <i data-lucide="star" style="width:16px;height:16px;fill:currentColor;"></i>
+                    <i data-lucide="star" style="width:16px;height:16px;fill:currentColor;"></i>
+                    <i data-lucide="star" style="width:16px;height:16px;fill:currentColor;"></i>
+                  </div>
+                  <p class="text-secondary-light mb-4 fs-5 italic">"We renovated our luxury bathroom and PlumbMaster designed and fitted our designer copper pipes and waterfall showers perfectly. Upfront pricing, neat cleanup, and extremely polite staff."</p>
+                  <div class="d-flex align-items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80" alt="Elena Rostova" class="testimonial-user-photo" />
+                    <div>
+                      <h4 class="h5 text-white mb-0">Elena Rostova</h4>
+                      <span class="text-secondary small">📍 Luxury Homeowner, Seattle</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Review 3 -->
+              <div class="swiper-slide">
+                <div class="testimonial-card-premium">
+                  <div class="star-rating mb-3">
+                    <i data-lucide="star" style="width:16px;height:16px;fill:currentColor;"></i>
+                    <i data-lucide="star" style="width:16px;height:16px;fill:currentColor;"></i>
+                    <i data-lucide="star" style="width:16px;height:16px;fill:currentColor;"></i>
+                    <i data-lucide="star" style="width:16px;height:16px;fill:currentColor;"></i>
+                    <i data-lucide="star" style="width:16px;height:16px;fill:currentColor;"></i>
+                  </div>
+                  <p class="text-secondary-light mb-4 fs-5 italic">"Managing a major commercial plant requires reliable vendors. PlumbMaster delivers backflow certification audits, valve testing, and high-velocity water jetting continuously with extreme precision."</p>
+                  <div class="d-flex align-items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80" alt="Linda Thompson" class="testimonial-user-photo" />
+                    <div>
+                      <h4 class="h5 text-white mb-0">Linda Thompson</h4>
+                      <span class="text-secondary small">📍 Facility Supervisor, Seattle</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 13: BRANDS & PARTNERS
+           ========================================== -->
+      <section class="section-padding pt-0 pb-0" style="background-color: var(--bg-body);">
+        <div class="brand-marquee-container">
+          <div class="brand-marquee-inner">
+            <div class="brand-logo-item"><i data-lucide="droplet"></i> GROHE</div>
+            <div class="brand-logo-item"><i data-lucide="settings"></i> TOTO</div>
+            <div class="brand-logo-item"><i data-lucide="wrench"></i> KOHLER</div>
+            <div class="brand-logo-item"><i data-lucide="activity"></i> DELTA FITTING</div>
+            <div class="brand-logo-item"><i data-lucide="target"></i> MOEN APPLIANCES</div>
+            <div class="brand-logo-item"><i data-lucide="shield"></i> DURAVIT BRASS</div>
+            <div class="brand-logo-item"><i data-lucide="flame"></i> BRADFORD WHITE</div>
+            <!-- Duplicate for infinite marquee loop -->
+            <div class="brand-logo-item"><i data-lucide="droplet"></i> GROHE</div>
+            <div class="brand-logo-item"><i data-lucide="settings"></i> TOTO</div>
+            <div class="brand-logo-item"><i data-lucide="wrench"></i> KOHLER</div>
+            <div class="brand-logo-item"><i data-lucide="activity"></i> DELTA FITTING</div>
+            <div class="brand-logo-item"><i data-lucide="target"></i> MOEN APPLIANCES</div>
+            <div class="brand-logo-item"><i data-lucide="shield"></i> DURAVIT BRASS</div>
+            <div class="brand-logo-item"><i data-lucide="flame"></i> BRADFORD WHITE</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 14: SERVICE AREAS
+           ========================================== -->
+      <section class="section-padding bg-surface" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);" id="serviceAreas">
+        <div class="container">
+          <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+              <span class="badge-premium mb-3">OUR REGIONAL REACH</span>
+              <h2 class="display-6 font-heading fw-bold text-white mb-4">Areas Under Our Protection</h2>
+              <p class="text-secondary mb-4">Our mechanical GPS fleets patrol major residential hubs. Because our dispatch trucks are pre-loaded with hundreds of pipes and fitting supplies, we execute standard fixes on the first visit.</p>
+              
+              <div class="service-areas-grid mb-4">
+                <div class="area-chip"><i data-lucide="map-pin" class="text-orange" style="width:16px;height:16px;"></i> Downtown Seattle</div>
+                <div class="area-chip"><i data-lucide="map-pin" class="text-orange" style="width:16px;height:16px;"></i> Bellevue Region</div>
+                <div class="area-chip"><i data-lucide="map-pin" class="text-orange" style="width:16px;height:16px;"></i> Redmond Business Park</div>
+                <div class="area-chip"><i data-lucide="map-pin" class="text-orange" style="width:16px;height:16px;"></i> Tacoma District</div>
+                <div class="area-chip"><i data-lucide="map-pin" class="text-orange" style="width:16px;height:16px;"></i> Kirkland Residential</div>
+                <div class="area-chip"><i data-lucide="map-pin" class="text-orange" style="width:16px;height:16px;"></i> Renton Hub</div>
+              </div>
+
+              <div class="p-3 bg-dark rounded-3 d-inline-flex align-items-center gap-3">
+                <span class="text-orange fw-bold font-mono">● LIVE GPS MAP</span>
+                <span class="text-secondary small">8 response trucks actively patrolling near you now.</span>
+              </div>
+            </div>
+            
+            <div class="col-lg-6" data-aos="fade-left">
+              <div class="map-style-placeholder">
+                <div class="radar-ring mb-4">
+                  <i data-lucide="map-pin" style="width:40px;height:40px;" class="text-orange animate-bounce"></i>
+                </div>
+                <h4 class="h5 text-white mb-2">GPS Fleet Synchronization</h4>
+                <p class="text-secondary text-center small max-w-sm">Our live routing dispatch system tracks active mechanical trucks continuously to route the closest plumber directly to your location.</p>
+                <div class="badge-premium mt-3">8 Trucks Fully Active Now</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 15: LATEST BLOG
+           ========================================== -->
+      <section class="section-padding" style="background-color: var(--bg-body);">
+        <div class="container">
+          <div class="row align-items-end mb-5">
+            <div class="col-lg-6" data-aos="fade-right">
+              <span class="badge-premium mb-2">RESOURCES & FAQS</span>
+              <h2 class="display-6 font-heading fw-bold text-white">Latest Industry Insights</h2>
+              <p class="text-secondary mb-0">Stay informed with maintenance check-lists and tips compiled directly by our master mechanical plumbers.</p>
+            </div>
+            <div class="col-lg-6 text-lg-end" data-aos="fade-left">
+              <a href="blog.html" class="btn-premium">
+                View All Articles
+                <i data-lucide="arrow-right" style="width:16px;height:16px;margin-left:8px;"></i>
+              </a>
+            </div>
+          </div>
+          <div class="row g-4">
+            
+            <!-- Article 1 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+              <div class="blog-card-modern">
+                <div class="blog-card-img">
+                  <img src="https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=600&q=80" alt="Winter Proofing Pipe Lines" />
+                  <span class="blog-card-badge">MAINTENANCE TIPS</span>
+                </div>
+                <div class="p-4">
+                  <span class="text-muted small font-mono d-block mb-2">October 24, 2026 ● 5 min read</span>
+                  <h4 class="h5 text-white mb-3 font-heading"><a href="blog-details.html" class="hover-orange">How to Winter-Proof Residential Pipeline Fittings</a></h4>
+                  <p class="text-secondary small mb-4">Learn basic valve drainage and insulation wraps to guard your lines from freezing temperature damages.</p>
+                  <a href="blog-details.html" class="category-card-btn">
+                    Read Article <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Article 2 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+              <div class="blog-card-modern">
+                <div class="blog-card-img">
+                  <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80" alt="Plumbing Leak Detection Tech" />
+                  <span class="blog-card-badge">ACOUSTICS TECH</span>
+                </div>
+                <div class="p-4">
+                  <span class="text-muted small font-mono d-block mb-2">September 12, 2026 ● 4 min read</span>
+                  <h4 class="h5 text-white mb-3 font-heading"><a href="blog-details.html" class="hover-orange">Science Behind Acoustic Leak Trace Frequencies</a></h4>
+                  <p class="text-secondary small mb-4">Discover how our state-certified plumbers use specialized noise analyzers to isolate pipe fissures.</p>
+                  <a href="blog-details.html" class="category-card-btn">
+                    Read Article <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Article 3 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+              <div class="blog-card-modern">
+                <div class="blog-card-img">
+                  <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80" alt="Tankless Heaters vs Standard Tanks" />
+                  <span class="blog-card-badge">ECO DESIGN</span>
+                </div>
+                <div class="p-4">
+                  <span class="text-muted small font-mono d-block mb-2">August 05, 2026 ● 6 min read</span>
+                  <h4 class="h5 text-white mb-3 font-heading"><a href="blog-details.html" class="hover-orange">Tankless Heaters vs Standard Tank Systems</a></h4>
+                  <p class="text-secondary small mb-4">A head-to-head comparison detailing cost-savings, operational lifetime, and initial hardware setups.</p>
+                  <a href="blog-details.html" class="category-card-btn">
+                    Read Article <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 16: NEWSLETTER CTA
+           ========================================== -->
+      <section class="section-padding bg-surface" style="border-top: 1px solid var(--border-color);">
+        <div class="container">
+          <div class="newsletter-premium-cta" data-aos="zoom-in">
+            <!-- Decorative outline of a major water valve background -->
+            <i data-lucide="settings" class="newsletter-illustration" style="width:400px; height:400px;"></i>
+            
+            <div class="row align-items-center g-4 position-relative" style="z-index: 2;">
+              <div class="col-lg-7 text-start">
+                <span class="badge-premium mb-3">EXCLUSIVE PIPELINE DISCOUNTS</span>
+                <h2 class="display-6 font-heading fw-bold text-white mb-2">Get Our Smart Plumber Newsletter</h2>
+                <p class="text-secondary mb-0">Subscribe today to receive seasonal diagnostic coupons, free winterizer guides, and priority emergency dispatch priority list activation.</p>
+              </div>
+              <div class="col-lg-5">
+                <form class="d-flex flex-sm-row flex-column gap-3 newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed to PlumbMaster Priority List!');">
+                  <div class="flex-grow-1 position-relative">
+                    <input type="email" class="form-control newsletter-input w-100 py-3 ps-4" placeholder="Your Active Email Address" required style="border-radius: 50px; background-color: var(--bg-body); border-color: var(--border-color); color: var(--text-primary);" />
+                  </div>
+                  <button type="submit" class="btn-premium d-inline-flex align-items-center justify-content-center px-4" style="border-radius: 50px; white-space:nowrap; height: 54px;">
+                    Subscribe Now
+                    <i data-lucide="send" style="width:16px;height:16px;margin-left:8px;"></i>
+                  </button>
+                </form>
+                <span class="text-secondary small d-block mt-2 text-start px-2">● We value your privacy. Unsubscribe any time in 1 click.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 6. PREMIUM FOOTER -->
+    <footer class="premium-footer section-padding pb-0">
+      <div class="container">
+        <div class="row g-5 pb-5">
+          
+          <!-- Widget 1: Brand details -->
+          <div class="col-lg-4 col-md-6">
+            <div class="mb-4">
+              <a href="index.html" class="logo-brand text-decoration-none">
+                <div class="logo-icon">
+                  <i data-lucide="wrench" style="width:20px;height:20px;"></i>
+                </div>
+                PLUMB<span>MASTER</span>
+              </a>
+            </div>
+            <p class="text-secondary mb-4">
+              Providing modern, elite plumbing engineering and emergency plumbing solutions across domestic and industrial sectors. Responsive, certified, and luxury-first.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" class="social-icon-circle" aria-label="Facebook"><i data-lucide="facebook" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Twitter"><i data-lucide="twitter" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Instagram"><i data-lucide="instagram" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:16px;height:16px;"></i></a>
+            </div>
+          </div>
+
+          <!-- Widget 2: Services -->
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Core Services</h3>
+            <ul class="footer-link-list">
+              <li><a href="service-details.html">Drain Clearing</a></li>
+              <li><a href="service-details.html">Luxury Tub Fittings</a></li>
+              <li><a href="service-details.html">Pipeline Audits</a></li>
+              <li><a href="service-details.html">Water Heater Setup</a></li>
+              <li><a href="service-details.html">Emergency Response</a></li>
+            </ul>
+          </div>
+
+          <!-- Widget 3: Quick Navigation -->
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Quick Links</h3>
+            <ul class="footer-link-list">
+              <li><a href="about.html">About Corporate</a></li>
+              <li><a href="pricing.html">Transparent Rates</a></li>
+              <li><a href="team.html">Our Certified Staff</a></li>
+              <li><a href="faq.html">Common Questions</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+
+          <!-- Widget 4: Newsletter -->
+          <div class="col-lg-4 col-md-6">
+            <h3 class="footer-widget-title">Newsletter Signup</h3>
+            <p class="text-secondary mb-3">Subscribe to our monthly maintenance checklist and seasonal discount coupons.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+              <input type="email" class="newsletter-input" placeholder="Your Email Address" required />
+              <button type="submit" class="newsletter-submit" aria-label="Subscribe">
+                <i data-lucide="send" style="width:16px;height:16px;"></i>
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+        <!-- Footer Bottom Copyright Block -->
+        <div class="footer-bottom text-center">
+          <div class="row align-items-center justify-content-between">
+            <div class="col-md-6 text-md-start mb-3 mb-md-0">
+              <p class="mb-0">&copy; 2026 PlumbMaster Template. Inspired by high-end luxury business engineering.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <div class="d-flex justify-content-center justify-content-md-end gap-4">
+                <a href="terms-conditions.html" class="text-secondary text-decoration-none">Terms of Service</a>
+                <a href="privacy-policy.html" class="text-secondary text-decoration-none">Privacy Policy</a>
+                <a href="contact.html" class="text-secondary text-decoration-none">Support desk</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+    <!-- Lucide Vector Icons Library CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Animation Engine CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Swiper JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Theme JS Control -->
+    <script src="/assets/js/main.js"></script>
+
+    <!-- Homepage Premium Interactive Features Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // 1. Initialize Swiper Instances
+        const projectsSwiper = new Swiper('.projectsSwiper', {
+          slidesPerView: 1,
+          spaceBetween: 30,
+          loop: true,
+          navigation: {
+            nextEl: '.swiper-button-next-custom',
+            prevEl: '.swiper-button-prev-custom',
+          },
+          breakpoints: {
+            768: { slidesPerView: 2 },
+            1200: { slidesPerView: 3 }
+          }
+        });
+
+        const teamSwiper = new Swiper('.teamSwiper', {
+          slidesPerView: 1,
+          spaceBetween: 30,
+          loop: true,
+          autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+          },
+          breakpoints: {
+            576: { slidesPerView: 2 },
+            992: { slidesPerView: 3 }
+          }
+        });
+
+        const testimonialsSwiper = new Swiper('.testimonialsSwiper', {
+          slidesPerView: 1,
+          spaceBetween: 30,
+          loop: true,
+          navigation: {
+            nextEl: '.swiper-testimonial-next-custom',
+            prevEl: '.swiper-testimonial-prev-custom',
+          },
+          breakpoints: {
+            992: { slidesPerView: 2 }
+          }
+        });
+
+        // 2. Statistics Count-Up Animation with Viewport Intersection
+        const counterElements = document.querySelectorAll('.counter-number');
+        
+        const runCounter = (el) => {
+          const target = parseInt(el.innerText, 10);
+          let count = 0;
+          const speed = 2000; // Animation duration in ms
+          const increment = target / (speed / 16); // 60 FPS rough calc
+          
+          const updateCount = () => {
+            count += increment;
+            if (count < target) {
+              el.innerText = Math.floor(count);
+              requestAnimationFrame(updateCount);
+            } else {
+              el.innerText = target;
+            }
+          };
+          updateCount();
+        };
+
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              runCounter(entry.target);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.5 });
+
+        counterElements.forEach(el => counterObserver.observe(el));
+
+        // 3. Mouse parallax effect for About Company image composition
+        const compositionBox = document.querySelector('.about-image-composition');
+        if (compositionBox) {
+          const mainImg = document.getElementById('aboutImgMain');
+          const badge = document.getElementById('expBadge');
+          
+          compositionBox.addEventListener('mousemove', (e) => {
+            const rect = compositionBox.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Calculate offset percentage
+            const dx = (x - rect.width / 2) / (rect.width / 2);
+            const dy = (y - rect.height / 2) / (rect.height / 2);
+            
+            if (mainImg) mainImg.style.transform = `translate(${dx * 10}px, ${dy * 10}px) scale(1.01)`;
+            if (badge) badge.style.transform = `translate(${dx * -15}px, ${dy * -15}px)`;
+          });
+          
+          compositionBox.addEventListener('mouseleave', () => {
+            if (mainImg) mainImg.style.transform = '';
+            if (badge) badge.style.transform = '';
+          });
+        }
+      });
+    </script>
+
+  </body>
+</html>

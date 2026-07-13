@@ -1,0 +1,1094 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure Checkout - PlumbMaster Premium Plumbing Template</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- AOS Animation CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    <!-- Custom Global Style -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    
+    <!-- Bespoke Styles for Secure Checkout Page -->
+    <style>
+      .checkout-form-panel {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: var(--shadow-sm);
+      }
+      
+      .checkout-section-title {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 1.15rem;
+        color: var(--text-primary);
+        margin-bottom: 25px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      
+      .checkout-form-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        margin-bottom: 8px;
+        display: block;
+      }
+      
+      .checkout-input {
+        background-color: var(--bg-topbar);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-sm);
+        padding: 12px 16px;
+        color: var(--text-primary);
+        font-size: 0.92rem;
+        width: 100%;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      
+      .checkout-input:focus {
+        border-color: var(--color-orange);
+        box-shadow: var(--shadow-glow);
+      }
+      
+      .payment-tab-group {
+        display: flex;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-sm);
+        overflow: hidden;
+        margin-bottom: 25px;
+      }
+      
+      .payment-tab-btn {
+        flex: 1;
+        background-color: var(--bg-topbar);
+        border: none;
+        color: var(--text-secondary);
+        padding: 14px;
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 0.88rem;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+      }
+      
+      .payment-tab-btn.active {
+        background-color: var(--bg-surface-hover);
+        color: var(--color-orange);
+      }
+      
+      .payment-pane {
+        display: none;
+      }
+      
+      .payment-pane.active {
+        display: block;
+      }
+      
+      /* Summary Right Column */
+      .checkout-summary-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 30px;
+        box-shadow: var(--shadow-sm);
+        position: sticky;
+        top: 100px;
+      }
+      
+      .checkout-summary-title {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--text-primary);
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+      }
+      
+      .mini-cart-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+        border-bottom: 1px dotted var(--border-color);
+        padding-bottom: 15px;
+      }
+      
+      .mini-cart-item:last-child {
+        border-bottom: none;
+        margin-bottom: 20px;
+        padding-bottom: 0;
+      }
+      
+      .mini-cart-img {
+        width: 50px;
+        height: 50px;
+        border-radius: var(--border-radius-sm);
+        border: 1px solid var(--border-color);
+        object-fit: cover;
+        background-color: var(--bg-topbar);
+      }
+      
+      .mini-cart-name {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 2px;
+        line-height: 1.4;
+      }
+      
+      .mini-cart-qty {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+      
+      .mini-cart-sub {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--color-orange);
+        margin-left: auto;
+      }
+      
+      .checkout-badge-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px;
+        background-color: rgba(16, 185, 129, 0.05);
+        border: 1px solid rgba(16, 185, 129, 0.15);
+        border-radius: var(--border-radius-sm);
+        margin-top: 20px;
+        color: #10b981;
+        font-size: 0.78rem;
+      }
+      
+      .summary-calc-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+      
+      .summary-calc-row.grand-total-row {
+        border-top: 1px solid var(--border-color);
+        padding-top: 15px;
+        margin-top: 15px;
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: var(--text-primary);
+      }
+      
+      .summary-calc-row.grand-total-row .grand-total-val {
+        color: var(--color-orange);
+        font-family: var(--font-mono);
+      }
+      
+      /* Progress Overlay */
+      .processing-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(11, 15, 23, 0.95);
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+      }
+      
+      .processing-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      
+      .spinner-plumb {
+        width: 60px;
+        height: 60px;
+        border: 4px solid rgba(255, 107, 0, 0.1);
+        border-left-color: var(--color-orange);
+        border-radius: 50%;
+        animation: spin-plumb 1s linear infinite;
+        margin-bottom: 25px;
+      }
+      
+      @keyframes spin-plumb {
+        to { transform: rotate(360deg); }
+      }
+      
+      .processing-text {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        color: var(--text-primary);
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+      }
+      
+      .processing-sub {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+      
+      /* Order success state styling */
+      .success-receipt-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 50px;
+        text-align: center;
+        box-shadow: var(--shadow-lg), var(--shadow-glow);
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      
+      .success-glow-icon {
+        width: 80px;
+        height: 80px;
+        background-color: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 30px auto;
+        box-shadow: 0 0 25px rgba(16, 185, 129, 0.2);
+      }
+      
+      .receipt-specs-box {
+        background-color: var(--bg-topbar);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-sm);
+        padding: 24px;
+        text-align: left;
+        margin: 30px 0;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- GLOBAL SEARCH MODAL -->
+    <div class="search-modal-overlay" id="searchModal">
+      <button class="search-modal-close" aria-label="Close search">
+        <i data-lucide="x" style="width:32px;height:32px;"></i>
+      </button>
+      <div class="search-modal-box">
+        <div class="search-modal-input-wrapper">
+          <input type="text" class="search-modal-input" placeholder="Search services, articles, products..." />
+          <i data-lucide="search" class="search-modal-icon" style="width:24px;height:24px;"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- STICKY HEADER TOP-BAR -->
+    <div class="top-bar d-none d-lg-flex">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-4">
+          <span class="top-bar-link">
+            <i data-lucide="clock" style="width:14px;height:14px;"></i>
+            Working Hours: 24/7 Emergency Support
+          </span>
+          <a href="mailto:emergency@plumbmaster.com" class="top-bar-link">
+            <i data-lucide="mail" style="width:14px;height:14px;"></i>
+            emergency@plumbmaster.com
+          </a>
+        </div>
+        <div class="d-flex align-items-center gap-4">
+          <a href="tel:18005550199" class="top-bar-link fw-bold text-orange">
+            <i data-lucide="phone-call" style="width:14px;height:14px;"></i>
+            Emergency Hotline: 1-800-555-0199
+          </a>
+          <div class="d-flex align-items-center gap-2 border-start ps-3 border-secondary">
+            <a href="#" class="top-bar-link" aria-label="Facebook"><i data-lucide="facebook" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Twitter"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN HEADER NAVIGATION -->
+    <header class="main-header">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a href="index.html" class="logo-brand">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:22px;height:22px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="nav-menu">
+          <div class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </div>
+          <div class="nav-item">
+            <a href="about.html" class="nav-link ">About</a>
+          </div>
+          <div class="nav-item">
+            <a href="services.html" class="nav-link">
+              Services <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="services.html" class="dropdown-item-custom">All Services</a>
+              <a href="service-details.html" class="dropdown-item-custom">Service Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="projects.html" class="nav-link">
+              Projects <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="projects.html" class="dropdown-item-custom">Project Gallery</a>
+              <a href="project-details.html" class="dropdown-item-custom">Project Details</a>
+            </div>
+          </div>
+          <div class="nav-item mega-menu-wrapper">
+            <a href="shop.html" class="nav-link text-orange">
+              Shop <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="mega-menu">
+              <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Shop Collection</h3>
+                  <a href="shop.html" class="dropdown-item-custom ">Main Plumbing Store</a>
+                  <a href="product-details.html" class="dropdown-item-custom ">Premium Fittings</a>
+                  <a href="cart.html" class="dropdown-item-custom ">Shopping Cart</a>
+                  <a href="checkout.html" class="dropdown-item-custom text-orange">Secure Checkout</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Our Pages</h3>
+                  <a href="team.html" class="dropdown-item-custom ">Our Expert Plumbers</a>
+                  <a href="team-details.html" class="dropdown-item-custom ">Expert Profile</a>
+                  <a href="pricing.html" class="dropdown-item-custom ">Transparent Rates</a>
+                  <a href="faq.html" class="dropdown-item-custom ">Frequently Asked Qs</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                  <h3 class="mega-title">Company Info</h3>
+                  <a href="about.html" class="dropdown-item-custom">Corporate Overview</a>
+                  <a href="contact.html" class="dropdown-item-custom ">Office Contacts</a>
+                  <a href="privacy-policy.html" class="dropdown-item-custom ">Privacy Policy</a>
+                  <a href="terms-conditions.html" class="dropdown-item-custom ">Terms of Service</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="emergency-banner-box h-100 d-flex flex-column justify-content-center p-3 text-center">
+                    <span class="badge-premium mb-2 mx-auto">Seasonal Offer</span>
+                    <h4 class="fs-6 text-white mb-2">Free Inspections</h4>
+                    <p class="text-secondary small mb-3">Claim a free system audit on your initial water lines setup.</p>
+                    <a href="appointment.html" class="btn-premium py-2 px-3 fs-7 align-self-center">Claim Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="blog.html" class="nav-link ">
+              Blog <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="blog.html" class="dropdown-item-custom ">Industry News</a>
+              <a href="blog-details.html" class="dropdown-item-custom ">Article Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="contact.html" class="nav-link ">Contact</a>
+          </div>
+        </nav>
+
+        <div class="d-flex align-items-center gap-3">
+          <button class="search-toggle-btn search-trigger" aria-label="Open Search">
+            <i data-lucide="search"></i>
+          </button>
+          <a href="cart.html" class="search-toggle-btn position-relative" aria-label="View Cart">
+            <i data-lucide="shopping-cart" style="width:20px;height:20px;"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger font-mono" id="cart-badge-count" style="font-size:0.65rem; padding: 0.25em 0.5em;">0</span>
+          </a>
+          <button class="theme-toggle-btn" aria-label="Toggle Theme">
+            <i data-lucide="sun"></i>
+          </button>
+          <a href="appointment.html" class="btn-premium d-none d-xl-flex">
+            Book Appointment
+            <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+          </a>
+          <button class="mobile-menu-trigger" aria-label="Toggle Navigation">
+            <i data-lucide="menu" style="width:20px;height:20px;"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div class="mobile-nav-overlay"></div>
+    <div class="mobile-nav-drawer">
+      <div class="mobile-nav-header">
+        <a href="index.html" class="logo-brand text-decoration-none">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:18px;height:18px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+        <button class="mobile-nav-close" aria-label="Close Mobile Menu">
+          <i data-lucide="x" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-links">
+        <div class="mobile-nav-item"><a href="index.html" class="mobile-nav-link">Home</a></div>
+        <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About Us</a></div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Services <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="services.html" class="mobile-nav-submenu-link">Our Services</a>
+            <a href="service-details.html" class="mobile-nav-submenu-link">Service Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Projects <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="projects.html" class="mobile-nav-submenu-link">Project Gallery</a>
+            <a href="project-details.html" class="mobile-nav-submenu-link">Project Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link text-orange">Store Collection <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="shop.html" class="mobile-nav-submenu-link ">Main Shop</a>
+            <a href="product-details.html" class="mobile-nav-submenu-link ">Product Details</a>
+            <a href="cart.html" class="mobile-nav-submenu-link ">Cart</a>
+            <a href="checkout.html" class="mobile-nav-submenu-link text-orange">Checkout</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">More Pages <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="team.html" class="mobile-nav-submenu-link ">Our Plumbers</a>
+            <a href="team-details.html" class="mobile-nav-submenu-link ">Profile Details</a>
+            <a href="pricing.html" class="mobile-nav-submenu-link ">Pricing Plans</a>
+            <a href="faq.html" class="mobile-nav-submenu-link ">FAQ Pages</a>
+            <a href="404.html" class="mobile-nav-submenu-link ">404 Page</a>
+            <a href="coming-soon.html" class="mobile-nav-submenu-link ">Coming Soon</a>
+            <a href="privacy-policy.html" class="mobile-nav-submenu-link ">Privacy Policy</a>
+            <a href="terms-conditions.html" class="mobile-nav-submenu-link ">Terms & Conditions</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link ">Blog & News <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="blog.html" class="mobile-nav-submenu-link ">Blog Posts</a>
+            <a href="blog-details.html" class="mobile-nav-submenu-link ">Blog Article</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link ">Contact</a></div>
+      </div>
+      <div class="mt-4 pt-3 border-top border-secondary">
+        <a href="appointment.html" class="btn-premium w-full text-center">Book Online Now</a>
+      </div>
+    </div>
+
+    <!-- MAIN BREADCRUMB HERO BANNER -->
+    <section class="breadcrumbs-hero">
+      <div class="container text-center text-md-start d-md-flex align-items-center justify-content-between">
+        <div data-aos="fade-right">
+          <h1 class="display-5 text-white fw-bold mb-2">Secure Checkout</h1>
+          <p class="text-secondary mb-0">Review billing details, local shipping rates, and secure portal configurations.</p>
+        </div>
+        <div class="mt-3 mt-md-0" data-aos="fade-left">
+          <nav class="breadcrumb-nav justify-content-center justify-content-md-end">
+            <a href="index.html">Home</a>
+            <i data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+            <span class="text-orange">Checkout</span>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECURE GATEWAY CHECKOUT PANEL -->
+    <main class="section-padding">
+      <div class="container" id="checkout-main-content">
+        <!-- Secure progress overlay during order validation -->
+        <div class="processing-overlay" id="checkoutProcessing">
+          <div class="spinner-plumb"></div>
+          <p class="processing-text" id="processing-title">Initiating Security Audits...</p>
+          <p class="processing-sub" id="processing-sub">Routing transaction to secure CJS servers.</p>
+        </div>
+
+        <form id="checkout-form-element" onsubmit="return false;">
+          <div class="row g-4" id="checkout-grid-container">
+            <!-- Left Side: Invoice details & payment methods -->
+            <div class="col-lg-7 col-xl-8" data-aos="fade-right">
+              
+              <!-- Billing & Sourcing Details -->
+              <div class="checkout-form-panel">
+                <h2 class="checkout-section-title">
+                  <i data-lucide="user" class="text-orange" style="width:18px;height:18px;"></i>
+                  Sourcing & Billing Credentials
+                </h2>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="checkout-form-label" for="bill-fname">First Name *</label>
+                    <input type="text" id="bill-fname" class="checkout-input" placeholder="e.g. Richard" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="checkout-form-label" for="bill-lname">Last Name *</label>
+                    <input type="text" id="bill-lname" class="checkout-input" placeholder="e.g. Hendricks" required />
+                  </div>
+                  <div class="col-md-12">
+                    <label class="checkout-form-label" for="bill-company">Company Name (Optional)</label>
+                    <input type="text" id="bill-company" class="checkout-input" placeholder="e.g. Pied Piper Plumbing" />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="checkout-form-label" for="bill-email">Corporate Email *</label>
+                    <input type="email" id="bill-email" class="checkout-input" placeholder="e.g. r.hendricks@piedpiper.com" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="checkout-form-label" for="bill-phone">Phone Number *</label>
+                    <input type="tel" id="bill-phone" class="checkout-input" placeholder="e.g. 1-800-555-0199" required />
+                  </div>
+                  <div class="col-md-12">
+                    <label class="checkout-form-label" for="bill-address">Project Street Address *</label>
+                    <input type="text" id="bill-address" class="checkout-input" placeholder="House number, street name, and crawlspace suite" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="checkout-form-label" for="bill-city">City *</label>
+                    <input type="text" id="bill-city" class="checkout-input" placeholder="e.g. Palo Alto" required />
+                  </div>
+                  <div class="col-md-3">
+                    <label class="checkout-form-label" for="bill-state">State / Prov *</label>
+                    <input type="text" id="bill-state" class="checkout-input" placeholder="e.g. CA" required />
+                  </div>
+                  <div class="col-md-3">
+                    <label class="checkout-form-label" for="bill-zip">ZIP / Postal Code *</label>
+                    <input type="text" id="bill-zip" class="checkout-input" placeholder="e.g. 94301" required />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dispatch Logistics Options -->
+              <div class="checkout-form-panel">
+                <h2 class="checkout-section-title">
+                  <i data-lucide="truck" class="text-orange" style="width:18px;height:18px;"></i>
+                  Logistics Dispatch Priority
+                </h2>
+                <div class="row g-3">
+                  <div class="col-md-12">
+                    <div class="shipping-options-group">
+                      <label class="shipping-option-item">
+                        <input type="radio" name="checkout_shipping" value="standard" checked />
+                        <div class="d-flex justify-content-between w-full align-items-center">
+                          <div class="fs-8" style="font-size:0.8rem;">
+                            <div class="fw-bold text-white">Standard Local Freight</div>
+                            <div class="text-secondary">Delivered directly to job site in 2-3 business days</div>
+                          </div>
+                          <span id="summary-shipping-standard-label" class="font-mono fw-bold fs-8" style="font-size:0.8rem;">Free</span>
+                        </div>
+                      </label>
+                      <label class="shipping-option-item">
+                        <input type="radio" name="checkout_shipping" value="express" />
+                        <div class="d-flex justify-content-between w-full align-items-center">
+                          <div class="fs-8" style="font-size:0.8rem;">
+                            <div class="fw-bold text-white">Express Air Cargo Dispatch</div>
+                            <div class="text-secondary">Next-day emergency helicopter / hot-shot transport</div>
+                          </div>
+                          <span class="font-mono fw-bold text-orange fs-8" style="font-size:0.8rem;">$45.00</span>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <label class="checkout-form-label" for="special-instructions">Special On-Site Courier Instructions</label>
+                    <textarea id="special-instructions" class="checkout-input" rows="3" placeholder="e.g. Code for service elevator, lockbox locator details, or ring project engineer upon gate arrival..."></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Secure Payment Gateways -->
+              <div class="checkout-form-panel">
+                <h2 class="checkout-section-title">
+                  <i data-lucide="credit-card" class="text-orange" style="width:18px;height:18px;"></i>
+                  Secure Payment Method
+                </h2>
+                
+                <div class="payment-tab-group">
+                  <button type="button" class="payment-tab-btn active" data-pay="card">
+                    <i data-lucide="credit-card" style="width:16px;height:16px;"></i> Credit Card
+                  </button>
+                  <button type="button" class="payment-tab-btn" data-pay="po">
+                    <i data-lucide="file-text" style="width:16px;height:16px;"></i> Corporate P.O.
+                  </button>
+                  <button type="button" class="payment-tab-btn" data-pay="paypal">
+                    <i data-lucide="wallet" style="width:16px;height:16px;"></i> PayPal Portal
+                  </button>
+                </div>
+
+                <!-- Card Pane -->
+                <div class="payment-pane active" id="pane-card">
+                  <div class="row g-3">
+                    <div class="col-md-12">
+                      <label class="checkout-form-label" for="card-num">Card Number *</label>
+                      <input type="text" id="card-num" class="checkout-input" placeholder="4111 2222 3333 4444" pattern="^[0-9\s]{12,19}$" />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="checkout-form-label" for="card-expiry">Expiration Date *</label>
+                      <input type="text" id="card-expiry" class="checkout-input" placeholder="MM/YY" pattern="^(0[1-9]|1[0-2])\/?([0-9]{2})$" />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="checkout-form-label" for="card-cvv">CVV Code *</label>
+                      <input type="password" id="card-cvv" class="checkout-input" placeholder="123" pattern="^[0-9]{3,4}$" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Purchase Order Pane -->
+                <div class="payment-pane" id="pane-po">
+                  <div class="row g-3">
+                    <div class="col-md-12">
+                      <label class="checkout-form-label" for="po-num">Corporate Purchase Order Number (P.O.) *</label>
+                      <input type="text" id="po-num" class="checkout-input" placeholder="e.g. PO-2026-94821" />
+                      <p class="text-secondary small mt-2">Your company must have an active net-30 billing credit agreement pre-verified by our corporate controllers.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- PayPal Pane -->
+                <div class="payment-pane text-center py-4" id="pane-paypal">
+                  <div class="glass-panel p-4 d-inline-block text-center border-orange" style="max-width:400px; border-width: 1px;">
+                    <i data-lucide="external-link" class="text-orange mb-2" style="width:32px;height:32px;"></i>
+                    <h4 class="text-white h6 mb-2">Redirecting to External Merchant Gate</h4>
+                    <p class="text-secondary small mb-0">We will open a secure window to synchronize with PayPal balance nodes upon order generation validation.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Terms agreement & submit -->
+              <div class="d-flex align-items-center gap-2 mb-4">
+                <input type="checkbox" id="terms-agree" style="accent-color:var(--color-orange);" required />
+                <label for="terms-agree" class="text-secondary small">I certify that the materials and priority selected are compliant with city plumbing codes, and I accept the terms of service.</label>
+              </div>
+
+              <div class="d-none d-lg-block">
+                <button type="submit" id="btn-place-order-desktop" class="btn-premium w-full text-center py-3 fs-6">
+                  Validate & Authorize Sourcing Order
+                  <i data-lucide="shield-check" style="width:20px;height:20px;margin-left:8px;"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Right Side: Order summary recap -->
+            <div class="col-lg-5 col-xl-4" data-aos="fade-left">
+              <div class="checkout-summary-card">
+                <h3 class="checkout-summary-title">Order Ledger Recap</h3>
+                
+                <!-- Tiny thumbnail items preview container -->
+                <div id="checkout-mini-items-container">
+                  <!-- Javascript rendered mini items -->
+                </div>
+
+                <div class="summary-row-divider border-top pt-3 border-secondary border-opacity-10 mb-3">
+                  <div class="summary-calc-row">
+                    <span>Sourcing Subtotal</span>
+                    <span id="checkout-subtotal" class="font-mono text-white fw-bold">$0.00</span>
+                  </div>
+                  
+                  <div class="summary-calc-row" id="checkout-discount-row" style="display: none;">
+                    <span>Coupon Discount (<span id="checkout-discount-code"></span>)</span>
+                    <span id="checkout-discount" class="font-mono text-success fw-bold">-$0.00</span>
+                  </div>
+
+                  <div class="summary-calc-row">
+                    <span>Freight Dispatch Cost</span>
+                    <span id="checkout-shipping-cost" class="font-mono text-white">$0.00</span>
+                  </div>
+
+                  <div class="summary-calc-row">
+                    <span>Estimated Surcharge (Tax 8%)</span>
+                    <span id="checkout-tax" class="font-mono text-white">$0.00</span>
+                  </div>
+
+                  <div class="summary-calc-row grand-total-row">
+                    <span>Grand Total Invoice</span>
+                    <span id="checkout-grand-total" class="grand-total-val">$0.00</span>
+                  </div>
+                </div>
+
+                <div class="checkout-badge-box">
+                  <i data-lucide="shield-check" style="width:16px;height:16px;flex-shrink:0;"></i>
+                  <span>256-Bit SSL Encrypted Sourcing Channel Active. Priority verification is automated.</span>
+                </div>
+
+                <div class="d-block d-lg-none mt-4">
+                  <button type="submit" id="btn-place-order-mobile" class="btn-premium w-full text-center py-3">
+                    Authorize Sourcing Order
+                    <i data-lucide="shield-check" style="width:18px;height:18px;margin-left:8px;"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        
+        <!-- Order success receipt card (Initially hidden) -->
+        <div id="checkout-success-view" class="row py-5" style="display: none;">
+          <div class="col-12">
+            <div class="success-receipt-card" data-aos="zoom-in">
+              <div class="success-glow-icon">
+                <i data-lucide="check" style="width:40px;height:40px;"></i>
+              </div>
+              <h1 class="display-6 text-white fw-bold mb-2">Procurement Authorized</h1>
+              <p class="text-secondary mb-4">Your transaction has passed all encrypted nodes. A physical copy has been sent to your coordinator.</p>
+              
+              <div class="receipt-specs-box">
+                <h4 class="h6 text-white mb-3 text-uppercase font-mono text-orange" style="letter-spacing:0.05em;">Invoice Specifications</h4>
+                <div class="row g-2 small">
+                  <div class="col-sm-6 text-secondary">Reference Code:</div>
+                  <div class="col-sm-6 text-white fw-bold text-sm-end" id="rec-code">#PM-7489-CJS</div>
+                  
+                  <div class="col-sm-6 text-secondary">Authorized By:</div>
+                  <div class="col-sm-6 text-white text-sm-end" id="rec-name">Richard Hendricks</div>
+                  
+                  <div class="col-sm-6 text-secondary">Project Site:</div>
+                  <div class="col-sm-6 text-white text-sm-end" id="rec-address">Palo Alto, CA</div>
+                  
+                  <div class="col-sm-6 text-secondary">Invoice Amount:</div>
+                  <div class="col-sm-6 text-orange fw-bold text-sm-end" id="rec-total">$850.00</div>
+                  
+                  <div class="col-sm-6 text-secondary">Dispatch Method:</div>
+                  <div class="col-sm-6 text-white text-sm-end" id="rec-shipping">Standard Local Freight</div>
+                </div>
+              </div>
+              
+              <div class="d-flex flex-wrap justify-content-center gap-3">
+                <button onclick="alert('Preparing transaction PDF invoice... Download completed!');" class="btn-premium">
+                  <i data-lucide="download" style="width:16px;height:16px;margin-right:8px;"></i> Download PDF Invoice
+                </button>
+                <a href="appointment.html" class="btn-premium-secondary text-decoration-none">
+                  <i data-lucide="calendar" style="width:16px;height:16px;margin-right:8px;"></i> Book Installation Staff
+                </a>
+              </div>
+              <div class="mt-4">
+                <a href="shop.html" class="text-secondary small">Back to Main Sourcing Catalog</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- PREMIUM FOOTER -->
+    <footer class="premium-footer section-padding pb-0">
+      <div class="container">
+        <div class="row g-5 pb-5">
+          <div class="col-lg-4 col-md-6">
+            <div class="mb-4">
+              <a href="index.html" class="logo-brand text-decoration-none">
+                <div class="logo-icon">
+                  <i data-lucide="wrench" style="width:20px;height:20px;"></i>
+                </div>
+                PLUMB<span>MASTER</span>
+              </a>
+            </div>
+            <p class="text-secondary mb-4">
+              Providing modern, elite plumbing engineering and emergency plumbing solutions across domestic and industrial sectors. Responsive, certified, and luxury-first.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" class="social-icon-circle" aria-label="Facebook"><i data-lucide="facebook" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Twitter"><i data-lucide="twitter" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Instagram"><i data-lucide="instagram" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:16px;height:16px;"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Core Services</h3>
+            <ul class="footer-link-list">
+              <li><a href="service-details.html">Drain Clearing</a></li>
+              <li><a href="service-details.html">Luxury Tub Fittings</a></li>
+              <li><a href="service-details.html">Pipeline Audits</a></li>
+              <li><a href="service-details.html">Water Heater Setup</a></li>
+              <li><a href="service-details.html">Emergency Response</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Quick Links</h3>
+            <ul class="footer-link-list">
+              <li><a href="about.html">About Corporate</a></li>
+              <li><a href="pricing.html">Transparent Rates</a></li>
+              <li><a href="team.html">Our Certified Staff</a></li>
+              <li><a href="faq.html">Common Questions</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <h3 class="footer-widget-title">Newsletter Signup</h3>
+            <p class="text-secondary mb-3">Subscribe to our monthly maintenance checklist and seasonal discount coupons.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+              <input type="email" class="newsletter-input" placeholder="Your Email Address" required />
+              <button type="submit" class="newsletter-submit" aria-label="Subscribe">
+                <i data-lucide="send" style="width:16px;height:16px;"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom text-center">
+          <div class="row align-items-center justify-content-between">
+            <div class="col-md-6 text-md-start mb-3 mb-md-0">
+              <p class="mb-0">&copy; 2026 PlumbMaster Template. Inspired by high-end luxury business engineering.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <div class="d-flex justify-content-center justify-content-md-end gap-4">
+                <a href="terms-conditions.html" class="text-secondary text-decoration-none">Terms of Service</a>
+                <a href="privacy-policy.html" class="text-secondary text-decoration-none">Privacy Policy</a>
+                <a href="contact.html" class="text-secondary text-decoration-none">Support desk</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lucide Vector Icons Library CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Animation Engine CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Theme JS Control -->
+    <script src="/assets/js/main.js"></script>
+
+    <!-- Interactive Checkout Logic -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // Retrieve cart items or redirect if empty
+        const cart = JSON.parse(localStorage.getItem("plumbCart") || "[]");
+        
+        // Populate header cart badge
+        const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const headerBadge = document.getElementById("cart-badge-count");
+        if (headerBadge) {
+          headerBadge.textContent = totalQty;
+        }
+
+        if (cart.length === 0) {
+          alert("Your sourcing checklist is currently empty. Redirecting back to the main catalog.");
+          window.location.href = "shop.html";
+          return;
+        }
+
+        // Active coupon detection (from cart memory simulation or standard)
+        let discountPercent = 0;
+        let couponCode = "";
+        
+        // We will default to standard coupon detection if cart has items but let's assume they might have PLUMB20 pre-activated or check standard values
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        
+        // Free standard shipping trigger
+        const isFreeShippingApplicable = subtotal >= 150;
+        if (isFreeShippingApplicable) {
+          document.getElementById("summary-shipping-standard-label").textContent = "Free";
+          document.getElementById("summary-shipping-standard-label").className = "font-mono text-success fw-bold";
+        } else {
+          document.getElementById("summary-shipping-standard-label").textContent = "$15.00";
+          document.getElementById("summary-shipping-standard-label").className = "font-mono text-white";
+        }
+
+        // 1. Render Mini item summary list
+        const miniContainer = document.getElementById("checkout-mini-items-container");
+        miniContainer.innerHTML = "";
+        
+        cart.forEach(item => {
+          const div = document.createElement("div");
+          div.className = "mini-cart-item";
+          const itemTotal = item.price * item.quantity;
+          
+          div.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="mini-cart-img" />
+            <div>
+              <div class="mini-cart-name">${item.name}</div>
+              <div class="mini-cart-qty">${item.quantity}x @ $${item.price.toFixed(2)}</div>
+            </div>
+            <span class="mini-cart-sub">$${itemTotal.toFixed(2)}</span>
+          `;
+          miniContainer.appendChild(div);
+        });
+
+        // 2. Perform live summary compilations
+        function calculateCheckoutTotals() {
+          const shippingMode = document.querySelector('input[name="checkout_shipping"]:checked').value;
+          let shippingCost = 0;
+          if (shippingMode === "standard") {
+            shippingCost = isFreeShippingApplicable ? 0 : 15.00;
+          } else {
+            shippingCost = 45.00;
+          }
+
+          document.getElementById("checkout-subtotal").textContent = "$" + subtotal.toFixed(2);
+          
+          let discountAmt = subtotal * (discountPercent / 100);
+          if (discountPercent > 0) {
+            document.getElementById("checkout-discount-row").style.display = "flex";
+            document.getElementById("checkout-discount-code").textContent = couponCode;
+            document.getElementById("checkout-discount").textContent = "-$" + discountAmt.toFixed(2);
+          } else {
+            document.getElementById("checkout-discount-row").style.display = "none";
+          }
+
+          document.getElementById("checkout-shipping-cost").textContent = shippingCost === 0 ? "Free" : "$" + shippingCost.toFixed(2);
+          if (shippingCost === 0) {
+            document.getElementById("checkout-shipping-cost").className = "font-mono text-success fw-bold";
+          } else {
+            document.getElementById("checkout-shipping-cost").className = "font-mono text-white";
+          }
+
+          const taxableAmt = Math.max(0, subtotal - discountAmt);
+          const estimatedTax = taxableAmt * 0.08;
+          document.getElementById("checkout-tax").textContent = "$" + estimatedTax.toFixed(2);
+
+          const grandTotal = taxableAmt + shippingCost + estimatedTax;
+          document.getElementById("checkout-grand-total").textContent = "$" + grandTotal.toFixed(2);
+          return grandTotal;
+        }
+
+        calculateCheckoutTotals();
+
+        // 3. Listen for logistics option updates
+        document.querySelectorAll('input[name="checkout_shipping"]').forEach(radio => {
+          radio.addEventListener("change", function() {
+            calculateCheckoutTotals();
+          });
+        });
+
+        // 4. Tab switching for payment panes
+        const payBtns = document.querySelectorAll(".payment-tab-btn");
+        const payPanes = document.querySelectorAll(".payment-pane");
+        let activePaymentMethod = "card";
+
+        payBtns.forEach(btn => {
+          btn.addEventListener("click", function() {
+            payBtns.forEach(b => b.classList.remove("active"));
+            payPanes.forEach(p => p.classList.remove("active"));
+
+            btn.classList.add("active");
+            activePaymentMethod = btn.getAttribute("data-pay");
+            
+            // Activate specific inputs based on payment type
+            document.getElementById("pane-" + activePaymentMethod).classList.add("active");
+            
+            // Set required fields dynamically
+            if (activePaymentMethod === "card") {
+              document.getElementById("card-num").required = true;
+              document.getElementById("card-expiry").required = true;
+              document.getElementById("card-cvv").required = true;
+              document.getElementById("po-num").required = false;
+            } else if (activePaymentMethod === "po") {
+              document.getElementById("card-num").required = false;
+              document.getElementById("card-expiry").required = false;
+              document.getElementById("card-cvv").required = false;
+              document.getElementById("po-num").required = true;
+            } else {
+              document.getElementById("card-num").required = false;
+              document.getElementById("card-expiry").required = false;
+              document.getElementById("card-cvv").required = false;
+              document.getElementById("po-num").required = false;
+            }
+          });
+        });
+
+        // Set card inputs as required by default
+        document.getElementById("card-num").required = true;
+        document.getElementById("card-expiry").required = true;
+        document.getElementById("card-cvv").required = true;
+
+        // 5. Place order form submission
+        const form = document.getElementById("checkout-form-element");
+        
+        function handleOrderSubmission(event) {
+          event.preventDefault();
+
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+
+          // Trigger dynamic loader simulation
+          const overlay = document.getElementById("checkoutProcessing");
+          const pTitle = document.getElementById("processing-title");
+          const pSub = document.getElementById("processing-sub");
+
+          overlay.classList.add("active");
+
+          // Step 1 of validation
+          setTimeout(() => {
+            pTitle.textContent = "Verifying Sourcing Codes...";
+            pSub.textContent = "Analyzing local building code guidelines against selected parts.";
+            
+            // Step 2
+            setTimeout(() => {
+              pTitle.textContent = "Authorizing Funds Transfer...";
+              pSub.textContent = "Encrypting ledger dispatch records and confirming credit capacity.";
+              
+              // Finalize
+              setTimeout(() => {
+                overlay.classList.remove("active");
+
+                // Retrieve form values
+                const firstName = document.getElementById("bill-fname").value;
+                const lastName = document.getElementById("bill-lname").value;
+                const city = document.getElementById("bill-city").value;
+                const state = document.getElementById("bill-state").value;
+                const shippingMode = document.querySelector('input[name="checkout_shipping"]:checked').value;
+                const finalAmount = calculateCheckoutTotals();
+
+                // Clear the actual cart from localStorage
+                localStorage.removeItem("plumbCart");
+                if (headerBadge) {
+                  headerBadge.textContent = "0";
+                }
+
+                // Populate receipt panel
+                document.getElementById("rec-code").textContent = "#PM-" + Math.floor(Math.random() * 90000 + 10000) + "-SSL";
+                document.getElementById("rec-name").textContent = `${firstName} ${lastName}`;
+                document.getElementById("rec-address").textContent = `${city}, ${state}`;
+                document.getElementById("rec-total").textContent = "$" + finalAmount.toFixed(2);
+                document.getElementById("rec-shipping").textContent = shippingMode === "standard" ? "Standard Local Freight (2-3 days)" : "Express Air Cargo (1 day)";
+
+                // Hide main grid, show success view
+                document.getElementById("checkout-grid-container").style.display = "none";
+                document.getElementById("checkout-success-view").style.display = "block";
+                
+                // Scroll beautifully back to top
+                window.scrollTo({ top: 100, behavior: "smooth" });
+
+              }, 1500);
+            }, 1500);
+          }, 1500);
+        }
+
+        document.getElementById("btn-place-order-desktop").addEventListener("click", handleOrderSubmission);
+        document.getElementById("btn-place-order-mobile").addEventListener("click", handleOrderSubmission);
+
+        AOS.init({ duration: 800, once: true });
+      });
+    </script>
+  </body>
+</html>

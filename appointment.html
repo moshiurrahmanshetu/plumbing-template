@@ -1,0 +1,1343 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book a Plumber - PlumbMaster Premium Plumbing Template</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- AOS Animation CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    <!-- Custom Global Style -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    
+    <!-- Bespoke Styles for Appointment Page -->
+    <style>
+      .form-section-title {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 1.25rem;
+        color: var(--text-primary);
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 12px;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* Custom input & Floating labels */
+      .custom-floating-form .form-floating > .form-control,
+      .custom-floating-form .form-floating > .form-select {
+        background-color: var(--bg-topbar);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        border-radius: var(--border-radius-sm);
+        transition: all 0.3s ease;
+      }
+
+      .custom-floating-form .form-floating > .form-control:focus,
+      .custom-floating-form .form-floating > .form-select:focus {
+        border-color: var(--color-orange);
+        box-shadow: var(--shadow-glow);
+        background-color: var(--bg-surface-hover);
+      }
+
+      .custom-floating-form .form-floating > label {
+        color: var(--text-secondary);
+      }
+
+      .custom-floating-form .form-floating > .form-control:focus ~ label,
+      .custom-floating-form .form-floating > .form-control:not(:placeholder-shown) ~ label,
+      .custom-floating-form .form-floating > .form-select:focus ~ label,
+      .custom-floating-form .form-floating > .form-select:not([value=""]) ~ label {
+        color: var(--color-orange);
+      }
+
+      /* Interactive Technician Selector */
+      .tech-card-option {
+        background-color: var(--bg-topbar);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .tech-card-option:hover {
+        border-color: var(--color-orange-hover);
+        transform: translateY(-3px);
+      }
+
+      .tech-card-radio {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .tech-card-radio:checked + .tech-card-option {
+        border-color: var(--color-orange);
+        background-color: rgba(255, 87, 34, 0.05);
+        box-shadow: var(--shadow-glow);
+      }
+
+      .tech-avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--border-color);
+        margin-bottom: 12px;
+        transition: border-color 0.3s ease;
+      }
+
+      .tech-card-radio:checked + .tech-card-option .tech-avatar {
+        border-color: var(--color-orange);
+      }
+
+      /* Summary Sticky Card */
+      .summary-sticky-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 30px;
+        box-shadow: var(--shadow-lg);
+        position: sticky;
+        top: 130px;
+        transition: all 0.3s ease;
+      }
+
+      .summary-sticky-card:hover {
+        border-color: rgba(255, 87, 34, 0.3);
+      }
+
+      .summary-title {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        border-bottom: 2px dashed var(--border-color);
+        padding-bottom: 16px;
+        margin-bottom: 20px;
+      }
+
+      .summary-line {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        font-size: 0.95rem;
+      }
+
+      .summary-label {
+        color: var(--text-secondary);
+      }
+
+      .summary-value {
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+
+      /* Why book features styling */
+      .why-feature-wrap {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 24px;
+        height: 100%;
+        transition: all 0.3s ease;
+      }
+      .why-feature-wrap:hover {
+        border-color: var(--color-orange);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+      }
+
+      /* FAQ accordion styling */
+      .appointment-faq .accordion-item {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md) !important;
+        margin-bottom: 12px;
+        overflow: hidden;
+      }
+      .appointment-faq .accordion-button {
+        background-color: var(--bg-surface);
+        color: var(--text-primary);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 16px 20px;
+        box-shadow: none !important;
+      }
+      .appointment-faq .accordion-button:not(.collapsed) {
+        color: var(--color-orange);
+        background-color: var(--bg-surface-hover);
+      }
+      .appointment-faq .accordion-body {
+        background-color: var(--bg-surface);
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        padding: 0 20px 20px 20px;
+      }
+
+      /* Pulse badge styling */
+      .badge-emergency-glowing {
+        background-color: #dc3545;
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 4px;
+        animation: critical-pulse 1.5s infinite;
+        display: inline-block;
+      }
+      @keyframes critical-pulse {
+        0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.5); }
+        70% { box-shadow: 0 0 0 8px rgba(220, 53, 69, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- GLOBAL SEARCH MODAL -->
+    <div class="search-modal-overlay" id="searchModal">
+      <button class="search-modal-close" aria-label="Close search">
+        <i data-lucide="x" style="width:32px;height:32px;"></i>
+      </button>
+      <div class="search-modal-box">
+        <div class="search-modal-input-wrapper">
+          <input type="text" class="search-modal-input" placeholder="Search services, articles, products..." />
+          <i data-lucide="search" class="search-modal-icon" style="width:24px;height:24px;"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- STICKY HEADER TOP-BAR -->
+    <div class="top-bar d-none d-lg-flex">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-4">
+          <span class="top-bar-link">
+            <i data-lucide="clock" style="width:14px;height:14px;"></i>
+            Working Hours: 24/7 Emergency Support
+          </span>
+          <a href="mailto:emergency@plumbmaster.com" class="top-bar-link">
+            <i data-lucide="mail" style="width:14px;height:14px;"></i>
+            emergency@plumbmaster.com
+          </a>
+        </div>
+        <div class="d-flex align-items-center gap-4">
+          <a href="tel:18005550199" class="top-bar-link fw-bold text-orange">
+            <i data-lucide="phone-call" style="width:14px;height:14px;"></i>
+            Emergency Hotline: 1-800-555-0199
+          </a>
+          <div class="d-flex align-items-center gap-2 border-start ps-3 border-secondary">
+            <a href="#" class="top-bar-link" aria-label="Facebook"><i data-lucide="facebook" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Twitter"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN HEADER NAVIGATION -->
+    <header class="main-header">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a href="index.html" class="logo-brand">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:22px;height:22px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="nav-menu">
+          <div class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </div>
+          <div class="nav-item">
+            <a href="about.html" class="nav-link ">About</a>
+          </div>
+          <div class="nav-item">
+            <a href="services.html" class="nav-link">
+              Services <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="services.html" class="dropdown-item-custom">All Services</a>
+              <a href="service-details.html" class="dropdown-item-custom">Service Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="projects.html" class="nav-link">
+              Projects <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="projects.html" class="dropdown-item-custom">Project Gallery</a>
+              <a href="project-details.html" class="dropdown-item-custom">Project Details</a>
+            </div>
+          </div>
+          <div class="nav-item mega-menu-wrapper">
+            <a href="shop.html" class="nav-link ">
+              Shop <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="mega-menu">
+              <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Shop Collection</h3>
+                  <a href="shop.html" class="dropdown-item-custom ">Main Plumbing Store</a>
+                  <a href="product-details.html" class="dropdown-item-custom ">Premium Fittings</a>
+                  <a href="cart.html" class="dropdown-item-custom ">Shopping Cart</a>
+                  <a href="checkout.html" class="dropdown-item-custom ">Secure Checkout</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Our Pages</h3>
+                  <a href="team.html" class="dropdown-item-custom ">Our Expert Plumbers</a>
+                  <a href="team-details.html" class="dropdown-item-custom ">Expert Profile</a>
+                  <a href="pricing.html" class="dropdown-item-custom ">Transparent Rates</a>
+                  <a href="faq.html" class="dropdown-item-custom ">Frequently Asked Qs</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                  <h3 class="mega-title">Company Info</h3>
+                  <a href="about.html" class="dropdown-item-custom">Corporate Overview</a>
+                  <a href="contact.html" class="dropdown-item-custom ">Office Contacts</a>
+                  <a href="privacy-policy.html" class="dropdown-item-custom ">Privacy Policy</a>
+                  <a href="terms-conditions.html" class="dropdown-item-custom ">Terms of Service</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="emergency-banner-box h-100 d-flex flex-column justify-content-center p-3 text-center">
+                    <span class="badge-premium mb-2 mx-auto">Seasonal Offer</span>
+                    <h4 class="fs-6 text-white mb-2">Free Inspections</h4>
+                    <p class="text-secondary small mb-3">Claim a free system audit on your initial water lines setup.</p>
+                    <a href="appointment.html" class="btn-premium py-2 px-3 fs-7 align-self-center">Claim Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="blog.html" class="nav-link ">
+              Blog <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="blog.html" class="dropdown-item-custom ">Industry News</a>
+              <a href="blog-details.html" class="dropdown-item-custom ">Article Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="contact.html" class="nav-link ">Contact</a>
+          </div>
+        </nav>
+
+        <div class="d-flex align-items-center gap-3">
+          <button class="search-toggle-btn search-trigger" aria-label="Open Search">
+            <i data-lucide="search"></i>
+          </button>
+          <button class="theme-toggle-btn" aria-label="Toggle Theme">
+            <i data-lucide="sun"></i>
+          </button>
+          <a href="appointment.html" class="btn-premium d-none d-xl-flex">
+            Book Appointment
+            <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+          </a>
+          <button class="mobile-menu-trigger" aria-label="Toggle Navigation">
+            <i data-lucide="menu" style="width:20px;height:20px;"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div class="mobile-nav-overlay"></div>
+    <div class="mobile-nav-drawer">
+      <div class="mobile-nav-header">
+        <a href="index.html" class="logo-brand text-decoration-none">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:18px;height:18px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+        <button class="mobile-nav-close" aria-label="Close Mobile Menu">
+          <i data-lucide="x" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-links">
+        <div class="mobile-nav-item"><a href="index.html" class="mobile-nav-link">Home</a></div>
+        <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About Us</a></div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Services <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="services.html" class="mobile-nav-submenu-link">Our Services</a>
+            <a href="service-details.html" class="mobile-nav-submenu-link">Service Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Projects <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="projects.html" class="mobile-nav-submenu-link">Project Gallery</a>
+            <a href="project-details.html" class="mobile-nav-submenu-link">Project Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link ">Store Collection <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="shop.html" class="mobile-nav-submenu-link ">Main Shop</a>
+            <a href="product-details.html" class="mobile-nav-submenu-link ">Product Details</a>
+            <a href="cart.html" class="mobile-nav-submenu-link ">Cart</a>
+            <a href="checkout.html" class="mobile-nav-submenu-link ">Checkout</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">More Pages <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="team.html" class="mobile-nav-submenu-link ">Our Plumbers</a>
+            <a href="team-details.html" class="mobile-nav-submenu-link ">Profile Details</a>
+            <a href="pricing.html" class="mobile-nav-submenu-link ">Pricing Plans</a>
+            <a href="faq.html" class="mobile-nav-submenu-link ">FAQ Pages</a>
+            <a href="404.html" class="mobile-nav-submenu-link ">404 Page</a>
+            <a href="coming-soon.html" class="mobile-nav-submenu-link ">Coming Soon</a>
+            <a href="privacy-policy.html" class="mobile-nav-submenu-link ">Privacy Policy</a>
+            <a href="terms-conditions.html" class="mobile-nav-submenu-link ">Terms & Conditions</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link ">Blog & News <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="blog.html" class="mobile-nav-submenu-link ">Blog Posts</a>
+            <a href="blog-details.html" class="mobile-nav-submenu-link ">Blog Article</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link ">Contact</a></div>
+      </div>
+      <div class="mt-4 pt-3 border-top border-secondary">
+        <a href="appointment.html" class="btn-premium w-full text-center">Book Online Now</a>
+      </div>
+    </div>
+
+    <!-- MAIN BREADCRUMB HERO BANNER -->
+    <section class="breadcrumbs-hero">
+      <div class="container text-center text-md-start d-md-flex align-items-center justify-content-between">
+        <div data-aos="fade-right">
+          <h1 class="display-5 text-white fw-bold mb-2">Schedule Certified Plumber</h1>
+          <p class="text-secondary mb-0">Reserve real-time engineering diagnostics or instant emergency support.</p>
+        </div>
+        <div class="mt-3 mt-md-0" data-aos="fade-left">
+          <nav class="breadcrumb-nav justify-content-center justify-content-md-end">
+            <a href="index.html">Home</a>
+            <i data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+            <span class="text-orange">Book Appointment</span>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2: APPOINTMENT INTRODUCTION
+         ========================================== -->
+    <section class="section-padding bg-surface" style="border-bottom: 1px solid var(--border-color);">
+      <div class="container text-center max-w-3xl" data-aos="fade-up">
+        <span class="badge-premium mb-3">ONLINE DISPATCH SYSTEM</span>
+        <h2 class="display-6 font-heading fw-bold text-white mb-4">Elite Plumbing Diagnostics, <span class="text-orange">Reserved Instantly</span></h2>
+        <p class="text-secondary">
+          Welcome to the PlumbMaster smart scheduler. Provide your facility parameters, specify the urgency level, select your on-duty field technician, and get a real-time dispatch baseline estimation instantly.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 3 & 4: BOOKING FORM & STICKY SUMMARY
+         ========================================== -->
+    <section class="section-padding" style="border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="row g-5">
+          <!-- BOOKING FORM COLUMN (Left) -->
+          <div class="col-lg-8" data-aos="fade-right">
+            <div class="glass-panel p-4 p-md-5">
+              <form id="smartBookingForm" class="custom-floating-form needs-validation" novalidate>
+                
+                <!-- Section A: Personal Details -->
+                <div class="form-section-title">
+                  <i data-lucide="user" class="text-orange" style="width:20px;height:20px;"></i>
+                  <span>1. Customer & Location Details</span>
+                </div>
+                
+                <div class="row g-3 mb-4">
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="customerName" placeholder="John Doe" required />
+                      <label for="customerName">Full Name</label>
+                      <div class="invalid-feedback">Please enter your name.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input type="email" class="form-control" id="customerEmail" placeholder="name@example.com" required />
+                      <label for="customerEmail">Email Address</label>
+                      <div class="invalid-feedback">Please enter a valid email address.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input type="tel" class="form-control" id="customerPhone" placeholder="+1 (555) 000-0000" required />
+                      <label for="customerPhone">Phone Number</label>
+                      <div class="invalid-feedback">Please enter your telephone number.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <select class="form-select" id="propertyType" required>
+                        <option value="" disabled selected>Select Property Type</option>
+                        <option value="Residential House">Residential House</option>
+                        <option value="Apartment/Condo">Apartment/Condo</option>
+                        <option value="Commercial Shop">Commercial Storefront</option>
+                        <option value="Industrial Facility">Industrial Facility</option>
+                        <option value="Corporate Office">Corporate Office</option>
+                      </select>
+                      <label for="propertyType">Property Type</label>
+                      <div class="invalid-feedback">Please select your property type.</div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="streetAddress" placeholder="123 Main St" required />
+                      <label for="streetAddress">Street Address</label>
+                      <div class="invalid-feedback">Please enter your address.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="cityLoc" placeholder="New York" required />
+                      <label for="cityLoc">City</label>
+                      <div class="invalid-feedback">Please enter city.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="postalCode" placeholder="10001" required />
+                      <label for="postalCode">Postal / ZIP Code</label>
+                      <div class="invalid-feedback">Please enter postal code.</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Section B: Service Specifics -->
+                <div class="form-section-title">
+                  <i data-lucide="wrench" class="text-orange" style="width:20px;height:20px;"></i>
+                  <span>2. Plumbing Requirements</span>
+                </div>
+
+                <div class="row g-3 mb-4">
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <select class="form-select" id="serviceCategory" required>
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="leak_detection">Leak Detection & Repair</option>
+                        <option value="water_heaters">Water Heaters & Boilers</option>
+                        <option value="drain_sewer">Drain & Sewer Services</option>
+                        <option value="luxury_fixtures">Luxury Bathroom & Fixtures</option>
+                        <option value="commercial_hydraulics">Commercial Hydraulics</option>
+                      </select>
+                      <label for="serviceCategory">Service Category</label>
+                      <div class="invalid-feedback">Please select a service category.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <select class="form-select" id="specificService" required disabled>
+                        <option value="" disabled selected>Select category first</option>
+                      </select>
+                      <label for="specificService">Specific Technical Service</label>
+                      <div class="invalid-feedback">Please select a specific service.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input type="date" class="form-control" id="preferredDate" required />
+                      <label for="preferredDate">Preferred Date</label>
+                      <div class="invalid-feedback">Please select your preferred date.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <select class="form-select" id="preferredTime" required>
+                        <option value="" disabled selected>Select Preferred Slot</option>
+                        <option value="Morning (08:00 AM – 12:00 PM)">Morning (08:00 AM – 12:00 PM)</option>
+                        <option value="Afternoon (12:00 PM – 04:00 PM)">Afternoon (12:00 PM – 04:00 PM)</option>
+                        <option value="Evening (04:00 PM – 08:00 PM)">Evening (04:00 PM – 08:00 PM)</option>
+                        <option value="Night Emergency (08:00 PM – 08:00 AM)">Night Emergency (08:00 PM – 08:00 AM)</option>
+                      </select>
+                      <label for="preferredTime">Preferred Time Window</label>
+                      <div class="invalid-feedback">Please select a preferred time slot.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <select class="form-select" id="isEmergency" required>
+                        <option value="No" selected>No - Standard Dispatch</option>
+                        <option value="Yes">Yes - Active Flooding / Hazard (+$99)</option>
+                      </select>
+                      <label for="isEmergency">Is This An Active Emergency?</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <select class="form-select" id="urgencyLevel" required>
+                        <option value="Standard Scheduling" selected>Standard Booking (1-3 Days)</option>
+                        <option value="High Priority">High Priority (Same Day)</option>
+                        <option value="Critical Emergency">Immediate Dispatch (Under 30-Min)</option>
+                      </select>
+                      <label for="urgencyLevel">Urgency Level</label>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-floating">
+                      <textarea class="form-control" id="serviceMessage" placeholder="Please describe symptoms..." style="height: 100px;"></textarea>
+                      <label for="serviceMessage">Describe Symptoms or Specific Instructions (Optional)</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Section C: Preferred Plumber -->
+                <div class="form-section-title">
+                  <i data-lucide="award" class="text-orange" style="width:20px;height:20px;"></i>
+                  <span>3. Preferred On-Duty Master Plumber</span>
+                </div>
+
+                <div class="row g-3 mb-4">
+                  <!-- Tech Option 1 -->
+                  <div class="col-sm-6 col-xl-3">
+                    <input type="radio" name="preferredPlumber" id="plumberAny" value="Any Certified Plumber" checked class="tech-card-radio" />
+                    <label for="plumberAny" class="tech-card-option w-100">
+                      <div class="tech-avatar d-flex align-items-center justify-content-center bg-secondary-subtle">
+                        <i data-lucide="users" class="text-orange" style="width:32px;height:32px;"></i>
+                      </div>
+                      <span class="d-block fw-bold text-white small mb-1">First Available</span>
+                      <span class="text-secondary font-mono" style="font-size:0.75rem;">Fastest Response</span>
+                    </label>
+                  </div>
+                  <!-- Tech Option 2 -->
+                  <div class="col-sm-6 col-xl-3">
+                    <input type="radio" name="preferredPlumber" id="plumberMarcus" value="Marcus Vance" class="tech-card-radio" />
+                    <label for="plumberMarcus" class="tech-card-option w-100">
+                      <img src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=200&q=80" alt="Marcus Vance" class="tech-avatar" />
+                      <span class="d-block fw-bold text-white small mb-1">Marcus Vance</span>
+                      <span class="text-orange font-mono" style="font-size:0.75rem;">Hydraulics Lead</span>
+                    </label>
+                  </div>
+                  <!-- Tech Option 3 -->
+                  <div class="col-sm-6 col-xl-3">
+                    <input type="radio" name="preferredPlumber" id="plumberElena" value="Elena Rostova" class="tech-card-radio" />
+                    <label for="plumberElena" class="tech-card-option w-100">
+                      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="Elena Rostova" class="tech-avatar" />
+                      <span class="d-block fw-bold text-white small mb-1">Elena Rostova</span>
+                      <span class="text-orange font-mono" style="font-size:0.75rem;">Boiler Expert</span>
+                    </label>
+                  </div>
+                  <!-- Tech Option 4 -->
+                  <div class="col-sm-6 col-xl-3">
+                    <input type="radio" name="preferredPlumber" id="plumberJaxson" value="Jaxson Kross" class="tech-card-radio" />
+                    <label for="plumberJaxson" class="tech-card-option w-100">
+                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Jaxson Kross" class="tech-avatar" />
+                      <span class="d-block fw-bold text-white small mb-1">Jaxson Kross</span>
+                      <span class="text-orange font-mono" style="font-size:0.75rem;">Emergency Pro</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Section D: Preferred Contact Method & Terms -->
+                <div class="form-section-title">
+                  <i data-lucide="info" class="text-orange" style="width:20px;height:20px;"></i>
+                  <span>4. Booking Authorization</span>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label text-secondary small d-block mb-2">Preferred Contact Method</label>
+                    <div class="d-flex gap-4">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="preferredContact" id="contactSms" value="Sms Text" checked />
+                        <label class="form-check-label text-secondary" for="contactSms">SMS Text</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="preferredContact" id="contactEmail" value="Email Inbox" />
+                        <label class="form-check-label text-secondary" for="contactEmail">Email</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="preferredContact" id="contactCall" value="Direct Voice Call" />
+                        <label class="form-check-label text-secondary" for="contactCall">Voice Call</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 mb-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="acceptTerms" required />
+                      <label class="form-check-label text-secondary small" for="acceptTerms">
+                        I authorize PlumbMaster certified technicians to contact me regarding diagnostic dispatch scheduling. I accept the standard corporate terms and privacy practices.
+                      </label>
+                      <div class="invalid-feedback">You must authorize the dispatch booking.</div>
+                    </div>
+                    <div class="form-check mt-2">
+                      <input class="form-check-input" type="checkbox" id="newsletterSignup" />
+                      <label class="form-check-label text-secondary small" for="newsletterSignup">
+                        Subscribe me to the monthly seasonal water lines inspection checklist and discount coupon packs.
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex flex-wrap gap-3 mt-4 pt-3 border-top border-secondary justify-content-center justify-content-md-end">
+                  <button type="button" class="btn btn-outline-secondary px-4 py-3 border-secondary text-secondary" id="resetFormBtn">
+                    Reset Form <i data-lucide="rotate-ccw" class="ms-1" style="width:16px;height:16px;"></i>
+                  </button>
+                  <button type="submit" class="btn-premium px-5 py-3 fs-6" id="submitBookingBtn">
+                    Book Appointment <i data-lucide="check-circle" style="width:18px;height:18px;"></i>
+                  </button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+          <!-- BOOKING SUMMARY COLUMN (Right) -->
+          <div class="col-lg-4" data-aos="fade-left">
+            <div class="summary-sticky-card">
+              <h3 class="summary-title text-white">
+                <i data-lucide="calendar" class="text-orange me-2" style="width:24px;height:24px;vertical-align:middle;"></i>
+                Booking Summary
+              </h3>
+              
+              <!-- Realtime Summary elements -->
+              <div class="text-center mb-4 pb-4 border-bottom border-secondary">
+                <span class="text-secondary small d-block mb-1">HELLO CUSTOMER</span>
+                <span class="h4 text-orange fw-bold" id="summaryClientName">Valued Client</span>
+                <div class="mt-3 d-none" id="summaryEmergencyBadgeWrap">
+                  <span class="badge-emergency-glowing"><i data-lucide="alert-triangle" class="me-1" style="width:12px;height:12px;vertical-align:text-bottom;"></i> CRITICAL EMERGENCY</span>
+                </div>
+              </div>
+
+              <div class="summary-line">
+                <span class="summary-label">Property Type</span>
+                <span class="summary-value" id="summaryProperty">---</span>
+              </div>
+              <div class="summary-line">
+                <span class="summary-label">Service Type</span>
+                <span class="summary-value" id="summaryService">---</span>
+              </div>
+              <div class="summary-line">
+                <span class="summary-label">Preferred Date</span>
+                <span class="summary-value" id="summaryDate">---</span>
+              </div>
+              <div class="summary-line">
+                <span class="summary-label">Time Window</span>
+                <span class="summary-value" id="summaryTime">---</span>
+              </div>
+              <div class="summary-line">
+                <span class="summary-label">Lead Plumber</span>
+                <span class="summary-value" id="summaryPlumber">First Available</span>
+              </div>
+              <div class="summary-line pb-3 border-bottom border-secondary">
+                <span class="summary-label">Est. Duration</span>
+                <span class="summary-value font-mono text-orange" id="summaryDuration">---</span>
+              </div>
+
+              <div class="mt-4 pt-2 text-center">
+                <span class="text-secondary small d-block mb-1">ESTIMATED DISPATCH COST</span>
+                <span class="h2 text-white font-heading fw-bold" id="summaryCost">$0.00</span>
+                <span class="text-muted d-block small mt-1">Diagnostic waiving applied if repairs booked</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5: EMERGENCY CONTACT & DIRECT DIAL
+         ========================================== -->
+    <section class="section-padding bg-surface" style="border-bottom: 1px solid var(--border-color); background-image: linear-gradient(180deg, transparent 0%, rgba(255, 87, 34, 0.03) 100%);">
+      <div class="container text-center">
+        <div class="max-w-xl mx-auto" data-aos="zoom-in">
+          <div class="badge-emergency-glowing mb-3" style="font-size:0.85rem; padding: 6px 16px;"><i data-lucide="phone-call" class="me-2" style="width:14px;height:14px;"></i> 24/7 ACTIVE HOTLINE</div>
+          <h2 class="display-6 font-heading fw-bold text-white mb-3">Facing Immediate Active Flooding?</h2>
+          <p class="text-secondary mb-4">Do not wait for the scheduler queues. Call or connect on our emergency WhatsApp instant desk now for immediate 15-minute response.</p>
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="tel:18005550199" class="btn-premium px-4 py-3 fs-5">
+              <i data-lucide="phone-call" style="width:20px;height:20px;"></i> Call 1-800-555-0199
+            </a>
+            <a href="https://wa.me/18005550199" target="_blank" class="btn btn-outline-success px-4 py-3 fs-5 fw-bold d-flex align-items-center gap-2 border-2">
+              <i data-lucide="message-square" style="width:20px;height:20px;"></i> WhatsApp Dispatch (Demo)
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 6: WHY BOOK WITH US
+         ========================================== -->
+    <section class="section-padding" style="border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <span class="badge-premium mb-3">TRUST PILLARS</span>
+          <h2 class="display-6 font-heading fw-bold text-white">Why Schedule With PlumbMaster?</h2>
+          <p class="text-secondary max-w-2xl mx-auto">We combine advanced molecular leak detection instruments with centuries-old structural standards.</p>
+        </div>
+
+        <div class="row g-4">
+          <!-- Trust 1 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="why-feature-wrap">
+              <div class="text-orange mb-3"><i data-lucide="shield-check" style="width:40px;height:40px;"></i></div>
+              <h3 class="h4 text-white mb-2">Licensed & Bonded Experts</h3>
+              <p class="text-secondary small mb-0">Every field operator holds advanced plumbing licenses and underwent rigorous engineering certifications.</p>
+            </div>
+          </div>
+          <!-- Trust 2 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="why-feature-wrap">
+              <div class="text-orange mb-3"><i data-lucide="dollar-sign" style="width:40px;height:40px;"></i></div>
+              <h3 class="h4 text-white mb-2">Honest Upfront Rates</h3>
+              <p class="text-secondary small mb-0">We use clear flat rates, giving you full financial certainty. No surprise travel surcharges or hourly additions.</p>
+            </div>
+          </div>
+          <!-- Trust 3 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="why-feature-wrap">
+              <div class="text-orange mb-3"><i data-lucide="zap" style="width:40px;height:40px;"></i></div>
+              <h3 class="h4 text-white mb-2">Guaranteed Same-Day Service</h3>
+              <p class="text-secondary small mb-0">Book standard slots by noon, and we guarantee our vehicles arrive before the end of the day, or dispatch is free.</p>
+            </div>
+          </div>
+          <!-- Trust 4 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="why-feature-wrap">
+              <div class="text-orange mb-3"><i data-lucide="award" style="width:40px;height:40px;"></i></div>
+              <h3 class="h4 text-white mb-2">Lifetime Structural Warranty</h3>
+              <p class="text-secondary small mb-0">We stand by our copper pipelines and system calibration, backed by a written lifetime craftsmanship guarantee.</p>
+            </div>
+          </div>
+          <!-- Trust 5 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="why-feature-wrap">
+              <div class="text-orange mb-3"><i data-lucide="clock" style="width:40px;height:40px;"></i></div>
+              <h3 class="h4 text-white mb-2">30-Minute Dispatch Speed</h3>
+              <p class="text-secondary small mb-0">Our municipal location tracker automatically routes our nearest service vehicle to your coordinates.</p>
+            </div>
+          </div>
+          <!-- Trust 6 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="why-feature-wrap">
+              <div class="text-orange mb-3"><i data-lucide="users" style="width:40px;height:40px;"></i></div>
+              <h3 class="h4 text-white mb-2">15,000+ Projects Completed</h3>
+              <p class="text-secondary small mb-0">For over 25 years, we have designed domestic and commercial boiler systems with outstanding client reviews.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 7: FAQ
+         ========================================== -->
+    <section class="section-padding bg-surface" style="border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <span class="badge-premium mb-3">APPOINTMENT FAQS</span>
+          <h2 class="display-6 font-heading fw-bold text-white">Booking & Scheduling Help</h2>
+          <p class="text-secondary max-w-2xl mx-auto">Get detailed answers regarding scheduling, rescheduling, and preparing for our engineers.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-8 mx-auto" data-aos="fade-up">
+            <div class="accordion appointment-faq" id="bookingFAQ">
+              
+              <!-- Q1 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="bqH1">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bqC1" aria-expanded="true" aria-controls="bqC1">
+                    What happens after I submit this online booking form?
+                  </button>
+                </h3>
+                <div id="bqC1" class="accordion-collapse collapse show" aria-labelledby="bqH1" data-bs-parent="#bookingFAQ">
+                  <div class="accordion-body">
+                    Our smart automated dispatcher instantly logs your location parameters. You will receive an SMS confirmation within 15 minutes, followed by a voice call from your chosen technician to verify your entry gate and pressure dynamics.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Q2 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="bqH2">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bqC2" aria-expanded="false" aria-controls="bqC2">
+                    Are the estimated cost and duration quotes exact?
+                  </button>
+                </h3>
+                <div id="bqC2" class="accordion-collapse collapse" aria-labelledby="bqH2" data-bs-parent="#bookingFAQ">
+                  <div class="accordion-body">
+                    The online estimations represent a reliable engineering baseline. Once our lead technician arrives at your site and tests physical pressure and acoustic signals, they will verify the flat rate before commencing any work.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Q3 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="bqH3">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bqC3" aria-expanded="false" aria-controls="bqC3">
+                    How do I reschedule or cancel my reserved appointment slot?
+                  </button>
+                </h3>
+                <div id="bqC3" class="accordion-collapse collapse" aria-labelledby="bqH3" data-bs-parent="#bookingFAQ">
+                  <div class="accordion-body">
+                    You can reschedule or cancel up to 2 hours before the dispatch slot with zero penalties. Simply click the unique reservation link in your SMS confirmation or call our hotline desk.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Q4 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="bqH4">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bqC4" aria-expanded="false" aria-controls="bqC4">
+                    Do I need to turn off my main water valve before you arrive?
+                  </button>
+                </h3>
+                <div id="bqC4" class="accordion-collapse collapse" aria-labelledby="bqH4" data-bs-parent="#bookingFAQ">
+                  <div class="accordion-body">
+                    If you have an active, major pipe rupture, we highly recommend shutting down your home's main water valve immediately to minimize water damage. Our technicians can assist you with locating this over the phone as they drive to your site.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUCCESS BOOKING CONFIRMATION MODAL -->
+    <div class="modal fade" id="successBookingModal" tabindex="-1" aria-labelledby="successBookingModalLabel" aria-hidden="true" style="backdrop-filter: blur(8px);">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-surface border-orange" style="border: 2px solid var(--color-orange);">
+          <div class="modal-header border-secondary text-center d-block">
+            <div class="text-orange mb-3">
+              <i data-lucide="check-circle" style="width:64px;height:64px;animation: pulse-orange 1.5s infinite;"></i>
+            </div>
+            <h4 class="modal-title text-white fw-bold" id="successBookingModalLabel">Dispatch Slot Reserved!</h4>
+            <span class="text-muted font-mono small mt-1">REFERENCE: <strong id="modalRefId" class="text-orange">PM-94821</strong></span>
+          </div>
+          <div class="modal-body text-secondary">
+            <p class="text-center text-white mb-4">
+              Thank you, <strong id="modalClientName" class="text-orange">Client</strong>. Your certified plumbing audit has been successfully queued in our dispatch system.
+            </p>
+            <div class="px-3 py-2 bg-topbar rounded border border-secondary mb-3">
+              <div class="d-flex justify-content-between mb-2">
+                <span class="small text-secondary">Service Ordered:</span>
+                <span class="small text-white fw-bold" id="modalService">Leak Detection</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="small text-secondary">Scheduled Date:</span>
+                <span class="small text-white fw-bold" id="modalDate">---</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="small text-secondary">Arrival Window:</span>
+                <span class="small text-white fw-bold" id="modalTime">---</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="small text-secondary">Assigned Plumber:</span>
+                <span class="small text-orange fw-bold" id="modalPlumber">Marcus Vance</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="small text-secondary">Emergency Level:</span>
+                <span class="small text-white fw-bold" id="modalEmergency">No</span>
+              </div>
+              <div class="d-flex justify-content-between">
+                <span class="small text-secondary">Contact Method:</span>
+                <span class="small text-white fw-bold" id="modalContact">SMS</span>
+              </div>
+            </div>
+            <p class="small text-muted text-center mb-0">
+              A text confirmation has been dispatched to <span id="modalClientPhone" class="text-secondary fw-bold">---</span>. Please ensure your gateway is clear for the dispatch vehicle.
+            </p>
+          </div>
+          <div class="modal-footer border-top-0 d-flex justify-content-center">
+            <button type="button" class="btn btn-orange btn-premium py-2 px-4" data-bs-dismiss="modal">Acknowledge Booking</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DYNAMIC INTERACTIVE SCHEDULER SCRIPTS -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const categorySelect = document.getElementById("serviceCategory");
+        const specificSelect = document.getElementById("specificService");
+        const emergencySelect = document.getElementById("isEmergency");
+        const customerNameInput = document.getElementById("customerName");
+        const propertySelect = document.getElementById("propertyType");
+        const dateInput = document.getElementById("preferredDate");
+        const timeSelect = document.getElementById("preferredTime");
+        const bookingForm = document.getElementById("smartBookingForm");
+        const resetBtn = document.getElementById("resetFormBtn");
+        
+        // Setup Date Input Minimum as Today
+        const todayStr = new Date().toISOString().split('T')[0];
+        dateInput.min = todayStr;
+        dateInput.value = todayStr;
+
+        // Service Mapping Data
+        const servicesData = {
+          leak_detection: {
+            title: "Leak Detection & Repair",
+            duration: "2-3 Hours",
+            minPrice: 180,
+            maxPrice: 350,
+            options: [
+              { value: "ultrasonic_tracing", label: "Ultrasonic Water Leak Tracing", price: "$180 - $350", dur: "2-3 Hrs" },
+              { value: "sound_isolation", label: "Pipe Sounding & Acoustic Isolation", price: "$120 - $220", dur: "1-2 Hrs" },
+              { value: "gas_tracer", label: "Gas Tracer Line Leak Diagnostic", price: "$250 - $450", dur: "3-4 Hrs" }
+            ]
+          },
+          water_heaters: {
+            title: "Water Heaters & Boilers",
+            duration: "3-5 Hours",
+            minPrice: 150,
+            maxPrice: 900,
+            options: [
+              { value: "tankless_install", label: "Tankless Water Heater Setup", price: "$450 - $900", dur: "4-6 Hrs" },
+              { value: "boiler_calibration", label: "Traditional Boiler Calibration", price: "$150 - $300", dur: "2 Hrs" },
+              { value: "solar_thermal", label: "Solar Thermal Water Loop Audit", price: "$220 - $400", dur: "3 Hrs" }
+            ]
+          },
+          drain_sewer: {
+            title: "Drain & Sewer Services",
+            duration: "1-3 Hours",
+            minPrice: 90,
+            maxPrice: 320,
+            options: [
+              { value: "hydro_jetting", label: "High-Velocity Hydro-Jetting", price: "$180 - $320", dur: "2-3 Hrs" },
+              { value: "epoxy_lining", label: "Trenchless Epoxy Pipe Lining", price: "$600 - $1200", dur: "4-8 Hrs" },
+              { value: "cctv_camera", label: "CCTV Sewer Line Camera Inspection", price: "$90 - $180", dur: "1 Hr" }
+            ]
+          },
+          luxury_fixtures: {
+            title: "Luxury Bathroom & Fixtures",
+            duration: "2-4 Hours",
+            minPrice: 120,
+            maxPrice: 600,
+            options: [
+              { value: "tub_fitting", label: "Bespoke Tub & Cistern Fitting", price: "$300 - $600", dur: "3-5 Hrs" },
+              { value: "shower_panel", label: "Intelligent Shower Panel Install", price: "$250 - $500", dur: "2-3 Hrs" },
+              { value: "smart_faucet", label: "Smart Sensor Faucet Setup", price: "$120 - $250", dur: "1-2 Hrs" }
+            ]
+          },
+          commercial_hydraulics: {
+            title: "Commercial Hydraulics",
+            duration: "2-6 Hours",
+            minPrice: 180,
+            maxPrice: 1000,
+            options: [
+              { value: "backflow_audit", label: "Commercial Backflow Code Audit", price: "$200 - $400", dur: "1-2 Hrs" },
+              { value: "valve_calibration", label: "High-Pressure Valve Calibration", price: "$180 - $350", dur: "2 Hrs" },
+              { value: "boiler_overhaul", label: "Commercial Boiler Loop Overhaul", price: "$500 - $1000", dur: "4-8 Hrs" }
+            ]
+          }
+        };
+
+        // Query Param Handler (pre-populate service or plan)
+        const urlParams = new URLSearchParams(window.location.search);
+        const serviceParam = urlParams.get('service');
+        const planParam = urlParams.get('plan');
+
+        if (serviceParam) {
+          if (["basic_visit", "standard_repair", "premium_care"].includes(serviceParam)) {
+            categorySelect.value = "leak_detection";
+            triggerCategoryChange();
+            if (serviceParam === "basic_visit") specificSelect.value = "sound_isolation";
+            else if (serviceParam === "standard_repair") specificSelect.value = "ultrasonic_tracing";
+            else specificSelect.value = "gas_tracer";
+          } else if (serviceParam.startsWith("comm")) {
+            categorySelect.value = "commercial_hydraulics";
+            triggerCategoryChange();
+            if (serviceParam === "comm_small") specificSelect.value = "backflow_audit";
+            else if (serviceParam === "comm_plus") specificSelect.value = "valve_calibration";
+            else specificSelect.value = "boiler_overhaul";
+          }
+          updateSummary();
+        } else if (planParam) {
+          // Prepopulate maintenance message
+          categorySelect.value = "leak_detection";
+          triggerCategoryChange();
+          specificSelect.value = "sound_isolation";
+          document.getElementById("serviceMessage").value = "Subscribing to Annual Maintenance Membership: " + planParam.toUpperCase() + " Plan.";
+          updateSummary();
+        }
+
+        // Listener for Category Changes
+        categorySelect.addEventListener("change", triggerCategoryChange);
+        specificSelect.addEventListener("change", updateSummary);
+        emergencySelect.addEventListener("change", updateSummary);
+        propertySelect.addEventListener("change", updateSummary);
+        dateInput.addEventListener("input", updateSummary);
+        timeSelect.addEventListener("change", updateSummary);
+        customerNameInput.addEventListener("input", updateSummary);
+
+        // Plumber radio card selector listeners
+        document.querySelectorAll("input[name='preferredPlumber']").forEach(radio => {
+          radio.addEventListener("change", updateSummary);
+        });
+
+        function triggerCategoryChange() {
+          const category = categorySelect.value;
+          specificSelect.innerHTML = "";
+          
+          if (!category || !servicesData[category]) {
+            specificSelect.disabled = true;
+            specificSelect.innerHTML = "<option value='' disabled selected>Select category first</option>";
+            return;
+          }
+
+          specificSelect.disabled = false;
+          servicesData[category].options.forEach(opt => {
+            const element = document.createElement("option");
+            element.value = opt.value;
+            element.textContent = opt.label + " (" + opt.price + ")";
+            element.dataset.dur = opt.dur;
+            element.dataset.priceRange = opt.price;
+            specificSelect.appendChild(element);
+          });
+          
+          // Select first option by default
+          specificSelect.selectedIndex = 0;
+          updateSummary();
+        }
+
+        // Realtime update summary calculation
+        function updateSummary() {
+          // Client Name
+          const nameVal = customerNameInput.value.trim();
+          document.getElementById("summaryClientName").textContent = nameVal ? nameVal : "Valued Client";
+
+          // Property Type
+          const propVal = propertySelect.value;
+          document.getElementById("summaryProperty").textContent = propVal ? propVal : "---";
+
+          // Service Selected
+          const category = categorySelect.value;
+          const specific = specificSelect.value;
+          if (category && specific && servicesData[category]) {
+            const specificOpt = servicesData[category].options.find(o => o.value === specific);
+            if (specificOpt) {
+              document.getElementById("summaryService").textContent = specificOpt.label;
+              document.getElementById("summaryDuration").textContent = specificOpt.dur;
+              
+              // Calculate Price baseline
+              let costText = specificOpt.price;
+              
+              // If emergency is yes, add surcharge
+              if (emergencySelect.value === "Yes") {
+                document.getElementById("summaryEmergencyBadgeWrap").classList.remove("d-none");
+                // Extrapolate numeric values to add the $99 dispatch surcharge
+                const prices = costText.replace(/\$/g, "").split(" - ");
+                if (prices.length === 2) {
+                  const newMin = parseInt(prices[0]) + 99;
+                  const newMax = parseInt(prices[1]) + 99;
+                  costText = "$" + newMin + " - $" + newMax;
+                } else if (prices.length === 1) {
+                  const val = parseInt(prices[0]) + 99;
+                  costText = "$" + val;
+                }
+                document.getElementById("submitBookingBtn").innerHTML = 'Request Emergency Visit <i data-lucide="alert-triangle" style="width:18px;height:18px;"></i>';
+                document.getElementById("submitBookingBtn").className = "btn-premium bg-danger border-danger px-5 py-3 fs-6";
+              } else {
+                document.getElementById("summaryEmergencyBadgeWrap").classList.add("d-none");
+                document.getElementById("submitBookingBtn").innerHTML = 'Book Appointment <i data-lucide="check-circle" style="width:18px;height:18px;"></i>';
+                document.getElementById("submitBookingBtn").className = "btn-premium px-5 py-3 fs-6";
+              }
+
+              document.getElementById("summaryCost").textContent = costText;
+            }
+          } else {
+            document.getElementById("summaryService").textContent = "---";
+            document.getElementById("summaryDuration").textContent = "---";
+            document.getElementById("summaryCost").textContent = "$0.00";
+            document.getElementById("summaryEmergencyBadgeWrap").classList.add("d-none");
+          }
+
+          // Preferred Date
+          const dateVal = dateInput.value;
+          if (dateVal) {
+            const formattedDate = new Date(dateVal).toLocaleDateString("en-US", { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+            document.getElementById("summaryDate").textContent = formattedDate;
+          } else {
+            document.getElementById("summaryDate").textContent = "---";
+          }
+
+          // Preferred Time Window
+          const timeVal = timeSelect.value;
+          document.getElementById("summaryTime").textContent = timeVal ? timeVal.split(" (")[0] : "---";
+
+          // Preferred Plumber
+          const plumberVal = document.querySelector("input[name='preferredPlumber']:checked").value;
+          document.getElementById("summaryPlumber").textContent = plumberVal;
+
+          // Recall Lucide to update icons in any injected HTML
+          if (window.lucide) {
+            window.lucide.createIcons();
+          }
+        }
+
+        // Reset form handler
+        resetBtn.addEventListener("click", function() {
+          bookingForm.reset();
+          bookingForm.classList.remove("was-validated");
+          specificSelect.innerHTML = "<option value='' disabled selected>Select category first</option>";
+          specificSelect.disabled = true;
+          dateInput.value = todayStr;
+          updateSummary();
+        });
+
+        // Form Submit Handler
+        bookingForm.addEventListener("submit", function(event) {
+          event.preventDefault();
+          
+          if (!bookingForm.checkValidity()) {
+            event.stopPropagation();
+            bookingForm.classList.add("was-validated");
+            
+            // Scroll to the first invalid element
+            const firstInvalid = bookingForm.querySelector(":invalid");
+            if (firstInvalid) {
+              firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return;
+          }
+
+          // Build confirmation details dynamically
+          const name = customerNameInput.value.trim();
+          const category = categorySelect.value;
+          const specific = specificSelect.value;
+          const dateVal = dateInput.value;
+          const timeVal = timeSelect.value;
+          const plumber = document.querySelector("input[name='preferredPlumber']:checked").value;
+          const emergency = emergencySelect.value;
+          const phone = document.getElementById("customerPhone").value;
+          const contact = document.querySelector("input[name='preferredContact']:checked").value;
+
+          const specificText = servicesData[category].options.find(o => o.value === specific).label;
+          const formattedDate = new Date(dateVal).toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric' });
+
+          // Generate reference ID
+          const refNum = "PM-" + Math.floor(10000 + Math.random() * 90000);
+
+          // Populate success modal
+          document.getElementById("modalRefId").textContent = refNum;
+          document.getElementById("modalClientName").textContent = name;
+          document.getElementById("modalService").textContent = specificText;
+          document.getElementById("modalDate").textContent = formattedDate;
+          document.getElementById("modalTime").textContent = timeVal;
+          document.getElementById("modalPlumber").textContent = plumber;
+          document.getElementById("modalEmergency").textContent = emergency === "Yes" ? "CRITICAL EMERGENCY" : "No";
+          document.getElementById("modalContact").textContent = contact;
+          document.getElementById("modalClientPhone").textContent = phone;
+
+          // Open Bootstrap Modal
+          const successModal = new bootstrap.Modal(document.getElementById('successBookingModal'));
+          successModal.show();
+        });
+
+        // Initial setup
+        triggerCategoryChange();
+      });
+    </script>
+
+    <!-- PREMIUM FOOTER -->
+    <footer class="premium-footer section-padding pb-0">
+      <div class="container">
+        <div class="row g-5 pb-5">
+          <div class="col-lg-4 col-md-6">
+            <div class="mb-4">
+              <a href="index.html" class="logo-brand text-decoration-none">
+                <div class="logo-icon">
+                  <i data-lucide="wrench" style="width:20px;height:20px;"></i>
+                </div>
+                PLUMB<span>MASTER</span>
+              </a>
+            </div>
+            <p class="text-secondary mb-4">
+              Providing modern, elite plumbing engineering and emergency plumbing solutions across domestic and industrial sectors. Responsive, certified, and luxury-first.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" class="social-icon-circle" aria-label="Facebook"><i data-lucide="facebook" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Twitter"><i data-lucide="twitter" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Instagram"><i data-lucide="instagram" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:16px;height:16px;"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Core Services</h3>
+            <ul class="footer-link-list">
+              <li><a href="service-details.html">Drain Clearing</a></li>
+              <li><a href="service-details.html">Luxury Tub Fittings</a></li>
+              <li><a href="service-details.html">Pipeline Audits</a></li>
+              <li><a href="service-details.html">Water Heater Setup</a></li>
+              <li><a href="service-details.html">Emergency Response</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Quick Links</h3>
+            <ul class="footer-link-list">
+              <li><a href="about.html">About Corporate</a></li>
+              <li><a href="pricing.html">Transparent Rates</a></li>
+              <li><a href="team.html">Our Certified Staff</a></li>
+              <li><a href="faq.html">Common Questions</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <h3 class="footer-widget-title">Newsletter Signup</h3>
+            <p class="text-secondary mb-3">Subscribe to our monthly maintenance checklist and seasonal discount coupons.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+              <input type="email" class="newsletter-input" placeholder="Your Email Address" required />
+              <button type="submit" class="newsletter-submit" aria-label="Subscribe">
+                <i data-lucide="send" style="width:16px;height:16px;"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom text-center">
+          <div class="row align-items-center justify-content-between">
+            <div class="col-md-6 text-md-start mb-3 mb-md-0">
+              <p class="mb-0">&copy; 2026 PlumbMaster Template. Inspired by high-end luxury business engineering.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <div class="d-flex justify-content-center justify-content-md-end gap-4">
+                <a href="terms-conditions.html" class="text-secondary text-decoration-none">Terms of Service</a>
+                <a href="privacy-policy.html" class="text-secondary text-decoration-none">Privacy Policy</a>
+                <a href="contact.html" class="text-secondary text-decoration-none">Support desk</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lucide Vector Icons Library CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Animation Engine CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Theme JS Control -->
+    <script src="/assets/js/main.js"></script>
+
+  </body>
+</html>

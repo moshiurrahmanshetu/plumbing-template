@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Cart - PlumbMaster Premium Plumbing Template</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- AOS Animation CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    <!-- Custom Global Style -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    
+    <!-- Bespoke Styles for Premium Shopping Cart Page -->
+    <style>
+      .cart-table-wrapper {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: var(--shadow-sm);
+      }
+      
+      .cart-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 0;
+      }
+      
+      .cart-table th {
+        background-color: var(--bg-topbar);
+        color: var(--text-primary);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.05em;
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border-color);
+      }
+      
+      .cart-table td {
+        padding: 20px;
+        vertical-align: middle;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--text-secondary);
+      }
+      
+      .cart-table tr:last-child td {
+        border-bottom: none;
+      }
+      
+      .cart-product-cell {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      
+      .cart-product-img {
+        width: 80px;
+        height: 80px;
+        border-radius: var(--border-radius-sm);
+        border: 1px solid var(--border-color);
+        object-fit: cover;
+        background-color: var(--bg-topbar);
+      }
+      
+      .cart-product-title {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--text-primary);
+        margin-bottom: 4px;
+      }
+      
+      .cart-product-title a {
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      
+      .cart-product-title a:hover {
+        color: var(--color-orange);
+      }
+      
+      .cart-product-sku {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+      
+      .cart-price-cell, .cart-subtotal-cell {
+        font-family: var(--font-mono);
+        font-weight: 600;
+      }
+      
+      .cart-subtotal-cell {
+        color: var(--color-orange);
+      }
+      
+      .cart-qty-control {
+        display: inline-flex;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-sm);
+        overflow: hidden;
+        background-color: var(--bg-topbar);
+      }
+      
+      .cart-qty-btn {
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        width: 32px;
+        height: 36px;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      
+      .cart-qty-btn:hover {
+        background-color: var(--bg-surface-hover);
+      }
+      
+      .cart-qty-input {
+        width: 40px;
+        border: none;
+        background: none;
+        color: var(--text-primary);
+        text-align: center;
+        font-family: var(--font-mono);
+        font-weight: 600;
+        font-size: 0.9rem;
+        outline: none;
+      }
+      
+      .cart-remove-btn {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        transition: color 0.2s;
+        cursor: pointer;
+        padding: 5px;
+      }
+      
+      .cart-remove-btn:hover {
+        color: #ef4444;
+      }
+      
+      /* Summary panel card */
+      .cart-summary-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 30px;
+        position: sticky;
+        top: 100px;
+        box-shadow: var(--shadow-sm);
+      }
+      
+      .summary-title {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--text-primary);
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+      }
+      
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        font-size: 0.95rem;
+      }
+      
+      .summary-row.total-row {
+        border-top: 1px solid var(--border-color);
+        padding-top: 15px;
+        margin-top: 15px;
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: var(--text-primary);
+      }
+      
+      .summary-row.total-row .total-amount {
+        color: var(--color-orange);
+        font-family: var(--font-mono);
+      }
+      
+      .coupon-box {
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border-color);
+      }
+      
+      .coupon-input-group {
+        display: flex;
+        gap: 10px;
+      }
+      
+      .coupon-input {
+        flex: 1;
+        background-color: var(--bg-topbar);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-sm);
+        padding: 10px 15px;
+        color: var(--text-primary);
+        font-size: 0.88rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      
+      .coupon-input:focus {
+        border-color: var(--color-orange);
+      }
+      
+      /* Shipping option group */
+      .shipping-options-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+      
+      .shipping-option-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        padding: 8px 12px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-sm);
+        background-color: var(--bg-topbar);
+        transition: all 0.2s;
+      }
+      
+      .shipping-option-item:hover {
+        border-color: var(--color-orange);
+      }
+      
+      .shipping-option-item input[type="radio"] {
+        accent-color: var(--color-orange);
+      }
+      
+      /* Toast alerts */
+      .toast-container-custom {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .toast-custom {
+        background-color: var(--bg-surface);
+        border-left: 4px solid var(--color-orange);
+        box-shadow: var(--shadow-lg), var(--shadow-glow);
+        color: var(--text-primary);
+        border-radius: var(--border-radius-sm);
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 300px;
+        transform: translateY(50px);
+        opacity: 0;
+        animation: toast-slide-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      }
+      
+      @keyframes toast-slide-in {
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- GLOBAL SEARCH MODAL -->
+    <div class="search-modal-overlay" id="searchModal">
+      <button class="search-modal-close" aria-label="Close search">
+        <i data-lucide="x" style="width:32px;height:32px;"></i>
+      </button>
+      <div class="search-modal-box">
+        <div class="search-modal-input-wrapper">
+          <input type="text" class="search-modal-input" placeholder="Search services, articles, products..." />
+          <i data-lucide="search" class="search-modal-icon" style="width:24px;height:24px;"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- STICKY HEADER TOP-BAR -->
+    <div class="top-bar d-none d-lg-flex">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-4">
+          <span class="top-bar-link">
+            <i data-lucide="clock" style="width:14px;height:14px;"></i>
+            Working Hours: 24/7 Emergency Support
+          </span>
+          <a href="mailto:emergency@plumbmaster.com" class="top-bar-link">
+            <i data-lucide="mail" style="width:14px;height:14px;"></i>
+            emergency@plumbmaster.com
+          </a>
+        </div>
+        <div class="d-flex align-items-center gap-4">
+          <a href="tel:18005550199" class="top-bar-link fw-bold text-orange">
+            <i data-lucide="phone-call" style="width:14px;height:14px;"></i>
+            Emergency Hotline: 1-800-555-0199
+          </a>
+          <div class="d-flex align-items-center gap-2 border-start ps-3 border-secondary">
+            <a href="#" class="top-bar-link" aria-label="Facebook"><i data-lucide="facebook" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Twitter"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN HEADER NAVIGATION -->
+    <header class="main-header">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a href="index.html" class="logo-brand">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:22px;height:22px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="nav-menu">
+          <div class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </div>
+          <div class="nav-item">
+            <a href="about.html" class="nav-link ">About</a>
+          </div>
+          <div class="nav-item">
+            <a href="services.html" class="nav-link">
+              Services <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="services.html" class="dropdown-item-custom">All Services</a>
+              <a href="service-details.html" class="dropdown-item-custom">Service Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="projects.html" class="nav-link">
+              Projects <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="projects.html" class="dropdown-item-custom">Project Gallery</a>
+              <a href="project-details.html" class="dropdown-item-custom">Project Details</a>
+            </div>
+          </div>
+          <div class="nav-item mega-menu-wrapper">
+            <a href="shop.html" class="nav-link text-orange">
+              Shop <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="mega-menu">
+              <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Shop Collection</h3>
+                  <a href="shop.html" class="dropdown-item-custom ">Main Plumbing Store</a>
+                  <a href="product-details.html" class="dropdown-item-custom ">Premium Fittings</a>
+                  <a href="cart.html" class="dropdown-item-custom text-orange">Shopping Cart</a>
+                  <a href="checkout.html" class="dropdown-item-custom ">Secure Checkout</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Our Pages</h3>
+                  <a href="team.html" class="dropdown-item-custom ">Our Expert Plumbers</a>
+                  <a href="team-details.html" class="dropdown-item-custom ">Expert Profile</a>
+                  <a href="pricing.html" class="dropdown-item-custom ">Transparent Rates</a>
+                  <a href="faq.html" class="dropdown-item-custom ">Frequently Asked Qs</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                  <h3 class="mega-title">Company Info</h3>
+                  <a href="about.html" class="dropdown-item-custom">Corporate Overview</a>
+                  <a href="contact.html" class="dropdown-item-custom ">Office Contacts</a>
+                  <a href="privacy-policy.html" class="dropdown-item-custom ">Privacy Policy</a>
+                  <a href="terms-conditions.html" class="dropdown-item-custom ">Terms of Service</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="emergency-banner-box h-100 d-flex flex-column justify-content-center p-3 text-center">
+                    <span class="badge-premium mb-2 mx-auto">Seasonal Offer</span>
+                    <h4 class="fs-6 text-white mb-2">Free Inspections</h4>
+                    <p class="text-secondary small mb-3">Claim a free system audit on your initial water lines setup.</p>
+                    <a href="appointment.html" class="btn-premium py-2 px-3 fs-7 align-self-center">Claim Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="blog.html" class="nav-link ">
+              Blog <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="blog.html" class="dropdown-item-custom ">Industry News</a>
+              <a href="blog-details.html" class="dropdown-item-custom ">Article Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="contact.html" class="nav-link ">Contact</a>
+          </div>
+        </nav>
+
+        <div class="d-flex align-items-center gap-3">
+          <button class="search-toggle-btn search-trigger" aria-label="Open Search">
+            <i data-lucide="search"></i>
+          </button>
+          <a href="cart.html" class="search-toggle-btn position-relative" aria-label="View Cart">
+            <i data-lucide="shopping-cart" style="width:20px;height:20px;"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger font-mono" id="cart-badge-count" style="font-size:0.65rem; padding: 0.25em 0.5em;">0</span>
+          </a>
+          <button class="theme-toggle-btn" aria-label="Toggle Theme">
+            <i data-lucide="sun"></i>
+          </button>
+          <a href="appointment.html" class="btn-premium d-none d-xl-flex">
+            Book Appointment
+            <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+          </a>
+          <button class="mobile-menu-trigger" aria-label="Toggle Navigation">
+            <i data-lucide="menu" style="width:20px;height:20px;"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div class="mobile-nav-overlay"></div>
+    <div class="mobile-nav-drawer">
+      <div class="mobile-nav-header">
+        <a href="index.html" class="logo-brand text-decoration-none">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:18px;height:18px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+        <button class="mobile-nav-close" aria-label="Close Mobile Menu">
+          <i data-lucide="x" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-links">
+        <div class="mobile-nav-item"><a href="index.html" class="mobile-nav-link">Home</a></div>
+        <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About Us</a></div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Services <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="services.html" class="mobile-nav-submenu-link">Our Services</a>
+            <a href="service-details.html" class="mobile-nav-submenu-link">Service Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Projects <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="projects.html" class="mobile-nav-submenu-link">Project Gallery</a>
+            <a href="project-details.html" class="mobile-nav-submenu-link">Project Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link text-orange">Store Collection <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="shop.html" class="mobile-nav-submenu-link ">Main Shop</a>
+            <a href="product-details.html" class="mobile-nav-submenu-link ">Product Details</a>
+            <a href="cart.html" class="mobile-nav-submenu-link text-orange">Cart</a>
+            <a href="checkout.html" class="mobile-nav-submenu-link ">Checkout</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">More Pages <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="team.html" class="mobile-nav-submenu-link ">Our Plumbers</a>
+            <a href="team-details.html" class="mobile-nav-submenu-link ">Profile Details</a>
+            <a href="pricing.html" class="mobile-nav-submenu-link ">Pricing Plans</a>
+            <a href="faq.html" class="mobile-nav-submenu-link ">FAQ Pages</a>
+            <a href="404.html" class="mobile-nav-submenu-link ">404 Page</a>
+            <a href="coming-soon.html" class="mobile-nav-submenu-link ">Coming Soon</a>
+            <a href="privacy-policy.html" class="mobile-nav-submenu-link ">Privacy Policy</a>
+            <a href="terms-conditions.html" class="mobile-nav-submenu-link ">Terms & Conditions</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link ">Blog & News <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="blog.html" class="mobile-nav-submenu-link ">Blog Posts</a>
+            <a href="blog-details.html" class="mobile-nav-submenu-link ">Blog Article</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link ">Contact</a></div>
+      </div>
+      <div class="mt-4 pt-3 border-top border-secondary">
+        <a href="appointment.html" class="btn-premium w-full text-center">Book Online Now</a>
+      </div>
+    </div>
+
+    <!-- MAIN BREADCRUMB HERO BANNER -->
+    <section class="breadcrumbs-hero">
+      <div class="container text-center text-md-start d-md-flex align-items-center justify-content-between">
+        <div data-aos="fade-right">
+          <h1 class="display-5 text-white fw-bold mb-2">Your Shopping Cart</h1>
+          <p class="text-secondary mb-0">Review your selected professional plumbing fixtures and parts.</p>
+        </div>
+        <div class="mt-3 mt-md-0" data-aos="fade-left">
+          <nav class="breadcrumb-nav justify-content-center justify-content-md-end">
+            <a href="index.html">Home</a>
+            <i data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+            <span class="text-orange">Cart</span>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- CART VIEW MAIN SECTION -->
+    <main class="section-padding">
+      <div class="container">
+        <!-- Toast alert containers -->
+        <div id="toastContainer" class="toast-container-custom"></div>
+
+        <div id="cart-content-container" class="row g-4" style="display: none;">
+          <!-- Left side: items list -->
+          <div class="col-lg-8" data-aos="fade-right">
+            <div class="cart-table-wrapper table-responsive">
+              <table class="cart-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th class="text-end">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="cart-items-tbody">
+                  <!-- Javascript rendered list -->
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+              <a href="shop.html" class="btn-premium-secondary py-2 px-4">
+                <i data-lucide="arrow-left" style="width:16px;height:16px;margin-right:8px;"></i>
+                Continue Sourcing
+              </a>
+              <button id="clear-cart-btn" class="btn-premium py-2 px-4 bg-transparent border-danger text-danger hover:bg-danger" style="border: 1px solid rgba(239, 68, 68, 0.4);">
+                <i data-lucide="trash-2" style="width:16px;height:16px;margin-right:8px;"></i>
+                Clear Entire Cart
+              </button>
+            </div>
+          </div>
+          
+          <!-- Right side: summary details -->
+          <div class="col-lg-4" data-aos="fade-left">
+            <div class="cart-summary-card">
+              <h2 class="summary-title">Procurement Summary</h2>
+              
+              <div class="summary-row">
+                <span class="text-secondary">Subtotal</span>
+                <span id="summary-subtotal" class="font-mono text-white fw-bold">$0.00</span>
+              </div>
+              
+              <div class="summary-row" id="coupon-discount-row" style="display: none;">
+                <span class="text-secondary">Coupon Discount (<span id="coupon-code-label"></span>)</span>
+                <span id="summary-discount" class="font-mono text-success fw-bold">-$0.00</span>
+              </div>
+
+              <div class="summary-row flex-column gap-2 mb-3 border-top pt-3 border-secondary border-opacity-10">
+                <span class="text-secondary">Shipping & Freight Surcharges</span>
+                <div class="shipping-options-group">
+                  <label class="shipping-option-item">
+                    <input type="radio" name="shipping_rate" value="standard" checked />
+                    <div class="d-flex justify-content-between w-full align-items-center">
+                      <div class="fs-8" style="font-size:0.8rem;">
+                        <div class="fw-bold text-white">Standard Local Freight</div>
+                        <div class="text-secondary" id="standard-shipping-desc">Calculated dynamically...</div>
+                      </div>
+                      <span id="standard-shipping-cost" class="font-mono fw-bold fs-8" style="font-size:0.8rem;">Free</span>
+                    </div>
+                  </label>
+                  <label class="shipping-option-item">
+                    <input type="radio" name="shipping_rate" value="express" />
+                    <div class="d-flex justify-content-between w-full align-items-center">
+                      <div class="fs-8" style="font-size:0.8rem;">
+                        <div class="fw-bold text-white">Express Air Cargo</div>
+                        <div class="text-secondary">Next-day guaranteed hot dispatch</div>
+                      </div>
+                      <span class="font-mono fw-bold text-orange fs-8" style="font-size:0.8rem;">$45.00</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="summary-row">
+                <span class="text-secondary">Estimated Tax (8%)</span>
+                <span id="summary-tax" class="font-mono text-white">$0.00</span>
+              </div>
+              
+              <div class="summary-row total-row">
+                <span>Total Budget</span>
+                <span id="summary-total" class="total-amount">$0.00</span>
+              </div>
+              
+              <a href="checkout.html" class="btn-premium w-full text-center py-3 mt-4 text-decoration-none">
+                Proceed to Secure Checkout
+                <i data-lucide="shield-check" style="width:18px;height:18px;margin-left:8px;"></i>
+              </a>
+              
+              <!-- Coupon box -->
+              <div class="coupon-box">
+                <label for="coupon-code-input" class="form-label text-secondary small fw-bold uppercase">Corporate Promo Code</label>
+                <div class="coupon-input-group">
+                  <input type="text" id="coupon-code-input" class="coupon-input" placeholder="e.g. PLUMB20" />
+                  <button id="apply-coupon-btn" class="btn-premium px-3 py-2 fs-8">Apply</button>
+                </div>
+                <div id="coupon-status-msg" class="small mt-2" style="display:none;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Empty Cart View -->
+        <div id="cart-empty-container" class="row" style="display: none;">
+          <div class="col-lg-8 mx-auto" data-aos="fade-up">
+            <div class="glass-panel p-5 text-center">
+              <div class="premium-card-icon mx-auto mb-4" style="width: 72px; height: 72px; border-radius: 50%;">
+                <i data-lucide="shopping-bag" style="width:36px;height:36px;"></i>
+              </div>
+              <h2 class="h3 text-white mb-3">Your Shopping Cart is Empty</h2>
+              <p class="text-secondary mb-4">You have not selected any professional fixtures, pipe sealants, or water boiler fittings yet. Explore our high-grade inventory to begin your project layout.</p>
+              <div class="d-flex justify-content-center gap-3">
+                <a href="shop.html" class="btn-premium text-decoration-none">
+                  <i data-lucide="shopping-cart" style="width:16px;height:16px;margin-right:8px;"></i>
+                  Go Sourcing
+                </a>
+                <a href="appointment.html" class="btn-premium-secondary text-decoration-none">Schedule Inspection</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- PREMIUM FOOTER -->
+    <footer class="premium-footer section-padding pb-0">
+      <div class="container">
+        <div class="row g-5 pb-5">
+          <div class="col-lg-4 col-md-6">
+            <div class="mb-4">
+              <a href="index.html" class="logo-brand text-decoration-none">
+                <div class="logo-icon">
+                  <i data-lucide="wrench" style="width:20px;height:20px;"></i>
+                </div>
+                PLUMB<span>MASTER</span>
+              </a>
+            </div>
+            <p class="text-secondary mb-4">
+              Providing modern, elite plumbing engineering and emergency plumbing solutions across domestic and industrial sectors. Responsive, certified, and luxury-first.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" class="social-icon-circle" aria-label="Facebook"><i data-lucide="facebook" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Twitter"><i data-lucide="twitter" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Instagram"><i data-lucide="instagram" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:16px;height:16px;"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Core Services</h3>
+            <ul class="footer-link-list">
+              <li><a href="service-details.html">Drain Clearing</a></li>
+              <li><a href="service-details.html">Luxury Tub Fittings</a></li>
+              <li><a href="service-details.html">Pipeline Audits</a></li>
+              <li><a href="service-details.html">Water Heater Setup</a></li>
+              <li><a href="service-details.html">Emergency Response</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Quick Links</h3>
+            <ul class="footer-link-list">
+              <li><a href="about.html">About Corporate</a></li>
+              <li><a href="pricing.html">Transparent Rates</a></li>
+              <li><a href="team.html">Our Certified Staff</a></li>
+              <li><a href="faq.html">Common Questions</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <h3 class="footer-widget-title">Newsletter Signup</h3>
+            <p class="text-secondary mb-3">Subscribe to our monthly maintenance checklist and seasonal discount coupons.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+              <input type="email" class="newsletter-input" placeholder="Your Email Address" required />
+              <button type="submit" class="newsletter-submit" aria-label="Subscribe">
+                <i data-lucide="send" style="width:16px;height:16px;"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom text-center">
+          <div class="row align-items-center justify-content-between">
+            <div class="col-md-6 text-md-start mb-3 mb-md-0">
+              <p class="mb-0">&copy; 2026 PlumbMaster Template. Inspired by high-end luxury business engineering.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <div class="d-flex justify-content-center justify-content-md-end gap-4">
+                <a href="terms-conditions.html" class="text-secondary text-decoration-none">Terms of Service</a>
+                <a href="privacy-policy.html" class="text-secondary text-decoration-none">Privacy Policy</a>
+                <a href="contact.html" class="text-secondary text-decoration-none">Support desk</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lucide Vector Icons Library CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Animation Engine CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Theme JS Control -->
+    <script src="/assets/js/main.js"></script>
+
+    <!-- Interactive Cart Engine -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // Active session promo code tracking
+        let activeDiscountPercent = 0;
+        let activePromoCode = "";
+        
+        // 1. Core render function
+        function renderCart() {
+          const cart = JSON.parse(localStorage.getItem("plumbCart") || "[]");
+          const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+          
+          // Sync header cart badge
+          const badgeElement = document.getElementById("cart-badge-count");
+          if (badgeElement) {
+            badgeElement.textContent = totalQty;
+          }
+          
+          // Toggle layout views based on items count
+          const contentContainer = document.getElementById("cart-content-container");
+          const emptyContainer = document.getElementById("cart-empty-container");
+          
+          if (totalQty === 0) {
+            contentContainer.style.display = "none";
+            emptyContainer.style.display = "block";
+            return;
+          } else {
+            contentContainer.style.display = "flex";
+            emptyContainer.style.display = "none";
+          }
+          
+          // Render table list
+          const tbody = document.getElementById("cart-items-tbody");
+          tbody.innerHTML = "";
+          
+          cart.forEach((item, index) => {
+            const tr = document.createElement("tr");
+            const itemTotal = item.price * item.quantity;
+            
+            tr.innerHTML = `
+              <td>
+                <div class="cart-product-cell">
+                  <img src="${item.image}" alt="${item.name}" class="cart-product-img" />
+                  <div>
+                    <h3 class="cart-product-title">
+                      <a href="product-details.html?id=${item.id}">${item.name}</a>
+                    </h3>
+                    <span class="cart-product-sku">SKU: ${item.sku} | Cat: ${item.category}</span>
+                  </div>
+                </div>
+              </td>
+              <td class="cart-price-cell text-white">$${item.price.toFixed(2)}</td>
+              <td>
+                <div class="cart-qty-control">
+                  <button class="cart-qty-btn decrease-qty" data-index="${index}">-</button>
+                  <input type="text" class="cart-qty-input" value="${item.quantity}" readonly />
+                  <button class="cart-qty-btn increase-qty" data-index="${index}">+</button>
+                </div>
+              </td>
+              <td class="cart-subtotal-cell">$${itemTotal.toFixed(2)}</td>
+              <td class="text-end">
+                <button class="cart-remove-btn remove-item" data-index="${index}" aria-label="Remove item">
+                  <i data-lucide="trash-2" style="width:18px;height:18px;"></i>
+                </button>
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+          
+          // Hook up quantity adjustment controls
+          document.querySelectorAll(".decrease-qty").forEach(btn => {
+            btn.addEventListener("click", function() {
+              const idx = parseInt(this.getAttribute("data-index"));
+              const cartData = JSON.parse(localStorage.getItem("plumbCart") || "[]");
+              if (cartData[idx].quantity > 1) {
+                cartData[idx].quantity -= 1;
+                localStorage.setItem("plumbCart", JSON.stringify(cartData));
+                renderCart();
+                showCartToast(`Reduced ${cartData[idx].name} quantity`);
+              } else {
+                // If 1, let's prompt or delete it
+                const itemName = cartData[idx].name;
+                cartData.splice(idx, 1);
+                localStorage.setItem("plumbCart", JSON.stringify(cartData));
+                renderCart();
+                showCartToast(`Removed ${itemName} from Cart`);
+              }
+            });
+          });
+          
+          document.querySelectorAll(".increase-qty").forEach(btn => {
+            btn.addEventListener("click", function() {
+              const idx = parseInt(this.getAttribute("data-index"));
+              const cartData = JSON.parse(localStorage.getItem("plumbCart") || "[]");
+              if (cartData[idx].quantity < 99) {
+                cartData[idx].quantity += 1;
+                localStorage.setItem("plumbCart", JSON.stringify(cartData));
+                renderCart();
+                showCartToast(`Increased ${cartData[idx].name} quantity`);
+              }
+            });
+          });
+          
+          // Hook up removal trigger
+          document.querySelectorAll(".remove-item").forEach(btn => {
+            btn.addEventListener("click", function() {
+              const idx = parseInt(this.getAttribute("data-index"));
+              const cartData = JSON.parse(localStorage.getItem("plumbCart") || "[]");
+              const removedName = cartData[idx].name;
+              
+              cartData.splice(idx, 1);
+              localStorage.setItem("plumbCart", JSON.stringify(cartData));
+              renderCart();
+              showCartToast(`Removed ${removedName} from Cart`);
+            });
+          });
+          
+          // Perform live totals compilation
+          calculateTotals();
+          
+          // Re-trigger vector icons injection
+          lucide.createIcons();
+        }
+        
+        // 2. Perform live price computations
+        function calculateTotals() {
+          const cart = JSON.parse(localStorage.getItem("plumbCart") || "[]");
+          const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+          
+          document.getElementById("summary-subtotal").textContent = "$" + subtotal.toFixed(2);
+          
+          // Coupon discount computation
+          let discountAmount = 0;
+          if (activeDiscountPercent > 0) {
+            discountAmount = subtotal * (activeDiscountPercent / 100);
+            document.getElementById("coupon-discount-row").style.display = "flex";
+            document.getElementById("coupon-code-label").textContent = activePromoCode;
+            document.getElementById("summary-discount").textContent = "-$" + discountAmount.toFixed(2);
+          } else {
+            document.getElementById("coupon-discount-row").style.display = "none";
+          }
+          
+          // Shipping configuration
+          const shippingRateVal = document.querySelector('input[name="shipping_rate"]:checked').value;
+          let shippingCost = 0;
+          
+          if (shippingRateVal === "standard") {
+            // Free for orders over $150 or if free shipping code applied, otherwise standard flat rate $15
+            if (activePromoCode === "FREESHIP" || subtotal >= 150) {
+              shippingCost = 0;
+              document.getElementById("standard-shipping-cost").textContent = "Free";
+              document.getElementById("standard-shipping-cost").className = "font-mono text-success fw-bold";
+              document.getElementById("standard-shipping-desc").textContent = subtotal >= 150 ? "Over $150 bulk order bonus" : "Free Coupon active";
+            } else {
+              shippingCost = 15.00;
+              document.getElementById("standard-shipping-cost").textContent = "$15.00";
+              document.getElementById("standard-shipping-cost").className = "font-mono text-white fw-bold";
+              const gap = (150 - subtotal).toFixed(2);
+              document.getElementById("standard-shipping-desc").textContent = `Spend $${gap} more for free freight`;
+            }
+          } else if (shippingRateVal === "express") {
+            shippingCost = 45.00;
+          }
+          
+          // Estimated Tax calculation (8%)
+          const taxableSubtotal = Math.max(0, subtotal - discountAmount);
+          const estimatedTax = taxableSubtotal * 0.08;
+          document.getElementById("summary-tax").textContent = "$" + estimatedTax.toFixed(2);
+          
+          // Grand final total
+          const grandTotal = taxableSubtotal + shippingCost + estimatedTax;
+          document.getElementById("summary-total").textContent = "$" + grandTotal.toFixed(2);
+        }
+        
+        // 3. Clear cart hook
+        document.getElementById("clear-cart-btn").addEventListener("click", function() {
+          if (confirm("Are you sure you want to clear your entire sourcing checklist?")) {
+            localStorage.removeItem("plumbCart");
+            renderCart();
+            showCartToast("Sourcing checklist cleared successfully");
+          }
+        });
+        
+        // 4. Coupon validation handler
+        document.getElementById("apply-coupon-btn").addEventListener("click", function() {
+          const rawCode = document.getElementById("coupon-code-input").value.trim().toUpperCase();
+          const statusMsg = document.getElementById("coupon-status-msg");
+          
+          statusMsg.style.display = "block";
+          
+          if (rawCode === "") {
+            statusMsg.textContent = "Please provide a valid code.";
+            statusMsg.className = "small mt-2 text-danger";
+            return;
+          }
+          
+          if (rawCode === "PLUMB20") {
+            activeDiscountPercent = 20;
+            activePromoCode = "PLUMB20";
+            statusMsg.textContent = "Promo applied: 20% discount activated!";
+            statusMsg.className = "small mt-2 text-success";
+            calculateTotals();
+            showCartToast("Promo applied: 20% Discount!");
+          } else if (rawCode === "FREESHIP") {
+            activeDiscountPercent = 0;
+            activePromoCode = "FREESHIP";
+            statusMsg.textContent = "Promo applied: Free local ground shipping activated!";
+            statusMsg.className = "small mt-2 text-success";
+            calculateTotals();
+            showCartToast("Promo applied: Free Local Freight!");
+          } else {
+            statusMsg.textContent = "Invalid or expired corporate promotion code.";
+            statusMsg.className = "small mt-2 text-danger";
+          }
+        });
+        
+        // 5. Watch shipping rate switches
+        document.querySelectorAll('input[name="shipping_rate"]').forEach(radio => {
+          radio.addEventListener("change", function() {
+            calculateTotals();
+          });
+        });
+        
+        // 6. Styled toast feedback
+        function showCartToast(message) {
+          const container = document.getElementById("toastContainer");
+          const toast = document.createElement("div");
+          toast.className = "toast-custom";
+          toast.innerHTML = `
+            <i data-lucide="shopping-cart" class="text-orange" style="width:20px;height:20px;"></i>
+            <div>
+              <p class="mb-0 fw-bold text-white fs-7">Cart Synchronized</p>
+              <p class="mb-0 text-secondary fs-8">${message}</p>
+            </div>
+          `;
+          
+          container.appendChild(toast);
+          lucide.createIcons();
+          
+          setTimeout(() => {
+            toast.style.transition = "all 0.4s ease";
+            toast.style.opacity = "0";
+            toast.style.transform = "translateY(-20px)";
+            setTimeout(() => {
+              toast.remove();
+            }, 400);
+          }, 3000);
+        }
+        
+        // Initialize
+        renderCart();
+        AOS.init({ duration: 800, once: true });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1600 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Services - PlumbMaster Premium Plumbing Template</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- AOS Animation CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Custom Global Style -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    
+    <!-- Custom Premium Styles for Services Module -->
+    <style>
+      .services-hero-banner {
+        position: relative;
+        background-image: url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1920&q=80');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        padding: 120px 0 80px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .services-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(11, 15, 25, 0.9) 0%, rgba(11, 15, 25, 0.72) 100%);
+        z-index: 1;
+      }
+      [data-theme="light"] .services-hero-overlay {
+        background: linear-gradient(180deg, rgba(248, 250, 252, 0.92) 0%, rgba(248, 250, 252, 0.8) 100%);
+      }
+      .relative-z {
+        position: relative;
+        z-index: 2;
+      }
+      .badge-premium {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 87, 34, 0.1);
+        border: 1px solid rgba(255, 87, 34, 0.3);
+        color: var(--color-orange);
+        font-family: var(--font-mono);
+        font-weight: 600;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        padding: 6px 14px;
+        border-radius: 30px;
+        text-transform: uppercase;
+      }
+      .animate-float {
+        animation: premiumFloat 4s ease-in-out infinite;
+      }
+      @keyframes premiumFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+      
+      /* Services Filter styles */
+      .filter-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin: 40px 0;
+      }
+      .filter-btn {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        padding: 10px 22px;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .filter-btn:hover {
+        color: var(--text-primary);
+        border-color: var(--color-orange);
+        transform: translateY(-1px);
+      }
+      .filter-btn.active {
+        background: var(--color-orange);
+        border-color: var(--color-orange);
+        color: #fff !important;
+        box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+      }
+
+      /* Services Grid & Cards */
+      .service-card-premium {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .service-card-premium::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: var(--border-radius-md);
+        padding: 1.5px;
+        background: linear-gradient(135deg, transparent, transparent);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+        transition: all 0.4s ease;
+        z-index: 3;
+      }
+      .service-card-premium:hover::before {
+        background: linear-gradient(135deg, var(--color-orange), var(--color-teal));
+      }
+      .service-card-premium:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-lg), var(--shadow-glow);
+        border-color: transparent;
+      }
+      .service-img-wrap {
+        position: relative;
+        height: 230px;
+        overflow: hidden;
+      }
+      .service-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .service-card-premium:hover .service-img {
+        transform: scale(1.08);
+      }
+      .service-img-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(360deg, rgba(11,15,25,0.7) 0%, rgba(11,15,25,0) 65%);
+        z-index: 1;
+      }
+      [data-theme="light"] .service-img-overlay {
+        background: linear-gradient(360deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 65%);
+      }
+      .service-icon-badge {
+        position: absolute;
+        bottom: -22px;
+        left: 24px;
+        width: 46px;
+        height: 46px;
+        background: var(--color-orange);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        z-index: 2;
+        box-shadow: 0 4px 12px rgba(255, 87, 34, 0.35);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .service-card-premium:hover .service-icon-badge {
+        background: var(--text-primary);
+        color: var(--color-orange);
+        transform: translateY(-3px) rotate(8deg);
+      }
+      .response-badge {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: rgba(11, 15, 25, 0.85);
+        backdrop-filter: blur(4px);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        padding: 5px 12px;
+        border-radius: 20px;
+        z-index: 2;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      [data-theme="light"] .response-badge {
+        background: rgba(255, 255, 255, 0.9);
+      }
+      .response-badge i {
+        color: var(--color-orange);
+      }
+      .service-body {
+        padding: 36px 24px 24px 24px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+      .service-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        transition: color 0.3s ease;
+      }
+      .service-card-premium:hover .service-title {
+        color: var(--color-orange);
+      }
+      .service-desc {
+        font-size: 14px;
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+      .service-bullets {
+        padding-left: 0;
+        margin-bottom: 24px;
+      }
+      .service-bullet-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13.5px;
+        color: var(--text-secondary);
+        margin-bottom: 10px;
+      }
+      .service-bullet-item i {
+        color: var(--color-orange);
+        flex-shrink: 0;
+      }
+      .service-footer {
+        margin-top: auto;
+        padding-top: 16px;
+        border-top: 1px solid var(--border-color);
+      }
+      .btn-view-details {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 11px 18px;
+        background: rgba(255, 87, 34, 0.05);
+        border: 1px solid rgba(255, 87, 34, 0.15);
+        color: var(--text-primary);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 13.5px;
+        border-radius: var(--border-radius-sm);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .service-card-premium:hover .btn-view-details {
+        background: var(--color-orange);
+        border-color: var(--color-orange);
+        color: #fff !important;
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+      
+      /* Why Our Services / Features Section */
+      .why-service-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 36px 30px;
+        height: 100%;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .why-service-card:hover {
+        border-color: var(--color-orange);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+      }
+      .why-service-icon {
+        width: 52px;
+        height: 52px;
+        background: rgba(255, 87, 34, 0.08);
+        color: var(--color-orange);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 24px;
+        transition: all 0.3s ease;
+      }
+      .why-service-card:hover .why-service-icon {
+        background: var(--color-orange);
+        color: #fff;
+        transform: scale(1.05);
+      }
+
+      /* Emergency Banner Card */
+      .emergency-banner-box-custom {
+        background: linear-gradient(135deg, var(--bg-surface) 0%, #070a11 100%);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-lg);
+        padding: 55px;
+        position: relative;
+        overflow: hidden;
+      }
+      .emergency-banner-box-custom::before {
+        content: '';
+        position: absolute;
+        top: -40%;
+        right: -15%;
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle, rgba(255, 87, 34, 0.12) 0%, transparent 70%);
+        z-index: 1;
+        pointer-events: none;
+      }
+      .status-pulse-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(0, 150, 136, 0.1);
+        border: 1px solid rgba(0, 150, 136, 0.3);
+        color: #26a69a;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 600;
+        padding: 5px 12px;
+        border-radius: 20px;
+        text-transform: uppercase;
+      }
+      .pulse-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #26a69a;
+        border-radius: 50%;
+        box-shadow: 0 0 0 0 rgba(38, 166, 154, 0.5);
+        animation: pulseAnimation 1.6s infinite;
+      }
+      @keyframes pulseAnimation {
+        0% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(38, 166, 154, 0.7);
+        }
+        70% {
+          transform: scale(1);
+          box-shadow: 0 0 0 6px rgba(38, 166, 154, 0);
+        }
+        100% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(38, 166, 154, 0);
+        }
+      }
+
+      /* Maintenance Plans Card */
+      .pricing-card-custom {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 40px 32px;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .pricing-card-custom.featured {
+        border-color: var(--color-orange);
+        box-shadow: var(--shadow-glow);
+      }
+      .pricing-card-custom:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-lg);
+      }
+      .pricing-badge {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        background: var(--color-orange);
+        color: #fff;
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 10px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 4px 12px;
+        border-radius: 20px;
+      }
+      .price-tag {
+        font-size: 42px;
+        font-weight: 700;
+        color: var(--text-primary);
+        font-family: var(--font-heading);
+        margin-bottom: 24px;
+      }
+      .price-tag span {
+        font-size: 15px;
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+      .pricing-features-list {
+        padding-left: 0;
+        margin-bottom: 32px;
+      }
+      .pricing-feature-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        color: var(--text-secondary);
+        margin-bottom: 12px;
+      }
+      .pricing-feature-item.muted {
+        color: var(--text-muted);
+        text-decoration: line-through;
+      }
+      .pricing-feature-item i {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+      }
+      .pricing-feature-item .text-green {
+        color: #26a69a;
+      }
+      .pricing-feature-item .text-red {
+        color: var(--text-muted);
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- GLOBAL SEARCH MODAL -->
+    <div class="search-modal-overlay" id="searchModal">
+      <button class="search-modal-close" aria-label="Close search">
+        <i data-lucide="x" style="width:32px;height:32px;"></i>
+      </button>
+      <div class="search-modal-box">
+        <div class="search-modal-input-wrapper">
+          <input type="text" class="search-modal-input" placeholder="Search services, articles, products..." />
+          <i data-lucide="search" class="search-modal-icon" style="width:24px;height:24px;"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- STICKY HEADER TOP-BAR -->
+    <div class="top-bar d-none d-lg-flex">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-4">
+          <span class="top-bar-link">
+            <i data-lucide="clock" style="width:14px;height:14px;"></i>
+            Working Hours: 24/7 Emergency Support
+          </span>
+          <a href="mailto:emergency@plumbmaster.com" class="top-bar-link">
+            <i data-lucide="mail" style="width:14px;height:14px;"></i>
+            emergency@plumbmaster.com
+          </a>
+        </div>
+        <div class="d-flex align-items-center gap-4">
+          <a href="tel:18005550199" class="top-bar-link fw-bold text-orange">
+            <i data-lucide="phone-call" style="width:14px;height:14px;"></i>
+            Emergency Hotline: 1-800-555-0199
+          </a>
+          <div class="d-flex align-items-center gap-2 border-start ps-3 border-secondary">
+            <a href="#" class="top-bar-link" aria-label="Facebook"><i data-lucide="facebook" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Twitter"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN HEADER NAVIGATION -->
+    <header class="main-header">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a href="index.html" class="logo-brand">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:22px;height:22px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="nav-menu">
+          <div class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </div>
+          <div class="nav-item">
+            <a href="about.html" class="nav-link">About</a>
+          </div>
+          <div class="nav-item">
+            <a href="services.html" class="nav-link text-orange">
+              Services <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="services.html" class="dropdown-item-custom text-orange">All Services</a>
+              <a href="service-details.html" class="dropdown-item-custom">Service Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="projects.html" class="nav-link">
+              Projects <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="projects.html" class="dropdown-item-custom">Project Gallery</a>
+              <a href="project-details.html" class="dropdown-item-custom">Project Details</a>
+            </div>
+          </div>
+          <div class="nav-item mega-menu-wrapper">
+            <a href="shop.html" class="nav-link">
+              Shop <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="mega-menu">
+              <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Shop Collection</h3>
+                  <a href="shop.html" class="dropdown-item-custom">Main Plumbing Store</a>
+                  <a href="product-details.html" class="dropdown-item-custom">Premium Fittings</a>
+                  <a href="cart.html" class="dropdown-item-custom">Shopping Cart</a>
+                  <a href="checkout.html" class="dropdown-item-custom">Secure Checkout</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Our Pages</h3>
+                  <a href="team.html" class="dropdown-item-custom">Our Expert Plumbers</a>
+                  <a href="team-details.html" class="dropdown-item-custom">Expert Profile</a>
+                  <a href="pricing.html" class="dropdown-item-custom">Transparent Rates</a>
+                  <a href="faq.html" class="dropdown-item-custom">Frequently Asked Qs</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                  <h3 class="mega-title">Company Info</h3>
+                  <a href="about.html" class="dropdown-item-custom">Corporate Overview</a>
+                  <a href="contact.html" class="dropdown-item-custom">Office Contacts</a>
+                  <a href="privacy-policy.html" class="dropdown-item-custom">Privacy Policy</a>
+                  <a href="terms-conditions.html" class="dropdown-item-custom">Terms of Service</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="emergency-banner-box h-100 d-flex flex-column justify-content-center p-3 text-center">
+                    <span class="badge-premium mb-2 mx-auto">Seasonal Offer</span>
+                    <h4 class="fs-6 text-white mb-2">Free Inspections</h4>
+                    <p class="text-secondary small mb-3">Claim a free system audit on your initial water lines setup.</p>
+                    <a href="appointment.html" class="btn-premium py-2 px-3 fs-7 align-self-center">Claim Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="blog.html" class="nav-link">
+              Blog <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="blog.html" class="dropdown-item-custom">Industry News</a>
+              <a href="blog-details.html" class="dropdown-item-custom">Article Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="contact.html" class="nav-link">Contact</a>
+          </div>
+        </nav>
+
+        <div class="d-flex align-items-center gap-3">
+          <button class="search-toggle-btn search-trigger" aria-label="Open Search">
+            <i data-lucide="search"></i>
+          </button>
+          <button class="theme-toggle-btn" aria-label="Toggle Theme">
+            <i data-lucide="sun"></i>
+          </button>
+          <a href="appointment.html" class="btn-premium d-none d-xl-flex">
+            Book Appointment
+            <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+          </a>
+          <button class="mobile-menu-trigger" aria-label="Toggle Navigation">
+            <i data-lucide="menu" style="width:20px;height:20px;"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div class="mobile-nav-overlay"></div>
+    <div class="mobile-nav-drawer">
+      <div class="mobile-nav-header">
+        <a href="index.html" class="logo-brand text-decoration-none">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:18px;height:18px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+        <button class="mobile-nav-close" aria-label="Close Mobile Menu">
+          <i data-lucide="x" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-links">
+        <div class="mobile-nav-item"><a href="index.html" class="mobile-nav-link">Home</a></div>
+        <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About Us</a></div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link text-orange">Services <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="services.html" class="mobile-nav-submenu-link text-orange">Our Services</a>
+            <a href="service-details.html" class="mobile-nav-submenu-link">Service Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Projects <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="projects.html" class="mobile-nav-submenu-link">Project Gallery</a>
+            <a href="project-details.html" class="mobile-nav-submenu-link">Project Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Store Collection <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="shop.html" class="mobile-nav-submenu-link">Main Shop</a>
+            <a href="product-details.html" class="mobile-nav-submenu-link">Product Details</a>
+            <a href="cart.html" class="mobile-nav-submenu-link">Cart</a>
+            <a href="checkout.html" class="mobile-nav-submenu-link">Checkout</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">More Pages <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="team.html" class="mobile-nav-submenu-link">Our Plumbers</a>
+            <a href="team-details.html" class="mobile-nav-submenu-link">Profile Details</a>
+            <a href="pricing.html" class="mobile-nav-submenu-link">Pricing Plans</a>
+            <a href="faq.html" class="mobile-nav-submenu-link">FAQ Pages</a>
+            <a href="404.html" class="mobile-nav-submenu-link">404 Page</a>
+            <a href="coming-soon.html" class="mobile-nav-submenu-link">Coming Soon</a>
+            <a href="privacy-policy.html" class="mobile-nav-submenu-link">Privacy Policy</a>
+            <a href="terms-conditions.html" class="mobile-nav-submenu-link">Terms & Conditions</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Blog & News <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="blog.html" class="mobile-nav-submenu-link">Blog Posts</a>
+            <a href="blog-details.html" class="mobile-nav-submenu-link">Blog Article</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></div>
+      </div>
+      <div class="mt-4 pt-3 border-top border-secondary">
+        <a href="appointment.html" class="btn-premium w-full text-center">Book Online Now</a>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SECTION 1: PREMIUM PAGE HERO (BANNER)
+         ========================================== -->
+    <section class="services-hero-banner">
+      <div class="services-hero-overlay"></div>
+      <div class="container relative-z text-center text-md-start d-md-flex align-items-center justify-content-between">
+        <div data-aos="fade-right">
+          <span class="badge-premium mb-3 animate-float">
+            <i data-lucide="award" style="width:12px;height:12px;"></i> Elite Engineering
+          </span>
+          <h1 class="display-4 text-white fw-bold mb-2 font-heading">Our Elite Services</h1>
+          <p class="text-secondary mb-0">High-precision commercial and residential plumbing engineering solutions.</p>
+        </div>
+        <div class="mt-3 mt-md-0" data-aos="fade-left">
+          <nav class="breadcrumb-nav justify-content-center justify-content-md-end">
+            <a href="index.html" class="text-decoration-none">Home</a>
+            <i data-lucide="chevron-right" style="width:14px;height:14px;color:var(--text-secondary);"></i>
+            <span class="text-orange fw-medium">Services</span>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2: SERVICES CATEGORY FILTER
+         ========================================== -->
+    <section class="py-5" style="background-color: var(--bg-body);">
+      <div class="container">
+        <div class="row text-center mb-4">
+          <div class="col-lg-6 mx-auto" data-aos="fade-up">
+            <span class="badge-premium mb-2">SYSTEM CLASSIFICATION</span>
+            <h2 class="display-6 font-heading fw-bold text-white mb-2">Plumbing Services Directory</h2>
+            <p class="text-secondary">Filter our custom engineering operations by system, environment, or urgency level.</p>
+          </div>
+        </div>
+
+        <div class="filter-container" data-aos="fade-up" data-aos-delay="100">
+          <button class="filter-btn active" data-filter="all">All Solutions</button>
+          <button class="filter-btn" data-filter="emergency">Emergency</button>
+          <button class="filter-btn" data-filter="residential">Residential</button>
+          <button class="filter-btn" data-filter="commercial">Commercial</button>
+          <button class="filter-btn" data-filter="installation">Installation</button>
+          <button class="filter-btn" data-filter="repair">Repair</button>
+          <button class="filter-btn" data-filter="maintenance">Maintenance</button>
+          <button class="filter-btn" data-filter="drain-services">Drain Services</button>
+          <button class="filter-btn" data-filter="water-header">Water Heater</button>
+        </div>
+
+        <!-- ==========================================
+             SECTION 3: SERVICES GRID (12 CARDS)
+             ========================================== -->
+        <div class="row g-4" id="servicesGrid">
+          
+          <!-- Card 1: Emergency Plumbing -->
+          <div class="col-lg-4 col-md-6 filter-item" data-categories="emergency residential repair" data-aos="fade-up" style="transition: all 0.4s ease;">
+            <div class="service-card-premium">
+              <div class="service-img-wrap">
+                <span class="response-badge">
+                  <i data-lucide="clock" style="width:12px;height:12px;"></i> 15 MIN DISPATCH
+                </span>
+                <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80" alt="Emergency Plumbing" class="service-img" />
+                <div class="service-img-overlay"></div>
+                <div class="service-icon-badge">
+                  <i data-lucide="alert-triangle" style="width:20px;height:20px;"></i>
+                </div>
+              </div>
+              <div class="service-body">
+                <h3 class="service-title font-heading">Emergency Plumbing</h3>
+                <p class="service-desc">Burst pipes, severe sewer backups, or major flooding. Our active GPS squad deploys instantly to secure your asset.</p>
+                <ul class="service-bullets">
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> 24/7/365 Standby Squad</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Flood Containment Protocols</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Full Property Damage Protection</li>
+                </ul>
+                <div class="service-footer">
+                  <a href="service-details.html" class="btn-view-details text-decoration-none">
+                    <span>View Specifications</span>
+                    <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Leak Detection -->
+          <div class="col-lg-4 col-md-6 filter-item" data-categories="emergency residential commercial maintenance" data-aos="fade-up" data-aos-delay="50" style="transition: all 0.4s ease;">
+            <div class="service-card-premium">
+              <div class="service-img-wrap">
+                <span class="response-badge">
+                  <i data-lucide="check-circle" style="width:12px;height:12px;"></i> NON-INVASIVE
+                </span>
+                <img src="https://images.unsplash.com/photo-1542013936693-8848e5742383?auto=format&fit=crop&w=800&q=80" alt="Leak Detection" class="service-img" />
+                <div class="service-img-overlay"></div>
+                <div class="service-icon-badge">
+                  <i data-lucide="search" style="width:20px;height:20px;"></i>
+                </div>
+              </div>
+              <div class="service-body">
+                <h3 class="service-title font-heading">Acoustic Leak Detection</h3>
+                <p class="service-desc">Finding concealed pipeline breaches behind drywall or beneath concrete slabs using advanced ultrasonic diagnostics.</p>
+                <ul class="service-bullets">
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Zero-Destruction Frequency Scan</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Thermal Imaging Mapping</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Detailed Structural Reports</li>
+                </ul>
+                <div class="service-footer">
+                  <a href="service-details.html" class="btn-view-details text-decoration-none">
+                    <span>View Specifications</span>
+                    <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Pipe Installation -->
+          <div class="col-lg-4 col-md-6 filter-item" data-categories="residential commercial installation" data-aos="fade-up" data-aos-delay="100" style="transition: all 0.4s ease;">
+            <div class="service-card-premium">
+              <div class="service-img-wrap">
+                <span class="response-badge">
+                  <i data-lucide="layers" style="width:12px;height:12px;"></i> COPPER & PEX
+                </span>
+                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" alt="Pipe Installation" class="service-img" />
+                <div class="service-img-overlay"></div>
+                <div class="service-icon-badge">
+                  <i data-lucide="plus-circle" style="width:20px;height:20px;"></i>
+                </div>
+              </div>
+              <div class="service-body">
+                <h3 class="service-title font-heading">Pipe Installation</h3>
+                <p class="service-desc">Complete hydronic routing, full repiping, and fresh layout configurations for new estates and commercial builds.</p>
+                <ul class="service-bullets">
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Certified Pure Copper Solder</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Uponor PEX-a Expansion</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> 25-Year Manufacturer Warranty</li>
+                </ul>
+                <div class="service-footer">
+                  <a href="service-details.html" class="btn-view-details text-decoration-none">
+                    <span>View Specifications</span>
+                    <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Pipe Repair -->
+          <div class="col-lg-4 col-md-6 filter-item" data-categories="emergency residential repair" data-aos="fade-up" style="transition: all 0.4s ease;">
+            <div class="service-card-premium">
+              <div class="service-img-wrap">
+                <span class="response-badge">
+                  <i data-lucide="zap" style="width:12px;height:12px;"></i> INSTANT RESTORE
+                </span>
+                <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=800&q=80" alt="Pipe Repair" class="service-img" />
+                <div class="service-img-overlay"></div>
+                <div class="service-icon-badge">
+                  <i data-lucide="wrench" style="width:20px;height:20px;"></i>
+                </div>
+              </div>
+              <div class="service-body">
+                <h3 class="service-title font-heading">Pipe Repair & Weld</h3>
+                <p class="service-desc">Mending cracked joints, restoring corroded sections, and reinforcing lines against seasonal frost expansion.</p>
+                <ul class="service-bullets">
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> High-Durability Clamp Welds</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Anti-Corrosion Epoxy Liners</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Hydrostatic Testing Check</li>
+                </ul>
+                <div class="service-footer">
+                  <a href="service-details.html" class="btn-view-details text-decoration-none">
+                    <span>View Specifications</span>
+                    <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: Drain Cleaning -->
+          <div class="col-lg-4 col-md-6 filter-item" data-categories="residential drain-services maintenance" data-aos="fade-up" data-aos-delay="50" style="transition: all 0.4s ease;">
+            <div class="service-card-premium">
+              <div class="service-img-wrap">
+                <span class="response-badge">
+                  <i data-lucide="droplet" style="width:12px;height:12px;"></i> HYDRO-JET POWER
+                </span>
+                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80" alt="Drain Cleaning" class="service-img" />
+                <div class="service-img-overlay"></div>
+                <div class="service-icon-badge">
+                  <i data-lucide="refresh-cw" style="width:20px;height:20px;"></i>
+                </div>
+              </div>
+              <div class="service-body">
+                <h3 class="service-title font-heading">Hydro-Jet Drain Cleaning</h3>
+                <p class="service-desc">Clearing blockages, tree roots, and grease scaling from internal sewer pipes using 4,000 PSI high-velocity water jets.</p>
+                <ul class="service-bullets">
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Complete Obstruction Clearing</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Optical Sewer Scope Verification</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Safe for Old Pipelines</li>
+                </ul>
+                <div class="service-footer">
+                  <a href="service-details.html" class="btn-view-details text-decoration-none">
+                    <span>View Specifications</span>
+                    <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6: Sewer Line Repair -->
+          <div class="col-lg-4 col-md-6 filter-item" data-categories="commercial repair drain-services" data-aos="fade-up" data-aos-delay="100" style="transition: all 0.4s ease;">
+            <div class="service-card-premium">
+              <div class="service-img-wrap">
+                <span class="response-badge">
+                  <i data-lucide="shield" style="width:12px;height:12px;"></i> TRENCHLESS TECH
+                </span>
+                <img src="https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=800&q=80" alt="Sewer Line Repair" class="service-img" />
+                <div class="service-img-overlay"></div>
+                <div class="service-icon-badge">
+                  <i data-lucide="settings" style="width:20px;height:20px;"></i>
+                </div>
+              </div>
+              <div class="service-body">
+                <h3 class="service-title font-heading">Trenchless Sewer Repair</h3>
+                <p class="service-desc">Replacing or patching subterranean sewer lines without digging up your pristine yard or corporate entrance parking space.</p>
+                <ul class="service-bullets">
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Zero Excavation Overhead</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Structural Pipe Bursting method</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Lifetime Flow Guarantee</li>
+                </ul>
+                <div class="service-footer">
+                  <a href="service-details.html" class="btn-view-details text-decoration-none">
+                    <span>View Specifications</span>
+                    <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 7: Bathroom Plumbing -->
+          <div class="col-lg-4 col-md-6 filter-item" data-categories="residential installation repair" data-aos="fade-up" style="transition: all 0.4s ease;">
+            <div class="service-card-premium">
+              <div class="service-img-wrap">
+                <span class="response-badge">
+                  <i data-lucide="sliders" style="width:12px;height:12px;"></i> FINE LUXURY
+                </span>
+                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" alt="Bathroom Plumbing" class="service-img" />
+                <div class="service-img-overlay"></div>
+                <div class="service-icon-badge">
+                  <i data-lucide="bath" style="width:20px;height:20px;"></i>
+                </div>
+              </div>
+              <div class="service-body">
+                <h3 class="service-title font-heading">Bathroom Fittings</h3>
+                <p class="service-desc">Setting up smart toilets, designer shower manifolds, freestanding soaking tub drains, and bespoke vanity faucets.</p>
+                <ul class="service-bullets">
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Premium Brand Integrations</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Dynamic Pressure Calibrations</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Waterproof Seal Integrity</li>
+                </ul>
+                <div class="service-footer">
+                  <a href="service-details.html" class="btn-view-details text-decoration-none">
+                    <span>View Specifications</span>
+                    <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 8: Kitchen Plumbing -->
+          <div class="col-lg-4 col-md-6 filter-item" data-categories="residential installation repair" data-aos="fade-up" data-aos-delay="50" style="transition: all 0.4s ease;">
+            <div class="service-card-premium">
+              <div class="service-img-wrap">
+                <span class="response-badge">
+                  <i data-lucide="heart" style="width:12px;height:12px;"></i> PREMIUM CHEF
+                </span>
+                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80" alt="Kitchen Plumbing" class="service-img" />
+                <div class="service-img-overlay"></div>
+                <div class="service-icon-badge">
+                  <i data-lucide="heart" style="width:20px;height:20px;"></i>
+                </div>
+              </div>
+              <div class="service-body">
+                <h3 class="service-title font-heading">Kitchen Plumbing</h3>
+                <p class="service-desc">Mounting commercial-tier kitchen faucets, water filtering systems, garbage disposals, and master appliance lines.</p>
+                <ul class="service-bullets">
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Reverse Osmosis Filtration</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Leak-Free Valve Assemblies</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> High-Flow Utility Setup</li>
+                </ul>
+                <div class="service-footer">
+                  <a href="service-details.html" class="btn-view-details text-decoration-none">
+                    <span>View Specifications</span>
+                    <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 9: Water Heater Installation -->
+          <div class="col-lg-4 col-md-6 filter-item" data-categories="residential commercial installation water-heater" data-aos="fade-up" data-aos-delay="100" style="transition: all 0.4s ease;">
+            <div class="service-card-premium">
+              <div class="service-img-wrap">
+                <span class="response-badge">
+                  <i data-lucide="sun" style="width:12px;height:12px;"></i> ECO TANKLESS
+                </span>
+                <img src="https://images.unsplash.com/photo-1605647540924-852290f6b0d5?auto=format&fit=crop&w=800&q=80" alt="Water Heater Installation" class="service-img" />
+                <div class="service-img-overlay"></div>
+                <div class="service-icon-badge">
+                  <i data-lucide="flame" style="width:20px;height:20px;"></i>
+                </div>
+              </div>
+              <div class="service-body">
+                <h3 class="service-title font-heading">Water Heater Installation</h3>
+                <p class="service-desc">Installing super-efficient tankless water systems from leading manufacturers, optimizing thermal output and electricity rates.</p>
+                <ul class="service-bullets">
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Continuous Hot Water Delivery</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> 45% Energy Cost Reductions</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Low-Footprint Smart Units</li>
+                </ul>
+                <div class="service-footer">
+                  <a href="service-details.html" class="btn-view-details text-decoration-none">
+                    <span>View Specifications</span>
+                    <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 10: Water Heater Repair -->
+          <div class="col-lg-4 col-md-6 filter-item" data-categories="emergency residential repair water-heater" data-aos="fade-up" style="transition: all 0.4s ease;">
+            <div class="service-card-premium">
+              <div class="service-img-wrap">
+                <span class="response-badge">
+                  <i data-lucide="activity" style="width:12px;height:12px;"></i> QUICK DIAGNOSIS
+                </span>
+                <img src="https://images.unsplash.com/photo-1621905252507-b354bc25edac?auto=format&fit=crop&w=800&q=80" alt="Water Heater Repair" class="service-img" />
+                <div class="service-img-overlay"></div>
+                <div class="service-icon-badge">
+                  <i data-lucide="zap" style="width:20px;height:20px;"></i>
+                </div>
+              </div>
+              <div class="service-body">
+                <h3 class="service-title font-heading">Water Heater Repair</h3>
+                <p class="service-desc">Fixing heating elements, malfunctioning pilot systems, internal sediment layers, and temperature-pressure valves.</p>
+                <ul class="service-bullets">
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Element & Thermostat Swap</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Diagnostic Burner Cleaning</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Comprehensive Safety Checks</li>
+                </ul>
+                <div class="service-footer">
+                  <a href="service-details.html" class="btn-view-details text-decoration-none">
+                    <span>View Specifications</span>
+                    <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 11: Commercial Plumbing -->
+          <div class="col-lg-4 col-md-6 filter-item" data-categories="commercial installation maintenance" data-aos="fade-up" data-aos-delay="50" style="transition: all 0.4s ease;">
+            <div class="service-card-premium">
+              <div class="service-img-wrap">
+                <span class="response-badge">
+                  <i data-lucide="building" style="width:12px;height:12px;"></i> CORPORATE GRADE
+                </span>
+                <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="Commercial Plumbing" class="service-img" />
+                <div class="service-img-overlay"></div>
+                <div class="service-icon-badge">
+                  <i data-lucide="building-2" style="width:20px;height:20px;"></i>
+                </div>
+              </div>
+              <div class="service-body">
+                <h3 class="service-title font-heading">Commercial Plumbing</h3>
+                <p class="service-desc">Supporting shopping malls, medical spaces, high-rises, and industrial sites. Structured for minimum operational downtime.</p>
+                <ul class="service-bullets">
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> High-Capacity Hydronic Pumps</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Preventive Water Flow Audits</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Backflow Preventer Testing</li>
+                </ul>
+                <div class="service-footer">
+                  <a href="service-details.html" class="btn-view-details text-decoration-none">
+                    <span>View Specifications</span>
+                    <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 12: Preventive Maintenance -->
+          <div class="col-lg-4 col-md-6 filter-item" data-categories="residential commercial maintenance" data-aos="fade-up" data-aos-delay="100" style="transition: all 0.4s ease;">
+            <div class="service-card-premium">
+              <div class="service-img-wrap">
+                <span class="response-badge">
+                  <i data-lucide="activity" style="width:12px;height:12px;"></i> EXTEND LIFESPAN
+                </span>
+                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80" alt="Preventive Maintenance" class="service-img" />
+                <div class="service-img-overlay"></div>
+                <div class="service-icon-badge">
+                  <i data-lucide="shield-check" style="width:20px;height:20px;"></i>
+                </div>
+              </div>
+              <div class="service-body">
+                <h3 class="service-title font-heading">Preventive Maintenance</h3>
+                <p class="service-desc">Recurring full system assessments, diagnostic pressure tracking, camera sewer scans, and calcification clearouts.</p>
+                <ul class="service-bullets">
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Seasonal Calibration Checklists</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Advanced Camera Inspections</li>
+                  <li class="service-bullet-item"><i data-lucide="check" style="width:14px;height:14px;"></i> Emergency Risk Reductions</li>
+                </ul>
+                <div class="service-footer">
+                  <a href="service-details.html" class="btn-view-details text-decoration-none">
+                    <span>View Specifications</span>
+                    <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 4: WHY OUR SERVICES
+         ========================================== -->
+    <section class="section-padding bg-surface" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5" data-aos="fade-right">
+            <span class="badge-premium mb-3">UNMATCHED INTEGRITY</span>
+            <h2 class="display-5 font-heading fw-bold text-white mb-4">
+              Engineered For Perfect <span class="text-orange">Flow Operations</span>
+            </h2>
+            <p class="text-secondary mb-4">
+              At PlumbMaster, our services are structured from twenty-five years of mechanical mastery. We reject temporary patch-ups, providing long-term structural flow solutions built on absolute scientific precision.
+            </p>
+            <div class="d-flex flex-column gap-3 mb-4">
+              <div class="d-flex align-items-center gap-3 text-white">
+                <div class="bg-orange p-2 rounded-circle" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(255,87,34,0.1);color:var(--color-orange);">
+                  <i data-lucide="check" style="width:18px;height:18px;"></i>
+                </div>
+                <span>Full compliance with federal structural codes.</span>
+              </div>
+              <div class="d-flex align-items-center gap-3 text-white">
+                <div class="bg-orange p-2 rounded-circle" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(255,87,34,0.1);color:var(--color-orange);">
+                  <i data-lucide="check" style="width:18px;height:18px;"></i>
+                </div>
+                <span>State-of-the-art non-invasive acoustic instruments.</span>
+              </div>
+              <div class="d-flex align-items-center gap-3 text-white">
+                <div class="bg-orange p-2 rounded-circle" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(255,87,34,0.1);color:var(--color-orange);">
+                  <i data-lucide="check" style="width:18px;height:18px;"></i>
+                </div>
+                <span>Transparent hourly rates with flat-rate quotes.</span>
+              </div>
+            </div>
+            <a href="about.html" class="btn-premium">Discover Our Pedigree</a>
+          </div>
+          
+          <div class="col-lg-7" data-aos="fade-left">
+            <div class="row g-4">
+              <div class="col-sm-6">
+                <div class="why-service-card">
+                  <div class="why-service-icon">
+                    <i data-lucide="shield" style="width:24px;height:24px;"></i>
+                  </div>
+                  <h3 class="h5 text-white mb-2 font-heading">Certified Plumbers</h3>
+                  <p class="text-secondary small mb-0">Every field operator holds a minimum of five years of master mechanical licensing credentials.</p>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="why-service-card">
+                  <div class="why-service-icon">
+                    <i data-lucide="navigation" style="width:24px;height:24px;"></i>
+                  </div>
+                  <h3 class="h5 text-white mb-2 font-heading">Active GPS Routing</h3>
+                  <p class="text-secondary small mb-0">Our central dispatcher tracks local repair trucks in real time to guarantee a sub-30 minute response.</p>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="why-service-card">
+                  <div class="why-service-icon">
+                    <i data-lucide="award" style="width:24px;height:24px;"></i>
+                  </div>
+                  <h3 class="h5 text-white mb-2 font-heading">Lifetime Warranties</h3>
+                  <p class="text-secondary small mb-0">Our signature welds and custom repipes are completely protected by a written lifetime warranty.</p>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="why-service-card">
+                  <div class="why-service-icon">
+                    <i data-lucide="headphones" style="width:24px;height:24px;"></i>
+                  </div>
+                  <h3 class="h5 text-white mb-2 font-heading">24/7 Human Dispatch</h3>
+                  <p class="text-secondary small mb-0">Speak with an active, certified system supervisor during midnight distress calls, never an automated bot.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5: EMERGENCY PLUMBING CTA
+         ========================================== -->
+    <section class="section-padding" style="background-color: var(--bg-body);">
+      <div class="container">
+        <div class="emergency-banner-box-custom" data-aos="zoom-in">
+          <div class="row align-items-center g-4 position-relative" style="z-index: 2;">
+            <div class="col-lg-8">
+              <div class="status-pulse-badge mb-3">
+                <div class="pulse-dot"></div>
+                <span>GPS Dispatch Network: ONLINE</span>
+              </div>
+              <h2 class="display-5 font-heading fw-bold text-white mb-3">Confronting a Critical Pipe Emergency?</h2>
+              <p class="text-secondary mb-0 max-w-2xl">
+                Burst heating lines, heavy sewage blockages, or overflowing valves can cause thousands in minutes. Call our direct supervisor hotdesk now—our nearest rapid responder is already on stand-by near your block.
+              </p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+              <div class="d-flex flex-column flex-sm-row justify-content-lg-end gap-3">
+                <a href="tel:18005550199" class="btn-premium">
+                  <i data-lucide="phone-call" style="width:16px;height:16px;margin-right:8px;"></i>
+                  1-800-555-0199
+                </a>
+                <a href="appointment.html" class="btn-premium-secondary" style="border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: #fff;">
+                  Book Dispatch Online
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 6: MAINTENANCE PLANS (PRICING)
+         ========================================== -->
+    <section class="section-padding bg-surface" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="row text-center mb-5">
+          <div class="col-lg-6 mx-auto" data-aos="fade-up">
+            <span class="badge-premium mb-2">SYSTEM SECURITIES</span>
+            <h2 class="display-6 font-heading fw-bold text-white mb-3">Preventative System Plans</h2>
+            <p class="text-secondary">Avoid high-cost restoration bills with our proactive hydronic maintenance options.</p>
+          </div>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+          
+          <!-- Silver Plan -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="pricing-card-custom">
+              <div class="mb-4">
+                <span class="badge-premium text-orange mb-2">BASIC PROTECTION</span>
+                <h3 class="h3 font-heading text-white fw-bold">Silver Shield</h3>
+                <p class="text-secondary small">Perfect for residential households aiming to secure water line lifespans.</p>
+              </div>
+              <div class="price-tag">
+                $29<span>/month</span>
+              </div>
+              <ul class="pricing-features-list">
+                <li class="pricing-feature-item">
+                  <i data-lucide="check" class="text-green"></i> 1 Annual Full System Assessment
+                </li>
+                <li class="pricing-feature-item">
+                  <i data-lucide="check" class="text-green"></i> 10% Off Any On-Site Repair
+                </li>
+                <li class="pricing-feature-item">
+                  <i data-lucide="check" class="text-green"></i> Water Pressure Calibration Checks
+                </li>
+                <li class="pricing-feature-item muted">
+                  <i data-lucide="x" class="text-red"></i> Optical Sewer Camera Inspection
+                </li>
+                <li class="pricing-feature-item muted">
+                  <i data-lucide="x" class="text-red"></i> High-Velocity Jet Clearing
+                </li>
+              </ul>
+              <div class="mt-auto">
+                <a href="appointment.html" class="btn-premium w-full text-center py-3">Enroll Silver</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gold Plan -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="pricing-card-custom featured">
+              <span class="pricing-badge">POPULAR SAVINGS</span>
+              <div class="mb-4">
+                <span class="badge-premium text-orange mb-2">COMPLETE COVERAGE</span>
+                <h3 class="h3 font-heading text-white fw-bold">Gold Armor</h3>
+                <p class="text-secondary small">Comprehensive preventative plan shielding domestic properties from flooding.</p>
+              </div>
+              <div class="price-tag">
+                $59<span>/month</span>
+              </div>
+              <ul class="pricing-features-list">
+                <li class="pricing-feature-item">
+                  <i data-lucide="check" class="text-green"></i> 2 Annual Full System Assessments
+                </li>
+                <li class="pricing-feature-item">
+                  <i data-lucide="check" class="text-green"></i> 15% Off Any On-Site Repair
+                </li>
+                <li class="pricing-feature-item">
+                  <i data-lucide="check" class="text-green"></i> Water Pressure Calibration Checks
+                </li>
+                <li class="pricing-feature-item">
+                  <i data-lucide="check" class="text-green"></i> Optical Sewer Camera Inspection
+                </li>
+                <li class="pricing-feature-item muted">
+                  <i data-lucide="x" class="text-red"></i> High-Velocity Jet Clearing
+                </li>
+              </ul>
+              <div class="mt-auto">
+                <a href="appointment.html" class="btn-premium w-full text-center py-3">Enroll Gold</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Platinum Plan -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="pricing-card-custom">
+              <div class="mb-4">
+                <span class="badge-premium text-orange mb-2">COMMERCIAL SCALE</span>
+                <h3 class="h3 font-heading text-white fw-bold">Platinum Titan</h3>
+                <p class="text-secondary small">Engineered for large estates, multi-unit builds, and corporate environments.</p>
+              </div>
+              <div class="price-tag">
+                $119<span>/month</span>
+              </div>
+              <ul class="pricing-features-list">
+                <li class="pricing-feature-item">
+                  <i data-lucide="check" class="text-green"></i> 4 Annual Full System Assessments
+                </li>
+                <li class="pricing-feature-item">
+                  <i data-lucide="check" class="text-green"></i> 25% Off Any On-Site Repair
+                </li>
+                <li class="pricing-feature-item">
+                  <i data-lucide="check" class="text-green"></i> Water Pressure Calibration Checks
+                </li>
+                <li class="pricing-feature-item">
+                  <i data-lucide="check" class="text-green"></i> Optical Sewer Camera Inspection
+                </li>
+                <li class="pricing-feature-item">
+                  <i data-lucide="check" class="text-green"></i> High-Velocity Jet Clearing
+                </li>
+              </ul>
+              <div class="mt-auto">
+                <a href="appointment.html" class="btn-premium w-full text-center py-3">Enroll Platinum</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 7: FAQ PREVIEW
+         ========================================== -->
+    <section class="section-padding" style="background-color: var(--bg-body);">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5" data-aos="fade-right">
+            <span class="badge-premium mb-3">ANSWERS & EXPLANATIONS</span>
+            <h2 class="display-5 font-heading fw-bold text-white mb-4">Frequently Asked Questions</h2>
+            <p class="text-secondary mb-4">
+              Get direct clarity regarding our service processes, diagnostic fees, dispatch timing, and warranty protections.
+            </p>
+            <div class="glass-panel p-4 text-center text-sm-start d-sm-flex align-items-center gap-3">
+              <div class="bg-orange p-3 rounded-circle text-white d-inline-flex mb-3 mb-sm-0" style="background: rgba(255,87,34,0.1); color: var(--color-orange);">
+                <i data-lucide="help-circle" style="width:24px;height:24px;"></i>
+              </div>
+              <div>
+                <h4 class="h5 text-white mb-1 font-heading">Have alternative questions?</h4>
+                <p class="text-secondary small mb-0">Our active engineering team is standing by to assist.</p>
+                <a href="contact.html" class="text-orange small fw-bold font-heading">Ask our desk →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7" data-aos="fade-left">
+            <div class="accordion accordion-flush" id="serviceFaqAccordion">
+              
+              <!-- Question 1 -->
+              <div class="accordion-item bg-transparent border-theme mb-3">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed bg-transparent text-white fw-semibold font-heading py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq-1" aria-expanded="false" aria-controls="faq-1" style="box-shadow: none;">
+                    How quick is your typical emergency response?
+                  </button>
+                </h3>
+                <div id="faq-1" class="accordion-collapse collapse" data-bs-parent="#serviceFaqAccordion">
+                  <div class="accordion-body text-secondary small pt-0">
+                    With our active GPS dispatch routing and designated regional trucks stationed across Seattle, Tacoma, Bellevue, and Everett, we maintain a guaranteed emergency arrival of under 30 minutes.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 2 -->
+              <div class="accordion-item bg-transparent border-theme mb-3">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed bg-transparent text-white fw-semibold font-heading py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq-2" aria-expanded="false" aria-controls="faq-2" style="box-shadow: none;">
+                    Are your on-site plumbers fully licensed and bonded?
+                  </button>
+                </h3>
+                <div id="faq-2" class="accordion-collapse collapse" data-bs-parent="#serviceFaqAccordion">
+                  <div class="accordion-body text-secondary small pt-0">
+                    Yes. 100% of our on-site operators are fully state licensed, insured, and bonded with public liability assurance coverage up to $10,000,000 to fully safeguard your facility.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 3 -->
+              <div class="accordion-item bg-transparent border-theme mb-3">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed bg-transparent text-white fw-semibold font-heading py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq-3" aria-expanded="false" aria-controls="faq-3" style="box-shadow: none;">
+                    Do you charge extra for weekend or night calls?
+                  </button>
+                </h3>
+                <div id="faq-3" class="accordion-collapse collapse" data-bs-parent="#serviceFaqAccordion">
+                  <div class="accordion-body text-secondary small pt-0">
+                    We maintain absolute pricing transparency. Our standard diagnostics and dispatch travel fees are flat-rate, with zero surprise overtime charges or hidden dispatch fees for late-night callouts.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 4 -->
+              <div class="accordion-item bg-transparent border-theme mb-3">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed bg-transparent text-white fw-semibold font-heading py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq-4" aria-expanded="false" aria-controls="faq-4" style="box-shadow: none;">
+                    What is non-invasive leak mapping?
+                  </button>
+                </h3>
+                <div id="faq-4" class="accordion-collapse collapse" data-bs-parent="#serviceFaqAccordion">
+                  <div class="accordion-body text-secondary small pt-0">
+                    Instead of hacking through your drywall or slab to search for leaks, we use ultra-sensitive acoustic microphones and infrared thermal scanners to locate underground pipeline cracks down to the exact millimeter.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 5 -->
+              <div class="accordion-item bg-transparent border-theme mb-3">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed bg-transparent text-white fw-semibold font-heading py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq-5" aria-expanded="false" aria-controls="faq-5" style="box-shadow: none;">
+                    Do you offer product installation warranties?
+                  </button>
+                </h3>
+                <div id="faq-5" class="accordion-collapse collapse" data-bs-parent="#serviceFaqAccordion">
+                  <div class="accordion-body text-secondary small pt-0">
+                    Absolutely. Every water line build, valve assembly, and water heater setup we perform is backed by our signature lifetime workmanship warranty in addition to all manufacturer guarantees.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 6 -->
+              <div class="accordion-item bg-transparent border-theme mb-3">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed bg-transparent text-white fw-semibold font-heading py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq-6" aria-expanded="false" aria-controls="faq-6" style="box-shadow: none;">
+                    What is the benefit of tankless water heaters?
+                  </button>
+                </h3>
+                <div id="faq-6" class="accordion-collapse collapse" data-bs-parent="#serviceFaqAccordion">
+                  <div class="accordion-body text-secondary small pt-0">
+                    Tankless systems heat water strictly on demand rather than maintaining a large hot tank 24/7. This delivers continuous unlimited hot water while reducing utility heating expenses by up to 45%.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 7 -->
+              <div class="accordion-item bg-transparent border-theme mb-3">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed bg-transparent text-white fw-semibold font-heading py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq-7" aria-expanded="false" aria-controls="faq-7" style="box-shadow: none;">
+                    How does trenchless sewer repair work?
+                  </button>
+                </h3>
+                <div id="faq-7" class="accordion-collapse collapse" data-bs-parent="#serviceFaqAccordion">
+                  <div class="accordion-body text-secondary small pt-0">
+                    By accessing underground pathways via minimal entry holes, we use specialized hydraulic rams to pull high-durability epoxy-coated sleeves inside old piping, reinforcing your line without excavation.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 8 -->
+              <div class="accordion-item bg-transparent border-theme mb-3">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed bg-transparent text-white fw-semibold font-heading py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq-8" aria-expanded="false" aria-controls="faq-8" style="box-shadow: none;">
+                    What happens during a preventive maintenance sweep?
+                  </button>
+                </h3>
+                <div id="faq-8" class="accordion-collapse collapse" data-bs-parent="#serviceFaqAccordion">
+                  <div class="accordion-body text-secondary small pt-0">
+                    Our technician performs a full sewer camera check, calibrates household water pressure valves, tests hot water tank sacrificial anodes, and scans for micro-leaks to secure your building from sudden failures.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 8: CONTACT CTA
+         ========================================== -->
+    <section class="section-padding bg-surface" style="border-top: 1px solid var(--border-color); position: relative;">
+      <div class="container text-center py-4">
+        <div class="row justify-content-center">
+          <div class="col-lg-8" data-aos="fade-up">
+            <span class="badge-premium mb-3">RAPID SCHEDULING SYSTEM</span>
+            <h2 class="display-6 font-heading fw-bold text-white mb-3">Ready to Secure Your System Flow?</h2>
+            <p class="text-secondary mb-4 px-lg-5">
+              Book a custom mechanical diagnostic sweep, request an upfront itemized quotation, or schedule a priority commercial installation. Our staff is ready to assist.
+            </p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+              <a href="appointment.html" class="btn-premium">
+                <i data-lucide="calendar" style="width:16px;height:16px;margin-right:8px;"></i> Book Priority Dispatch
+              </a>
+              <a href="contact.html" class="btn-premium-secondary">
+                Request Upfront Quotation
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREMIUM FOOTER -->
+    <footer class="premium-footer section-padding pb-0">
+      <div class="container">
+        <div class="row g-5 pb-5">
+          <div class="col-lg-4 col-md-6">
+            <div class="mb-4">
+              <a href="index.html" class="logo-brand text-decoration-none">
+                <div class="logo-icon">
+                  <i data-lucide="wrench" style="width:20px;height:20px;"></i>
+                </div>
+                PLUMB<span>MASTER</span>
+              </a>
+            </div>
+            <p class="text-secondary mb-4">
+              Providing modern, elite plumbing engineering and emergency plumbing solutions across domestic and industrial sectors. Responsive, certified, and luxury-first.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" class="social-icon-circle" aria-label="Facebook"><i data-lucide="facebook" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Twitter"><i data-lucide="twitter" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Instagram"><i data-lucide="instagram" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:16px;height:16px;"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Core Services</h3>
+            <ul class="footer-link-list">
+              <li><a href="service-details.html">Drain Clearing</a></li>
+              <li><a href="service-details.html">Luxury Tub Fittings</a></li>
+              <li><a href="service-details.html">Pipeline Audits</a></li>
+              <li><a href="service-details.html">Water Heater Setup</a></li>
+              <li><a href="service-details.html">Emergency Response</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Quick Links</h3>
+            <ul class="footer-link-list">
+              <li><a href="about.html">About Corporate</a></li>
+              <li><a href="pricing.html">Transparent Rates</a></li>
+              <li><a href="team.html">Our Certified Staff</a></li>
+              <li><a href="faq.html">Common Questions</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <h3 class="footer-widget-title">Newsletter Signup</h3>
+            <p class="text-secondary mb-3">Subscribe to our monthly maintenance checklist and seasonal discount coupons.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+              <input type="email" class="newsletter-input" placeholder="Your Email Address" required />
+              <button type="submit" class="newsletter-submit" aria-label="Subscribe">
+                <i data-lucide="send" style="width:16px;height:16px;"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom text-center">
+          <div class="row align-items-center justify-content-between">
+            <div class="col-md-6 text-md-start mb-3 mb-md-0">
+              <p class="mb-0">&copy; 2026 PlumbMaster Template. Inspired by high-end luxury business engineering.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <div class="d-flex justify-content-center justify-content-md-end gap-4">
+                <a href="terms-conditions.html" class="text-secondary text-decoration-none">Terms of Service</a>
+                <a href="privacy-policy.html" class="text-secondary text-decoration-none">Privacy Policy</a>
+                <a href="contact.html" class="text-secondary text-decoration-none">Support desk</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lucide Vector Icons Library CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Animation Engine CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Theme JS Control -->
+    <script src="/assets/js/main.js"></script>
+
+    <!-- Vanilla JS Category Filter Integration -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const filterItems = document.querySelectorAll('.filter-item');
+
+        filterBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            // Remove active from all
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add active to current
+            btn.classList.add('active');
+
+            const filterValue = btn.getAttribute('data-filter');
+
+            filterItems.forEach(item => {
+              const categoriesStr = item.getAttribute('data-categories');
+              if (!categoriesStr) return;
+              const categories = categoriesStr.split(' ');
+              if (filterValue === 'all' || categories.includes(filterValue)) {
+                item.style.display = 'block';
+                setTimeout(() => {
+                  item.style.opacity = '1';
+                  item.style.transform = 'scale(1)';
+                }, 50);
+              } else {
+                item.style.opacity = '0';
+                item.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                  item.style.display = 'none';
+                }, 300);
+              }
+            });
+          });
+        });
+      });
+    </script>
+
+  </body>
+</html>

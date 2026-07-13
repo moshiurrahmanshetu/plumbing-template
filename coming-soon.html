@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coming Soon - PlumbMaster Premium Plumbing Template</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- AOS Animation CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    <!-- Custom Global Style -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    
+    <!-- Immersive Page-Specific Coming Soon Styles -->
+    <style>
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--bg-body);
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      .soon-wrapper {
+        max-width: 750px;
+        width: 100%;
+        padding: 50px 20px;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Countdown grid styling */
+      .countdown-grid {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin: 40px 0;
+        flex-wrap: wrap;
+      }
+
+      .countdown-box {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 24px;
+        min-width: 120px;
+        box-shadow: var(--shadow-md);
+        transition: border-color 0.3s ease;
+      }
+      .countdown-box:hover {
+        border-color: var(--color-orange);
+        box-shadow: var(--shadow-glow);
+      }
+
+      .countdown-num {
+        font-family: var(--font-heading);
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: var(--color-orange);
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+
+      .countdown-label {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+      }
+
+      /* Newsletter form */
+      .soon-news-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        max-width: 500px;
+        margin: 30px auto;
+        transition: all 0.3s ease;
+      }
+      .soon-news-card:focus-within {
+        border-color: var(--color-orange);
+        box-shadow: var(--shadow-glow);
+      }
+      .soon-news-input {
+        background: transparent;
+        border: none;
+        color: var(--text-primary);
+        font-size: 15px;
+        flex: 1;
+        padding: 8px 12px;
+      }
+      .soon-news-input:focus {
+        outline: none;
+      }
+      .soon-news-btn {
+        background: var(--color-orange);
+        color: white;
+        border: none;
+        border-radius: var(--border-radius-sm);
+        padding: 10px 24px;
+        font-family: var(--font-heading);
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+      .soon-news-btn:hover {
+        background: var(--color-orange-hover);
+        transform: translateY(-2px);
+      }
+
+      .theme-float {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        z-index: 10;
+      }
+
+      .floating-bg-element {
+        position: absolute;
+        opacity: 0.02;
+        pointer-events: none;
+        z-index: 0;
+        animation: floatEffect 12s infinite ease-in-out;
+      }
+
+      .badge-premium {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-orange);
+        background-color: var(--color-orange-light);
+        padding: 6px 14px;
+        border-radius: 50px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: 1px solid rgba(255, 87, 34, 0.2);
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Floating Theme Toggler -->
+    <div class="theme-float">
+      <button class="theme-toggle-btn" aria-label="Toggle Theme">
+        <i data-lucide="sun"></i>
+      </button>
+    </div>
+
+    <!-- Background decorative patterns -->
+    <svg class="floating-bg-element" style="top: 15%; left: 10%; width: 100px; height: 100px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+    <svg class="floating-bg-element" style="bottom: 15%; right: 10%; width: 120px; height: 120px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M11 2a9 9 0 0 1 9 9v1a9 9 0 0 1-9 9l-1 .01A9 9 0 0 1 2 11V10a9 9 0 0 1 9-9z"/></svg>
+
+    <div class="soon-wrapper">
+      
+      <!-- Brand Logo -->
+      <div class="mb-4" data-aos="zoom-in">
+        <a href="index.html" class="logo-brand text-decoration-none justify-content-center" style="font-size: 1.8rem;">
+          <div class="logo-icon" style="width:40px;height:40px;">
+            <i data-lucide="wrench" style="width:20px;height:20px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="100">
+        <span class="badge-premium"><i data-lucide="sparkles"></i> Store Module Expanding</span>
+        <h1 class="display-5 text-white fw-bold mb-3">Something Elite is Piping Up!</h1>
+        <p class="text-secondary mx-auto max-w-600 mb-0">Our premium commercial plumbing warehouse and digital store module is undergoing final leak tests. Subscribe below to claim 20% off your first parts shipment.</p>
+      </div>
+
+      <!-- Live Dynamic Countdown Grid -->
+      <div class="countdown-grid" data-aos="zoom-in" data-aos-delay="200">
+        <div class="countdown-box">
+          <div class="countdown-num" id="daysBox">90</div>
+          <div class="countdown-label">Days</div>
+        </div>
+        <div class="countdown-box">
+          <div class="countdown-num" id="hoursBox">00</div>
+          <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-box">
+          <div class="countdown-num" id="minsBox">00</div>
+          <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-box">
+          <div class="countdown-num" id="secsBox">00</div>
+          <div class="countdown-label">Seconds</div>
+        </div>
+      </div>
+
+      <!-- Newsletter sign-up or alert success -->
+      <div data-aos="fade-up" data-aos-delay="300" id="soonFormContainer">
+        <form class="soon-news-card" id="soonNewsletterForm">
+          <i data-lucide="mail" class="text-secondary ms-3" style="width:18px;height:18px;"></i>
+          <input type="email" class="soon-news-input" id="soonEmail" placeholder="Your Professional Email" required />
+          <button type="submit" class="soon-news-btn">Notify Me</button>
+        </form>
+      </div>
+
+      <!-- Success message -->
+      <div id="soonSuccessAlert" class="glass-panel p-4 max-w-500 mx-auto mb-4 d-none animate-fade-in" style="border-color: var(--color-teal); background-color: rgba(0, 150, 136, 0.05);">
+        <i data-lucide="check-circle" class="text-teal mb-2" style="width:32px;height:32px;margin:0 auto;display:block;"></i>
+        <h4 class="text-white h6 mb-1">Credentials Logged!</h4>
+        <p class="text-secondary small mb-0">You have successfully locked in your 20% opening discount. We will email you the moment our digital catalog is active.</p>
+      </div>
+
+      <!-- Navigation & Social Links -->
+      <div data-aos="fade-up" data-aos-delay="400" class="mt-4">
+        <div class="d-flex justify-content-center gap-3 mb-4">
+          <a href="#" class="social-icon-circle" aria-label="Facebook"><i data-lucide="facebook" style="width:16px;height:16px;"></i></a>
+          <a href="#" class="social-icon-circle" aria-label="Twitter"><i data-lucide="twitter" style="width:16px;height:16px;"></i></a>
+          <a href="#" class="social-icon-circle" aria-label="Instagram"><i data-lucide="instagram" style="width:16px;height:16px;"></i></a>
+          <a href="#" class="social-icon-circle" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:16px;height:16px;"></i></a>
+        </div>
+
+        <a href="index.html" class="btn-premium py-2 px-4">
+          <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
+          Back To Live Site
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Lucide Vector Icons Library CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Animation Engine CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Custom Theme JS Control -->
+    <script src="/assets/js/main.js"></script>
+
+    <!-- Countdown Engine & Submissions Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Dynamic Target Calculation: Today + 90 Days (prevents expired timestamps)
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 90);
+        targetDate.setHours(0, 0, 0, 0);
+
+        function updateCountdown() {
+          const now = new Date().getTime();
+          const distance = targetDate.getTime() - now;
+
+          if (distance < 0) {
+            document.getElementById('daysBox').textContent = '00';
+            document.getElementById('hoursBox').textContent = '00';
+            document.getElementById('minsBox').textContent = '00';
+            document.getElementById('secsBox').textContent = '00';
+            return;
+          }
+
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          document.getElementById('daysBox').textContent = days.toString().padStart(2, '0');
+          document.getElementById('hoursBox').textContent = hours.toString().padStart(2, '0');
+          document.getElementById('minsBox').textContent = minutes.toString().padStart(2, '0');
+          document.getElementById('secsBox').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Newsletter form submission handling
+        const form = document.getElementById('soonNewsletterForm');
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          document.getElementById('soonFormContainer').classList.add('d-none');
+          document.getElementById('soonSuccessAlert').classList.remove('d-none');
+        });
+      });
+    </script>
+
+  </body>
+</html>

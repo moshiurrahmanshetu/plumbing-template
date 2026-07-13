@@ -1,0 +1,1237 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Details - PlumbMaster Premium Plumbing Template</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- AOS Animation CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Custom Global Style -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+
+    <!-- Custom Premium Styles for Project Details Module -->
+    <style>
+      .details-hero {
+        position: relative;
+        background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        padding: 130px 0 90px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .details-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(11, 15, 25, 0.94) 0%, rgba(11, 15, 25, 0.8) 100%);
+        z-index: 1;
+      }
+      [data-theme="light"] .details-hero-overlay {
+        background: linear-gradient(180deg, rgba(248, 250, 252, 0.96) 0%, rgba(248, 250, 252, 0.88) 100%);
+      }
+      .relative-z {
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Specs Info Grid */
+      .spec-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 24px;
+        height: 100%;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .spec-card:hover {
+        border-color: var(--color-orange);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-glow);
+      }
+      .spec-icon-box {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: var(--color-orange-light);
+        color: var(--color-orange);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+      }
+
+      /* Challenges & Solutions */
+      .challenge-box {
+        background: rgba(239, 68, 68, 0.04);
+        border: 1px solid rgba(239, 68, 68, 0.15);
+        border-radius: var(--border-radius-md);
+        padding: 30px;
+        height: 100%;
+      }
+      .solution-box {
+        background: rgba(0, 150, 136, 0.04);
+        border: 1px solid rgba(0, 150, 136, 0.15);
+        border-radius: var(--border-radius-md);
+        padding: 30px;
+        height: 100%;
+      }
+
+      /* Timeline Process */
+      .process-timeline {
+        position: relative;
+        padding-left: 32px;
+      }
+      .process-timeline::before {
+        content: '';
+        position: absolute;
+        left: 8px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--border-color);
+      }
+      .timeline-step {
+        position: relative;
+        margin-bottom: 40px;
+      }
+      .timeline-step:last-child {
+        margin-bottom: 0;
+      }
+      .timeline-node {
+        position: absolute;
+        left: -32px;
+        top: 4px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--bg-body);
+        border: 4px solid var(--color-orange);
+        box-shadow: 0 0 0 4px var(--bg-surface);
+        z-index: 2;
+        transition: all 0.3s ease;
+      }
+      .timeline-step:hover .timeline-node {
+        background: var(--color-orange);
+        transform: scale(1.2);
+      }
+      .timeline-content {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 24px;
+        transition: all 0.3s ease;
+      }
+      .timeline-step:hover .timeline-content {
+        border-color: var(--color-orange);
+        box-shadow: var(--shadow-sm);
+      }
+
+      /* Materials Card */
+      .material-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 20px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .material-card:hover {
+        border-color: var(--color-orange);
+        transform: translateY(-2px);
+      }
+      .material-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--color-orange-light);
+        color: var(--color-orange);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      /* Swiper Carousel Card */
+      .related-swiper {
+        padding: 10px 0 40px 0;
+      }
+      .related-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      .related-card:hover {
+        border-color: var(--color-orange);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-glow);
+      }
+      .related-img-wrap {
+        height: 180px;
+        overflow: hidden;
+      }
+      .related-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      .related-card:hover .related-img-wrap img {
+        transform: scale(1.08);
+      }
+
+      /* Testimonial Panel */
+      .review-panel {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-lg);
+        position: relative;
+        overflow: hidden;
+      }
+      .quote-svg {
+        position: absolute;
+        right: 40px;
+        bottom: 20px;
+        width: 120px;
+        height: 120px;
+        color: rgba(255, 87, 34, 0.03);
+        pointer-events: none;
+      }
+
+      /* Lightbox Modal */
+      .lightbox-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(11, 15, 25, 0.95);
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .lightbox-modal.active {
+        display: flex;
+        opacity: 1;
+      }
+      .lightbox-modal-content {
+        max-width: 90%;
+        max-height: 80vh;
+        border-radius: var(--border-radius-sm);
+        border: 1px solid var(--border-color);
+        box-shadow: var(--shadow-lg);
+      }
+      .lightbox-close-btn {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .lightbox-close-btn:hover {
+        background: var(--color-orange);
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- GLOBAL SEARCH MODAL -->
+    <div class="search-modal-overlay" id="searchModal">
+      <button class="search-modal-close" aria-label="Close search">
+        <i data-lucide="x" style="width:32px;height:32px;"></i>
+      </button>
+      <div class="search-modal-box">
+        <div class="search-modal-input-wrapper">
+          <input type="text" class="search-modal-input" placeholder="Search services, articles, products..." />
+          <i data-lucide="search" class="search-modal-icon" style="width:24px;height:24px;"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- STICKY HEADER TOP-BAR -->
+    <div class="top-bar d-none d-lg-flex">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-4">
+          <span class="top-bar-link">
+            <i data-lucide="clock" style="width:14px;height:14px;"></i>
+            Working Hours: 24/7 Emergency Support
+          </span>
+          <a href="mailto:emergency@plumbmaster.com" class="top-bar-link">
+            <i data-lucide="mail" style="width:14px;height:14px;"></i>
+            emergency@plumbmaster.com
+          </a>
+        </div>
+        <div class="d-flex align-items-center gap-4">
+          <a href="tel:18005550199" class="top-bar-link fw-bold text-orange">
+            <i data-lucide="phone-call" style="width:14px;height:14px;"></i>
+            Emergency Hotline: 1-800-555-0199
+          </a>
+          <div class="d-flex align-items-center gap-2 border-start ps-3 border-secondary">
+            <a href="#" class="top-bar-link" aria-label="Facebook"><i data-lucide="facebook" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Twitter"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN HEADER NAVIGATION -->
+    <header class="main-header">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a href="index.html" class="logo-brand">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:22px;height:22px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="nav-menu">
+          <div class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </div>
+          <div class="nav-item">
+            <a href="about.html" class="nav-link">About</a>
+          </div>
+          <div class="nav-item">
+            <a href="services.html" class="nav-link">
+              Services <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="services.html" class="dropdown-item-custom">All Services</a>
+              <a href="service-details.html" class="dropdown-item-custom">Service Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="projects.html" class="nav-link text-orange">
+              Projects <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="projects.html" class="dropdown-item-custom">Project Gallery</a>
+              <a href="project-details.html" class="dropdown-item-custom text-orange">Project Details</a>
+            </div>
+          </div>
+          <div class="nav-item mega-menu-wrapper">
+            <a href="shop.html" class="nav-link">
+              Shop <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="mega-menu">
+              <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Shop Collection</h3>
+                  <a href="shop.html" class="dropdown-item-custom">Main Plumbing Store</a>
+                  <a href="product-details.html" class="dropdown-item-custom">Premium Fittings</a>
+                  <a href="cart.html" class="dropdown-item-custom">Shopping Cart</a>
+                  <a href="checkout.html" class="dropdown-item-custom">Secure Checkout</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Our Pages</h3>
+                  <a href="team.html" class="dropdown-item-custom">Our Expert Plumbers</a>
+                  <a href="team-details.html" class="dropdown-item-custom">Expert Profile</a>
+                  <a href="pricing.html" class="dropdown-item-custom">Transparent Rates</a>
+                  <a href="faq.html" class="dropdown-item-custom">Frequently Asked Qs</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                  <h3 class="mega-title">Company Info</h3>
+                  <a href="about.html" class="dropdown-item-custom">Corporate Overview</a>
+                  <a href="contact.html" class="dropdown-item-custom">Office Contacts</a>
+                  <a href="privacy-policy.html" class="dropdown-item-custom">Privacy Policy</a>
+                  <a href="terms-conditions.html" class="dropdown-item-custom">Terms of Service</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="emergency-banner-box h-100 d-flex flex-column justify-content-center p-3 text-center">
+                    <span class="badge-premium mb-2 mx-auto">Seasonal Offer</span>
+                    <h4 class="fs-6 text-white mb-2">Free Inspections</h4>
+                    <p class="text-secondary small mb-3">Claim a free system audit on your initial water lines setup.</p>
+                    <a href="appointment.html" class="btn-premium py-2 px-3 fs-7 align-self-center">Claim Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="blog.html" class="nav-link">
+              Blog <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="blog.html" class="dropdown-item-custom">Industry News</a>
+              <a href="blog-details.html" class="dropdown-item-custom">Article Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="contact.html" class="nav-link">Contact</a>
+          </div>
+        </nav>
+
+        <div class="d-flex align-items-center gap-3">
+          <button class="search-toggle-btn search-trigger" aria-label="Open Search">
+            <i data-lucide="search"></i>
+          </button>
+          <button class="theme-toggle-btn" aria-label="Toggle Theme">
+            <i data-lucide="sun"></i>
+          </button>
+          <a href="appointment.html" class="btn-premium d-none d-xl-flex">
+            Book Appointment
+            <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+          </a>
+          <button class="mobile-menu-trigger" aria-label="Toggle Navigation">
+            <i data-lucide="menu" style="width:20px;height:20px;"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div class="mobile-nav-overlay"></div>
+    <div class="mobile-nav-drawer">
+      <div class="mobile-nav-header">
+        <a href="index.html" class="logo-brand text-decoration-none">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:18px;height:18px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+        <button class="mobile-nav-close" aria-label="Close Mobile Menu">
+          <i data-lucide="x" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-links">
+        <div class="mobile-nav-item"><a href="index.html" class="mobile-nav-link">Home</a></div>
+        <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About Us</a></div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Services <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="services.html" class="mobile-nav-submenu-link">Our Services</a>
+            <a href="service-details.html" class="mobile-nav-submenu-link">Service Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link text-orange">Projects <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="projects.html" class="mobile-nav-submenu-link text-orange">Project Gallery</a>
+            <a href="project-details.html" class="mobile-nav-submenu-link">Project Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Store Collection <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="shop.html" class="mobile-nav-submenu-link">Main Shop</a>
+            <a href="product-details.html" class="mobile-nav-submenu-link">Product Details</a>
+            <a href="cart.html" class="mobile-nav-submenu-link">Cart</a>
+            <a href="checkout.html" class="mobile-nav-submenu-link">Checkout</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">More Pages <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="team.html" class="mobile-nav-submenu-link">Our Plumbers</a>
+            <a href="team-details.html" class="mobile-nav-submenu-link">Profile Details</a>
+            <a href="pricing.html" class="mobile-nav-submenu-link">Pricing Plans</a>
+            <a href="faq.html" class="mobile-nav-submenu-link">FAQ Pages</a>
+            <a href="404.html" class="mobile-nav-submenu-link">404 Page</a>
+            <a href="coming-soon.html" class="mobile-nav-submenu-link">Coming Soon</a>
+            <a href="privacy-policy.html" class="mobile-nav-submenu-link">Privacy Policy</a>
+            <a href="terms-conditions.html" class="mobile-nav-submenu-link">Terms & Conditions</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Blog & News <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="blog.html" class="mobile-nav-submenu-link">Blog Posts</a>
+            <a href="blog-details.html" class="mobile-nav-submenu-link">Blog Article</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></div>
+      </div>
+      <div class="mt-4 pt-3 border-top border-secondary">
+        <a href="appointment.html" class="btn-premium w-full text-center">Book Online Now</a>
+      </div>
+    </div>
+
+    <!-- 1. PREMIUM PAGE HERO BANNER -->
+    <section class="details-hero">
+      <div class="details-hero-overlay"></div>
+      <div class="container relative-z">
+        <div class="row align-items-center">
+          <div class="col-lg-8" data-aos="fade-right">
+            <nav class="breadcrumb-nav mb-3">
+              <a href="index.html">Home</a>
+              <i data-lucide="chevron-right" style="width:12px;height:12px;margin:0 8px;vertical-align:middle;"></i>
+              <a href="projects.html">Projects</a>
+              <i data-lucide="chevron-right" style="width:12px;height:12px;margin:0 8px;vertical-align:middle;"></i>
+              <span class="text-orange">Commercial Pipe Overhaul</span>
+            </nav>
+            <span class="badge bg-danger mb-3 px-3 py-2 text-uppercase tracking-wider">Industrial Engineering</span>
+            <h1 class="display-4 text-white fw-bold mb-4">Commercial Pipeline Overhaul & Acoustic Dampening</h1>
+            <p class="lead text-secondary mb-0">Re-engineering standard municipal distribution conduits for luxury office towers, integrating high-pressure tolerance, leak detection grids, and structural noise cancellation.</p>
+          </div>
+          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-left">
+            <div class="glass-panel p-4">
+              <h3 class="h5 text-white mb-3 pb-2 border-bottom border-secondary">Project Dossier</h3>
+              <ul class="list-unstyled mb-0 d-flex flex-column gap-3">
+                <li class="d-flex justify-content-between text-secondary">
+                  <span>Client Name:</span>
+                  <strong class="text-white">Metropolitan Towers LLC</strong>
+                </li>
+                <li class="d-flex justify-content-between text-secondary">
+                  <span>Completion Date:</span>
+                  <strong class="text-white">April 14, 2026</strong>
+                </li>
+                <li class="d-flex justify-content-between text-secondary">
+                  <span>Location:</span>
+                  <strong class="text-white">Financial District, NY</strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. PROJECT OVERVIEW -->
+    <section class="section-padding" style="background: var(--bg-body);">
+      <div class="container">
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-6" data-aos="fade-right">
+            <div class="position-relative">
+              <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7eed?auto=format&fit=crop&w=800&q=80" alt="Plumbing Engineering Team" class="img-fluid rounded-lg shadow-lg border border-secondary" />
+              <div class="position-absolute bottom-0 end-0 bg-orange p-3 rounded-lg text-white m-3 d-none d-sm-block">
+                <p class="mb-0 fw-bold">100% Seamless</p>
+                <small class="text-white-50">Zero post-install issues</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-left">
+            <div class="ps-lg-4">
+              <h2 class="section-title text-white mb-3">System Specification Overview</h2>
+              <div class="section-divider mb-4"></div>
+              <p class="text-secondary mb-4">
+                The high-rise commercial pipe overhaul at Metropolitan Towers was initiated to address chronic sub-floor vibration, recurring low pressure on top floors, and lack of systemic monitoring. Our premium team designed and built a dual-loop circulation system using acoustics-certified surgical steel and intelligent flow valves.
+              </p>
+              <p class="text-secondary mb-5">
+                Over a period of five weeks, PlumbMaster replaced over 1,200 meters of corroded steel risers with acoustically isolated copper and heavy-wall PVC networks. The system now features real-time telemetry output, pressure buffers, and automated localized emergency shutoffs.
+              </p>
+              
+              <div class="row g-4">
+                <div class="col-6">
+                  <div class="border-start border-orange border-3 ps-3">
+                    <p class="text-secondary mb-1">Total Pipeline</p>
+                    <h4 class="text-white fw-bold">1,200m+</h4>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="border-start border-orange border-3 ps-3">
+                    <p class="text-secondary mb-1">Project Value</p>
+                    <h4 class="text-white fw-bold">$185,000</h4>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="border-start border-orange border-3 ps-3">
+                    <p class="text-secondary mb-1">Time Elapsed</p>
+                    <h4 class="text-white fw-bold">35 Days</h4>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="border-start border-orange border-3 ps-3">
+                    <p class="text-secondary mb-1">Pressure Output</p>
+                    <h4 class="text-white fw-bold">75 PSI (Stabilized)</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. IMAGE GALLERY -->
+    <section class="section-padding" style="background: var(--bg-surface); border-top: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="section-title text-white">System Architecture & Engineering Logs</h2>
+          <div class="section-divider mx-auto mb-3"></div>
+          <p class="text-secondary max-w-2xl mx-auto">Visual schematics, high-pressure calibrations, and completed system aesthetics. Click any panel to view the system inspection zoom.</p>
+        </div>
+        
+        <div class="row g-4">
+          <!-- Item 1 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="ba-images-container position-relative overflow-hidden rounded-lg border border-secondary" style="cursor: pointer; height: 260px;" data-src-after="https://images.unsplash.com/photo-1542013936693-8848e5740a7a?auto=format&fit=crop&w=800&q=80">
+              <img src="https://images.unsplash.com/photo-1542013936693-8848e5740a7a?auto=format&fit=crop&w=800&q=80" alt="Valve System Installation" class="w-full h-full object-cover transition duration-500 hover-zoom" />
+              <div class="position-absolute inset-0 bg-dark-overlay d-flex flex-column justify-content-end p-3">
+                <span class="text-orange text-xs fw-bold text-uppercase">Log 01</span>
+                <h4 class="h6 text-white mb-0">High-Pressure Backflow Regulators</h4>
+              </div>
+              <div class="position-absolute top-0 end-0 bg-orange p-2 m-2 rounded-circle" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: white;">
+                <i data-lucide="zoom-in" style="width: 14px; height: 14px;"></i>
+              </div>
+            </div>
+          </div>
+          <!-- Item 2 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="ba-images-container position-relative overflow-hidden rounded-lg border border-secondary" style="cursor: pointer; height: 260px;" data-src-after="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80">
+              <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" alt="Acoustic Vibration Dampeners" class="w-full h-full object-cover transition duration-500 hover-zoom" />
+              <div class="position-absolute inset-0 bg-dark-overlay d-flex flex-column justify-content-end p-3">
+                <span class="text-orange text-xs fw-bold text-uppercase">Log 02</span>
+                <h4 class="h6 text-white mb-0">Acoustic Isolating Clamps</h4>
+              </div>
+              <div class="position-absolute top-0 end-0 bg-orange p-2 m-2 rounded-circle" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: white;">
+                <i data-lucide="zoom-in" style="width: 14px; height: 14px;"></i>
+              </div>
+            </div>
+          </div>
+          <!-- Item 3 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="ba-images-container position-relative overflow-hidden rounded-lg border border-secondary" style="cursor: pointer; height: 260px;" data-src-after="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80">
+              <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" alt="Copper Branch Piping" class="w-full h-full object-cover transition duration-500 hover-zoom" />
+              <div class="position-absolute inset-0 bg-dark-overlay d-flex flex-column justify-content-end p-3">
+                <span class="text-orange text-xs fw-bold text-uppercase">Log 03</span>
+                <h4 class="h6 text-white mb-0">Custom Soldered Copper Risers</h4>
+              </div>
+              <div class="position-absolute top-0 end-0 bg-orange p-2 m-2 rounded-circle" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: white;">
+                <i data-lucide="zoom-in" style="width: 14px; height: 14px;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PROJECT INFORMATION / SPECIFICATIONS -->
+    <section class="section-padding" style="background: var(--bg-body);">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="section-title text-white">System Classifications</h2>
+          <div class="section-divider mx-auto mb-3"></div>
+          <p class="text-secondary max-w-2xl mx-auto">Specific standards, certified crew structures, and coverage plans guaranteed for this premium engineering installation.</p>
+        </div>
+        
+        <div class="row g-4">
+          <!-- Spec 1 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="spec-card">
+              <div class="spec-icon-box">
+                <i data-lucide="shield-check" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3 class="h5 text-white mb-2">Service Standard</h3>
+              <p class="text-secondary mb-0">Industrial-Grade Pipeline Replacement, compliance audited under ASME A112.19.2 standards.</p>
+            </div>
+          </div>
+          <!-- Spec 2 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="spec-card">
+              <div class="spec-icon-box">
+                <i data-lucide="building" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3 class="h5 text-white mb-2">Property Profile</h3>
+              <p class="text-secondary mb-0">45-story commercial office skyscraper with sub-level parking and retail arcade hubs.</p>
+            </div>
+          </div>
+          <!-- Spec 3 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="spec-card">
+              <div class="spec-icon-box">
+                <i data-lucide="users" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3 class="h5 text-white mb-2">Active Crew</h3>
+              <p class="text-secondary mb-0">6 Senior Pipe Engineers, 4 Acoustic Mechanics, led by Chief Plumbing Architect Mark Sterling.</p>
+            </div>
+          </div>
+          <!-- Spec 4 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="spec-card">
+              <div class="spec-icon-box">
+                <i data-lucide="clock" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3 class="h5 text-white mb-2">Installation Schedule</h3>
+              <p class="text-secondary mb-0">Off-peak nighttime shifts (10:00 PM – 5:00 AM) to ensure absolute zero disruption to business hours.</p>
+            </div>
+          </div>
+          <!-- Spec 5 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="spec-card">
+              <div class="spec-icon-box">
+                <i data-lucide="zap" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3 class="h5 text-white mb-2">Telemetry Grid</h3>
+              <p class="text-secondary mb-0">24/7 Smart ultrasonic sensors checking for micrometric fluid drops and heat spikes constantly.</p>
+            </div>
+          </div>
+          <!-- Spec 6 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="spec-card">
+              <div class="spec-icon-box">
+                <i data-lucide="award" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3 class="h5 text-white mb-2">Extended Warranty</h3>
+              <p class="text-secondary mb-0">Covered by our PlumbMaster 15-Year Commercial Structural guarantee with biannual audit reviews.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 & 6. CHALLENGES & SOLUTIONS -->
+    <section class="section-padding" style="background: var(--bg-surface); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="row g-5">
+          <!-- Challenges Section -->
+          <div class="col-lg-6" data-aos="fade-right">
+            <div class="challenge-box">
+              <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="bg-danger text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+                  <i data-lucide="alert-triangle" style="width: 20px; height: 20px;"></i>
+                </div>
+                <h2 class="h3 text-white mb-0">Operational Challenges</h2>
+              </div>
+              <ul class="d-flex flex-column gap-3 list-unstyled mb-0">
+                <li class="d-flex gap-3 text-secondary">
+                  <div class="text-danger mt-1">●</div>
+                  <div>
+                    <strong class="text-white">Heavy Internal Friction:</strong> Constant water-hammer pulses inside main vertical lines from multi-floor flushing cycles, causing high structural vibration.
+                  </div>
+                </li>
+                <li class="d-flex gap-3 text-secondary">
+                  <div class="text-danger mt-1">●</div>
+                  <div>
+                    <strong class="text-white">Active Business Operations:</strong> Replacing primary sewage and freshwater pipelines without causing outages to executive desks and ground restaurants.
+                  </div>
+                </li>
+                <li class="d-flex gap-3 text-secondary">
+                  <div class="text-danger mt-1">●</div>
+                  <div>
+                    <strong class="text-white">Space Limitations:</strong> Crawling inside 2.5-foot false-wall spaces behind heavy elevator shafts, requiring micro-solder welding tools.
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Solutions Section -->
+          <div class="col-lg-6" data-aos="fade-left">
+            <div class="solution-box">
+              <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background: rgba(0, 150, 136, 0.2); color: #009688;">
+                  <i data-lucide="check-circle" style="width: 20px; height: 20px;"></i>
+                </div>
+                <h2 class="h3 text-white mb-0">Engineering Solutions</h2>
+              </div>
+              <ul class="d-flex flex-column gap-3 list-unstyled mb-0">
+                <li class="d-flex gap-3 text-secondary">
+                  <div class="text-teal mt-1" style="color: #009688;">●</div>
+                  <div>
+                    <strong class="text-white">Pneumatic Arrester Loops:</strong> Designed and welded custom gas-charged pressure expansion loops on floors 12, 24, and 36 to absorb 98% of shockwaves.
+                  </div>
+                </li>
+                <li class="d-flex gap-3 text-secondary">
+                  <div class="text-teal mt-1" style="color: #009688;">●</div>
+                  <div>
+                    <strong class="text-white">Isolated Shift Splicing:</strong> Splicing lines floor-by-floor using temporary secondary flex-bypass tubes, ensuring restrooms remained 100% active during office hours.
+                  </div>
+                </li>
+                <li class="d-flex gap-3 text-secondary">
+                  <div class="text-teal mt-1" style="color: #009688;">●</div>
+                  <div>
+                    <strong class="text-white">Micro-Torch Laser Brazing:</strong> Deployed fiber-laser precision heating heads to carry out seamless joins without the risk of open flame sparks inside wall voids.
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. DETAILED WORK PROCESS TIMELINE -->
+    <section class="section-padding" style="background: var(--bg-body);">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="section-title text-white">Our Tactical Work Process</h2>
+          <div class="section-divider mx-auto mb-3"></div>
+          <p class="text-secondary max-w-2xl mx-auto">Tracing our six-phase high-precision workflow from preliminary thermographic audits to final system pressure tests.</p>
+        </div>
+        
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <div class="process-timeline">
+              <!-- Step 1 -->
+              <div class="timeline-step" data-aos="fade-up">
+                <div class="timeline-node"></div>
+                <div class="timeline-content">
+                  <span class="text-orange text-xs fw-bold text-uppercase d-block mb-1">Phase 01 — Thermographic Inspection</span>
+                  <h3 class="h5 text-white mb-2">Non-Invasive Diagnostic Heatmapping</h3>
+                  <p class="text-secondary mb-0">We ran infrared and acoustic probes through all wet columns to isolate micro-leaks, structural fatigue points, and trapped scale blocks without cutting a single panel.</p>
+                </div>
+              </div>
+              <!-- Step 2 -->
+              <div class="timeline-step" data-aos="fade-up" data-aos-delay="100">
+                <div class="timeline-node"></div>
+                <div class="timeline-content">
+                  <span class="text-orange text-xs fw-bold text-uppercase d-block mb-1">Phase 02 — CAD System Blueprinting</span>
+                  <h3 class="h5 text-white mb-2">Custom System Redesign & CAD Mapping</h3>
+                  <p class="text-secondary mb-0">Drafted highly detailed layout schematics integrating automated valve locations, bypass loops, and structural acoustic dampeners mapped onto the tower's architect files.</p>
+                </div>
+              </div>
+              <!-- Step 3 -->
+              <div class="timeline-step" data-aos="fade-up" data-aos-delay="200">
+                <div class="timeline-node"></div>
+                <div class="timeline-content">
+                  <span class="text-orange text-xs fw-bold text-uppercase d-block mb-1">Phase 03 — Bypass Conduit Setup</span>
+                  <h3 class="h5 text-white mb-2">Flexible Pressure Splicing</h3>
+                  <p class="text-secondary mb-0">Before dismantling the main lines, we routed heavy-duty temporary bypass conduits across high-usage floors, retaining full utilities for tenants with zero downtime.</p>
+                </div>
+              </div>
+              <!-- Step 4 -->
+              <div class="timeline-step" data-aos="fade-up" data-aos-delay="300">
+                <div class="timeline-node"></div>
+                <div class="timeline-content">
+                  <span class="text-orange text-xs fw-bold text-uppercase d-block mb-1">Phase 04 — Solder & Fusion Execution</span>
+                  <h3 class="h5 text-white mb-2">High-Grade Materials Integration</h3>
+                  <p class="text-secondary mb-0">Laid out premium Type L copper pipelines and heavy-walled Schedule 80 PVC branches, locking joints with double-soldered seals and acoustic isolators.</p>
+                </div>
+              </div>
+              <!-- Step 5 -->
+              <div class="timeline-step" data-aos="fade-up" data-aos-delay="400">
+                <div class="timeline-node"></div>
+                <div class="timeline-content">
+                  <span class="text-orange text-xs fw-bold text-uppercase d-block mb-1">Phase 05 — Telemetry Grid Calibration</span>
+                  <h3 class="h5 text-white mb-2">Smart Ultrasonic Transducer Setup</h3>
+                  <p class="text-secondary mb-0">Fitted non-contact ultrasound transmitters onto all major branch nodes, connecting flow velocity data to the building management software control terminal.</p>
+                </div>
+              </div>
+              <!-- Step 6 -->
+              <div class="timeline-step" data-aos="fade-up" data-aos-delay="500">
+                <div class="timeline-node"></div>
+                <div class="timeline-content">
+                  <span class="text-orange text-xs fw-bold text-uppercase d-block mb-1">Phase 06 — Pressure & Acoustic Certification</span>
+                  <h3 class="h5 text-white mb-2">ASME Calibration Audit & Handover</h3>
+                  <p class="text-secondary mb-0">Conducted a continuous 24-hour hydrostatic load test at 120 PSI (1.5x normal operating pressure) and acoustic noise metering to issue the final compliance safety badge.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. MATERIALS USED -->
+    <section class="section-padding" style="background: var(--bg-surface); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="section-title text-white">Premium Materials Deployed</h2>
+          <div class="section-divider mx-auto mb-3"></div>
+          <p class="text-secondary max-w-2xl mx-auto">We use strictly top-shelf components and copper alloys to prevent corrosion, degradation, or hydraulic failures.</p>
+        </div>
+        
+        <div class="row g-4">
+          <!-- Mat 1 -->
+          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="material-card">
+              <div class="material-icon">
+                <i data-lucide="wrench" style="width: 20px; height: 20px;"></i>
+              </div>
+              <div>
+                <h4 class="h6 text-white mb-1">Type L Hard Copper</h4>
+                <p class="text-secondary text-xs mb-0">High-purity domestic water line with thick structural walls for absolute pressure containment.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Mat 2 -->
+          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="material-card">
+              <div class="material-icon">
+                <i data-lucide="shield" style="width: 20px; height: 20px;"></i>
+              </div>
+              <div>
+                <h4 class="h6 text-white mb-1">Schedule 80 Heavy PVC</h4>
+                <p class="text-secondary text-xs mb-0">Thick industrial composite lines for chemical drainage resistance and structural loading security.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Mat 3 -->
+          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="material-card">
+              <div class="material-icon">
+                <i data-lucide="settings" style="width: 20px; height: 20px;"></i>
+              </div>
+              <div>
+                <h4 class="h6 text-white mb-1">Pneumatic Valves</h4>
+                <p class="text-secondary text-xs mb-0">High-durability stainless isolation valves with non-stick Teflon seats to prevent calcium lockup.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Mat 4 -->
+          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="material-card">
+              <div class="material-icon">
+                <i data-lucide="activity" style="width: 20px; height: 20px;"></i>
+              </div>
+              <div>
+                <h4 class="h6 text-white mb-1">Ultrasonic Flowmeters</h4>
+                <p class="text-secondary text-xs mb-0">Smart velocity meters detecting micrometric drips through high-speed sound impulses.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Mat 5 -->
+          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
+            <div class="material-card">
+              <div class="material-icon">
+                <i data-lucide="volume-x" style="width: 20px; height: 20px;"></i>
+              </div>
+              <div>
+                <h4 class="h6 text-white mb-1">Acoustic Wrap Clamps</h4>
+                <p class="text-secondary text-xs mb-0">Heavy-gauge elastomer wraps absorbing pipe vibrations before they transfer to office framing.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Mat 6 -->
+          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
+            <div class="material-card">
+              <div class="material-icon">
+                <i data-lucide="cpu" style="width: 20px; height: 20px;"></i>
+              </div>
+              <div>
+                <h4 class="h6 text-white mb-1">Microprocessor Shutoffs</h4>
+                <p class="text-secondary text-xs mb-0">Local logic valves closing columns in milliseconds upon detecting pressure spikes or air loops.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. CLIENT REVIEW PANEL -->
+    <section class="section-padding" style="background: var(--bg-body);">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 mx-auto" data-aos="fade-up">
+            <div class="review-panel p-5">
+              <svg class="quote-svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M11.192 15.757c0-.907-.188-1.745-.563-2.515C10.254 12.473 9.71 11.83 9 11.311c-.71-.52-1.503-.896-2.378-1.129v-.114c.83-.243 1.517-.68 2.061-1.311.543-.63.814-1.424.814-2.38 0-1.15-.353-2.1-1.059-2.85C7.731 2.776 6.786 2.4 5.597 2.4c-1.282 0-2.304.428-3.064 1.284C1.773 4.54 1.393 5.673 1.393 7.086c0 1.574.453 2.923 1.36 4.047.907 1.124 2.124 1.836 3.65 2.137v.143c-.87.433-1.517 1.1-1.939 2-.422.9-.633 1.96-.633 3.178 0 1.25.32 2.274.962 3.072.642.798 1.554 1.197 2.738 1.197 1.157 0 2.052-.39 2.686-1.168.634-.778.95-1.78.95-3.007V15.757zm11 0c0-.907-.188-1.745-.562-2.515-.376-.769-.92-1.412-1.63-1.931-.71-.52-1.503-.896-2.378-1.129v-.114c.83-.243 1.517-.68 2.061-1.311.543-.63.815-1.424.815-2.38 0-1.15-.354-2.1-1.06-2.85-.705-.75-1.65-1.126-2.84-1.126-1.28 0-2.303.428-3.063 1.284-.76.856-1.14 1.989-1.14 3.402 0 1.574.453 2.923 1.36 4.047.907 1.124 2.124 1.836 3.65 2.137v.143c-.87.433-1.517 1.1-1.939 2-.422.9-.633 1.96-.633 3.178 0 1.25.32 2.274.962 3.072.643.798 1.554 1.197 2.738 1.197 1.157 0 2.051-.39 2.685-1.168.635-.778.951-1.78.951-3.007V15.757z" />
+              </svg>
+              
+              <div class="row align-items-center g-4">
+                <div class="col-md-3 text-center text-md-start">
+                  <div class="position-relative d-inline-block">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&h=150&q=80" alt="Sarah Jenkins" class="img-fluid rounded-circle border border-orange shadow-md" style="width: 100px; height: 100px; object-fit: cover;" />
+                    <span class="position-absolute bottom-0 end-0 bg-success p-1 rounded-circle" style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg-surface); color: white;" title="Verified Client">
+                      <i data-lucide="check" style="width: 12px; height: 12px;"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div class="d-flex align-items-center gap-2 mb-2 justify-content-center justify-content-md-start">
+                    <div class="text-orange d-flex gap-1">
+                      <i data-lucide="star" style="width: 16px; height: 16px; fill: var(--color-orange);"></i>
+                      <i data-lucide="star" style="width: 16px; height: 16px; fill: var(--color-orange);"></i>
+                      <i data-lucide="star" style="width: 16px; height: 16px; fill: var(--color-orange);"></i>
+                      <i data-lucide="star" style="width: 16px; height: 16px; fill: var(--color-orange);"></i>
+                      <i data-lucide="star" style="width: 16px; height: 16px; fill: var(--color-orange);"></i>
+                    </div>
+                    <span class="badge bg-success-light text-success px-2 py-1 text-xs">Verified Project</span>
+                  </div>
+                  <h3 class="h5 text-white mb-2">"A masterclass in industrial contracting"</h3>
+                  <p class="text-secondary mb-3 italic">
+                    "We had suffered from intermittent floor-thrum and rattling water columns for years. PlumbMaster came in, mapped our structural columns in CAD, worked nocturnal shifts, and completed the entire 1,200m replacement ahead of schedule. The silent acoustics are incredible."
+                  </p>
+                  <div>
+                    <strong class="text-white">Sarah Jenkins</strong>
+                    <span class="text-secondary text-xs d-block">VP of Facilities, Metropolitan Towers LLC</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. RELATED PROJECTS CAROUSEL (SWIPER) -->
+    <section class="section-padding" style="background: var(--bg-surface); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="d-md-flex align-items-center justify-content-between mb-5" data-aos="fade-up">
+          <div>
+            <h2 class="section-title text-white mb-1">More High-End Case Studies</h2>
+            <div class="section-divider mb-0"></div>
+          </div>
+          <div class="d-flex gap-2 mt-3 mt-md-0">
+            <button class="swiper-prev-btn btn-premium-secondary p-0 rounded-circle" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;" aria-label="Previous Project">
+              <i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i>
+            </button>
+            <button class="swiper-next-btn btn-premium-secondary p-0 rounded-circle" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;" aria-label="Next Project">
+              <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="swiper related-swiper" data-aos="fade-up">
+          <div class="swiper-wrapper">
+            <!-- Slide 1 -->
+            <div class="swiper-slide">
+              <div class="related-card">
+                <div class="related-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="Project 1" />
+                </div>
+                <div class="p-4">
+                  <span class="text-orange text-xs fw-bold text-uppercase d-block mb-1">Residential</span>
+                  <h3 class="h6 mb-3"><a href="project-details.html" class="text-white text-decoration-none hover-orange">Luxury Villa Pipeline Setup</a></h3>
+                  <p class="text-secondary text-xs mb-3">Custom built floor-heating and soundless sewer conduits for a 6-bathroom private estate.</p>
+                  <a href="project-details.html" class="text-orange text-xs fw-bold text-decoration-none d-flex align-items-center gap-1">
+                    Read Case Study <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="swiper-slide">
+              <div class="related-card">
+                <div class="related-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80" alt="Project 2" />
+                </div>
+                <div class="p-4">
+                  <span class="text-orange text-xs fw-bold text-uppercase d-block mb-1">Commercial</span>
+                  <h3 class="h6 mb-3"><a href="project-details.html" class="text-white text-decoration-none hover-orange">Smart Boiler Station Retrofit</a></h3>
+                  <p class="text-secondary text-xs mb-3">Retrofitting classic oil boilers with clean dual-fuel steam generators and smart flow gauges.</p>
+                  <a href="project-details.html" class="text-orange text-xs fw-bold text-decoration-none d-flex align-items-center gap-1">
+                    Read Case Study <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="swiper-slide">
+              <div class="related-card">
+                <div class="related-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80" alt="Project 3" />
+                </div>
+                <div class="p-4">
+                  <span class="text-orange text-xs fw-bold text-uppercase d-block mb-1">Emergency</span>
+                  <h3 class="h6 mb-3"><a href="project-details.html" class="text-white text-decoration-none hover-orange">Sub-Level Flood Management</a></h3>
+                  <p class="text-secondary text-xs mb-3">Emergency sump pump installations and structural concrete sealings for a luxury parking basement.</p>
+                  <a href="project-details.html" class="text-orange text-xs fw-bold text-decoration-none d-flex align-items-center gap-1">
+                    Read Case Study <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Slide 4 -->
+            <div class="swiper-slide">
+              <div class="related-card">
+                <div class="related-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7eed?auto=format&fit=crop&w=600&q=80" alt="Project 4" />
+                </div>
+                <div class="p-4">
+                  <span class="text-orange text-xs fw-bold text-uppercase d-block mb-1">Industrial</span>
+                  <h3 class="h6 mb-3"><a href="project-details.html" class="text-white text-decoration-none hover-orange">Chemical Filtration Network</a></h3>
+                  <p class="text-secondary text-xs mb-3">Heavy polypropylene conduits with acid-wash isolation nodes for state-of-the-art tech laboratories.</p>
+                  <a href="project-details.html" class="text-orange text-xs fw-bold text-decoration-none d-flex align-items-center gap-1">
+                    Read Case Study <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Swiper Pagination -->
+          <div class="swiper-pagination mt-4 position-relative" style="bottom: 0;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. PREMIUM CALL TO ACTION -->
+    <section class="section-padding text-center" style="background: var(--bg-body);">
+      <div class="container" data-aos="zoom-in">
+        <div class="glass-panel p-5 max-w-4xl mx-auto">
+          <div class="premium-card-icon mx-auto mb-4" style="width: 64px; height: 64px; border-radius: 50%;">
+            <i data-lucide="phone-call" style="width: 28px; height: 28px;"></i>
+          </div>
+          <h2 class="display-6 text-white fw-bold mb-3">Facing a Custom Engineering Challenge?</h2>
+          <p class="text-secondary lead mb-4 max-w-2xl mx-auto">Connect directly with our elite plumbing architects. From high-pressure system mapping to instant emergency restoration, PlumbMaster delivers ultimate precision.</p>
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="tel:+18005550199" class="btn-premium d-flex align-items-center gap-2">
+              <i data-lucide="phone" style="width:16px;height:16px;"></i> Call +1 (800) 555-0199
+            </a>
+            <a href="appointment.html" class="btn-premium-secondary d-flex align-items-center gap-2">
+              <i data-lucide="calendar" style="width:16px;height:16px;"></i> Schedule Technical Consultation
+            </a>
+            <a href="contact.html" class="btn-premium-secondary d-flex align-items-center gap-2">
+              <i data-lucide="message-square" style="width:16px;height:16px;"></i> Contact Engineering Desk
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REUSABLE SYSTEM INSIGHT LIGHTBOX MODAL -->
+    <div id="galleryLightbox" class="lightbox-modal">
+      <div class="lightbox-close-btn" id="lightboxClose" aria-label="Close Lightbox">
+        <i data-lucide="x" style="width:20px;height:20px;"></i>
+      </div>
+      <img src="" alt="System Inspection Zoomed view" class="lightbox-modal-content" id="lightboxModalImage" />
+    </div>
+
+    <!-- PREMIUM FOOTER -->
+    <footer class="premium-footer section-padding pb-0">
+      <div class="container">
+        <div class="row g-5 pb-5">
+          <div class="col-lg-4 col-md-6">
+            <div class="mb-4">
+              <a href="index.html" class="logo-brand text-decoration-none">
+                <div class="logo-icon">
+                  <i data-lucide="wrench" style="width:20px;height:20px;"></i>
+                </div>
+                PLUMB<span>MASTER</span>
+              </a>
+            </div>
+            <p class="text-secondary mb-4">
+              Providing modern, elite plumbing engineering and emergency plumbing solutions across domestic and industrial sectors. Responsive, certified, and luxury-first.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" class="social-icon-circle" aria-label="Facebook"><i data-lucide="facebook" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Twitter"><i data-lucide="twitter" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Instagram"><i data-lucide="instagram" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:16px;height:16px;"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Core Services</h3>
+            <ul class="footer-link-list">
+              <li><a href="service-details.html">Drain Clearing</a></li>
+              <li><a href="service-details.html">Luxury Tub Fittings</a></li>
+              <li><a href="service-details.html">Pipeline Audits</a></li>
+              <li><a href="service-details.html">Water Heater Setup</a></li>
+              <li><a href="service-details.html">Emergency Response</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Quick Links</h3>
+            <ul class="footer-link-list">
+              <li><a href="about.html">About Corporate</a></li>
+              <li><a href="pricing.html">Transparent Rates</a></li>
+              <li><a href="team.html">Our Certified Staff</a></li>
+              <li><a href="faq.html">Common Questions</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <h3 class="footer-widget-title">Newsletter Signup</h3>
+            <p class="text-secondary mb-3">Subscribe to our monthly maintenance checklist and seasonal discount coupons.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+              <input type="email" class="newsletter-input" placeholder="Your Email Address" required />
+              <button type="submit" class="newsletter-submit" aria-label="Subscribe">
+                <i data-lucide="send" style="width:16px;height:16px;"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom text-center">
+          <div class="row align-items-center justify-content-between">
+            <div class="col-md-6 text-md-start mb-3 mb-md-0">
+              <p class="mb-0">&copy; 2026 PlumbMaster Template. Inspired by high-end luxury business engineering.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <div class="d-flex justify-content-center justify-content-md-end gap-4">
+                <a href="terms-conditions.html" class="text-secondary text-decoration-none">Terms of Service</a>
+                <a href="privacy-policy.html" class="text-secondary text-decoration-none">Privacy Policy</a>
+                <a href="contact.html" class="text-secondary text-decoration-none">Support desk</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lucide Vector Icons Library CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Animation Engine CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Custom Theme JS Control -->
+    <script src="/assets/js/main.js"></script>
+
+    <!-- Custom Project Details JS Controllers -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // 1. Initialize Related Projects Swiper Carousel
+        if (typeof Swiper !== 'undefined') {
+          const relatedSwiper = new Swiper('.related-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+              delay: 5000,
+              disableOnInteraction: false,
+            },
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+            },
+            navigation: {
+              nextEl: '.swiper-next-btn',
+              prevEl: '.swiper-prev-btn',
+            },
+            breakpoints: {
+              768: {
+                slidesPerView: 2,
+              },
+              1024: {
+                slidesPerView: 3,
+              }
+            }
+          });
+        }
+
+        // 2. Interactive Lightbox Zoom modal controller
+        const lightbox = document.getElementById('galleryLightbox');
+        const lightboxImg = document.getElementById('lightboxModalImage');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const baImages = document.querySelectorAll('.ba-images-container');
+
+        baImages.forEach(card => {
+          card.addEventListener('click', () => {
+            const srcAfter = card.getAttribute('data-src-after');
+            if (lightbox && lightboxImg) {
+              lightboxImg.src = srcAfter;
+              lightbox.classList.add('active');
+            }
+          });
+        });
+
+        if (lightboxClose && lightbox) {
+          lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+          });
+
+          lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+              lightbox.classList.remove('active');
+            }
+          });
+        }
+      });
+    </script>
+
+  </body>
+</html>

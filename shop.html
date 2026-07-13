@@ -1,0 +1,2362 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plumbing Store - PlumbMaster Premium Plumbing Template</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- AOS Animation CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    <!-- Custom Global Style -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    
+    <!-- Bespoke Styles for Shop Page -->
+    <style>
+      .shop-sidebar {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 24px;
+        position: sticky;
+        top: 130px;
+        transition: var(--theme-transition);
+      }
+      
+      .sidebar-widget {
+        margin-bottom: 30px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid var(--border-color);
+      }
+      
+      .sidebar-widget:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+      
+      .widget-title {
+        font-family: var(--font-heading);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 20px;
+        position: relative;
+        padding-left: 12px;
+      }
+      
+      .widget-title::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 4px;
+        bottom: 4px;
+        width: 3px;
+        background-color: var(--color-orange);
+        border-radius: 2px;
+      }
+      
+      /* Search widget */
+      .sidebar-search-box {
+        position: relative;
+      }
+      
+      .sidebar-search-input {
+        width: 100%;
+        background-color: var(--bg-topbar);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-sm);
+        padding: 12px 45px 12px 16px;
+        color: var(--text-primary);
+        font-size: 0.9rem;
+        transition: var(--theme-transition);
+      }
+      
+      .sidebar-search-input:focus {
+        border-color: var(--color-orange);
+        box-shadow: var(--shadow-glow);
+        outline: none;
+      }
+      
+      .sidebar-search-btn {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        padding: 8px;
+        transition: color 0.3s;
+      }
+      
+      .sidebar-search-btn:hover {
+        color: var(--color-orange);
+      }
+      
+      /* Category list widget */
+      .category-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .category-item {
+        margin-bottom: 10px;
+      }
+      
+      .category-link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--text-secondary);
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: var(--border-radius-sm);
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+      }
+      
+      .category-link:hover, .category-link.active {
+        color: var(--text-primary);
+        background-color: var(--bg-surface-hover);
+        padding-left: 16px;
+      }
+      
+      .category-link.active {
+        border-left: 3px solid var(--color-orange);
+        font-weight: 600;
+      }
+      
+      .category-count {
+        background-color: var(--bg-topbar);
+        font-size: 0.75rem;
+        padding: 2px 8px;
+        border-radius: 10px;
+        color: var(--text-muted);
+        border: 1px solid var(--border-color);
+      }
+      
+      /* Price range filter */
+      .price-range-slider {
+        margin-bottom: 15px;
+      }
+      
+      .price-range-label {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .price-slider-input {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 6px;
+        border-radius: 3px;
+        background: var(--border-color);
+        outline: none;
+        margin: 15px 0;
+      }
+      
+      .price-slider-input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--color-orange);
+        cursor: pointer;
+        border: 2px solid var(--bg-surface);
+        box-shadow: var(--shadow-sm);
+        transition: transform 0.2s;
+      }
+      
+      .price-slider-input::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+        background: var(--color-orange-hover);
+      }
+      
+      /* Popular product widget */
+      .pop-product-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .pop-product-item {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      
+      .pop-product-img-wrap {
+        width: 64px;
+        height: 64px;
+        border-radius: var(--border-radius-sm);
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+      
+      .pop-product-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+      }
+      
+      .pop-product-item:hover .pop-product-img {
+        transform: scale(1.1);
+      }
+      
+      .pop-product-info {
+        flex-grow: 1;
+      }
+      
+      .pop-product-title {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 4px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-decoration: none;
+      }
+      
+      .pop-product-title:hover {
+        color: var(--color-orange);
+      }
+      
+      .pop-product-price {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--color-orange);
+        font-weight: 500;
+      }
+      
+      /* Tag widget */
+      .tag-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      
+      .tag-badge {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        background-color: var(--bg-topbar);
+        border: 1px solid var(--border-color);
+        padding: 6px 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+      
+      .tag-badge:hover {
+        color: var(--text-primary);
+        border-color: var(--color-orange);
+        background-color: var(--color-orange-light);
+      }
+      
+      /* Promotional sidebar banner */
+      .promo-sidebar-banner {
+        position: relative;
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        border: 1px dashed var(--color-orange);
+        border-radius: var(--border-radius-md);
+        padding: 30px 20px;
+        overflow: hidden;
+        text-align: center;
+        z-index: 1;
+      }
+      
+      .promo-sidebar-banner::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,87,34,0.1) 0%, transparent 70%);
+        z-index: -1;
+      }
+      
+      /* Product cards grid styles */
+      .product-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        position: relative;
+      }
+      
+      .product-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--color-orange);
+        box-shadow: var(--shadow-lg), var(--shadow-glow);
+      }
+      
+      .product-img-container {
+        position: relative;
+        width: 100%;
+        padding-top: 100%; /* 1:1 Aspect Ratio */
+        background-color: var(--bg-topbar);
+        overflow: hidden;
+      }
+      
+      .product-img-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      
+      .product-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+      }
+      
+      .product-img.img-hover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+      }
+      
+      .product-card:hover .product-img {
+        transform: scale(1.08);
+      }
+      
+      .product-card:hover .product-img.img-hover {
+        opacity: 1;
+      }
+      
+      /* Badges */
+      .badge-container {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        z-index: 2;
+      }
+      
+      .store-badge {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 4px;
+        letter-spacing: 0.05em;
+      }
+      
+      .badge-new {
+        background-color: var(--color-teal);
+        color: white;
+      }
+      
+      .badge-sale {
+        background-color: var(--color-orange);
+        color: white;
+      }
+      
+      .badge-stock {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 4px;
+        z-index: 2;
+        background-color: rgba(11, 15, 25, 0.75);
+        backdrop-filter: blur(4px);
+        border: 1px solid var(--border-color);
+      }
+      
+      .stock-in {
+        color: #10b981;
+      }
+      
+      .stock-low {
+        color: #f59e0b;
+      }
+      
+      .stock-out {
+        color: #ef4444;
+      }
+      
+      /* Hover actions overlay */
+      .product-actions-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(360deg, rgba(11, 15, 25, 0.9) 0%, rgba(11, 15, 25, 0) 100%);
+        padding: 20px 15px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        z-index: 3;
+      }
+      
+      .product-card:hover .product-actions-overlay {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      .action-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+      
+      .action-btn:hover {
+        background-color: var(--color-orange);
+        border-color: var(--color-orange);
+        color: white;
+        transform: scale(1.1);
+      }
+      
+      /* Product content */
+      .product-info-panel {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+      
+      .product-cat {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        margin-bottom: 6px;
+        letter-spacing: 0.05em;
+      }
+      
+      .product-title {
+        font-family: var(--font-heading);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 8px;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: 2.8em;
+      }
+      
+      .product-desc {
+        font-size: 0.82rem;
+        color: var(--text-secondary);
+        margin-bottom: 15px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        line-height: 1.5;
+        min-height: 3em;
+      }
+      
+      .product-rating {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-bottom: 15px;
+        font-size: 0.8rem;
+      }
+      
+      .rating-stars {
+        color: var(--color-yellow);
+        display: flex;
+      }
+      
+      .rating-count {
+        color: var(--text-muted);
+        margin-left: 4px;
+      }
+      
+      .product-footer-price {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+        padding-top: 15px;
+        border-top: 1px solid var(--border-color);
+      }
+      
+      .price-box {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+      }
+      
+      .curr-price {
+        font-family: var(--font-mono);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--color-orange);
+      }
+      
+      .old-price {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        text-decoration: line-line-through;
+        color: var(--text-muted);
+        text-decoration: line-through;
+      }
+      
+      .view-details-btn-store {
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        transition: color 0.3s;
+      }
+      
+      .view-details-btn-store:hover {
+        color: var(--color-orange);
+      }
+      
+      /* Filter bar styling */
+      .shop-filter-bar {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 16px 24px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        transition: var(--theme-transition);
+      }
+      
+      .filter-results-text {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        margin-bottom: 0;
+      }
+      
+      .sort-select-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      
+      .sort-select {
+        background-color: var(--bg-topbar);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        border-radius: var(--border-radius-sm);
+        padding: 8px 16px;
+        font-size: 0.85rem;
+        outline: none;
+        transition: var(--theme-transition);
+      }
+      
+      .sort-select:focus {
+        border-color: var(--color-orange);
+      }
+      
+      /* Toast styling */
+      .toast-container-custom {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .toast-custom {
+        background-color: var(--bg-surface);
+        border-left: 4px solid var(--color-orange);
+        box-shadow: var(--shadow-lg), var(--shadow-glow);
+        color: var(--text-primary);
+        border-radius: var(--border-radius-sm);
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 300px;
+        transform: translateY(50px);
+        opacity: 0;
+        animation: toast-slide-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      }
+      
+      @keyframes toast-slide-in {
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+    </style>
+  <body>
+
+    <!-- GLOBAL SEARCH MODAL -->
+    <div class="search-modal-overlay" id="searchModal">
+      <button class="search-modal-close" aria-label="Close search">
+        <i data-lucide="x" style="width:32px;height:32px;"></i>
+      </button>
+      <div class="search-modal-box">
+        <div class="search-modal-input-wrapper">
+          <input type="text" class="search-modal-input" placeholder="Search services, articles, products..." />
+          <i data-lucide="search" class="search-modal-icon" style="width:24px;height:24px;"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- STICKY HEADER TOP-BAR -->
+    <div class="top-bar d-none d-lg-flex">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-4">
+          <span class="top-bar-link">
+            <i data-lucide="clock" style="width:14px;height:14px;"></i>
+            Working Hours: 24/7 Emergency Support
+          </span>
+          <a href="mailto:emergency@plumbmaster.com" class="top-bar-link">
+            <i data-lucide="mail" style="width:14px;height:14px;"></i>
+            emergency@plumbmaster.com
+          </a>
+        </div>
+        <div class="d-flex align-items-center gap-4">
+          <a href="tel:18005550199" class="top-bar-link fw-bold text-orange">
+            <i data-lucide="phone-call" style="width:14px;height:14px;"></i>
+            Emergency Hotline: 1-800-555-0199
+          </a>
+          <div class="d-flex align-items-center gap-2 border-start ps-3 border-secondary">
+            <a href="#" class="top-bar-link" aria-label="Facebook"><i data-lucide="facebook" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Twitter"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN HEADER NAVIGATION -->
+    <header class="main-header">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a href="index.html" class="logo-brand">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:22px;height:22px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="nav-menu">
+          <div class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </div>
+          <div class="nav-item">
+            <a href="about.html" class="nav-link ">About</a>
+          </div>
+          <div class="nav-item">
+            <a href="services.html" class="nav-link">
+              Services <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="services.html" class="dropdown-item-custom">All Services</a>
+              <a href="service-details.html" class="dropdown-item-custom">Service Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="projects.html" class="nav-link">
+              Projects <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="projects.html" class="dropdown-item-custom">Project Gallery</a>
+              <a href="project-details.html" class="dropdown-item-custom">Project Details</a>
+            </div>
+          </div>
+          <div class="nav-item mega-menu-wrapper">
+            <a href="shop.html" class="nav-link text-orange">
+              Shop <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="mega-menu">
+              <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Shop Collection</h3>
+                  <a href="shop.html" class="dropdown-item-custom text-orange">Main Plumbing Store</a>
+                  <a href="product-details.html" class="dropdown-item-custom ">Premium Fittings</a>
+                  <a href="cart.html" class="dropdown-item-custom ">Shopping Cart</a>
+                  <a href="checkout.html" class="dropdown-item-custom ">Secure Checkout</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Our Pages</h3>
+                  <a href="team.html" class="dropdown-item-custom ">Our Expert Plumbers</a>
+                  <a href="team-details.html" class="dropdown-item-custom ">Expert Profile</a>
+                  <a href="pricing.html" class="dropdown-item-custom ">Transparent Rates</a>
+                  <a href="faq.html" class="dropdown-item-custom ">Frequently Asked Qs</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                  <h3 class="mega-title">Company Info</h3>
+                  <a href="about.html" class="dropdown-item-custom">Corporate Overview</a>
+                  <a href="contact.html" class="dropdown-item-custom ">Office Contacts</a>
+                  <a href="privacy-policy.html" class="dropdown-item-custom ">Privacy Policy</a>
+                  <a href="terms-conditions.html" class="dropdown-item-custom ">Terms of Service</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="emergency-banner-box h-100 d-flex flex-column justify-content-center p-3 text-center">
+                    <span class="badge-premium mb-2 mx-auto">Seasonal Offer</span>
+                    <h4 class="fs-6 text-white mb-2">Free Inspections</h4>
+                    <p class="text-secondary small mb-3">Claim a free system audit on your initial water lines setup.</p>
+                    <a href="appointment.html" class="btn-premium py-2 px-3 fs-7 align-self-center">Claim Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="blog.html" class="nav-link ">
+              Blog <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="blog.html" class="dropdown-item-custom ">Industry News</a>
+              <a href="blog-details.html" class="dropdown-item-custom ">Article Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="contact.html" class="nav-link ">Contact</a>
+          </div>
+        </nav>
+
+        <div class="d-flex align-items-center gap-3">
+          <button class="search-toggle-btn search-trigger" aria-label="Open Search">
+            <i data-lucide="search"></i>
+          </button>
+          <button class="theme-toggle-btn" aria-label="Toggle Theme">
+            <i data-lucide="sun"></i>
+          </button>
+          <a href="appointment.html" class="btn-premium d-none d-xl-flex">
+            Book Appointment
+            <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+          </a>
+          <button class="mobile-menu-trigger" aria-label="Toggle Navigation">
+            <i data-lucide="menu" style="width:20px;height:20px;"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div class="mobile-nav-overlay"></div>
+    <div class="mobile-nav-drawer">
+      <div class="mobile-nav-header">
+        <a href="index.html" class="logo-brand text-decoration-none">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:18px;height:18px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+        <button class="mobile-nav-close" aria-label="Close Mobile Menu">
+          <i data-lucide="x" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-links">
+        <div class="mobile-nav-item"><a href="index.html" class="mobile-nav-link">Home</a></div>
+        <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About Us</a></div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Services <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="services.html" class="mobile-nav-submenu-link">Our Services</a>
+            <a href="service-details.html" class="mobile-nav-submenu-link">Service Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Projects <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="projects.html" class="mobile-nav-submenu-link">Project Gallery</a>
+            <a href="project-details.html" class="mobile-nav-submenu-link">Project Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link text-orange">Store Collection <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="shop.html" class="mobile-nav-submenu-link text-orange">Main Shop</a>
+            <a href="product-details.html" class="mobile-nav-submenu-link ">Product Details</a>
+            <a href="cart.html" class="mobile-nav-submenu-link ">Cart</a>
+            <a href="checkout.html" class="mobile-nav-submenu-link ">Checkout</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">More Pages <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="team.html" class="mobile-nav-submenu-link ">Our Plumbers</a>
+            <a href="team-details.html" class="mobile-nav-submenu-link ">Profile Details</a>
+            <a href="pricing.html" class="mobile-nav-submenu-link ">Pricing Plans</a>
+            <a href="faq.html" class="mobile-nav-submenu-link ">FAQ Pages</a>
+            <a href="404.html" class="mobile-nav-submenu-link ">404 Page</a>
+            <a href="coming-soon.html" class="mobile-nav-submenu-link ">Coming Soon</a>
+            <a href="privacy-policy.html" class="mobile-nav-submenu-link ">Privacy Policy</a>
+            <a href="terms-conditions.html" class="mobile-nav-submenu-link ">Terms & Conditions</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link ">Blog & News <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="blog.html" class="mobile-nav-submenu-link ">Blog Posts</a>
+            <a href="blog-details.html" class="mobile-nav-submenu-link ">Blog Article</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link ">Contact</a></div>
+      </div>
+      <div class="mt-4 pt-3 border-top border-secondary">
+        <a href="appointment.html" class="btn-premium w-full text-center">Book Online Now</a>
+      </div>
+    </div>
+
+    <!-- MAIN BREADCRUMB HERO BANNER -->
+    <section class="breadcrumbs-hero">
+      <div class="container text-center text-md-start d-md-flex align-items-center justify-content-between">
+        <div data-aos="fade-right">
+          <h1 class="display-5 text-white fw-bold mb-2">The Plumbing Store</h1>
+          <p class="text-secondary mb-0">Sourcing high-end, commercial-grade plumbing fittings and smart leak sensors.</p>
+        </div>
+        <div class="mt-3 mt-md-0" data-aos="fade-left">
+          <nav class="breadcrumb-nav justify-content-center justify-content-md-end">
+            <a href="index.html">Home</a>
+            <i data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+            <span class="text-orange">Store</span>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN BREADCRUMB HERO BANNER -->
+    <section class="breadcrumbs-hero">
+      <div class="container text-center text-md-start d-md-flex align-items-center justify-content-between">
+        <div data-aos="fade-right">
+          <h1 class="display-5 text-white fw-bold mb-2">The Plumbing Store</h1>
+          <p class="text-secondary mb-0">Sourcing high-end, commercial-grade plumbing fittings and smart leak sensors.</p>
+        </div>
+        <div class="mt-3 mt-md-0" data-aos="fade-left">
+          <nav class="breadcrumb-nav justify-content-center justify-content-md-end">
+            <a href="index.html">Home</a>
+            <i data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+            <span class="text-orange">Store</span>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOPPING MAIN LAYOUT SECTION -->
+    <main class="section-padding">
+      <div class="container">
+        <div class="row g-4">
+          
+          <!-- LEFT SIDEBAR FILTER SYSTEM -->
+          <div class="col-lg-4 col-xl-3" data-aos="fade-right">
+            <aside class="shop-sidebar">
+              
+              <!-- WIDGET 1: SEARCH -->
+              <div class="sidebar-widget">
+                <h3 class="widget-title">Product Search</h3>
+                <div class="sidebar-search-box">
+                  <input type="text" id="storeSearchInput" class="sidebar-search-input" placeholder="Search fittings, pipes, valves..." />
+                  <button type="button" class="sidebar-search-btn" aria-label="Search submit">
+                    <i data-lucide="search" style="width:18px;height:18px;"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <!-- WIDGET 2: CATEGORIES -->
+              <div class="sidebar-widget">
+                <h3 class="widget-title">Categories</h3>
+                <ul class="category-list">
+                  <li class="category-item">
+                    <a href="#" class="category-link active" data-category="all">
+                      <span>All Products</span>
+                      <span class="category-count" id="count-all">16</span>
+                    </a>
+                  </li>
+                  <li class="category-item">
+                    <a href="#" class="category-link" data-category="Pipes">
+                      <span>Pipes</span>
+                      <span class="category-count" id="count-pipes">2</span>
+                    </a>
+                  </li>
+                  <li class="category-item">
+                    <a href="#" class="category-link" data-category="Pipe Fittings">
+                      <span>Pipe Fittings</span>
+                      <span class="category-count" id="count-fittings">2</span>
+                    </a>
+                  </li>
+                  <li class="category-item">
+                    <a href="#" class="category-link" data-category="Water Heaters">
+                      <span>Water Heaters</span>
+                      <span class="category-count" id="count-heaters">2</span>
+                    </a>
+                  </li>
+                  <li class="category-item">
+                    <a href="#" class="category-link" data-category="Bathroom Fixtures">
+                      <span>Bathroom Fixtures</span>
+                      <span class="category-count" id="count-bathroom">2</span>
+                    </a>
+                  </li>
+                  <li class="category-item">
+                    <a href="#" class="category-link" data-category="Kitchen Fixtures">
+                      <span>Kitchen Fixtures</span>
+                      <span class="category-count" id="count-kitchen">2</span>
+                    </a>
+                  </li>
+                  <li class="category-item">
+                    <a href="#" class="category-link" data-category="Drain Accessories">
+                      <span>Drain Accessories</span>
+                      <span class="category-count" id="count-drains">1</span>
+                    </a>
+                  </li>
+                  <li class="category-item">
+                    <a href="#" class="category-link" data-category="Valves">
+                      <span>Valves</span>
+                      <span class="category-count" id="count-valves">1</span>
+                    </a>
+                  </li>
+                  <li class="category-item">
+                    <a href="#" class="category-link" data-category="Tools">
+                      <span>Tools</span>
+                      <span class="category-count" id="count-tools">2</span>
+                    </a>
+                  </li>
+                  <li class="category-item">
+                    <a href="#" class="category-link" data-category="Commercial Equipment">
+                      <span>Commercial Equipment</span>
+                      <span class="category-count" id="count-commercial">1</span>
+                    </a>
+                  </li>
+                  <li class="category-item">
+                    <a href="#" class="category-link" data-category="Safety Equipment">
+                      <span>Safety Equipment</span>
+                      <span class="category-count" id="count-safety">1</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              
+              <!-- WIDGET 3: PRICE FILTER -->
+              <div class="sidebar-widget">
+                <h3 class="widget-title">Max Budget</h3>
+                <div class="price-range-slider">
+                  <input type="range" id="priceRangeInput" class="price-slider-input" min="10" max="1200" value="1200" step="10" />
+                  <div class="price-range-label">
+                    <span>Min: $10</span>
+                    <span>Max: <strong class="text-orange" id="priceRangeVal">$1200</strong></span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- WIDGET 4: POPULAR / BEST SELLERS -->
+              <div class="sidebar-widget">
+                <h3 class="widget-title">Popular Products</h3>
+                <div class="pop-product-list">
+                  <div class="pop-product-item">
+                    <div class="pop-product-img-wrap">
+                      <img src="https://images.unsplash.com/photo-1542013936693-8848e574047a?auto=format&fit=crop&w=150&q=80" alt="Brass Fitting" class="pop-product-img" />
+                    </div>
+                    <div class="pop-product-info">
+                      <a href="product-details.html?id=3" class="pop-product-title">Solid Brass T-Adapter (1/2" NPT)</a>
+                      <span class="pop-product-price">$14.50</span>
+                    </div>
+                  </div>
+                  <div class="pop-product-item">
+                    <div class="pop-product-img-wrap">
+                      <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=150&q=80" alt="Rainfall Shower" class="pop-product-img" />
+                    </div>
+                    <div class="pop-product-info">
+                      <a href="product-details.html?id=7" class="pop-product-title">Matte Black Rainfall Shower Head</a>
+                      <span class="pop-product-price">$220.00</span>
+                    </div>
+                  </div>
+                  <div class="pop-product-item">
+                    <div class="pop-product-img-wrap">
+                      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Smart Faucet" class="pop-product-img" />
+                    </div>
+                    <div class="pop-product-info">
+                      <a href="product-details.html?id=8" class="pop-product-title">Smart Motion-Sensor Brass Faucet</a>
+                      <span class="pop-product-price">$189.00</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- WIDGET 5: TAGS -->
+              <div class="sidebar-widget">
+                <h3 class="widget-title">Popular Tags</h3>
+                <div class="tag-cloud">
+                  <a href="#" class="tag-badge" data-tag="Brass">Brass</a>
+                  <a href="#" class="tag-badge" data-tag="Copper">Copper</a>
+                  <a href="#" class="tag-badge" data-tag="PEX">PEX</a>
+                  <a href="#" class="tag-badge" data-tag="Smart">Smart</a>
+                  <a href="#" class="tag-badge" data-tag="High-Pressure">High-Pressure</a>
+                  <a href="#" class="tag-badge" data-tag="Heavy-Duty">Heavy-Duty</a>
+                  <a href="#" class="tag-badge" data-tag="Tankless">Tankless</a>
+                </div>
+              </div>
+              
+              <!-- WIDGET 6: PROMOTION -->
+              <div class="promo-sidebar-banner">
+                <span class="badge-premium mb-2">LIMITED DEAL</span>
+                <h4 class="h5 text-white fw-bold mb-2">Plumbing Pro Kit</h4>
+                <p class="text-secondary small mb-3">Get 20% off high-pressure fittings and certified pipe cutters.</p>
+                <div class="font-mono text-orange fw-bold fs-5 mb-3">CODE: PLUMBER20</div>
+                <a href="product-details.html?id=13" class="btn-premium py-2 px-3 fs-7 w-100 text-center">Claim Deal</a>
+              </div>
+              
+            </aside>
+          </div>
+          
+          <!-- RIGHT PRODUCTS CATALOG GRID -->
+          <div class="col-lg-8 col-xl-9" data-aos="fade-left">
+            
+            <!-- FILTER STATS & SORTING BAR -->
+            <div class="shop-filter-bar">
+              <p class="filter-results-text">Showing <strong class="text-orange" id="visibleCount">16</strong> of <strong class="text-white">16</strong> results</p>
+              <div class="sort-select-wrap">
+                <span class="text-secondary small">Sort By:</span>
+                <select id="storeSortSelect" class="sort-select">
+                  <option value="popularity">Popularity / Best Sellers</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="rating">Average Rating</option>
+                </select>
+              </div>
+            </div>
+            
+            <!-- 16 PRODUCT GRID -->
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="storeProductGrid">
+              
+              <!-- PRODUCT 1 -->
+              <div class="col product-grid-item" data-category="Pipes" data-price="89.00" data-rating="4.8" data-tags="PEX Heavy-Duty" data-popularity="1">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <div class="badge-container">
+                      <span class="store-badge badge-sale">Sale -25%</span>
+                    </div>
+                    <span class="badge-stock stock-in"><i data-lucide="check" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> In Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Premium PEX-B Piping Coil (100ft)" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1542013936693-8848e574047a?auto=format&fit=crop&w=600&q=80" alt="PEX-B pipe zoom" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="1" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="1" data-name="Premium PEX-B Piping Coil (100ft)" data-price="89.00" title="Add to Cart" aria-label="Add to Cart">
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Pipes</span>
+                    <h3 class="product-title">Premium PEX-B Piping Coil (100ft)</h3>
+                    <p class="product-desc">High-density cross-linked polyethylene pipe for radiant floor heating and potable water lines.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                      </div>
+                      <span class="rating-count">4.8 (24)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$89.00</span>
+                        <span class="old-price">$119.00</span>
+                      </div>
+                      <a href="product-details.html?id=1" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- PRODUCT 2 -->
+              <div class="col product-grid-item" data-category="Pipes" data-price="45.00" data-rating="4.9" data-tags="Copper Heavy-Duty" data-popularity="2">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <div class="badge-container">
+                      <span class="store-badge badge-sale">Sale -18%</span>
+                    </div>
+                    <span class="badge-stock stock-in"><i data-lucide="check" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> In Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80" alt="Solid Copper L-Type Pipe (10ft)" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Copper pipe swap" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="2" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="2" data-name="Solid Copper L-Type Pipe (10ft)" data-price="45.00" title="Add to Cart" aria-label="Add to Cart">
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Pipes</span>
+                    <h3 class="product-title">Solid Copper L-Type Pipe (10ft)</h3>
+                    <p class="product-desc">Heavy-wall certified copper tubing for indoor structural water supply and high-pressure steam distribution.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                      </div>
+                      <span class="rating-count">4.9 (18)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$45.00</span>
+                        <span class="old-price">$55.00</span>
+                      </div>
+                      <a href="product-details.html?id=2" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- PRODUCT 3 -->
+              <div class="col product-grid-item" data-category="Pipe Fittings" data-price="14.50" data-rating="4.7" data-tags="Brass Heavy-Duty" data-popularity="15">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <div class="badge-container">
+                      <span class="store-badge badge-new">New</span>
+                    </div>
+                    <span class="badge-stock stock-in"><i data-lucide="check" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> In Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=600&q=80" alt="Solid Brass T-Adapter (1/2 NPT)" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1605647540924-852290f6b0d5?auto=format&fit=crop&w=600&q=80" alt="Brass Fitting swap" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="3" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="3" data-name="Solid Brass T-Adapter (1/2 NPT)" data-price="14.50" title="Add to Cart" aria-label="Add to Cart">
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Pipe Fittings</span>
+                    <h3 class="product-title">Solid Brass T-Adapter (1/2" NPT)</h3>
+                    <p class="product-desc">High-precision solid brass forged adapter designed for secure leak-free triple water-line connection grids.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                      </div>
+                      <span class="rating-count">4.7 (42)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$14.50</span>
+                      </div>
+                      <a href="product-details.html?id=3" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- PRODUCT 4 -->
+              <div class="col product-grid-item" data-category="Pipe Fittings" data-price="12.00" data-rating="4.6" data-tags="Brass High-Pressure" data-popularity="6">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <div class="badge-container">
+                      <span class="store-badge badge-sale">Sale -33%</span>
+                    </div>
+                    <span class="badge-stock stock-low"><i data-lucide="alert-triangle" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> Low Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1542013936693-8848e574047a?auto=format&fit=crop&w=600&q=80" alt="LeakStop Pro Compression Elbow (3/4)" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=600&q=80" alt="Brass Elbow swap" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="4" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="4" data-name="LeakStop Pro Compression Elbow (3/4)" data-price="12.00" title="Add to Cart" aria-label="Add to Cart">
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Pipe Fittings</span>
+                    <h3 class="product-title">LeakStop Pro Compression Elbow (3/4")</h3>
+                    <p class="product-desc">No-solder double-seal copper/PEX compression connector elbow for direct plumbing turns in restricted spaces.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;"></i>
+                      </div>
+                      <span class="rating-count">4.6 (15)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$12.00</span>
+                        <span class="old-price">$18.00</span>
+                      </div>
+                      <a href="product-details.html?id=4" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- PRODUCT 5 -->
+              <div class="col product-grid-item" data-category="Water Heaters" data-price="850.00" data-rating="4.9" data-tags="Smart Eco-Friendly" data-popularity="16">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <div class="badge-container">
+                      <span class="store-badge badge-sale">Save $149</span>
+                    </div>
+                    <span class="badge-stock stock-in"><i data-lucide="check" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> In Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="HydroVolt 50-Gal Smart Water Heater" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80" alt="Smart Boiler swap" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="5" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="5" data-name="HydroVolt 50-Gal Smart Water Heater" data-price="850.00" title="Add to Cart" aria-label="Add to Cart">
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Water Heaters</span>
+                    <h3 class="product-title">HydroVolt 50-Gal Smart Water Heater</h3>
+                    <p class="product-desc">Wi-Fi enabled Energy Star hybrid electric boiler with cellular leak sensors and scheduled heating loops.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                      </div>
+                      <span class="rating-count">4.9 (56)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$850.00</span>
+                        <span class="old-price">$999.00</span>
+                      </div>
+                      <a href="product-details.html?id=5" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- PRODUCT 6 -->
+              <div class="col product-grid-item" data-category="Water Heaters" data-price="1200.00" data-rating="4.8" data-tags="Tankless Eco-Friendly" data-popularity="10">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <div class="badge-container">
+                      <span class="store-badge badge-new">New</span>
+                    </div>
+                    <span class="badge-stock stock-in"><i data-lucide="check" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> In Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1605647540924-852290f6b0d5?auto=format&fit=crop&w=600&q=80" alt="ThermaFlow Tankless Gas Water Heater" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="Heater swap" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="6" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="6" data-name="ThermaFlow Tankless Gas Water Heater" data-price="1200.00" title="Add to Cart" aria-label="Add to Cart">
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Water Heaters</span>
+                    <h3 class="product-title">ThermaFlow Tankless Gas Water Heater</h3>
+                    <p class="product-desc">Ultra-efficient condensing gas-fired on-demand water system with modern low NOx burner cells.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                      </div>
+                      <span class="rating-count">4.8 (29)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$1,200.00</span>
+                      </div>
+                      <a href="product-details.html?id=6" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- PRODUCT 7 -->
+              <div class="col product-grid-item" data-category="Bathroom Fixtures" data-price="220.00" data-rating="4.9" data-tags="Brass High-Pressure" data-popularity="14">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <div class="badge-container">
+                      <span class="store-badge badge-sale">Promo</span>
+                    </div>
+                    <span class="badge-stock stock-in"><i data-lucide="check" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> In Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="Bespoke Matte Black Rainfall Shower Head" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1542013936693-8848e574047a?auto=format&fit=crop&w=600&q=80" alt="Rainfall zoom swap" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="7" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="7" data-name="Bespoke Matte Black Rainfall Shower Head" data-price="220.00" title="Add to Cart" aria-label="Add to Cart">
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Bathroom Fixtures</span>
+                    <h3 class="product-title">Bespoke Matte Black Rainfall Shower Head</h3>
+                    <p class="product-desc">Architectural 12-inch luxury rainfall panel featuring eco-friendly water dispersion tech and anti-clog jets.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                      </div>
+                      <span class="rating-count">4.9 (88)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$220.00</span>
+                        <span class="old-price">$280.00</span>
+                      </div>
+                      <a href="product-details.html?id=7" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- PRODUCT 8 -->
+              <div class="col product-grid-item" data-category="Bathroom Fixtures" data-price="189.00" data-rating="4.7" data-tags="Brass Smart" data-popularity="11">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <div class="badge-container">
+                      <span class="store-badge badge-new">New</span>
+                    </div>
+                    <span class="badge-stock stock-in"><i data-lucide="check" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> In Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Smart Motion-Sensor Brass Faucet" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=600&q=80" alt="Faucet swap" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="8" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="8" data-name="Smart Motion-Sensor Brass Faucet" data-price="189.00" title="Add to Cart" aria-label="Add to Cart">
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Bathroom Fixtures</span>
+                    <h3 class="product-title">Smart Motion-Sensor Brass Faucet</h3>
+                    <p class="product-desc">Touchless motion-activated bathroom tap with heavy chrome finishing and dynamic thermodynamic mixer valves.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;"></i>
+                      </div>
+                      <span class="rating-count">4.7 (31)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$189.00</span>
+                      </div>
+                      <a href="product-details.html?id=8" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- PRODUCT 9 -->
+              <div class="col product-grid-item" data-category="Kitchen Fixtures" data-price="299.00" data-rating="4.8" data-tags="Copper Heavy-Duty" data-popularity="12">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <div class="badge-container">
+                      <span class="store-badge badge-sale">Sale -15%</span>
+                    </div>
+                    <span class="badge-stock stock-in"><i data-lucide="check" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> In Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="Commercial-Grade Pull-Down Kitchen Tap" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Kitchen swap" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="9" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="9" data-name="Commercial-Grade Pull-Down Kitchen Tap" data-price="299.00" title="Add to Cart" aria-label="Add to Cart">
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Kitchen Fixtures</span>
+                    <h3 class="product-title">Commercial-Grade Pull-Down Kitchen Tap</h3>
+                    <p class="product-desc">Flexible high-arch kitchen gooseneck tap featuring magnetic spray nozzle docking and secure brass cartridge.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                      </div>
+                      <span class="rating-count">4.8 (47)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$299.00</span>
+                        <span class="old-price">$349.00</span>
+                      </div>
+                      <a href="product-details.html?id=9" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- PRODUCT 10 -->
+              <div class="col product-grid-item" data-category="Kitchen Fixtures" data-price="450.00" data-rating="4.6" data-tags="Heavy-Duty" data-popularity="5">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <span class="badge-stock stock-low"><i data-lucide="alert-triangle" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> Low Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="Luxury Deep Double-Basin Granite Sink" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80" alt="Sink swap" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="10" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="10" data-name="Luxury Deep Double-Basin Granite Sink" data-price="450.00" title="Add to Cart" aria-label="Add to Cart">
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Kitchen Fixtures</span>
+                    <h3 class="product-title">Luxury Deep Double-Basin Granite Sink</h3>
+                    <p class="product-desc">Scratch-resistant quartz-composite dual sink bowl built for superior acoustics and thermal dampening.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;"></i>
+                      </div>
+                      <span class="rating-count">4.6 (12)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$450.00</span>
+                      </div>
+                      <a href="product-details.html?id=10" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- PRODUCT 11 -->
+              <div class="col product-grid-item" data-category="Drain Accessories" data-price="35.00" data-rating="4.5" data-tags="Heavy-Duty" data-popularity="4">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <span class="badge-stock stock-in"><i data-lucide="check" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> In Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1542013936693-8848e574047a?auto=format&fit=crop&w=600&q=80" alt="Anti-Odor Stainless Floor Drain Trap" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=600&q=80" alt="Drain swap" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="11" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="11" data-name="Anti-Odor Stainless Floor Drain Trap" data-price="35.00" title="Add to Cart" aria-label="Add to Cart">
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Drain Accessories</span>
+                    <h3 class="product-title">Anti-Odor Stainless Floor Drain Trap</h3>
+                    <p class="product-desc">Polished heavy-duty steel drainage floor trap with magnetic anti-odor core and hair filter baskets.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;"></i>
+                      </div>
+                      <span class="rating-count">4.5 (64)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$35.00</span>
+                      </div>
+                      <a href="product-details.html?id=11" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- PRODUCT 12 -->
+              <div class="col product-grid-item" data-category="Valves" data-price="149.00" data-rating="4.8" data-tags="Brass Heavy-Duty" data-popularity="8">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <div class="badge-container">
+                      <span class="store-badge badge-sale">Sale -17%</span>
+                    </div>
+                    <span class="badge-stock stock-in"><i data-lucide="check" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> In Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80" alt="Heavy Cast-Iron Sewer Backwater Valve" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Valve swap" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="12" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="12" data-name="Heavy Cast-Iron Sewer Backwater Valve" data-price="149.00" title="Add to Cart" aria-label="Add to Cart">
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Valves</span>
+                    <h3 class="product-title">Heavy Cast-Iron Sewer Backwater Valve</h3>
+                    <p class="product-desc">Flapper backwater security system prevents emergency sewer backup lines during heavy municipal floodings.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                      </div>
+                      <span class="rating-count">4.8 (21)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$149.00</span>
+                        <span class="old-price">$179.00</span>
+                      </div>
+                      <a href="product-details.html?id=12" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- PRODUCT 13 -->
+              <div class="col product-grid-item" data-category="Tools" data-price="65.00" data-rating="4.9" data-tags="Copper Brass Heavy-Duty" data-popularity="13">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <div class="badge-container">
+                      <span class="store-badge badge-new">New</span>
+                    </div>
+                    <span class="badge-stock stock-in"><i data-lucide="check" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> In Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=600&q=80" alt="PlumbMaster Precision Pipe Cutter" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1605647540924-852290f6b0d5?auto=format&fit=crop&w=600&q=80" alt="Cutter swap" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="13" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="13" data-name="PlumbMaster Precision Pipe Cutter" data-price="65.00" title="Add to Cart" aria-label="Add to Cart">
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Tools</span>
+                    <h3 class="product-title">PlumbMaster Precision Pipe Cutter</h3>
+                    <p class="product-desc">Hardened steel cutting blade with smooth roller guides for surgical deformation-free copper pipeline cuts.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                      </div>
+                      <span class="rating-count">4.9 (53)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$65.00</span>
+                      </div>
+                      <a href="product-details.html?id=13" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- PRODUCT 14 -->
+              <div class="col product-grid-item" data-category="Tools" data-price="78.00" data-rating="4.7" data-tags="Heavy-Duty" data-popularity="9">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <div class="badge-container">
+                      <span class="store-badge badge-sale">Sale -18%</span>
+                    </div>
+                    <span class="badge-stock stock-in"><i data-lucide="check" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> In Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1605647540924-852290f6b0d5?auto=format&fit=crop&w=600&q=80" alt="Rotary Drain Auger & Clog Remover" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=600&q=80" alt="Snake swap" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="14" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="14" data-name="Rotary Drain Auger & Clog Remover" data-price="78.00" title="Add to Cart" aria-label="Add to Cart">
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Tools</span>
+                    <h3 class="product-title">Rotary Drain Auger & Clog Remover (25ft)</h3>
+                    <p class="product-desc">Heavy-duty drill-powered flexible carbon spring steel wire designed for resolving deep home pipe blockage grids.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;"></i>
+                      </div>
+                      <span class="rating-count">4.7 (79)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$78.00</span>
+                        <span class="old-price">$95.00</span>
+                      </div>
+                      <a href="product-details.html?id=14" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- PRODUCT 15 -->
+              <div class="col product-grid-item" data-category="Commercial Equipment" data-price="115.00" data-rating="4.8" data-tags="High-Pressure Heavy-Duty" data-popularity="3">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <span class="badge-stock stock-in"><i data-lucide="check" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> In Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80" alt="Industrial Water Pressure Gauge Kit" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Gauge swap" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="15" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="15" data-name="Industrial Water Pressure Gauge Kit" data-price="115.00" title="Add to Cart" aria-label="Add to Cart">
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Commercial Equipment</span>
+                    <h3 class="product-title">Industrial Water Pressure Gauge Kit</h3>
+                    <p class="product-desc">Stainless steel oil-filled diagnostic dial gauge measuring up to 200 PSI for commercial flow calibrations.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                      </div>
+                      <span class="rating-count">4.8 (37)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$115.00</span>
+                      </div>
+                      <a href="product-details.html?id=15" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- PRODUCT 16 -->
+              <div class="col product-grid-item" data-category="Safety Equipment" data-price="55.00" data-rating="4.6" data-tags="Heavy-Duty" data-popularity="7">
+                <div class="product-card">
+                  <div class="product-img-container">
+                    <span class="badge-stock stock-out"><i data-lucide="x" class="me-1" style="width:10px;height:10px;vertical-align:middle;"></i> Out of Stock</span>
+                    <div class="product-img-wrapper">
+                      <img src="https://images.unsplash.com/photo-1605647540924-852290f6b0d5?auto=format&fit=crop&w=600&q=80" alt="High-Visibility Plumbers Safety Harness" class="product-img main-img" />
+                      <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80" alt="Harness swap" class="product-img img-hover" />
+                    </div>
+                    <div class="product-actions-overlay">
+                      <button type="button" class="action-btn quick-view-trigger" data-id="16" title="Quick View" aria-label="Quick View">
+                        <i data-lucide="eye" style="width:16px;height:16px;"></i>
+                      </button>
+                      <button type="button" class="action-btn add-to-cart-trigger" data-id="16" data-name="High-Visibility Plumbers Safety Harness" data-price="55.00" title="Add to Cart" aria-label="Add to Cart" disabled>
+                        <i data-lucide="shopping-cart" style="width:16px;height:16px;"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-info-panel">
+                    <span class="product-cat">Safety Equipment</span>
+                    <h3 class="product-title">High-Visibility Plumbers Safety Harness</h3>
+                    <p class="product-desc">Industrial double-hook drop-protection belt designed for utility shaft climbs and high-altitude sewer piping.</p>
+                    <div class="product-rating">
+                      <div class="rating-stars">
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;fill:currentColor;"></i>
+                        <i data-lucide="star" style="width:12px;height:12px;"></i>
+                      </div>
+                      <span class="rating-count">4.6 (14)</span>
+                    </div>
+                    <div class="product-footer-price">
+                      <div class="price-box">
+                        <span class="curr-price">$55.00</span>
+                      </div>
+                      <a href="product-details.html?id=16" class="view-details-btn-store">Details <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            
+            <!-- WHOLESALE PROCUREMENT BLOCK -->
+            <div class="mt-5" data-aos="fade-up">
+              <div class="glass-panel p-4 p-md-5 text-center" style="border: 1px dashed var(--color-orange);">
+                <span class="badge-premium mb-3">WHOLESALE PROCUREMENT</span>
+                <h3 class="h4 text-white fw-bold mb-3">Looking For High-Volume Industrial Sourcing?</h3>
+                <p class="text-secondary max-w-2xl mx-auto mb-4">
+                  We supply mechanical plumbing adapters, massive boilers, and copper alloy coils in industrial pallets. Save up to 35% on freight and procurement taxes.
+                </p>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                  <a href="contact.html" class="btn-premium px-4 py-3"><i data-lucide="mail" class="me-2" style="width:16px;height:16px;vertical-align:middle;"></i> Request Bulk Quote</a>
+                  <a href="tel:18005550199" class="btn btn-outline-secondary text-secondary border-secondary px-4 py-3"><i data-lucide="phone" class="me-2" style="width:16px;height:16px;vertical-align:middle;"></i> Call Commercial Desk</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          
+        </div>
+      </div>
+    </main>
+
+    <!-- CUSTOM TOASTS CONTAINER FOR E-COMMERCE ALERTS -->
+    <div class="toast-container-custom" id="toastContainerCustom"></div>
+
+    <!-- QUICK VIEW MODAL (UI ONLY) -->
+    <div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true" style="backdrop-filter: blur(8px);">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-surface border-orange" style="border: 2px solid var(--color-orange);">
+          <div class="modal-header border-secondary">
+            <h4 class="modal-title text-white fw-bold" id="qvTitle">Product Quick View</h4>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-secondary">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="rounded border border-secondary overflow-hidden bg-topbar" style="aspect-ratio: 1/1;">
+                  <img id="qvImage" src="" alt="Product image" class="w-100 h-100" style="object-fit: cover;" />
+                </div>
+              </div>
+              <div class="col-md-6 d-flex flex-column">
+                <span class="text-orange font-mono small text-uppercase mb-2" id="qvCategory">Category</span>
+                <h3 class="text-white fw-bold mb-3 h4" id="qvName">Premium Product</h3>
+                
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <span class="h3 text-orange fw-bold mb-0" id="qvPrice">$0.00</span>
+                  <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small" id="qvStock">In Stock</span>
+                </div>
+                
+                <p class="small mb-4" id="qvDesc">Loading product descriptions...</p>
+                
+                <div class="mb-4">
+                  <label class="form-label text-secondary small">Quantity</label>
+                  <div class="input-group" style="width: 130px;">
+                    <button class="btn btn-outline-secondary text-white border-secondary" type="button" onclick="const q = document.getElementById('qvQty'); if(parseInt(q.value) > 1) q.value = parseInt(q.value) - 1;">-</button>
+                    <input type="text" class="form-control bg-topbar text-white text-center border-secondary font-mono" id="qvQty" value="1" readonly />
+                    <button class="btn btn-outline-secondary text-white border-secondary" type="button" onclick="const q = document.getElementById('qvQty'); q.value = parseInt(q.value) + 1;">+</button>
+                  </div>
+                </div>
+                
+                <div class="mt-auto d-flex gap-2">
+                  <button type="button" class="btn-premium flex-grow-1 py-3" id="qvAddToCartBtn">
+                    <i data-lucide="shopping-cart" class="me-2" style="width:16px;height:16px;vertical-align:middle;"></i> Add To Cart
+                  </button>
+                  <a href="product-details.html" class="btn btn-outline-secondary text-secondary border-secondary py-3 px-3" id="qvDetailsLink">
+                    View Full Details
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DYNAMIC STORE FRONT FILTRATION SCRIPTS -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const products = [
+          {
+            id: 1,
+            name: "Premium PEX-B Piping Coil (100ft)",
+            category: "Pipes",
+            price: 89.00,
+            rating: 4.8,
+            desc: "High-density cross-linked polyethylene pipe for radiant floor heating and potable water lines.",
+            image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80",
+            tags: ["PEX", "Heavy-Duty"],
+            stock: "In Stock"
+          },
+          {
+            id: 2,
+            name: "Solid Copper L-Type Pipe (10ft)",
+            category: "Pipes",
+            price: 45.00,
+            rating: 4.9,
+            desc: "Heavy-wall certified copper tubing for indoor structural water supply and high-pressure steam distribution.",
+            image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80",
+            tags: ["Copper", "Heavy-Duty"],
+            stock: "In Stock"
+          },
+          {
+            id: 3,
+            name: "Solid Brass T-Adapter (1/2\" NPT)",
+            category: "Pipe Fittings",
+            price: 14.50,
+            rating: 4.7,
+            desc: "High-precision solid brass forged adapter designed for secure leak-free triple water-line connection grids.",
+            image: "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=600&q=80",
+            tags: ["Brass", "Heavy-Duty"],
+            stock: "In Stock"
+          },
+          {
+            id: 4,
+            name: "LeakStop Pro Compression Elbow (3/4\")",
+            category: "Pipe Fittings",
+            price: 12.00,
+            rating: 4.6,
+            desc: "No-solder double-seal copper/PEX compression connector elbow for direct plumbing turns in restricted spaces.",
+            image: "https://images.unsplash.com/photo-1542013936693-8848e574047a?auto=format&fit=crop&w=600&q=80",
+            tags: ["Brass", "High-Pressure"],
+            stock: "Low Stock"
+          },
+          {
+            id: 5,
+            name: "HydroVolt 50-Gal Smart Water Heater",
+            category: "Water Heaters",
+            price: 850.00,
+            rating: 4.9,
+            desc: "Wi-Fi enabled Energy Star hybrid electric boiler with cellular leak sensors and scheduled heating loops.",
+            image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80",
+            tags: ["Smart", "Eco-Friendly"],
+            stock: "In Stock"
+          },
+          {
+            id: 6,
+            name: "ThermaFlow Tankless Gas Water Heater",
+            category: "Water Heaters",
+            price: 1200.00,
+            rating: 4.8,
+            desc: "Ultra-efficient condensing gas-fired on-demand water system with modern low NOx burner cells.",
+            image: "https://images.unsplash.com/photo-1605647540924-852290f6b0d5?auto=format&fit=crop&w=600&q=80",
+            tags: ["Tankless", "Eco-Friendly"],
+            stock: "In Stock"
+          },
+          {
+            id: 7,
+            name: "Bespoke Matte Black Rainfall Shower Head",
+            category: "Bathroom Fixtures",
+            price: 220.00,
+            rating: 4.9,
+            desc: "Architectural 12-inch luxury rainfall panel featuring eco-friendly water dispersion tech and anti-clog jets.",
+            image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80",
+            tags: ["Brass", "High-Pressure"],
+            stock: "In Stock"
+          },
+          {
+            id: 8,
+            name: "Smart Motion-Sensor Brass Faucet",
+            category: "Bathroom Fixtures",
+            price: 189.00,
+            rating: 4.7,
+            desc: "Touchless motion-activated bathroom tap with heavy chrome finishing and dynamic thermodynamic mixer valves.",
+            image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80",
+            tags: ["Brass", "Smart"],
+            stock: "In Stock"
+          },
+          {
+            id: 9,
+            name: "Commercial-Grade Pull-Down Kitchen Tap",
+            category: "Kitchen Fixtures",
+            price: 299.00,
+            rating: 4.8,
+            desc: "Flexible high-arch kitchen gooseneck tap featuring magnetic spray nozzle docking and secure brass cartridge.",
+            image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80",
+            tags: ["Copper", "Heavy-Duty"],
+            stock: "In Stock"
+          },
+          {
+            id: 10,
+            name: "Luxury Deep Double-Basin Granite Sink",
+            category: "Kitchen Fixtures",
+            price: 450.00,
+            rating: 4.6,
+            desc: "Scratch-resistant quartz-composite dual sink bowl built for superior acoustics and thermal dampening.",
+            image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80",
+            tags: ["Heavy-Duty"],
+            stock: "Low Stock"
+          },
+          {
+            id: 11,
+            name: "Anti-Odor Stainless Floor Drain Trap",
+            category: "Drain Accessories",
+            price: 35.00,
+            rating: 4.5,
+            desc: "Polished heavy-duty steel drainage floor trap with magnetic anti-odor core and hair filter baskets.",
+            image: "https://images.unsplash.com/photo-1542013936693-8848e574047a?auto=format&fit=crop&w=600&q=80",
+            tags: ["Heavy-Duty"],
+            stock: "In Stock"
+          },
+          {
+            id: 12,
+            name: "Heavy Cast-Iron Sewer Backwater Valve",
+            category: "Valves",
+            price: 149.00,
+            rating: 4.8,
+            desc: "Flapper backwater security system prevents emergency sewer backup lines during heavy municipal floodings.",
+            image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80",
+            tags: ["Brass", "Heavy-Duty"],
+            stock: "In Stock"
+          },
+          {
+            id: 13,
+            name: "PlumbMaster Precision Pipe Cutter",
+            category: "Tools",
+            price: 65.00,
+            rating: 4.9,
+            desc: "Hardened steel cutting blade with smooth roller guides for surgical deformation-free copper pipeline cuts.",
+            image: "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=600&q=80",
+            tags: ["Copper", "Brass", "Heavy-Duty"],
+            stock: "In Stock"
+          },
+          {
+            id: 14,
+            name: "Rotary Drain Auger & Clog Remover (25ft)",
+            category: "Tools",
+            price: 78.00,
+            rating: 4.7,
+            desc: "Heavy-duty drill-powered flexible carbon spring steel wire designed for resolving deep home pipe blockage grids.",
+            image: "https://images.unsplash.com/photo-1605647540924-852290f6b0d5?auto=format&fit=crop&w=600&q=80",
+            tags: ["Heavy-Duty"],
+            stock: "In Stock"
+          },
+          {
+            id: 15,
+            name: "Industrial Water Pressure Gauge Kit",
+            category: "Commercial Equipment",
+            price: 115.00,
+            rating: 4.8,
+            desc: "Stainless steel oil-filled diagnostic dial gauge measuring up to 200 PSI for commercial flow calibrations.",
+            image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80",
+            tags: ["High-Pressure", "Heavy-Duty"],
+            stock: "In Stock"
+          },
+          {
+            id: 16,
+            name: "High-Visibility Plumbers Safety Harness",
+            category: "Safety Equipment",
+            price: 55.00,
+            rating: 4.6,
+            desc: "Industrial double-hook drop-protection belt designed for utility shaft climbs and high-altitude sewer piping.",
+            image: "https://images.unsplash.com/photo-1605647540924-852290f6b0d5?auto=format&fit=crop&w=600&q=80",
+            tags: ["Heavy-Duty"],
+            stock: "Out of Stock"
+          }
+        ];
+
+        let activeCategory = "all";
+        let activeSearch = "";
+        let activeMaxPrice = 1200;
+        let activeTag = "";
+
+        const searchInput = document.getElementById("storeSearchInput");
+        const priceInput = document.getElementById("priceRangeInput");
+        const priceValLabel = document.getElementById("priceRangeVal");
+        const sortSelect = document.getElementById("storeSortSelect");
+        const visibleCountLabel = document.getElementById("visibleCount");
+        const productGrid = document.getElementById("storeProductGrid");
+        const toastContainer = document.getElementById("toastContainerCustom");
+
+        // Event Listeners for Filters
+        searchInput.addEventListener("input", function() {
+          activeSearch = searchInput.value.toLowerCase().trim();
+          applyFilters();
+        });
+
+        priceInput.addEventListener("input", function() {
+          activeMaxPrice = parseFloat(priceInput.value);
+          priceValLabel.textContent = "$" + activeMaxPrice;
+          applyFilters();
+        });
+
+        document.querySelectorAll(".category-link").forEach(link => {
+          link.addEventListener("click", function(e) {
+            e.preventDefault();
+            document.querySelectorAll(".category-link").forEach(l => l.classList.remove("active"));
+            link.classList.add("active");
+            activeCategory = link.dataset.category;
+            applyFilters();
+          });
+        });
+
+        document.querySelectorAll(".tag-badge").forEach(badge => {
+          badge.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (badge.classList.contains("active")) {
+              badge.classList.remove("active");
+              badge.style.borderColor = "var(--border-color)";
+              badge.style.backgroundColor = "var(--bg-topbar)";
+              activeTag = "";
+            } else {
+              document.querySelectorAll(".tag-badge").forEach(b => {
+                b.classList.remove("active");
+                b.style.borderColor = "var(--border-color)";
+                b.style.backgroundColor = "var(--bg-topbar)";
+              });
+              badge.classList.add("active");
+              badge.style.borderColor = "var(--color-orange)";
+              badge.style.backgroundColor = "var(--color-orange-light)";
+              activeTag = badge.dataset.tag;
+            }
+            applyFilters();
+          });
+        });
+
+        sortSelect.addEventListener("change", applyFilters);
+
+        // Core dynamic filter engine
+        function applyFilters() {
+          const cards = Array.from(document.querySelectorAll(".product-grid-item"));
+          let visibleCount = 0;
+
+          cards.forEach(card => {
+            const cat = card.dataset.category;
+            const price = parseFloat(card.dataset.price);
+            const rating = parseFloat(card.dataset.rating);
+            const tags = card.dataset.tags;
+            const title = card.querySelector(".product-title").textContent.toLowerCase();
+            const desc = card.querySelector(".product-desc").textContent.toLowerCase();
+
+            // Match Category
+            const matchesCat = (activeCategory === "all" || cat === activeCategory);
+            // Match Search
+            const matchesSearch = (!activeSearch || title.includes(activeSearch) || desc.includes(activeSearch));
+            // Match Price
+            const matchesPrice = (price <= activeMaxPrice);
+            // Match Tag
+            const matchesTag = (!activeTag || tags.includes(activeTag));
+
+            if (matchesCat && matchesSearch && matchesPrice && matchesTag) {
+              card.style.display = "block";
+              visibleCount++;
+            } else {
+              card.style.display = "none";
+            }
+          });
+
+          visibleCountLabel.textContent = visibleCount;
+
+          // Now Sort Visible Cards
+          sortCards(cards);
+        }
+
+        function sortCards(cards) {
+          const sortBy = sortSelect.value;
+          
+          cards.sort((a, b) => {
+            const priceA = parseFloat(a.dataset.price);
+            const priceB = parseFloat(b.dataset.price);
+            const ratingA = parseFloat(a.dataset.rating);
+            const ratingB = parseFloat(b.dataset.rating);
+            const popularityA = parseInt(a.dataset.popularity);
+            const popularityB = parseInt(b.dataset.popularity);
+
+            if (sortBy === "price-low") {
+              return priceA - priceB;
+            } else if (sortBy === "price-high") {
+              return priceB - priceA;
+            } else if (sortBy === "rating") {
+              return ratingB - ratingA;
+            } else {
+              // Popularity
+              return popularityA - popularityB;
+            }
+          });
+
+          // Re-append sorted cards in order
+          cards.forEach(card => productGrid.appendChild(card));
+        }
+
+        // Live Custom Alert Toasts
+        window.showToast = function(message, iconName = "check-circle") {
+          const toast = document.createElement("div");
+          toast.className = "toast-custom";
+          toast.innerHTML = `
+            <i data-lucide="${iconName}" style="width:20px;height:20px;color:var(--color-orange);"></i>
+            <span class="small fw-semibold text-white">${message}</span>
+          `;
+          toastContainer.appendChild(toast);
+          
+          if (window.lucide) {
+            window.lucide.createIcons();
+          }
+
+          setTimeout(() => {
+            toast.style.animation = "toast-slide-in 0.4s reverse forwards";
+            setTimeout(() => {
+              toast.remove();
+            }, 400);
+          }, 3000);
+        };
+
+        // Add to Cart Listeners
+        document.querySelectorAll(".add-to-cart-trigger").forEach(btn => {
+          btn.addEventListener("click", function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            const id = btn.dataset.id;
+            const name = btn.dataset.name;
+            const price = btn.dataset.price;
+
+            // Save item to localStorage for cart simulation
+            let cartItems = JSON.parse(localStorage.getItem("plumbCart")) || [];
+            const existing = cartItems.find(item => item.id == id);
+            if (existing) {
+              existing.qty += 1;
+            } else {
+              cartItems.push({
+                id: parseInt(id),
+                name: name,
+                price: parseFloat(price),
+                qty: 1,
+                image: products.find(p => p.id == id).image,
+                category: products.find(p => p.id == id).category
+              });
+            }
+            localStorage.setItem("plumbCart", JSON.stringify(cartItems));
+
+            showToast(`Added ${name} to your Cart!`, "shopping-bag");
+          });
+        });
+
+        // Quick View Setup
+        const qvModal = new bootstrap.Modal(document.getElementById('quickViewModal'));
+        document.querySelectorAll(".quick-view-trigger").forEach(btn => {
+          btn.addEventListener("click", function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            const id = parseInt(btn.dataset.id);
+            const product = products.find(p => p.id === id);
+            
+            if (product) {
+              document.getElementById("qvTitle").textContent = product.name;
+              document.getElementById("qvName").textContent = product.name;
+              document.getElementById("qvCategory").textContent = product.category;
+              document.getElementById("qvPrice").textContent = "$" + product.price.toFixed(2);
+              document.getElementById("qvDesc").textContent = product.desc;
+              document.getElementById("qvImage").src = product.image;
+              document.getElementById("qvQty").value = "1";
+              
+              const stockSpan = document.getElementById("qvStock");
+              stockSpan.textContent = product.stock;
+              if (product.stock === "In Stock") {
+                stockSpan.className = "badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small";
+              } else if (product.stock === "Low Stock") {
+                stockSpan.className = "badge bg-warning-subtle text-warning border border-warning-subtle px-2 py-1 small";
+              } else {
+                stockSpan.className = "badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1 small";
+              }
+
+              // Bind addToCart to QuickView button
+              const qvAddBtn = document.getElementById("qvAddToCartBtn");
+              if (product.stock === "Out of Stock") {
+                qvAddBtn.disabled = true;
+                qvAddBtn.textContent = "Out of Stock";
+              } else {
+                qvAddBtn.disabled = false;
+                qvAddBtn.innerHTML = '<i data-lucide="shopping-cart" class="me-2" style="width:16px;height:16px;vertical-align:middle;"></i> Add To Cart';
+                qvAddBtn.onclick = function() {
+                  const qty = parseInt(document.getElementById("qvQty").value);
+                  let cartItems = JSON.parse(localStorage.getItem("plumbCart")) || [];
+                  const existing = cartItems.find(item => item.id == product.id);
+                  if (existing) {
+                    existing.qty += qty;
+                  } else {
+                    cartItems.push({
+                      id: product.id,
+                      name: product.name,
+                      price: product.price,
+                      qty: qty,
+                      image: product.image,
+                      category: product.category
+                    });
+                  }
+                  localStorage.setItem("plumbCart", JSON.stringify(cartItems));
+                  qvModal.hide();
+                  showToast(`Added ${qty}x ${product.name} to your Cart!`, "shopping-bag");
+                };
+              }
+
+              // Set Full Details link
+              document.getElementById("qvDetailsLink").href = `product-details.html?id=${product.id}`;
+
+              qvModal.show();
+            }
+          });
+        });
+      });
+    </script>
+
+    <!-- PREMIUM FOOTER -->
+    <footer class="premium-footer section-padding pb-0">
+      <div class="container">
+        <div class="row g-5 pb-5">
+          <div class="col-lg-4 col-md-6">
+            <div class="mb-4">
+              <a href="index.html" class="logo-brand text-decoration-none">
+                <div class="logo-icon">
+                  <i data-lucide="wrench" style="width:20px;height:20px;"></i>
+                </div>
+                PLUMB<span>MASTER</span>
+              </a>
+            </div>
+            <p class="text-secondary mb-4">
+              Providing modern, elite plumbing engineering and emergency plumbing solutions across domestic and industrial sectors. Responsive, certified, and luxury-first.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" class="social-icon-circle" aria-label="Facebook"><i data-lucide="facebook" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Twitter"><i data-lucide="twitter" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Instagram"><i data-lucide="instagram" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:16px;height:16px;"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Core Services</h3>
+            <ul class="footer-link-list">
+              <li><a href="service-details.html">Drain Clearing</a></li>
+              <li><a href="service-details.html">Luxury Tub Fittings</a></li>
+              <li><a href="service-details.html">Pipeline Audits</a></li>
+              <li><a href="service-details.html">Water Heater Setup</a></li>
+              <li><a href="service-details.html">Emergency Response</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Quick Links</h3>
+            <ul class="footer-link-list">
+              <li><a href="about.html">About Corporate</a></li>
+              <li><a href="pricing.html">Transparent Rates</a></li>
+              <li><a href="team.html">Our Certified Staff</a></li>
+              <li><a href="faq.html">Common Questions</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <h3 class="footer-widget-title">Newsletter Signup</h3>
+            <p class="text-secondary mb-3">Subscribe to our monthly maintenance checklist and seasonal discount coupons.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+              <input type="email" class="newsletter-input" placeholder="Your Email Address" required />
+              <button type="submit" class="newsletter-submit" aria-label="Subscribe">
+                <i data-lucide="send" style="width:16px;height:16px;"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom text-center">
+          <div class="row align-items-center justify-content-between">
+            <div class="col-md-6 text-md-start mb-3 mb-md-0">
+              <p class="mb-0">&copy; 2026 PlumbMaster Template. Inspired by high-end luxury business engineering.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <div class="d-flex justify-content-center justify-content-md-end gap-4">
+                <a href="terms-conditions.html" class="text-secondary text-decoration-none">Terms of Service</a>
+                <a href="privacy-policy.html" class="text-secondary text-decoration-none">Privacy Policy</a>
+                <a href="contact.html" class="text-secondary text-decoration-none">Support desk</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lucide Vector Icons Library CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Animation Engine CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Theme JS Control -->
+    <script src="/assets/js/main.js"></script>
+
+  </body>
+</html>

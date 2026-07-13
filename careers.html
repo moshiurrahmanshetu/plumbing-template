@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Careers & Recruitment - PlumbMaster Premium Plumbing Template</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- AOS Animation CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    <!-- Custom Global Style -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    
+    <!-- Bespoke Styles for Careers Page -->
+    <style>
+      .culture-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 30px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100%;
+      }
+      .culture-card:hover {
+        border-color: var(--color-orange);
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-glow);
+      }
+
+      .benefit-item {
+        background-color: var(--bg-topbar);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 24px;
+        display: flex;
+        gap: 16px;
+        transition: all 0.3s ease;
+      }
+      .benefit-item:hover {
+        border-color: var(--color-orange);
+        background-color: var(--bg-surface-hover);
+        transform: scale(1.02);
+      }
+
+      .job-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 30px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .job-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--color-orange);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+      }
+      .job-card:hover {
+        border-color: var(--border-color-hover);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-4px);
+      }
+      .job-card:hover::after {
+        transform: scaleX(1);
+      }
+
+      .job-pill {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 500;
+        padding: 4px 12px;
+        border-radius: 50px;
+        background-color: var(--bg-topbar);
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .job-salary-badge {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--color-teal);
+        background-color: rgba(0, 150, 136, 0.1);
+        border: 1px solid rgba(0, 150, 136, 0.2);
+        padding: 4px 12px;
+        border-radius: var(--border-radius-sm);
+        display: inline-block;
+      }
+
+      /* Hiring Process Steps style */
+      .process-step-col {
+        position: relative;
+      }
+      .process-step-col:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 40px;
+        right: -15%;
+        width: 30%;
+        height: 2px;
+        border-top: 2px dashed var(--border-color);
+        z-index: 0;
+      }
+      @media (max-width: 991px) {
+        .process-step-col:not(:last-child)::after {
+          display: none;
+        }
+      }
+
+      .step-circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: var(--bg-surface);
+        border: 2px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-heading);
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--color-orange);
+        margin: 0 auto 20px auto;
+        position: relative;
+        z-index: 1;
+        transition: all 0.3s ease;
+      }
+      .process-step-col:hover .step-circle {
+        border-color: var(--color-orange);
+        background-color: var(--color-orange);
+        color: white;
+        box-shadow: var(--shadow-glow);
+        transform: scale(1.1);
+      }
+
+      .badge-premium {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-orange);
+        background-color: var(--color-orange-light);
+        padding: 6px 14px;
+        border-radius: 50px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: 1px solid rgba(255, 87, 34, 0.2);
+        margin-bottom: 12px;
+      }
+
+      .floating-bg-element {
+        position: absolute;
+        opacity: 0.03;
+        pointer-events: none;
+        z-index: 0;
+        animation: floatEffect 12s infinite ease-in-out;
+      }
+      @keyframes floatEffect {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(10deg); }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- GLOBAL SEARCH MODAL -->
+    <div class="search-modal-overlay" id="searchModal">
+      <button class="search-modal-close" aria-label="Close search">
+        <i data-lucide="x" style="width:32px;height:32px;"></i>
+      </button>
+      <div class="search-modal-box">
+        <div class="search-modal-input-wrapper">
+          <input type="text" class="search-modal-input" placeholder="Search services, articles, products..." />
+          <i data-lucide="search" class="search-modal-icon" style="width:24px;height:24px;"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- STICKY HEADER TOP-BAR -->
+    <div class="top-bar d-none d-lg-flex">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-4">
+          <span class="top-bar-link">
+            <i data-lucide="clock" style="width:14px;height:14px;"></i>
+            Working Hours: 24/7 Emergency Support
+          </span>
+          <a href="mailto:emergency@plumbmaster.com" class="top-bar-link">
+            <i data-lucide="mail" style="width:14px;height:14px;"></i>
+            emergency@plumbmaster.com
+          </a>
+        </div>
+        <div class="d-flex align-items-center gap-4">
+          <a href="tel:18005550199" class="top-bar-link fw-bold text-orange">
+            <i data-lucide="phone-call" style="width:14px;height:14px;"></i>
+            Emergency Hotline: 1-800-555-0199
+          </a>
+          <div class="d-flex align-items-center gap-2 border-start ps-3 border-secondary">
+            <a href="#" class="top-bar-link" aria-label="Facebook"><i data-lucide="facebook" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Twitter"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="Instagram"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+            <a href="#" class="top-bar-link" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:14px;height:14px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN HEADER NAVIGATION -->
+    <header class="main-header">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a href="index.html" class="logo-brand">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:22px;height:22px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="nav-menu">
+          <div class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </div>
+          <div class="nav-item">
+            <a href="about.html" class="nav-link">About</a>
+          </div>
+          <div class="nav-item">
+            <a href="services.html" class="nav-link">
+              Services <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="services.html" class="dropdown-item-custom">All Services</a>
+              <a href="service-details.html" class="dropdown-item-custom">Service Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="projects.html" class="nav-link">
+              Projects <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="projects.html" class="dropdown-item-custom">Project Gallery</a>
+              <a href="project-details.html" class="dropdown-item-custom">Project Details</a>
+            </div>
+          </div>
+          <div class="nav-item mega-menu-wrapper">
+            <a href="shop.html" class="nav-link">
+              Shop <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="mega-menu">
+              <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Shop Collection</h3>
+                  <a href="shop.html" class="dropdown-item-custom">Main Plumbing Store</a>
+                  <a href="product-details.html" class="dropdown-item-custom">Premium Fittings</a>
+                  <a href="cart.html" class="dropdown-item-custom">Shopping Cart</a>
+                  <a href="checkout.html" class="dropdown-item-custom">Secure Checkout</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  <h3 class="mega-title">Our Pages</h3>
+                  <a href="team.html" class="dropdown-item-custom">Our Expert Plumbers</a>
+                  <a href="team-details.html" class="dropdown-item-custom">Expert Profile</a>
+                  <a href="pricing.html" class="dropdown-item-custom">Transparent Rates</a>
+                  <a href="faq.html" class="dropdown-item-custom">Frequently Asked Qs</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                  <h3 class="mega-title">Company Info</h3>
+                  <a href="about.html" class="dropdown-item-custom">Corporate Overview</a>
+                  <a href="contact.html" class="dropdown-item-custom">Office Contacts</a>
+                  <a href="privacy-policy.html" class="dropdown-item-custom">Privacy Policy</a>
+                  <a href="terms-conditions.html" class="dropdown-item-custom">Terms of Service</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="emergency-banner-box h-100 d-flex flex-column justify-content-center p-3 text-center">
+                    <span class="badge-premium mb-2 mx-auto">Seasonal Offer</span>
+                    <h4 class="fs-6 text-white mb-2">Free Inspections</h4>
+                    <p class="text-secondary small mb-3">Claim a free system audit on your initial water lines setup.</p>
+                    <a href="appointment.html" class="btn-premium py-2 px-3 fs-7 align-self-center">Claim Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="blog.html" class="nav-link">
+              Blog <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+            </a>
+            <div class="dropdown-menu-custom">
+              <a href="blog.html" class="dropdown-item-custom">Industry News</a>
+              <a href="blog-details.html" class="dropdown-item-custom">Article Details</a>
+            </div>
+          </div>
+          <div class="nav-item">
+            <a href="contact.html" class="nav-link">Contact</a>
+          </div>
+        </nav>
+
+        <div class="d-flex align-items-center gap-3">
+          <button class="search-toggle-btn search-trigger" aria-label="Open Search">
+            <i data-lucide="search"></i>
+          </button>
+          <button class="theme-toggle-btn" aria-label="Toggle Theme">
+            <i data-lucide="sun"></i>
+          </button>
+          <a href="appointment.html" class="btn-premium d-none d-xl-flex">
+            Book Appointment
+            <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+          </a>
+          <button class="mobile-menu-trigger" aria-label="Toggle Navigation">
+            <i data-lucide="menu" style="width:20px;height:20px;"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div class="mobile-nav-overlay"></div>
+    <div class="mobile-nav-drawer">
+      <div class="mobile-nav-header">
+        <a href="index.html" class="logo-brand text-decoration-none">
+          <div class="logo-icon">
+            <i data-lucide="wrench" style="width:18px;height:18px;"></i>
+          </div>
+          PLUMB<span>MASTER</span>
+        </a>
+        <button class="mobile-nav-close" aria-label="Close Mobile Menu">
+          <i data-lucide="x" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-drawer-links">
+        <div class="mobile-nav-item"><a href="index.html" class="mobile-nav-link">Home</a></div>
+        <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About Us</a></div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Services <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="services.html" class="mobile-nav-submenu-link">Our Services</a>
+            <a href="service-details.html" class="mobile-nav-submenu-link">Service Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Projects <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="projects.html" class="mobile-nav-submenu-link">Project Gallery</a>
+            <a href="project-details.html" class="mobile-nav-submenu-link">Project Details</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Store Collection <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="shop.html" class="mobile-nav-submenu-link">Main Shop</a>
+            <a href="product-details.html" class="mobile-nav-submenu-link">Product Details</a>
+            <a href="cart.html" class="mobile-nav-submenu-link">Cart</a>
+            <a href="checkout.html" class="mobile-nav-submenu-link">Checkout</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">More Pages <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="team.html" class="mobile-nav-submenu-link">Our Plumbers</a>
+            <a href="team-details.html" class="mobile-nav-submenu-link">Profile Details</a>
+            <a href="pricing.html" class="mobile-nav-submenu-link">Pricing Plans</a>
+            <a href="faq.html" class="mobile-nav-submenu-link">FAQ Pages</a>
+            <a href="404.html" class="mobile-nav-submenu-link">404 Page</a>
+            <a href="coming-soon.html" class="mobile-nav-submenu-link">Coming Soon</a>
+            <a href="privacy-policy.html" class="mobile-nav-submenu-link">Privacy Policy</a>
+            <a href="terms-conditions.html" class="mobile-nav-submenu-link">Terms & Conditions</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item">
+          <a href="#" class="mobile-nav-link">Blog & News <i data-lucide="chevron-down" style="width:16px;height:16px;"></i></a>
+          <div class="mobile-nav-submenu">
+            <a href="blog.html" class="mobile-nav-submenu-link">Blog Posts</a>
+            <a href="blog-details.html" class="mobile-nav-submenu-link">Blog Article</a>
+          </div>
+        </div>
+        <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></div>
+      </div>
+      <div class="mt-4 pt-3 border-top border-secondary">
+        <a href="appointment.html" class="btn-premium w-full text-center">Book Online Now</a>
+      </div>
+    </div>
+
+    <!-- 1. HERO BANNER -->
+    <section class="breadcrumbs-hero" style="background: linear-gradient(rgba(11, 15, 25, 0.85), rgba(11, 15, 25, 0.95)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80') center/cover; padding: 120px 0;">
+      <svg class="floating-bg-element" style="top: 10%; right: 10%; width: 70px; height: 70px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      <svg class="floating-bg-element" style="bottom: 12%; left: 12%; width: 60px; height: 60px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M11 2a9 9 0 0 1 9 9v1a9 9 0 0 1-9 9l-1 .01A9 9 0 0 1 2 11V10a9 9 0 0 1 9-9z"/></svg>
+      
+      <div class="container text-center text-md-start d-md-flex align-items-center justify-content-between relative" style="z-index: 1;">
+        <div data-aos="fade-right">
+          <span class="badge-premium"><i data-lucide="briefcase"></i> Build Your Future</span>
+          <h1 class="display-4 text-white fw-bold mb-3">Join The Elite Plumbing Team</h1>
+          <p class="text-secondary mb-0 max-w-600">Explore career opportunities with PlumbMaster. We pay elite salaries, offer high-end tooling, and provide state-of-the-art training.</p>
+        </div>
+        <div class="mt-4 mt-md-0" data-aos="fade-left">
+          <nav class="breadcrumb-nav justify-content-center justify-content-md-end">
+            <a href="index.html">Home</a>
+            <i data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+            <span class="text-orange">Careers</span>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. COMPANY CULTURE -->
+    <section class="section-padding py-5">
+      <div class="container py-5">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <span class="badge-premium"><i data-lucide="smile"></i> The Plumbmaster Way</span>
+          <h2 class="display-5 fw-bold text-white mb-3">Our Corporate Culture</h2>
+          <p class="text-secondary mx-auto max-w-600">We don't just clear drains or weld copper pipes; we build lasting physical infrastructure and foster a culture of craftsmanship.</p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="culture-card text-center text-lg-start">
+              <div class="premium-card-icon mb-4 mx-auto mx-lg-0" style="width:56px;height:56px;">
+                <i data-lucide="award" style="width:24px;height:24px;"></i>
+              </div>
+              <h3 class="h4 text-white mb-3">Absolute Craftsmanship</h3>
+              <p class="text-secondary mb-0">We take deep, genuine pride in clean soldering lines, perfectly straight pipeline corridors, and pristine utility layouts. Near-enough is never good enough here.</p>
+            </div>
+          </div>
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="culture-card text-center text-lg-start">
+              <div class="premium-card-icon mb-4 mx-auto mx-lg-0" style="width:56px;height:56px;">
+                <i data-lucide="users" style="width:24px;height:24px;"></i>
+              </div>
+              <h3 class="h4 text-white mb-3">Collaborative Mentorship</h3>
+              <p class="text-secondary mb-0">Our senior engineering directors actively train junior technicians. We share diagnostic blueprints and operational logic across our entire organization.</p>
+            </div>
+          </div>
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="culture-card text-center text-lg-start">
+              <div class="premium-card-icon mb-4 mx-auto mx-lg-0" style="width:56px;height:56px;">
+                <i data-lucide="shield-check" style="width:24px;height:24px;"></i>
+              </div>
+              <h3 class="h4 text-white mb-3">Safety & Trust First</h3>
+              <p class="text-secondary mb-0">No cutting corners. We provide first-rate safety suits, high-tech toxic gas sensors, and premium climbing gear to guarantee safe on-site operations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. EMPLOYEE BENEFITS -->
+    <section class="section-padding bg-surface border-top border-bottom border-theme py-5">
+      <div class="container py-5">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5" data-aos="fade-right">
+            <span class="badge-premium"><i data-lucide="gift"></i> Industry-Best Perks</span>
+            <h2 class="display-6 fw-bold text-white mb-4">Why Mechanical Engineers Choose Us</h2>
+            <p class="text-secondary mb-4">We maintain the highest employee retention rates in the plumbing sector. By respecting our crews and funding premium lifestyles, we foster elite, long-term careers.</p>
+            
+            <div class="p-4 bg-topbar border border-theme rounded d-flex align-items-center gap-3">
+              <i data-lucide="star" class="text-orange" style="width:40px;height:40px;flex-shrink:0;"></i>
+              <div>
+                <h4 class="text-white h6 mb-1">Average Tenure: 6.8 Years</h4>
+                <p class="text-secondary small mb-0">Double the regional average for specialized plumbing contractors.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7" data-aos="fade-left">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="benefit-item">
+                  <div class="text-orange"><i data-lucide="heart" style="width:24px;height:24px;"></i></div>
+                  <div>
+                    <h4 class="text-white h6 mb-1">Elite Medical Cover</h4>
+                    <p class="text-secondary small mb-0">100% employer-covered health, visual, dental, and disability.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="benefit-item">
+                  <div class="text-orange"><i data-lucide="truck" style="width:24px;height:24px;"></i></div>
+                  <div>
+                    <h4 class="text-white h6 mb-1">Brand-New Work Rig</h4>
+                    <p class="text-secondary small mb-0">Assigned custom, fully loaded, air-conditioned Mercedes fleet trucks.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="benefit-item">
+                  <div class="text-orange"><i data-lucide="trending-up" style="width:24px;height:24px;"></i></div>
+                  <div>
+                    <h4 class="text-white h6 mb-1">401(k) Match & Bonus</h4>
+                    <p class="text-secondary small mb-0">Up to 6% matching program plus quarterly crew performance checks.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="benefit-item">
+                  <div class="text-orange"><i data-lucide="book-open" style="width:24px;height:24px;"></i></div>
+                  <div>
+                    <h4 class="text-white h6 mb-1">Paid Licenses & Training</h4>
+                    <p class="text-secondary small mb-0">We fund your continuing studies, state licenses, and advanced certifications.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. OPEN POSITIONS -->
+    <section class="section-padding py-5" id="openJobsSection">
+      <div class="container py-5">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <span class="badge-premium"><i data-lucide="briefcase"></i> Current Openings</span>
+          <h2 class="display-5 fw-bold text-white mb-3">Available Career Paths</h2>
+          <p class="text-secondary mx-auto max-w-600">Review our actively hiring roles below. Click any profile to view core requirements and fill out your application.</p>
+        </div>
+
+        <div class="row g-4">
+          <!-- Job 1 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="job-card h-100 d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="job-pill"><i data-lucide="map-pin" style="width:12px;height:12px;"></i> HQ / Field</span>
+                <span class="job-pill text-teal border-teal" style="background-color:rgba(0,150,136,0.05);"><i data-lucide="clock" style="width:12px;height:12px;"></i> Full-Time</span>
+              </div>
+              <h3 class="h4 text-white mb-2">Senior Plumber</h3>
+              <p class="text-secondary small mb-4 flex-grow-1">Lead commercial refittings, mentor junior crews, and direct pipeline soldering. Master Plumber license required.</p>
+              <div class="mb-4">
+                <div class="job-salary-badge">$85,000 - $110,000 / yr</div>
+                <div class="text-muted small mt-2">Experience: 5+ Years</div>
+              </div>
+              <a href="career-details.html?role=senior-plumber" class="btn-premium py-2 w-100 text-center text-decoration-none d-block">Apply For Role</a>
+            </div>
+          </div>
+
+          <!-- Job 2 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="job-card h-100 d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="job-pill"><i data-lucide="map-pin" style="width:12px;height:12px;"></i> North Suburbs</span>
+                <span class="job-pill text-teal border-teal" style="background-color:rgba(0,150,136,0.05);"><i data-lucide="clock" style="width:12px;height:12px;"></i> Full-Time</span>
+              </div>
+              <h3 class="h4 text-white mb-2">Junior Technician</h3>
+              <p class="text-secondary small mb-4 flex-grow-1">Assist master plumbers with local residential pipeline repair, fixture fittings, and sewer diagnostics.</p>
+              <div class="mb-4">
+                <div class="job-salary-badge">$45,000 - $60,000 / yr</div>
+                <div class="text-muted small mt-2">Experience: 1-2 Years</div>
+              </div>
+              <a href="career-details.html?role=junior-technician" class="btn-premium py-2 w-100 text-center text-decoration-none d-block">Apply For Role</a>
+            </div>
+          </div>
+
+          <!-- Job 3 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="job-card h-100 d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="job-pill"><i data-lucide="map-pin" style="width:12px;height:12px;"></i> Mobile Unit</span>
+                <span class="job-pill text-orange border-orange" style="background-color:rgba(255,87,34,0.05);"><i data-lucide="zap" style="width:12px;height:12px;"></i> Shift Rotation</span>
+              </div>
+              <h3 class="h4 text-white mb-2">Emergency Technician</h3>
+              <p class="text-secondary small mb-4 flex-grow-1">Respond to urgent residential flood alerts, pipe bursts, and utility collapses. Requires high adaptability.</p>
+              <div class="mb-4">
+                <div class="job-salary-badge">$75,000 - $95,000 / yr</div>
+                <div class="text-muted small mt-2">Experience: 3+ Years</div>
+              </div>
+              <a href="career-details.html?role=emergency-technician" class="btn-premium py-2 w-100 text-center text-decoration-none d-block">Apply For Role</a>
+            </div>
+          </div>
+
+          <!-- Job 4 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="job-card h-100 d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="job-pill"><i data-lucide="map-pin" style="width:12px;height:12px;"></i> Field Office</span>
+                <span class="job-pill text-teal border-teal" style="background-color:rgba(0,150,136,0.05);"><i data-lucide="clock" style="width:12px;height:12px;"></i> Full-Time</span>
+              </div>
+              <h3 class="h4 text-white mb-2">Project Supervisor</h3>
+              <p class="text-secondary small mb-4 flex-grow-1">Oversee high-end commercial site installations, manage material logistics, and verify plumbing codes.</p>
+              <div class="mb-4">
+                <div class="job-salary-badge">$90,000 - $120,000 / yr</div>
+                <div class="text-muted small mt-2">Experience: 6+ Years</div>
+              </div>
+              <a href="career-details.html?role=project-supervisor" class="btn-premium py-2 w-100 text-center text-decoration-none d-block">Apply For Role</a>
+            </div>
+          </div>
+
+          <!-- Job 5 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="job-card h-100 d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="job-pill"><i data-lucide="map-pin" style="width:12px;height:12px;"></i> Corporate HQ</span>
+                <span class="job-pill text-teal border-teal" style="background-color:rgba(0,150,136,0.05);"><i data-lucide="clock" style="width:12px;height:12px;"></i> Full-Time</span>
+              </div>
+              <h3 class="h4 text-white mb-2">Office Executive</h3>
+              <p class="text-secondary small mb-4 flex-grow-1">Handle commercial contracts, process dispatch invoicing, and assist corporate procurement schedules.</p>
+              <div class="mb-4">
+                <div class="job-salary-badge">$55,000 - $70,000 / yr</div>
+                <div class="text-muted small mt-2">Experience: 3+ Years</div>
+              </div>
+              <a href="career-details.html?role=office-executive" class="btn-premium py-2 w-100 text-center text-decoration-none d-block">Apply For Role</a>
+            </div>
+          </div>
+
+          <!-- Job 6 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="job-card h-100 d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="job-pill"><i data-lucide="map-pin" style="width:12px;height:12px;"></i> HQ / Hybrid</span>
+                <span class="job-pill text-teal border-teal" style="background-color:rgba(0,150,136,0.05);"><i data-lucide="clock" style="width:12px;height:12px;"></i> Full-Time</span>
+              </div>
+              <h3 class="h4 text-white mb-2">Customer Support</h3>
+              <p class="text-secondary small mb-4 flex-grow-1">Manage client dispatches, respond to estimate inquiries, and maintain emergency hotline logging desks.</p>
+              <div class="mb-4">
+                <div class="job-salary-badge">$40,000 - $52,000 / yr</div>
+                <div class="text-muted small mt-2">Experience: 1+ Year</div>
+              </div>
+              <a href="career-details.html?role=customer-support" class="btn-premium py-2 w-100 text-center text-decoration-none d-block">Apply For Role</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. HIRING PROCESS -->
+    <section class="section-padding bg-surface border-top border-bottom border-theme py-5">
+      <div class="container py-5">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <span class="badge-premium"><i data-lucide="trending-up"></i> Simple Boarding</span>
+          <h2 class="display-5 fw-bold text-white mb-3">Our Hiring Process</h2>
+          <p class="text-secondary mx-auto max-w-600">We keep recruitment transparent and fast. You will know exactly where your application stands within 48 hours.</p>
+        </div>
+
+        <div class="row g-4 text-center">
+          <div class="col-lg-3 col-md-6 process-step-col" data-aos="fade-up" data-aos-delay="100">
+            <div class="step-circle">1</div>
+            <h4 class="text-white h5 mb-2">Resume Review</h4>
+            <p class="text-secondary small mb-0">Our HR office scans your certifications and verifies mechanical experience parameters.</p>
+          </div>
+          <div class="col-lg-3 col-md-6 process-step-col" data-aos="fade-up" data-aos-delay="200">
+            <div class="step-circle">2</div>
+            <h4 class="text-white h5 mb-2">Practical Evaluation</h4>
+            <p class="text-secondary small mb-0">Join an assessor at our training center to display clean solders and flow calculations.</p>
+          </div>
+          <div class="col-lg-3 col-md-6 process-step-col" data-aos="fade-up" data-aos-delay="300">
+            <div class="step-circle">3</div>
+            <h4 class="text-white h5 mb-2">Core Interview</h4>
+            <p class="text-secondary small mb-0">Meet with our field director and discuss scheduling, crew management, and team values.</p>
+          </div>
+          <div class="col-lg-3 col-md-6 process-step-col" data-aos="fade-up" data-aos-delay="400">
+            <div class="step-circle">4</div>
+            <h4 class="text-white h5 mb-2">Immediate Start</h4>
+            <p class="text-secondary small mb-0">Sign your employment papers, claim your brand-new work truck, and start boarding!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. EMPLOYEE TESTIMONIALS -->
+    <section class="section-padding py-5">
+      <div class="container py-5">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <span class="badge-premium"><i data-lucide="message-square"></i> Real Stories</span>
+          <h2 class="display-5 fw-bold text-white mb-3">Crew Feedback Logs</h2>
+          <p class="text-secondary mx-auto max-w-600">Hear directly from the technicians and coordinators who power our field operations daily.</p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6" data-aos="fade-right">
+            <div class="glass-panel p-4 h-100">
+              <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="bg-secondary rounded-circle" style="width: 54px; height: 54px; background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80') center/cover;"></div>
+                <div>
+                  <h4 class="text-white h6 mb-1">Marcus Thorne</h4>
+                  <span class="text-orange small">Senior Lead Plumber (4 Years)</span>
+                </div>
+              </div>
+              <p class="text-secondary mb-0">"The respect you receive here is unlike any other subcontracting outfit. We drive high-end Mercedes trucks, utilize premium laser diagnostic gear, and are never forced to rush. My soldering work looks like artwork because management values craftsmanship over speed."</p>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-left">
+            <div class="glass-panel p-4 h-100">
+              <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="bg-secondary rounded-circle" style="width: 54px; height: 54px; background: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80') center/cover;"></div>
+                <div>
+                  <h4 class="text-white h6 mb-1">Clara Jenkins</h4>
+                  <span class="text-orange small">Invoicing Executive (3 Years)</span>
+                </div>
+              </div>
+              <p class="text-secondary mb-0">"The corporate environment is incredibly positive and structured. PlumbMaster rewards high performers, provides clear career trajectories, and respects my hybrid remote schedule. The systems we use are state-of-the-art and make scheduling a breeze."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. APPLY NOW CTA -->
+    <section class="section-padding py-5">
+      <div class="container text-center py-4">
+        <div class="glass-panel p-5" data-aos="zoom-in" style="border-top: 4px solid var(--color-orange);">
+          <span class="badge-premium mb-3"><i data-lucide="zap"></i> Immediate Onboarding</span>
+          <h2 class="display-6 fw-bold text-white mb-3">Ready to Elevate Your Career?</h2>
+          <p class="text-secondary mx-auto max-w-600 mb-4">Stop working under-compensated, unappreciated shifts. Submit your credentials today and double your lifestyle parameters with PlumbMaster.</p>
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="#openJobsSection" class="btn-premium">Browse Positions</a>
+            <a href="contact.html" class="btn-premium-secondary">Contact Hiring Team</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREMIUM FOOTER -->
+    <footer class="premium-footer section-padding pb-0">
+      <div class="container">
+        <div class="row g-5 pb-5">
+          <div class="col-lg-4 col-md-6">
+            <div class="mb-4">
+              <a href="index.html" class="logo-brand text-decoration-none">
+                <div class="logo-icon">
+                  <i data-lucide="wrench" style="width:20px;height:20px;"></i>
+                </div>
+                PLUMB<span>MASTER</span>
+              </a>
+            </div>
+            <p class="text-secondary mb-4">
+              Providing modern, elite plumbing engineering and emergency plumbing solutions across domestic and industrial sectors. Responsive, certified, and luxury-first.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" class="social-icon-circle" aria-label="Facebook"><i data-lucide="facebook" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Twitter"><i data-lucide="twitter" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="Instagram"><i data-lucide="instagram" style="width:16px;height:16px;"></i></a>
+              <a href="#" class="social-icon-circle" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:16px;height:16px;"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Core Services</h3>
+            <ul class="footer-link-list">
+              <li><a href="service-details.html">Drain Clearing</a></li>
+              <li><a href="service-details.html">Luxury Tub Fittings</a></li>
+              <li><a href="service-details.html">Pipeline Audits</a></li>
+              <li><a href="service-details.html">Water Heater Setup</a></li>
+              <li><a href="service-details.html">Emergency Response</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h3 class="footer-widget-title">Quick Links</h3>
+            <ul class="footer-link-list">
+              <li><a href="about.html">About Corporate</a></li>
+              <li><a href="pricing.html">Transparent Rates</a></li>
+              <li><a href="team.html">Our Certified Staff</a></li>
+              <li><a href="faq.html">Common Questions</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <h3 class="footer-widget-title">Newsletter Signup</h3>
+            <p class="text-secondary mb-3">Subscribe to our monthly maintenance checklist and seasonal discount coupons.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+              <input type="email" class="newsletter-input" placeholder="Your Email Address" required />
+              <button type="submit" class="newsletter-submit" aria-label="Subscribe">
+                <i data-lucide="send" style="width:16px;height:16px;"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom text-center">
+          <div class="row align-items-center justify-content-between">
+            <div class="col-md-6 text-md-start mb-3 mb-md-0">
+              <p class="mb-0">&copy; 2026 PlumbMaster Template. Inspired by high-end luxury business engineering.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <div class="d-flex justify-content-center justify-content-md-end gap-4">
+                <a href="terms-conditions.html" class="text-secondary text-decoration-none">Terms & Conditions</a>
+                <a href="privacy-policy.html" class="text-secondary text-decoration-none">Privacy Policy</a>
+                <a href="contact.html" class="text-secondary text-decoration-none">Support desk</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lucide Vector Icons Library CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Animation Engine CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Theme JS Control -->
+    <script src="/assets/js/main.js"></script>
+
+  </body>
+</html>
