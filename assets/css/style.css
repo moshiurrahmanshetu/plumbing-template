@@ -2233,7 +2233,7 @@ input, textarea, select, button {
 .nav-menu {
   display: flex !important;
   align-items: center !important;
-  gap: 32px !important; /* Menu Items -> 28~36px spacing */
+  gap: 20px !important; /* Menu Items -> 28~36px spacing */
   height: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
