@@ -2793,11 +2793,8 @@ body {
 }
 
 /* Make sure Appointment button shows on mobile/tablet, becoming compact on mobile */
-.main-header .btn-premium {
-  display: inline-flex !important;
-}
 
-@media screen and (min-width: 576px) and (max-width: 1199.98px) {
+@media screen and (min-width: 576px) and (max-width: 3000px) {
   .main-header .btn-premium {
     display: inline-flex !important;
   }
