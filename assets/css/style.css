@@ -2314,7 +2314,6 @@ input, textarea, select, button {
   padding: 0 20px !important;
   font-size: 13px !important;
   line-height: 1 !important;
-  display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   gap: 8px !important;
