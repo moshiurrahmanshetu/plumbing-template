@@ -3151,4 +3151,7 @@ table, .table {
     .main-header .btn-premium {
         gap: 0px !important;
     }
+    .hide-in-mobile{
+      display: none !important;
+    }
 }
