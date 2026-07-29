@@ -2280,7 +2280,7 @@ input, textarea, select, button {
 .header-actions {
   display: flex !important;
   align-items: center !important;
-  gap: 16px !important; /* Action Icons -> 14~18px spacing */
+  gap: 10px !important; /* Action Icons -> 14~18px spacing */
 }
 
 .theme-toggle-btn,
@@ -3147,4 +3147,8 @@ table, .table {
   }
 }
 
-
+@media (max-width: 575px) {
+    .main-header .btn-premium {
+        gap: 0px !important;
+    }
+}

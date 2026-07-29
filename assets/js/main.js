@@ -111,7 +111,7 @@ function initMobileNav() {
         <div class="logo-icon" style="background-color: var(--color-orange); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
           <i class="fa-solid fa-wrench" style="font-size: 16px;"></i>
         </div>
-        <span style="font-family: var(--font-heading); font-weight: 800; font-size: 18px; letter-spacing: 1px; color: var(--text-primary);">PLUMB<span style="color: var(--color-orange);">MASTER</span></span>
+        <span style="font-family: var(--font-heading); font-weight: 800; font-size: 18px; letter-spacing: 1px; color: var(--text-primary);">PLUMB</span>
       </a>
       <button type="button" class="btn-close-custom" data-bs-dismiss="offcanvas" aria-label="Close Mobile Menu">
         <i class="fa-solid fa-xmark"></i>
