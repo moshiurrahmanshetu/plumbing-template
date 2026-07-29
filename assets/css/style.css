@@ -333,7 +333,7 @@ input, textarea, select, button {
   font-size: 22px;
   letter-spacing: -0.03em;
   text-transform: uppercase;
-  color: var(--text-primary);
+  color: #ff5722;
 }
 
 .logo-brand span {
@@ -960,7 +960,9 @@ input, textarea, select, button {
   height: 2px;
   background-color: var(--color-orange);
 }
-
+.footer-link-list{
+  padding: 0px !important;
+}
 .footer-link-list li {
   margin-bottom: 12px;
 }
@@ -984,7 +986,7 @@ input, textarea, select, button {
 
 .footer-link-list a:hover {
   color: #ffffff;
-  padding-left: 10px;
+  padding-left: 5px;
 }
 
 .footer-link-list a:hover::before {
@@ -997,7 +999,9 @@ input, textarea, select, button {
   position: relative;
   margin-top: 16px;
 }
-
+.white-title{
+  color: white !important;;
+}
 .newsletter-input {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.05);
